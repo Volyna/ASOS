@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using WebAsos.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+// Add services to the container.
+builder.Services.AddDbContext<AppEFContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 
