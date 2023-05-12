@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebAsos.Data.Validation.User;
 using WebAsos.Data.ViewModels.User;
-using WebAsos.interfaces.JwtTokenService;
 using WebAsos.interfaces.UserService;
-using WebAsos.Services;
+
 
 namespace WebAsos.Controllers
 {
