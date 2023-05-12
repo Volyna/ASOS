@@ -18,6 +18,14 @@ namespace WebAsos.Data.Entitties
         public DateTime DateCreated { get; set; }
     }
 
+    public class Class
+    {
+
+        public bool IsDeleted { get; set; }
+        public DateTime DateCreated { get; set; }
+    }
+
+
 
     public class Language
     {
@@ -40,7 +48,9 @@ namespace WebAsos.Data.Entitties
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
     }
 }
+
 
 
