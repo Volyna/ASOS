@@ -17,5 +17,11 @@ namespace WebAsos.Data.Entitties
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; }
     }
+
+    public class Language
+    {  
+        private string _name;
+        private string _description;
+    }
 }
 
