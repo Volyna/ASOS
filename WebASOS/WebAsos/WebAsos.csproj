@@ -32,12 +32,9 @@
     <None Remove="Services\" />
     <None Remove="interfaces\" />
     <None Remove="interfaces\JwtTokenService\" />
-    <None Remove="Data\ViewModels \" />
     <None Remove="Data\ViewModels \User\" />
-    <None Remove="Data\Validation \" />
     <None Remove="Data\Validation \User\" />
     <None Remove="interfaces\UserService\" />
-    <None Remove="Data\AutoMapper \" />
     <None Remove="Data\AutoMapper \User\" />
     <None Remove="Repositories\" />
     <None Remove="Repositories\User\" />
@@ -51,13 +48,10 @@
     <Folder Include="Services\" />
     <Folder Include="interfaces\" />
     <Folder Include="interfaces\JwtTokenService\" />
-    <Folder Include="Data\ViewModels \" />
-    <Folder Include="Data\ViewModels \User\" />
-    <Folder Include="Data\Validation \" />
-    <Folder Include="Data\Validation \User\" />
+    <Folder Include="Data\ViewModels\User\" />
+    <Folder Include="Data\Validation\User\" />
     <Folder Include="interfaces\UserService\" />
-    <Folder Include="Data\AutoMapper \" />
-    <Folder Include="Data\AutoMapper \User\" />
+    <Folder Include="Data\AutoMapper\User\" />
     <Folder Include="Repositories\" />
     <Folder Include="Repositories\User\" />
   </ItemGroup>
