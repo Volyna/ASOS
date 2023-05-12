@@ -9,8 +9,7 @@ namespace WebAsos.Data.AutoMapper.User
     {
 		public AutoMapperUserProfile()
 		{
-            CreateMap<RegisterUserProfileViewModal, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));
-           
+            CreateMap<RegisterUserProfileViewModal, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));  
         }
 	}
 }
