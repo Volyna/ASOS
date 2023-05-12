@@ -12,8 +12,8 @@ using WebAsos.Data;
 namespace WebAsos.Migrations
 {
     [DbContext(typeof(AppEFContext))]
-    [Migration("20230511171533_InitialCreateUserTable")]
-    partial class InitialCreateUserTable
+    [Migration("20230512112125_InitialCreateUserEntity")]
+    partial class InitialCreateUserEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
