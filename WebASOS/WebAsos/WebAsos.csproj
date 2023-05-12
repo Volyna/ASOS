@@ -8,24 +8,57 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.1" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Data\" />
     <None Remove="Data\Entitties\" />
     <None Remove="Data\Entitties\IdentityUser\" />
+    <None Remove="Constants\" />
+    <None Remove="Constants\User\" />
+    <None Remove="Services\" />
+    <None Remove="interfaces\" />
+    <None Remove="interfaces\JwtTokenService\" />
+    <None Remove="Data\ViewModels \" />
+    <None Remove="Data\ViewModels \User\" />
+    <None Remove="Data\Validation \" />
+    <None Remove="Data\Validation \User\" />
+    <None Remove="interfaces\UserService\" />
+    <None Remove="Data\AutoMapper \" />
+    <None Remove="Data\AutoMapper \User\" />
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Data\Entitties\" />
     <Folder Include="Data\Entitties\IdentityUser\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Constants\User\" />
+    <Folder Include="Services\" />
+    <Folder Include="interfaces\" />
+    <Folder Include="interfaces\JwtTokenService\" />
+    <Folder Include="Data\ViewModels \" />
+    <Folder Include="Data\ViewModels \User\" />
+    <Folder Include="Data\Validation \" />
+    <Folder Include="Data\Validation \User\" />
+    <Folder Include="interfaces\UserService\" />
+    <Folder Include="Data\AutoMapper \" />
+    <Folder Include="Data\AutoMapper \User\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\User\" />
   </ItemGroup>
 </Project>

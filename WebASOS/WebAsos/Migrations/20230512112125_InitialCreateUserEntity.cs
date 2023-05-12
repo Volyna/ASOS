@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WebAsos.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateUserTable : Migration
+    public partial class InitialCreateUserEntity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
