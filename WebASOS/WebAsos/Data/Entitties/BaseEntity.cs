@@ -19,14 +19,18 @@ namespace WebAsos.Data.Entitties
     }
     public class CategoryEntity : BaseEntity<int>
     {
-        [Required,StringLength(255)]
+        [Required, StringLength(255)]
         public string Name { get; set; }
         [StringLength(255)]
         public string Image { get; set; }
         [StringLength(4000)]
         public string Description { get; set; }
-
+    }
+    public class Test
+    {
+        private string name;
 
     }
+
 }
 
