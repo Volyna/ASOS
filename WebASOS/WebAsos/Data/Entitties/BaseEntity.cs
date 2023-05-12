@@ -17,6 +17,11 @@ namespace WebAsos.Data.Entitties
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; }
     }
-// Test 1
+    public class Class
+    {
+
+        public bool IsDeleted { get; set; }
+        public DateTime DateCreated { get; set; }
+    }
 }
 
