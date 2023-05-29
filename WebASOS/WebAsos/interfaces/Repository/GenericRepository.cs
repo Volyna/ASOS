@@ -28,13 +28,13 @@ namespace WebAsos.interfaces.Repository
                 .FirstOrDefaultAsync(e => e.Id.Equals(id));
             if (entity == null) return false;
 
-            entity.IsDelete = true;
+            entity.IsDeleted = true;
             return await UpdateAsync(entity);
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>().AsNoTracking().Where(e => e.IsDelete == false);
+            return _dbContext.Set<TEntity>().AsNoTracking().Where(e => e.IsDeleted == false);
         }
 
         public async Task<TEntity> GetByIdAsync(T id)

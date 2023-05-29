@@ -8,7 +8,7 @@ namespace WebAsos.Data.Entitties
     {
         T Id { get; set; }
         string Name { get; set; }
-        bool IsDelete { get; set; }
+        bool IsDeleted { get; set; }
         DateTime DateCreated { get; set; }
     }
     public class BaseEntity<T> : IEntity<T>
@@ -16,7 +16,7 @@ namespace WebAsos.Data.Entitties
         [Key]
         public T Id { get; set; }
         public string Name { get; set; }
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; }
     }
 }

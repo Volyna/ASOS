@@ -16,7 +16,7 @@ namespace WebAsos.interfaces.Repository
 
         public IQueryable<CategoryEntity> Categories()
         {
-            return _dbContext.Categories.Where(c => c.IsDelete == false).AsNoTracking();
+            return _dbContext.Categories.Where(c => c.IsDeleted == false).AsNoTracking();
         }
 
     }
