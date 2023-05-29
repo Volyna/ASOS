@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebAsos.Data.Entitties.IdentityUser;
+using WebAsos.Data.Entitties.Catalog;
 
 namespace WebAsos.Data
 {
@@ -14,7 +15,7 @@ namespace WebAsos.Data
         {
 
         }
-
+        public DbSet<CategoryEntity> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
