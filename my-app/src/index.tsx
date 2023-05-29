@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { DarkModeContextProvider } from "./context/darkModeContext";
+import { DarkModeContextProvider } from "./components/admin/context/darkModeContext";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 
 ReactDOM.render(
   <React.StrictMode>
