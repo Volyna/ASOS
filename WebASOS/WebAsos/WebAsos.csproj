@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -41,9 +41,6 @@
     <None Remove="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Data\Entitties\" />
-    <Folder Include="Data\Entitties\IdentityUser\" />
     <Folder Include="Constants\" />
     <Folder Include="Constants\User\" />
     <Folder Include="Services\" />
