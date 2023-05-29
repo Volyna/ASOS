@@ -12,6 +12,8 @@ using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.Validation.User;
 using WebAsos.interfaces.JwtTokenService;
+using WebAsos.interfaces.Repository;
+using WebAsos.interfaces.Services;
 using WebAsos.interfaces.UserService;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
@@ -36,6 +38,9 @@ builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<AppEFContext>().AddDefaultTokenProviders();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterUserValidation>());
 

@@ -48,7 +48,6 @@
     <Folder Include="Constants\" />
     <Folder Include="Constants\User\" />
     <Folder Include="Services\" />
-    <Folder Include="interfaces\" />
     <Folder Include="interfaces\JwtTokenService\" />
     <Folder Include="Data\ViewModels\User\" />
     <Folder Include="Data\Validation\User\" />
