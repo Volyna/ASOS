@@ -47,6 +47,9 @@ function App() {
           <Route path="/">
             <Route index element={<LoginePage />} />
           </Route>
+          {/* <Route path="/admin">
+            <Route index element={<Home />} />
+          </Route> */}
         </Routes>
       </BrowserRouter>
     </>
