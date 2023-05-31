@@ -22,18 +22,8 @@ namespace WebAsos.Controllers
         {
             try
             {
-                var userValidator = new LoginUserValidation();
-                var validationResult = userValidator.Validate(model);
-                if (validationResult.IsValid)
-                {
-                    var result = await _userService.LoginUserAsync(model);
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest(validationResult.Errors);
-                }
-
+                var result = await _userService.LoginUserAsync(model);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -48,17 +38,9 @@ namespace WebAsos.Controllers
         {
             try
             {
-                var validator = new RegisterUserValidation();
-                var validationResult = validator.Validate(model);
-                if (validationResult.IsValid)
-                {
-                    var result = await _userService.RegisterUserAsync(model);
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest(validationResult.Errors);
-                }
+                var result = await _userService.RegisterUserAsync(model);
+                return Ok(result);
+
             }
             catch (Exception ex)
             {

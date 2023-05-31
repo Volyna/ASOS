@@ -7,6 +7,7 @@ namespace WebAsos.Data.Entitties
     public interface IEntity<T>
     {
         T Id { get; set; }
+        string Name { get; set; }
         bool IsDeleted { get; set; }
         DateTime DateCreated { get; set; }
     }
@@ -14,6 +15,7 @@ namespace WebAsos.Data.Entitties
     {
         [Key]
         public T Id { get; set; }
+        public string Name { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; }
     }

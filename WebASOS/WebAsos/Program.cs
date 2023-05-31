@@ -1,4 +1,5 @@
 using System.Text;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,10 @@ using WebAsos.Data;
 using WebAsos.Data.AutoMapper.User;
 using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
+using WebAsos.Data.Validation.User;
 using WebAsos.interfaces.JwtTokenService;
+using WebAsos.interfaces.Repository;
+using WebAsos.interfaces.Services;
 using WebAsos.interfaces.UserService;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
@@ -35,6 +39,10 @@ builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
     options.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<AppEFContext>().AddDefaultTokenProviders();
 
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterUserValidation>());
 
 var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<String>("JWTSecretKey")));
 
