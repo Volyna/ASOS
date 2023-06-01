@@ -1,7 +1,7 @@
 import { url } from "inspector";
 import { Link } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
-import "./style.css";
+import "./loginePageStyle.css";
 
 function LoginePage() {
   return (
@@ -17,6 +17,7 @@ function LoginePage() {
               </h1>
             </div>
           </div>
+
           <div className="main">
             <div className="signinContainer">
               <div className="form">

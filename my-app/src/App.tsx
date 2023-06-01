@@ -10,6 +10,8 @@ import { useContext } from "react";
 import { DarkModeContext } from "./components/admin/context/darkModeContext";
 
 import LoginePage from "./components/auth/login";
+import AuthorizationPage from "./components/auth/login/AuthorizationPage";
+import RegisterPage from "./components/auth/register";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -45,11 +47,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<LoginePage />} />
+            {/* <Route index element={<LoginePage />} /> */}
+            {/* <Route index element={<AuthorizationPage />} /> */}
+            <Route index element={<RegisterPage />} />
           </Route>
-          {/* <Route path="/admin">
-            <Route index element={<Home />} />
-          </Route> */}
         </Routes>
       </BrowserRouter>
     </>
