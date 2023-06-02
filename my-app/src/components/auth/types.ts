@@ -24,3 +24,6 @@ export interface IAuthUser {
     isAuth: boolean,
     user?: IUser
 }
+export interface IBeforeLoginUser {
+    email: string;
+}

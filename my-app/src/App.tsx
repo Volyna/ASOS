@@ -19,30 +19,32 @@ function App() {
   return (
     <>
       <div className={darkMode ? "app dark" : "app"}>
-        <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<DefaultLayout />}>
+            <Route index element={<LoginePage />} />
+          </Route>
 
-          <Routes>
-            <Route path="/" element={<DefaultLayout />}>
-              <Route index element={<LoginePage />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Home />} />
+            <Route path="users">
+              <Route index element={<List />} />
+              <Route path=":userId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={userInputs} title="Add New User" />}
+              />
             </Route>
 
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Home />} />
-              <Route path="users">
-                <Route index element={<List />} />
-                <Route path=":userId" element={<Single />} />
-                <Route path="new" element={<New inputs={userInputs} title="Add New User" />} />
-              </Route>
-
-              <Route path="products">
-                <Route index element={<List />} />
-                <Route path=":productId" element={<Single />} />
-                <Route path="new" element={<New inputs={productInputs} title="Add New Product" />} />
-              </Route>
+            <Route path="products">
+              <Route index element={<List />} />
+              <Route path=":productId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
             </Route>
-          </Routes>
-
-        </BrowserRouter>
+          </Route>
+        </Routes>
       </div>
     </>
   );
