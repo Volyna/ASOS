@@ -13,6 +13,7 @@ using WebAsos.interfaces.JwtTokenService;
 using WebAsos.interfaces.UserService;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
+using WebAsos.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -35,6 +36,11 @@ builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
     options.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<AppEFContext>().AddDefaultTokenProviders();
 
+var googleAuthSettings = builder.Configuration
+    .GetSection("GoogleAuthSettings")
+    .Get<GoogleAuthSettings>();
+
+builder.Services.AddSingleton(googleAuthSettings);
 
 var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<String>("JWTSecretKey")));
 

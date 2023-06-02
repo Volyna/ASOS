@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebAsos.Data.Validation.User;
+using WebAsos.Constants.User;
+using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
-using WebAsos.interfaces.UserService;
-
+using WebAsos.interfaces.JwtTokenService;
+using WebAsos.Services;
 
 namespace WebAsos.Controllers
 {
@@ -11,63 +13,110 @@ namespace WebAsos.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly UserManager<UserEntity> _userManager;
+        private readonly IJwtTokenService _jwtTokenService;
+
+        public UserController(IJwtTokenService jwtTokenService,
+           UserManager<UserEntity> userManager)
         {
-            _userService = userService;
+            _userManager = userManager;
+            _jwtTokenService = jwtTokenService;
         }
-        [AllowAnonymous]
+
+        //[AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> LoginUserAsync([FromBody] LoginViewModel model)
         {
-            try
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
             {
-                var userValidator = new LoginUserValidation();
-                var validationResult = userValidator.Validate(model);
-                if (validationResult.IsValid)
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, model.Password);
+                if (!isPasswordValid)
                 {
-                    var result = await _userService.LoginUserAsync(model);
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest(validationResult.Errors);
-                }
+                    return BadRequest(new { error = "Incorrect data. Try again!" });
 
+                }
+                var token = await _jwtTokenService.CreateToken(user);
+                return Ok(new { token });
             }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(new { error = "Incorrect data. Try again!" });
 
         }
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserProfileViewModal model)
+        public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserProfileViewModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                return BadRequest(new ServiceResponse { Message = "Ви вже зареєстровані" });
+            }
+
+            user = new UserEntity()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email
+            };
+
+            var result = _userManager.CreateAsync(user, model.Password).Result;
+            if (result.Succeeded)
+            {
+                result = _userManager.AddToRoleAsync(user, Roles.User).Result;
+                return Ok(new ServiceResponse { Message = "Congratulations! You have successfully registered." });
+            }
+            else
+            {
+                return BadRequest(new ServiceResponse { Message = "Something went wrong..." });
+            }
+        }
+
+        [HttpPost("GoogleExternalLogin")]
+        public async Task<IActionResult> GoogleExternalLoginAsync([FromBody] ExternalLoginRequest request)
         {
             try
             {
-                var validator = new RegisterUserValidation();
-                var validationResult = validator.Validate(model);
-                if (validationResult.IsValid)
+                var payload = await _jwtTokenService.VerifyGoogleToken(request);
+                if (payload == null)
                 {
-                    var result = await _userService.RegisterUserAsync(model);
-                    return Ok(result);
+                    return BadRequest(new { error = "Something went wrong..." });
                 }
-                else
+
+                var info = new UserLoginInfo(request.Provider, payload.Subject, request.Provider);
+                var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+                if (user == null)
                 {
-                    return BadRequest(validationResult.Errors);
+                    user = await _userManager.FindByEmailAsync(payload.Email);
+                    if (user == null)
+                    {
+                        user = new UserEntity()
+                        {
+                            FirstName = payload.GivenName,
+                            LastName = payload.FamilyName,
+                            Email = payload.Email
+
+                        };
+                        var resultCreate = await _userManager.CreateAsync(user);
+                        if (!resultCreate.Succeeded)
+                        {
+                            return BadRequest(new { error = "Error creating user" });
+                        }
+                    }
+
+                    var resultLogin = await _userManager.AddLoginAsync(user, info);
+                    if (!resultLogin.Succeeded)
+                    {
+                        return BadRequest(new { error = "Error creating a login through Google" });
+                    }
                 }
+
+                string token = await _jwtTokenService.CreateToken(user);
+                return Ok(new { token });
             }
             catch (Exception ex)
             {
-
-                return BadRequest(ex.Message);
+                return BadRequest(ex);
             }
-
-
         }
     }
 }
-

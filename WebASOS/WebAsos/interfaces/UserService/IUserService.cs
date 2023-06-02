@@ -8,7 +8,7 @@ namespace WebAsos.interfaces.UserService
     public interface IUserService
     {
         public Task<ServiceResponse> LoginUserAsync(LoginViewModel model);
-        public Task<ServiceResponse> RegisterUserAsync(RegisterUserProfileViewModal model);
+        public Task<ServiceResponse> RegisterUserAsync(RegisterUserProfileViewModel model);
       
     }
 }

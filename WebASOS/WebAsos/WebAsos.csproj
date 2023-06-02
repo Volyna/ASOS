@@ -8,6 +8,8 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.60.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
@@ -31,26 +33,22 @@
     <None Remove="Constants\User\" />
     <None Remove="Services\" />
     <None Remove="interfaces\" />
-    <None Remove="interfaces\JwtTokenService\" />
+    <None Remove="Interfaces\JwtTokenService\" />
     <None Remove="Data\ViewModels \User\" />
     <None Remove="Data\Validation \User\" />
-    <None Remove="interfaces\UserService\" />
+    <None Remove="Interfaces\UserService\" />
     <None Remove="Data\AutoMapper \User\" />
     <None Remove="Repositories\" />
     <None Remove="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Data\Entitties\" />
     <Folder Include="Data\Entitties\IdentityUser\" />
     <Folder Include="Constants\" />
     <Folder Include="Constants\User\" />
     <Folder Include="Services\" />
-    <Folder Include="interfaces\" />
-    <Folder Include="interfaces\JwtTokenService\" />
-    <Folder Include="Data\ViewModels\User\" />
+    <Folder Include="Interfaces\" />
     <Folder Include="Data\Validation\User\" />
-    <Folder Include="interfaces\UserService\" />
     <Folder Include="Data\AutoMapper\User\" />
     <Folder Include="Repositories\" />
     <Folder Include="Repositories\User\" />
