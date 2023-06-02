@@ -1,21 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
 import "./loginePageStyle.css";
 import { useFormik } from "formik";
-import { loginUserSchema } from "../validation";
+import { loginBeforeUserSchema } from "../validation";
 import { IBeforeLoginUser } from "../types";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 function LoginePage() {
+  const { email } = useTypedSelector((store) => store.UserReducer);
+  let navigator = useNavigate();
+  const { IsUserExist, SetEmail } = useActions();
   const onSubmitFormik = async (values: IBeforeLoginUser) => {
-    console.log("Email User: ", values);
+    let resultExistUser = await IsUserExist(values);
+    let isUserExits =
+      resultExistUser.toString().toLowerCase() == "true" ? true : false;
+    if (isUserExits == true) {
+      SetEmail(values.email);
+      navigator("/login");
+    } else {
+      navigator("/register");
+    }
   };
-  const initValues: IBeforeLoginUser = { email: "" };
-
+  const initValues: IBeforeLoginUser = { email: email.trim() };
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
-    validationSchema: loginUserSchema,
+    validationSchema: loginBeforeUserSchema,
   });
+
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;
   return (

@@ -4,7 +4,7 @@ const initialState: UserState = {
   message: null,
   loading: false,
   isAuth: false,
-  email: null,
+  email: "",
 };
 
 const UserReducer = (state = initialState, action: UserActions): UserState => {
@@ -14,6 +14,26 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
         ...state,
         loading: true,
         message: null,
+      };
+    }
+    case UserActionTypes.SET_USER_EMAIL: {
+      return {
+        ...state,
+        email: action.payload,
+      };
+    }
+    case UserActionTypes.LOGIN_USER: {
+      return {
+        ...state,
+        user: action.payload,
+        isAuth: true,
+      };
+    }
+    case UserActionTypes.REGISTER_USER: {
+      return {
+        ...state,
+        user: action.payload,
+        isAuth: true,
       };
     }
     default: {

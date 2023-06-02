@@ -103,7 +103,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
-
+// Add cours 
+app.UseCors(options => options.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 
 app.UseSwagger();
 app.UseSwaggerUI();

@@ -5,8 +5,10 @@ import { Provider } from "react-redux";
 import { DarkModeContextProvider } from "./components/admin/context/darkModeContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
+import "./index.css";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -21,5 +23,3 @@ root.render(
     </BrowserRouter>
   </Provider>
 );
-
-

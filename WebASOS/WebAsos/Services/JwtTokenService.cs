@@ -28,10 +28,11 @@ namespace WebAsos.Services
             IList<string> roles = await _userManager.GetRolesAsync(user);
             List<Claim> claims = new List<Claim>()
             {
-                new Claim("name", user.FirstName),
-                new Claim("surname", user.LastName),
-                new Claim("email", user.Email),
-                new Claim("image", user.Image??"asos.jpg")
+                new Claim("name", user.FirstName ?? ""),
+                new Claim("surname", user.LastName ?? ""),
+                new Claim("phone", user.PhoneNumber ?? ""),
+                new Claim("email", user.Email ?? ""),
+                new Claim("image", user.Image??"")
             };
 
             foreach (var claim in roles)

@@ -52,7 +52,6 @@
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
     <Folder Include="interfaces\JwtTokenService\" />
-    <Folder Include="Data\ViewModels\User\" />
     <Folder Include="Data\Validation\User\" />
     <Folder Include="Data\AutoMapper\User\" />
     <Folder Include="Repositories\" />

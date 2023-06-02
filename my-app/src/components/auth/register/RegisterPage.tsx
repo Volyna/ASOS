@@ -1,8 +1,68 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
 import "./RegisterPageStyle.css";
+import { useFormik } from "formik";
+import { IRegisterUser } from "../types";
+import { registerUserSchema } from "../validation";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useActions } from "../../../hooks/useActions";
 
 function RegisterPage() {
+  const { email, user } = useTypedSelector((store) => store.UserReducer);
+  const { RegisterUser } = useActions();
+  const initValues: IRegisterUser = {
+    email: email,
+    password: "",
+    firstName: "",
+    lastName: "",
+    dayBirh: 0,
+    monthBirh: 0,
+    yearBirh: 0,
+    mostlyInterested: "womenswear",
+    discountsAndSales: false,
+    newStuff: false,
+    yourExclusives: false,
+    asosPartners: false,
+  };
+  function SubscribeSubscriptions(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    var checkedBoxes = document.getElementsByClassName("checkbox");
+    if (e.currentTarget.textContent?.trim() == "SELECT ALL") {
+      e.currentTarget.textContent = "CLEAR";
+      for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
+        (checkedBoxes[i] as HTMLInputElement).checked = true;
+      }
+      formik.values.discountsAndSales = true;
+      formik.values.newStuff = true;
+      formik.values.yourExclusives = true;
+      formik.values.asosPartners = true;
+    } else {
+      e.currentTarget.textContent = "SELECT ALL";
+      for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
+        (checkedBoxes[i] as HTMLInputElement).checked = false;
+      }
+      formik.values.discountsAndSales = false;
+      formik.values.newStuff = false;
+      formik.values.yourExclusives = false;
+      formik.values.asosPartners = false;
+    }
+  }
+
+  const onSubmitFormik = async (values: IRegisterUser) => {
+    RegisterUser(values);
+  };
+
+  const formik = useFormik({
+    initialValues: initValues,
+    onSubmit: onSubmitFormik,
+    validationSchema: registerUserSchema,
+  });
+  if (user != null) {
+    return <Navigate to={"/asos"}></Navigate>;
+  }
+  const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
+    formik;
   return (
     <>
       <div className="container">
@@ -19,7 +79,7 @@ function RegisterPage() {
           <div className="main">
             <div className="signinContainer">
               <div className="form">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="unified-info">
                     <h2>Welcome</h2>
                   </div>
@@ -28,7 +88,7 @@ function RegisterPage() {
                       EMAIL ADDRESS:
                     </label>
                     <div className="edit-email-area">
-                      <span>user.user@gmail.com</span>
+                      <span>{email}</span>
                       <button className="edit-email-button">
                         <span>Edit</span>
                       </button>
@@ -46,39 +106,64 @@ function RegisterPage() {
                     <input
                       type="text"
                       className="form-control"
-                      id="firsName"
+                      id="firstName"
                       placeholder="Enter first name"
-                    />
+                      onChange={handleChange}
+                      value={values.firstName}
+                    />{" "}
+                    {errors.firstName && (
+                      <p className="mt-2" style={{ color: "red" }}>
+                        <span className="font-medium">{errors.firstName}</span>
+                      </p>
+                    )}
                   </div>
                   <div className="field">
                     <label style={{ margin: "0 3% 11px 0" }}>Last Name:</label>
                     <input
+                      onChange={handleChange}
+                      value={values.lastName}
                       type="text"
                       className="form-control"
-                      id="lastdName"
+                      id="lastName"
                       placeholder="Enter last name"
                     />
+                    {errors.lastName && (
+                      <p className="mt-2" style={{ color: "red" }}>
+                        <span className="font-medium">{errors.lastName}</span>
+                      </p>
+                    )}
                   </div>
                   <div className="field">
                     <label style={{ margin: "0 3% 11px 0" }}>Password:</label>
                     <input
+                      onChange={handleChange}
+                      value={values.password}
                       type="password"
                       className="form-control"
                       id="password"
                       placeholder="Enter password"
-                    />
+                    />{" "}
+                    {errors.password && (
+                      <p className="mt-2" style={{ color: "red" }}>
+                        <span className="font-medium">{errors.password}</span>
+                      </p>
+                    )}
                     <span className="hint">Must be 10 or more characters</span>
                   </div>
+
                   <div className="field">
                     <label style={{ margin: "0 3% 11px 0" }}>
                       Date of birth:
                     </label>
                     <div className="dataBirdth">
                       <div className="birthDay">
-                        <select className="form-select-day">
-                          <option selected value="0">
-                            DD
-                          </option>
+                        <select
+                          id="dayBirh"
+                          onChange={handleChange}
+                          value={values.dayBirh}
+                          className="form-select-day"
+                        >
+                          <option value="0">DD</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -112,11 +197,15 @@ function RegisterPage() {
                           <option value="31">31</option>
                         </select>
                       </div>
+
                       <div className="birthMonth">
-                        <select className="form-select-month">
-                          <option selected value="0">
-                            Month
-                          </option>
+                        <select
+                          id="monthBirh"
+                          onChange={handleChange}
+                          value={values.monthBirh}
+                          className="form-select-month"
+                        >
+                          <option value="0">Month</option>
                           <option value="1">January</option>
                           <option value="2">February</option>
                           <option value="3">March</option>
@@ -132,10 +221,13 @@ function RegisterPage() {
                         </select>
                       </div>
                       <div className="birthYear">
-                        <select className="form-select-year">
-                          <option selected value="0">
-                            YYY
-                          </option>
+                        <select
+                          id="yearBirh"
+                          onChange={handleChange}
+                          value={values.yearBirh}
+                          className="form-select-year"
+                        >
+                          <option value="0">YYY</option>
                           <option value="2007">2007</option>
                           <option value="2006">2006</option>
                           <option value="2005">2005</option>
@@ -197,6 +289,25 @@ function RegisterPage() {
                         </select>
                       </div>
                     </div>
+                    <div>
+                      {errors.dayBirh && touched.dayBirh && (
+                        <p className="mt-2" style={{ color: "red" }}>
+                          <span className="font-medium">{errors.dayBirh}</span>
+                        </p>
+                      )}
+                      {errors.monthBirh && touched.monthBirh && (
+                        <p className="mt-2" style={{ color: "red" }}>
+                          <span className="font-medium">
+                            {errors.monthBirh}
+                          </span>
+                        </p>
+                      )}
+                      {errors.yearBirh && touched.yearBirh && (
+                        <p className="mt-2" style={{ color: "red" }}>
+                          <span className="font-medium">{errors.yearBirh}</span>
+                        </p>
+                      )}
+                    </div>
                     <span className="hint">
                       You need to be 16 or over to use ASOS
                     </span>
@@ -210,7 +321,15 @@ function RegisterPage() {
                     <div className="gender-female">
                       <div className="form-check womenswear">
                         <input
+                          onChange={(e) => {
+                            setFieldValue(
+                              "mostlyInterested",
+                              "womenswear",
+                              false
+                            );
+                          }}
                           type="radio"
+                          defaultChecked={true}
                           className="form-check-input"
                           name="flexRadioDefault"
                           id="womenswear"
@@ -224,11 +343,18 @@ function RegisterPage() {
                       </div>
                       <div className="form-check menswear">
                         <input
+                          onChange={(e) => {
+                            setFieldValue(
+                              "mostlyInterested",
+                              "menswear",
+                              false
+                            );
+                          }}
                           className="form-check-input"
                           type="radio"
                           name="flexRadioDefault"
                           id="menswear"
-                          checked
+                          defaultChecked={false}
                         />
                         <label className="form-check-label" htmlFor="menswear">
                           Menswear
@@ -247,7 +373,13 @@ function RegisterPage() {
                           <span>Tell us which emails you’d like:</span>
                         </div>
                         <div className="all-check">
-                          <button className="btn btn-secondary" type="button">
+                          <button
+                            className="btn btn-secondary"
+                            onClick={(e) => {
+                              SubscribeSubscriptions(e);
+                            }}
+                            type="button"
+                          >
                             SELECT ALL
                           </button>
                         </div>
@@ -256,58 +388,74 @@ function RegisterPage() {
                     <div className="checkboxlist-container">
                       <div className="form-box">
                         <label
-                          className="form-check-label"
+                          className="form-check-label "
                           htmlFor="flexCheckDefault"
                         >
                           Discounts and sales
                         </label>
                         <input
-                          className="form-check-input"
+                          onChange={(e) => {
+                            let ischeck = e.target.checked;
+                            setFieldValue("discountsAndSales", ischeck, false);
+                          }}
+                          className="form-check-input checkbox"
                           type="checkbox"
                           value="Discounts and sales"
-                          id="flexCheckDefault"
+                          id="checkbox1"
                         />
                       </div>
                       <div className="form-box">
                         <label
-                          className="form-check-label"
+                          className="form-check-label "
                           htmlFor="flexCheckDefault"
                         >
                           New stuff
                         </label>
                         <input
-                          className="form-check-input"
+                          onChange={(e) => {
+                            let ischeck = e.target.checked;
+                            setFieldValue("newStuff", ischeck, false);
+                          }}
+                          className="form-check-input checkbox"
                           type="checkbox"
                           value="New stuff"
-                          id="flexCheckDefault"
+                          id="checkbox2"
                         />
                       </div>
                       <div className="form-box">
                         <label
-                          className="form-check-label"
+                          className="form-check-label "
                           htmlFor="flexCheckDefault"
                         >
                           Your exclusives
                         </label>
                         <input
-                          className="form-check-input"
+                          onChange={(e) => {
+                            let ischeck = e.target.checked;
+                            setFieldValue("yourExclusives", ischeck, false);
+                          }}
+                          className="form-check-input checkbox"
                           type="checkbox"
                           value="Your exclusives"
-                          id="flexCheckDefault"
+                          id="checkbox3"
                         />
                       </div>
                       <div className="form-box">
                         <label
-                          className="form-check-label"
+                          className="form-check-label "
                           htmlFor="flexCheckDefault"
                         >
                           ASOS partners
                         </label>
                         <input
-                          className="form-check-input"
+                          onChange={(e) => {
+                            let ischeck = e.target.checked;
+                            setFieldValue("asosPartners", ischeck, false);
+                          }}
+                          className="form-check-input checkbox"
                           type="checkbox"
                           value="ASOS partners"
-                          id="flexCheckDefault"
+                          id="checkbox4"
                         />
                       </div>
                     </div>
@@ -315,9 +463,10 @@ function RegisterPage() {
 
                   <div className="submit">
                     <button
-                      type="button"
+                      type="submit"
                       style={{ width: "100%" }}
                       className="btn btn-dark"
+                      id="submitBtn"
                     >
                       JOIN ASOS
                     </button>
@@ -337,4 +486,5 @@ function RegisterPage() {
     </>
   );
 }
+
 export default RegisterPage;

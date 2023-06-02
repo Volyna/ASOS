@@ -21,11 +21,9 @@ namespace WebAsos.Controllers
         public async Task<IActionResult> getAllAsync()
         {
             var res = await _placeCategoryService.GetAllAsync();
-            if (res.IsSuccess)
-            {
+    
                 return Ok(res);
-            }
-            return BadRequest(res);
+
         }
 
         [HttpPost]
@@ -34,11 +32,8 @@ namespace WebAsos.Controllers
         {
 
             var res = await _placeCategoryService.CreateAsync(model);
-            if (res.IsSuccess)
-            {
+  
                 return Ok(res);
-            }
-            return BadRequest(res);
         }
 
         [HttpPut]
@@ -46,11 +41,9 @@ namespace WebAsos.Controllers
         public async Task<IActionResult> updateAsync([FromBody] CategoryUpdateViewModel model)
         {
             var res = await _placeCategoryService.UpdateAsync(model);
-            if (res.IsSuccess)
-            {
+       
                 return Ok(res);
-            }
-            return BadRequest(res);
+
         }
 
         [HttpDelete]
@@ -58,11 +51,9 @@ namespace WebAsos.Controllers
         public async Task<IActionResult> deleteAsync(int id)
         {
             var res = await _placeCategoryService.DeleteAsync(id);
-            if (res.IsSuccess)
-            {
+       
                 return Ok(res);
-            }
-            return BadRequest(res);
+      
         }
     }
 }

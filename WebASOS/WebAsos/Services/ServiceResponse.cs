@@ -3,10 +3,17 @@ namespace WebAsos.Services
 {
     public class ServiceResponse
     {
-        public string Message { get; set; }
+        public ServiceResponse(Object _payload)
+        {
+               this.Payload = _payload;
+        }
+        
+        public ServiceResponse()
+        {
+                
+        }
         public object Payload { get; set; }
-        public bool IsSuccess { get; set; } 
-        public IEnumerable<string> Errors { get; set; }
+
     }
 }
 

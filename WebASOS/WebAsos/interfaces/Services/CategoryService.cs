@@ -33,20 +33,11 @@ namespace WebAsos.interfaces.Services
 
             if (result)
             {
-                return new ServiceResponse
-                {
-                    IsSuccess = true,
-                    Message = "Category created",
-                    Payload = entity
-                };
+                return new ServiceResponse(entity);
+
             }
 
-            return new ServiceResponse
-            {
-                IsSuccess = false,
-                Message = "Create error",
-                Payload = null
-            };
+            return new ServiceResponse("Create error");
         }
 
         public async Task<ServiceResponse> DeleteAsync(int id)
@@ -55,20 +46,10 @@ namespace WebAsos.interfaces.Services
 
             if (result)
             {
-                return new ServiceResponse
-                {
-                    IsSuccess = true,
-                    Message = "Category deleted",
-                    Payload = id
-                };
+                return new ServiceResponse("Category deleted");
             }
 
-            return new ServiceResponse
-            {
-                IsSuccess = false,
-                Message = "Delete error",
-                Payload = null
-            };
+            return new ServiceResponse("Delete error");
         }
 
         public async Task<ServiceResponse> GetAllAsync()
@@ -80,9 +61,7 @@ namespace WebAsos.interfaces.Services
 
             return new ServiceResponse
             {
-                IsSuccess = true,
                 Payload = list,
-                Message = "Categories loaded"
             };
         }
 
@@ -106,17 +85,13 @@ namespace WebAsos.interfaces.Services
             {
                 return new ServiceResponse
                 {
-                    IsSuccess = true,
-                    Message = "Category updated",
                     Payload = entity
                 };
             }
 
             return new ServiceResponse
             {
-                IsSuccess = false,
-                Message = "Update error",
-                Payload = null
+                Payload = "Update error"
             };
         }
     }
