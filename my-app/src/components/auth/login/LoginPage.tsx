@@ -1,9 +1,23 @@
-import { url } from "inspector";
 import { Link } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
 import "./loginePageStyle.css";
+import { useFormik } from "formik";
+import { loginUserSchema } from "../validation";
+import { IBeforeLoginUser } from "../types";
 
 function LoginePage() {
+  const onSubmitFormik = async (values: IBeforeLoginUser) => {
+    console.log("Email User: ", values);
+  };
+  const initValues: IBeforeLoginUser = { email: "" };
+
+  const formik = useFormik({
+    initialValues: initValues,
+    onSubmit: onSubmitFormik,
+    validationSchema: loginUserSchema,
+  });
+  const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
+    formik;
   return (
     <>
       <div className="container">
@@ -21,7 +35,7 @@ function LoginePage() {
           <div className="main">
             <div className="signinContainer">
               <div className="form">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="unified-info">
                     <h2>Welcome</h2>
                     <span>Enter your email to sign in or join</span>
@@ -31,15 +45,23 @@ function LoginePage() {
                       Email address:
                     </label>
                     <input
+                      onChange={handleChange}
+                      value={values.email}
                       type="email"
                       className="form-control"
-                      id="emailUser"
+                      id="email"
                       placeholder="Enter email"
+                      autoComplete="true"
                     />
+                    {errors.email && (
+                      <p className="mt-2" style={{ color: "red" }}>
+                        <span className="font-medium">{errors.email}</span>
+                      </p>
+                    )}
                   </div>
                   <div className="submit">
                     <button
-                      type="button"
+                      type="submit"
                       style={{ width: "100%" }}
                       className="btn btn-dark"
                     >
@@ -47,6 +69,7 @@ function LoginePage() {
                     </button>
                   </div>
                 </form>
+
                 <div className="info-centre unified-info-center">
                   <h2 className="unified-social-title">
                     <span style={{ background: "#fff", padding: "0 10px" }}>
