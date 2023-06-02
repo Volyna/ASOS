@@ -11,7 +11,7 @@ namespace WebAsos.Data.AutoMapper.User
     {
 		public AutoMapperUserProfile()
 		{
-            CreateMap<RegisterUserProfileViewModal, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));
+            CreateMap<RegisterUserProfileViewModel, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));
 
             CreateMap<CategoryEntity, CategoryViewModel>();
 
@@ -25,6 +25,7 @@ namespace WebAsos.Data.AutoMapper.User
             CreateMap<CategoryEntity, CategoryUpdateViewModel>();
 
             CreateMap<CategoryEntity, CategoryGroupViewModel>();
+            CreateMap<RegisterUserProfileViewModel, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));  
         }
 	}
 }

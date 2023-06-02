@@ -17,6 +17,7 @@ using WebAsos.interfaces.Services;
 using WebAsos.interfaces.UserService;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
+using WebAsos.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -39,6 +40,11 @@ builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
     options.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<AppEFContext>().AddDefaultTokenProviders();
 
+var googleAuthSettings = builder.Configuration
+    .GetSection("GoogleAuthSettings")
+    .Get<GoogleAuthSettings>();
+
+builder.Services.AddSingleton(googleAuthSettings);
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
@@ -121,3 +127,5 @@ app.MapControllers();
 app.SeedData();
 
 app.Run();
+
+
