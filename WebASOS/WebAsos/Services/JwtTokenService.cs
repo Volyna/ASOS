@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Google.Apis.Auth;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using WebAsos.Data.Entitties.IdentityUser;
+using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
+using WebAsos.Settings;
 
 namespace WebAsos.Services
 {
@@ -12,10 +15,12 @@ namespace WebAsos.Services
     {
         private readonly IConfiguration _config;
         private readonly UserManager<UserEntity> _userManager;
-        public JwtTokenService(IConfiguration config, UserManager<UserEntity> userManager)
+        private readonly GoogleAuthSettings _googleAuthSettings;
+        public JwtTokenService(IConfiguration config, UserManager<UserEntity> userManager, GoogleAuthSettings googleAuthSettings)
         {
             _config = config;
             _userManager = userManager;
+            _googleAuthSettings = googleAuthSettings;
         }
 
         public async Task<string> CreateToken(UserEntity user)
@@ -23,8 +28,10 @@ namespace WebAsos.Services
             IList<string> roles = await _userManager.GetRolesAsync(user);
             List<Claim> claims = new List<Claim>()
             {
-                new Claim("name", user.UserName),
-                new Claim("image", user.Image??"krot.jpg")
+                new Claim("name", user.FirstName),
+                new Claim("surname", user.LastName),
+                new Claim("email", user.Email),
+                new Claim("image", user.Image??"asos.jpg")
             };
 
             foreach (var claim in roles)
@@ -40,6 +47,18 @@ namespace WebAsos.Services
                 claims: claims
             );
             return new JwtSecurityTokenHandler().WriteToken(jwt);
+        }
+
+        public async Task<GoogleJsonWebSignature.Payload> VerifyGoogleToken(ExternalLoginRequest request)
+        {
+            string clientID = _config["GoogleAuthSettings:ClientId"];
+            var settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string>() { clientID }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(request.Token, settings);
+            return payload;
         }
     }
 }

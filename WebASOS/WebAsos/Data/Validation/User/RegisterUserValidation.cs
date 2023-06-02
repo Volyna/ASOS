@@ -4,7 +4,7 @@ using WebAsos.Data.ViewModels.User;
 
 namespace WebAsos.Data.Validation.User
 {
-    public class RegisterUserValidation : AbstractValidator<RegisterUserProfileViewModal>
+    public class RegisterUserValidation : AbstractValidator<RegisterUserProfileViewModel>
     {
         public RegisterUserValidation()
         {

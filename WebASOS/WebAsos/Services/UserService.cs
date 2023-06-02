@@ -50,7 +50,7 @@ namespace WebAsos.Services
             };
         }
 
-        public async Task<ServiceResponse> RegisterUserAsync(RegisterUserProfileViewModal model)
+        public async Task<ServiceResponse> RegisterUserAsync(RegisterUserProfileViewModel model)
         {
             if (model.Password != model.ConfirmPassword)
             {
@@ -61,7 +61,7 @@ namespace WebAsos.Services
                 };
 
             }
-            UserEntity newUser = _mapper.Map<RegisterUserProfileViewModal, UserEntity>(model);
+            UserEntity newUser = _mapper.Map<RegisterUserProfileViewModel, UserEntity>(model);
             if (model.ImageBase64 == "" || model.ImageBase64 == null)
             {
                 newUser.Image = "";

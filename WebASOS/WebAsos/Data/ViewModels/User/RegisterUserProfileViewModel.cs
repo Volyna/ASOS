@@ -1,7 +1,7 @@
 ﻿using System;
 namespace WebAsos.Data.ViewModels.User
 {
-	public class RegisterUserProfileViewModal
+	public class RegisterUserProfileViewModel
 	{
         public string FirstName { get; set; }
         public string LastName { get; set; }
