@@ -1,6 +1,9 @@
 ﻿using System;
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using WebAsos.Constants.User;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
@@ -23,85 +26,132 @@ namespace WebAsos.Services
             _userManager = userManager;
         }
 
-
-
         public async Task<ServiceResponse> LoginUserAsync(LoginViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.Email);
-            if (user == null)
+            try
             {
-                return new ServiceResponse
+                var user = await _userManager.FindByNameAsync(model.Email);
+                if (user == null)
                 {
-                    IsSuccess = false,
-                    Message = "User not found !"
-                };
-            }
-            var checkPassword = await _userManager.CheckPasswordAsync(user, model.Password);
-            if (!checkPassword)
-            {
-                return new ServiceResponse { IsSuccess = false, Message = "Password incorrect !" };
-            }
-            string token = await _jwtTokenService.CreateToken(user);
-            return new ServiceResponse()
-            {
-                IsSuccess = true,
-                Payload = token,
-                Message = "Successful request !"
-            };
-        }
-
-        public async Task<ServiceResponse> RegisterUserAsync(RegisterUserProfileViewModel model)
-        {
-            if (model.Password != model.ConfirmPassword)
-            {
-                return new ServiceResponse()
-                {
-                    IsSuccess = false,
-                    Message = "Confirm pssword do not match !!!"
-                };
-
-            }
-            UserEntity newUser = _mapper.Map<RegisterUserProfileViewModel, UserEntity>(model);
-            if (model.ImageBase64 == "" || model.ImageBase64 == null)
-            {
-                newUser.Image = "";
-            }
-            else
-            {
-                newUser.Image = model.ImageBase64;
-            }
-
-            var result = await _userRepository.RegisterUserAsync(newUser, model.Password);
-            if (result.Succeeded)
-            {
-                var resultRole = await _userRepository.AddToRoleAsync(newUser, Roles.User);
-                if (resultRole.Succeeded)
-                {
-                    var user = await _userManager.FindByEmailAsync(model.Email);
-                    var token = await _jwtTokenService.CreateToken(user);
                     return new ServiceResponse
                     {
-                        Message = "User successfully created.",
-                        IsSuccess = true,
-                        Payload = token,
+                        Payload = "User not found !"
                     };
+                }
+                var checkPassword = await _userManager.CheckPasswordAsync(user, model.Password);
+                if (!checkPassword)
+                {
+                    return new ServiceResponse { Payload = "Password incorrect !" };
+                }
+                string token = await _jwtTokenService.CreateToken(user);
+                return new ServiceResponse()
+                {
+                    Payload = token,
+                };
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse() { Payload =  ex.Message  };
+            }
+            
+        }
+
+        public async Task<ServiceResponse> RegisterUser(RegisterUserProfileViewModel model)
+        {
+            try
+            {
+                var user = await _userManager.FindByNameAsync(model.Email);
+                if (user != null)
+                {
+                    return new ServiceResponse() { Payload = "User was register" };
+                }
+                UserEntity newUser = _mapper.Map<RegisterUserProfileViewModel, UserEntity>(model);
+                DateTime dataBirth = new DateTime(model.YearBirh, model.MonthBirh, model.DayBirh);
+                newUser.DataBirth = dataBirth;
+                var result = await _userRepository.RegisterUserAsync(newUser, model.Password);
+                if (result.Succeeded)
+                {
+                    var resultRole = await _userRepository.AddToRoleAsync(newUser, Roles.User);
+                    if (resultRole.Succeeded)
+                    {
+
+                        var token = await _jwtTokenService.CreateToken(newUser);
+                        return new ServiceResponse() { Payload = token };
+
+                    }
+                    else
+                    {
+                        return new ServiceResponse() { Payload = "User was added but wasn't add to role error !!!" };
+                    }
 
                 }
                 else
                 {
-                    return new ServiceResponse { IsSuccess = false, Message = "User was added but wasn't add to role error !!!" };
+                    return new ServiceResponse()
+                    {
+                        Payload = "Error with register user !!!"
+                    };
+
+                }
+            } 
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse() { Payload = ex.Message };
+            }
+
+           
+
+
+
+        }
+
+        public async Task<ServiceResponse> GoogleExternalLoginAsync(ExternalLoginRequest request)
+        {
+            try
+            {
+                var payload = await _jwtTokenService.VerifyGoogleToken(request);
+                if (payload == null)
+                {
+                    return new ServiceResponse { IsSuccess=false,Message= "Something went wrong..." };
                 }
 
-            }
-            else
-            {
-                return new ServiceResponse()
+                var info = new UserLoginInfo(request.Provider, payload.Subject, request.Provider);
+                var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+                if (user == null)
                 {
-                    IsSuccess = false,
-                    Message = "Error with register user !!!",
-                    Errors = result.Errors.Select(e => e.Description)
-                };
+                    user = await _userManager.FindByEmailAsync(payload.Email);
+                    if (user == null)
+                    {
+                        user = new UserEntity()
+                        {
+                            FirstName = payload.GivenName,
+                            LastName = payload.FamilyName,
+                            Email = payload.Email,
+                            UserName = payload.Email
 
+                        };
+                        var resultCreate = await _userManager.CreateAsync(user);
+                        if (!resultCreate.Succeeded)
+                        {
+                            return new ServiceResponse { IsSuccess = false, Message = "Error creating user" };
+                        }
+                    }
+
+                    var resultLogin = await _userManager.AddLoginAsync(user, info);
+                    if (!resultLogin.Succeeded)
+                    {
+                        return new ServiceResponse { IsSuccess = false, Message = "Error creating a login through Google" };           
+                    }
+                }
+
+                string token = await _jwtTokenService.CreateToken(user);
+                return new ServiceResponse { Payload = token, IsSuccess=true};
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse { IsSuccess = false, Message = ex.Message.ToString() };
             }
         }
     }

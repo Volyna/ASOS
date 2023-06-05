@@ -41,8 +41,9 @@ namespace WebAsos.Data.Entitties
                         LastName = "User",
                         Email = "user@gmail.com",
                         UserName = "user@gmail.com",
-                        Image = ""
-                    };
+                        Image = "",
+                        DataBirth = new DateTime(2000, 1, 1),
+                };
                     var result = userManager.CreateAsync(user, "Qwerty-1")
                         .Result;
                     if (result.Succeeded)

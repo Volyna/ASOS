@@ -10,6 +10,8 @@ import { useContext } from "react";
 import { DarkModeContext } from "./components/admin/context/darkModeContext";
 
 import LoginePage from "./components/auth/login";
+import AuthorizationPage from "./components/auth/login/AuthorizationPage";
+import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
 
@@ -22,6 +24,8 @@ function App() {
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<LoginePage />} />
+            <Route path="login" element={<AuthorizationPage />} />
+            <Route path="register" element={<RegisterPage />} />
           </Route>
 
           <Route path="/admin" element={<AdminLayout />}>

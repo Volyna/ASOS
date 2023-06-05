@@ -1,21 +1,52 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
 import "./loginePageStyle.css";
 import { useFormik } from "formik";
-import { loginUserSchema } from "../validation";
-import { IBeforeLoginUser } from "../types";
-
+import { loginBeforeUserSchema } from "../validation";
+import { IBeforeLoginUser, ILoginUserByGoogle } from "../types";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { GoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 function LoginePage() {
+  const { email, user } = useTypedSelector((store) => store.UserReducer);
+  let navigator = useNavigate();
+  const { IsUserExist, SetEmail, LoginUserByGoogle } = useActions();
   const onSubmitFormik = async (values: IBeforeLoginUser) => {
-    console.log("Email User: ", values);
+    let resultExistUser = await IsUserExist(values);
+    let isUserExits =
+      resultExistUser.toString().toLowerCase() == "true" ? true : false;
+    if (isUserExits == true) {
+      SetEmail(values.email);
+      navigator("/login");
+    } else {
+      SetEmail(values.email);
+      navigator("/register");
+    }
   };
-  const initValues: IBeforeLoginUser = { email: "" };
 
+  const initValues: IBeforeLoginUser = { email: email.trim() };
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
-    validationSchema: loginUserSchema,
+    validationSchema: loginBeforeUserSchema,
   });
+  const responseGoogle = (resp: any) => {
+    const token = resp.credential;
+    let response: ILoginUserByGoogle = {
+      provider: "Google",
+      token: token,
+    };
+    LoginUserByGoogle(response);
+  };
+  if (user != null) {
+    return <Navigate to={"/asos"}></Navigate>;
+  }
+  const errorGoogle = () => {
+    toast.error("Error Google login!!!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;
   return (
@@ -91,7 +122,10 @@ function LoginePage() {
                         type="button"
                         className="btn btn-dark social-link"
                       >
-                        Google
+                        <GoogleLogin
+                          onSuccess={responseGoogle}
+                          onError={errorGoogle}
+                        />
                       </button>
                     </li>
                     <li className="social-register">

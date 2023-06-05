@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebAsos.Data;
@@ -11,9 +12,11 @@ using WebAsos.Data;
 namespace WebAsos.Migrations
 {
     [DbContext(typeof(AppEFContext))]
-    partial class AppEFContextModelSnapshot : ModelSnapshot
+    [Migration("20230605122548_Add new line to user")]
+    partial class Addnewlinetouser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,7 +126,7 @@ namespace WebAsos.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -187,17 +190,17 @@ namespace WebAsos.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<bool?>("AsosPartners")
+                    b.Property<bool>("AsosPartners")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("DataBirth")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateTime>("DataBirth")
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool?>("DiscountsAndSales")
+                    b.Property<bool>("DiscountsAndSales")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Email")
@@ -213,6 +216,7 @@ namespace WebAsos.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -228,9 +232,10 @@ namespace WebAsos.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("MostlyInterested")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool?>("NewStuff")
+                    b.Property<bool>("NewStuff")
                         .HasColumnType("boolean");
 
                     b.Property<string>("NormalizedEmail")
@@ -260,7 +265,7 @@ namespace WebAsos.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.Property<bool?>("YourExclusives")
+                    b.Property<bool>("YourExclusives")
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");

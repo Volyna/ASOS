@@ -1,29 +1,34 @@
-export interface IAuthResponse {
-    token: string
-}
-
-export interface ILoginPage {
-    email: string,
-    password: string,
-    reCaptchaToken: string
-};
-
-export enum AuthUserActionType {
-    LOGIN_USER = "AUTH_LOGIN_USER",
-    LOGOUT_USER = "AUTH_LOGOUT_USER"
-}
 
 export interface IUser {
-    email: string,
-    phone: string,
-    image: string,
-    roles: string[]
-}
-
-export interface IAuthUser {
-    isAuth: boolean,
-    user?: IUser
+    name:string;
+  surname:string;
+  email: string;
+    phone: string;
+    image: string;
+    roles: string;
 }
 export interface IBeforeLoginUser {
     email: string;
+}
+export interface ILoginUser {
+    email: string;
+    password: string;
+}
+export interface ILoginUserByGoogle {
+    provider: string;
+    token: string;
+}
+export interface IRegisterUser {
+    email: string;
+    password: string;
+    firstName:string;
+    lastName:string;
+    dayBirh:number;
+    monthBirh:number;
+    yearBirh:number;
+    mostlyInterested:string;
+    discountsAndSales:boolean;
+    newStuff:boolean;
+    yourExclusives:boolean;
+    asosPartners:boolean;
 }
