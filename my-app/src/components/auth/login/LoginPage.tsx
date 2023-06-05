@@ -3,14 +3,15 @@ import LOGO_ASOS from "../../../images/asos_logo.png";
 import "./loginePageStyle.css";
 import { useFormik } from "formik";
 import { loginBeforeUserSchema } from "../validation";
-import { IBeforeLoginUser } from "../types";
+import { IBeforeLoginUser, ILoginUserByGoogle } from "../types";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-
+import { GoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 function LoginePage() {
-  const { email } = useTypedSelector((store) => store.UserReducer);
+  const { email, user } = useTypedSelector((store) => store.UserReducer);
   let navigator = useNavigate();
-  const { IsUserExist, SetEmail } = useActions();
+  const { IsUserExist, SetEmail, LoginUserByGoogle } = useActions();
   const onSubmitFormik = async (values: IBeforeLoginUser) => {
     let resultExistUser = await IsUserExist(values);
     let isUserExits =
@@ -23,13 +24,29 @@ function LoginePage() {
       navigator("/register");
     }
   };
+
   const initValues: IBeforeLoginUser = { email: email.trim() };
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
     validationSchema: loginBeforeUserSchema,
   });
-
+  const responseGoogle = (resp: any) => {
+    const token = resp.credential;
+    let response: ILoginUserByGoogle = {
+      provider: "Google",
+      token: token,
+    };
+    LoginUserByGoogle(response);
+  };
+  if (user != null) {
+    return <Navigate to={"/asos"}></Navigate>;
+  }
+  const errorGoogle = () => {
+    toast.error("Error Google login!!!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;
   return (
@@ -105,7 +122,10 @@ function LoginePage() {
                         type="button"
                         className="btn btn-dark social-link"
                       >
-                        Google
+                        <GoogleLogin
+                          onSuccess={responseGoogle}
+                          onError={errorGoogle}
+                        />
                       </button>
                     </li>
                     <li className="social-register">

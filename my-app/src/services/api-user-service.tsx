@@ -1,6 +1,7 @@
 import {
   IBeforeLoginUser,
   ILoginUser,
+  ILoginUserByGoogle,
   IRegisterUser,
 } from "../components/auth/types";
 import http from "./http_common";
@@ -23,6 +24,19 @@ export async function isUserExist(email: IBeforeLoginUser) {
 export async function login(user: ILoginUser) {
   const data = await http
     .post(`api/User/login`, user)
+    .then((response) => {
+      return {
+        response,
+      };
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return data;
+}
+export async function loginByGoogle(user: ILoginUserByGoogle) {
+  const data = await http
+    .post(`api/User/GoogleExternalLogin`, user)
     .then((response) => {
       return {
         response,

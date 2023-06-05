@@ -128,7 +128,8 @@ namespace WebAsos.Services
                         {
                             FirstName = payload.GivenName,
                             LastName = payload.FamilyName,
-                            Email = payload.Email
+                            Email = payload.Email,
+                            UserName = payload.Email
 
                         };
                         var resultCreate = await _userManager.CreateAsync(user);

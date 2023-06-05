@@ -2,12 +2,14 @@ import { Dispatch } from "react";
 import {
   IBeforeLoginUser,
   ILoginUser,
+  ILoginUserByGoogle,
   IRegisterUser,
 } from "../../../components/auth/types";
 import { UserActionTypes, UserActions } from "../../reducers/userReducer/types";
 import {
   isUserExist,
   login,
+  loginByGoogle,
   register,
 } from "../../../services/api-user-service";
 import jwtDecode from "jwt-decode";
@@ -71,6 +73,21 @@ export const RegisterUser = (user: IRegisterUser) => {
       const data = await register(user);
       const { response } = data;
       console.log(response.data.payload);
+      AuthUserToken(response.data.payload, dispatch);
+    } catch (e) {
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+};
+export const LoginUserByGoogle = (model: ILoginUserByGoogle) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      dispatch({ type: UserActionTypes.START_REQUESTS_USER });
+      const data = await loginByGoogle(model);
+      const { response } = data;
+      console.log("response", response.data.payload);
       AuthUserToken(response.data.payload, dispatch);
     } catch (e) {
       toast.error("Error Notification !", {

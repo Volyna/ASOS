@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
 import "./index.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,12 +17,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <React.StrictMode>
-        <ToastContainer />
-        <DarkModeContextProvider>
-          <App />
-        </DarkModeContextProvider>
-      </React.StrictMode>
+      <GoogleOAuthProvider clientId="579487123707-nsn0hncgmdfrptb3ensmn85v08g8aubf.apps.googleusercontent.com">
+        <React.StrictMode>
+          <ToastContainer />
+          <DarkModeContextProvider>
+            <App />
+          </DarkModeContextProvider>
+        </React.StrictMode>
+      </GoogleOAuthProvider>
     </BrowserRouter>
   </Provider>
 );
