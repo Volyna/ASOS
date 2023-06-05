@@ -67,6 +67,8 @@ namespace WebAsos.Services
                     return new ServiceResponse() { Payload = "User was register" };
                 }
                 UserEntity newUser = _mapper.Map<RegisterUserProfileViewModel, UserEntity>(model);
+                DateTime dataBirth = new DateTime(model.YearBirh, model.MonthBirh, model.DayBirh);
+                newUser.DataBirth = dataBirth;
                 var result = await _userRepository.RegisterUserAsync(newUser, model.Password);
                 if (result.Succeeded)
                 {
@@ -74,7 +76,7 @@ namespace WebAsos.Services
                     if (resultRole.Succeeded)
                     {
 
-                        var token = await _jwtTokenService.CreateToken(user);
+                        var token = await _jwtTokenService.CreateToken(newUser);
                         return new ServiceResponse() { Payload = token };
 
                     }
@@ -112,7 +114,7 @@ namespace WebAsos.Services
                 var payload = await _jwtTokenService.VerifyGoogleToken(request);
                 if (payload == null)
                 {
-                    return new ServiceResponse("Something went wrong...");
+                    return new ServiceResponse { IsSuccess=false,Message= "Something went wrong..." };
                 }
 
                 var info = new UserLoginInfo(request.Provider, payload.Subject, request.Provider);
@@ -132,23 +134,23 @@ namespace WebAsos.Services
                         var resultCreate = await _userManager.CreateAsync(user);
                         if (!resultCreate.Succeeded)
                         {
-                            return new ServiceResponse("Error creating user");
+                            return new ServiceResponse { IsSuccess = false, Message = "Error creating user" };
                         }
                     }
 
                     var resultLogin = await _userManager.AddLoginAsync(user, info);
                     if (!resultLogin.Succeeded)
                     {
-                        return new ServiceResponse("Error creating a login through Google");
+                        return new ServiceResponse { IsSuccess = false, Message = "Error creating a login through Google" };           
                     }
                 }
 
                 string token = await _jwtTokenService.CreateToken(user);
-                return new ServiceResponse( token );
+                return new ServiceResponse { Payload = token, IsSuccess=true};
             }
             catch (Exception ex)
             {
-                return new ServiceResponse(ex.Message);
+                return new ServiceResponse { IsSuccess = false, Message = ex.Message.ToString() };
             }
         }
     }

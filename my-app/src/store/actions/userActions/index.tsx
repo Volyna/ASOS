@@ -13,7 +13,7 @@ import {
 import jwtDecode from "jwt-decode";
 import setAuthToken from "../../../services/setAuthToken";
 import { IUser } from "./types";
-
+import { toast } from "react-toastify";
 export const IsUserExist = (email: IBeforeLoginUser) => {
   return async (dispatch: Dispatch<UserActions>) => {
     try {
@@ -22,6 +22,9 @@ export const IsUserExist = (email: IBeforeLoginUser) => {
       const { response } = data;
       return response.data;
     } catch (e: any) {
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       console.log(e);
     }
   };
@@ -39,7 +42,11 @@ export const LoginUser = (user: ILoginUser) => {
       const { response } = data;
       console.log("response", response.data.payload);
       AuthUserToken(response.data.payload, dispatch);
-    } catch (e) {}
+    } catch (e) {
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 };
 export const AuthUserToken = (
@@ -65,6 +72,10 @@ export const RegisterUser = (user: IRegisterUser) => {
       const { response } = data;
       console.log(response.data.payload);
       AuthUserToken(response.data.payload, dispatch);
-    } catch (e) {}
+    } catch (e) {
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 };

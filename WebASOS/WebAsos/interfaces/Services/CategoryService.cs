@@ -33,11 +33,20 @@ namespace WebAsos.interfaces.Services
 
             if (result)
             {
-                return new ServiceResponse(entity);
-
+                return new ServiceResponse
+                {
+                    IsSuccess = true,
+                    Message = "Category created",
+                    Payload = entity
+                };
             }
 
-            return new ServiceResponse("Create error");
+            return new ServiceResponse
+            {
+                IsSuccess = false,
+                Message = "Create error",
+                Payload = null
+            };
         }
 
         public async Task<ServiceResponse> DeleteAsync(int id)
@@ -46,10 +55,20 @@ namespace WebAsos.interfaces.Services
 
             if (result)
             {
-                return new ServiceResponse("Category deleted");
+                return new ServiceResponse
+                {
+                    IsSuccess = true,
+                    Message = "Category deleted",
+                    Payload = id
+                };
             }
 
-            return new ServiceResponse("Delete error");
+            return new ServiceResponse
+            {
+                IsSuccess = false,
+                Message = "Delete error",
+                Payload = null
+            };
         }
 
         public async Task<ServiceResponse> GetAllAsync()
@@ -61,7 +80,9 @@ namespace WebAsos.interfaces.Services
 
             return new ServiceResponse
             {
+                IsSuccess = true,
                 Payload = list,
+                Message = "Categories loaded"
             };
         }
 
@@ -85,13 +106,17 @@ namespace WebAsos.interfaces.Services
             {
                 return new ServiceResponse
                 {
+                    IsSuccess = true,
+                    Message = "Category updated",
                     Payload = entity
                 };
             }
 
             return new ServiceResponse
             {
-                Payload = "Update error"
+                IsSuccess = false,
+                Message = "Update error",
+                Payload = null
             };
         }
     }

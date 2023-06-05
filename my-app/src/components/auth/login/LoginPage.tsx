@@ -19,6 +19,7 @@ function LoginePage() {
       SetEmail(values.email);
       navigator("/login");
     } else {
+      SetEmail(values.email);
       navigator("/register");
     }
   };

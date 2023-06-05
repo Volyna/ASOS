@@ -13,7 +13,8 @@ namespace WebAsos.Data
         public AppEFContext(DbContextOptions<AppEFContext> options)
             : base(options)
         {
-
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
         public DbSet<CategoryEntity> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)

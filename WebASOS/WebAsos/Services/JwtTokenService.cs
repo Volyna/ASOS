@@ -25,7 +25,7 @@ namespace WebAsos.Services
 
         public async Task<string> CreateToken(UserEntity user)
         {
-            IList<string> roles = await _userManager.GetRolesAsync(user);
+           
             List<Claim> claims = new List<Claim>()
             {
                 new Claim("name", user.FirstName ?? ""),
@@ -34,7 +34,7 @@ namespace WebAsos.Services
                 new Claim("email", user.Email ?? ""),
                 new Claim("image", user.Image??"")
             };
-
+            var roles = await _userManager.GetRolesAsync(user);
             foreach (var claim in roles)
             {
                 claims.Add(new Claim("roles", claim));

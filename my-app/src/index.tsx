@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
 import "./index.css";
+import { ToastContainer } from "react-toastify";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -16,6 +17,7 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
+        <ToastContainer />
         <DarkModeContextProvider>
           <App />
         </DarkModeContextProvider>
