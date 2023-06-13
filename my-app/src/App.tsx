@@ -15,12 +15,18 @@ import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
 
+import Navbar from "./components/navbar";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
     <>
       <div className={darkMode ? "app dark" : "app"}>
+        <Routes>
+          <Route path="/" element={<Navbar />}></Route>
+        </Routes>
+        {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<LoginePage />} />
@@ -48,7 +54,7 @@ function App() {
               />
             </Route>
           </Route>
-        </Routes>
+        </Routes> */}
       </div>
     </>
   );
