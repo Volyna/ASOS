@@ -1,0 +1,31 @@
+.infoSale{
+    visibility:hidden;
+    position: absolute;
+}
+
+.buttonInfo button{
+    background-color: red;
+    border: 0;
+    letter-spacing: .8px;
+    font-size: .875rem;
+    color: white;
+    line-height: 50px;
+    font-weight: 800;
+    padding: 0 12px 0 14px;
+}
+.buttonInfo{
+    display: block;
+    background-color: red;
+    transform: skew(-12deg);
+}
+.buttonInfo :hover  {
+
+        /* visibility:visible;
+        background-color: rebeccapurple; */
+
+        visibility:hidden;
+        background-color: rebeccapurple;
+
+
+}
+

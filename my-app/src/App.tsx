@@ -15,7 +15,7 @@ import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
 
-import Navbar from "./components/navbar";
+import Navbar from "./components/navbarWomen";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);

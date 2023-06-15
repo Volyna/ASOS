@@ -1,0 +1,66 @@
+.container {
+   
+}
+.women {
+    background-color:  #525050;
+}
+.categoriesPeople{
+    display: flex;
+    width: 230px;
+}
+
+.categoriesPeople li{
+    width: 115px;
+    border-bottom: none;
+    box-sizing: border-box;
+}
+.infoPeople{
+    list-style-type: none; /* Remove bullets */
+margin: 0;
+padding: 0;
+justify-content: space-between;
+}
+.infoPeople li{
+    color: white;
+}
+.categoriesPeople a{
+    color: white;
+
+    border-bottom: none;
+    height: 100%;
+    line-height: 60px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 900;
+    font-size: .875rem;
+}
+.container{
+    display: flex;
+}
+.infoPeople{
+    display: flex;
+}
+.search{
+    width: 100%;
+}
+.search input{
+    font-size: 1rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 0;
+    height: 38px;
+    border-radius: 19px/50%;
+    padding-left: 16px;
+    padding-right: 70px;
+    box-sizing: border-box;
+}
+.navbar{
+   
+    background-color: #2d2d2d;
+}
+.secondNav{
+    background-color:  #525050;
+}
