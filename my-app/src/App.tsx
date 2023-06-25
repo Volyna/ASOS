@@ -24,7 +24,7 @@ function App() {
     <>
       <div className={darkMode ? "app dark" : "app"}>
         <Routes>
-          <Route path="/" element={<Navbar />}></Route>
+          <Route path="/women" element={<Navbar />}></Route>
         </Routes>
         {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>

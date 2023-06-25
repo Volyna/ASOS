@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import LOGO_ASOS from "../../images/asos_logo.png";
 import "./styleWomen.css";
-import SaleComponent from "./componentsNavbarWomen/saleComponent";
+import SaleComponentWomen from "./componentsNavbarWomen/saleComponent";
 const Navbar = () => {
   return (
     <>
@@ -65,7 +65,7 @@ const Navbar = () => {
             id="navbarSupportedContent"
           >
             <div className="container">
-              <SaleComponent />
+              <SaleComponentWomen />
             </div>
           </div>
         </nav>
