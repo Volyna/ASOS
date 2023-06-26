@@ -11,19 +11,36 @@ namespace WebAsos.Helpers
 
 
             //set the image path
-            string imgPath = Path.Combine(path, RandomString() + ".jpg");
+            string nameImage = RandomString() + ".jpg";
+            string imgPath = Path.Combine(path, nameImage);
 
             byte[] imageBytes = Convert.FromBase64String(ImageBase54);
 
             File.WriteAllBytes(imgPath, imageBytes);
 
-            return imgPath;
+            return nameImage;
         }
         public static string RandomString()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZqwertyuiopasdfghjklzxcvbnm0123456789";
             return new string(Enumerable.Repeat(chars, 15)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        public static bool RemoveImage(string nameImage)
+        {
+            try
+            {
+                string file = Path.Combine(Directory.GetCurrentDirectory(), "images", nameImage);
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

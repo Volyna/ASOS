@@ -60,7 +60,31 @@ namespace WebAsos.Services
 
         public async Task<ServiceResponse> UpdateAsync(UpdateCategoryViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var oldCategory = await _categoryRepository.GetById(model.Id);
+                if (oldCategory != null)
+                {
+                    var newCategory = _mapper.Map<UpdateCategoryViewModel, CategoryEntity>(model, oldCategory);
+                    ImageWorker.RemoveImage(oldCategory.Image);
+                    var pathImage = ImageWorker.SaveImage(model.ImageBase64);
+                    newCategory.Image = pathImage;
+                    var result = _categoryRepository.UpdateCategory(newCategory);
+                    return new ServiceResponse() { IsSuccess = true };
+
+                
+                }
+                else
+                {
+                    return new ServiceResponse() { IsSuccess = false, Message = "Category with id: " + model.Id + " is not exist" };
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse() { IsSuccess = false, Message = ex.Message, Payload = ex.Message };
+            }
         }
     }
 }

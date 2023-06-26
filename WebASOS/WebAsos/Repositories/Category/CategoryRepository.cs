@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 using WebAsos.Data;
 using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Interfaces.CategoryInterfaces;
@@ -29,10 +30,22 @@ namespace WebAsos.Repositories.Category
           
         }
 
+        public async Task<CategoryEntity> GetById(int id)
+        {
+            var result = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            return result;
+        }
+
         public async Task<CategoryEntity> GetByName(string name)
         {
             var result = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
             return result;
+        }
+
+        public async Task UpdateCategory(CategoryEntity model)
+        {
+            _context.Categories.Update(model);
+            await _context.SaveChangesAsync();
         }
     }
 }

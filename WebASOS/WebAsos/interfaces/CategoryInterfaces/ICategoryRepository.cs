@@ -6,6 +6,8 @@ namespace WebAsos.Interfaces.CategoryInterfaces
     public interface ICategoryRepository
     {
         Task<CategoryEntity> GetByName(string name);
+        Task<CategoryEntity> GetById(int id);
         Task<IdentityResult> CreateCategory(CategoryEntity model);
+        Task UpdateCategory(CategoryEntity model);
     }
 }

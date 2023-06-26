@@ -10,6 +10,7 @@ namespace WebAsos.Data.AutoMapper.Category
         public AutoMapperCategory()
         {
             CreateMap<CreateCategoryViewModel, CategoryEntity>();
+            CreateMap<UpdateCategoryViewModel, CategoryEntity>();
         }
     }
 }
