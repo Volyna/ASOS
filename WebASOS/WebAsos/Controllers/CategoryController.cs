@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebAsos.Data.ViewModels.Category;
+using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.Services;
-using WebAsos.Models;
 
 namespace WebAsos.Controllers
 {
@@ -9,60 +10,26 @@ namespace WebAsos.Controllers
     [ApiController]
     public class CategoryController : Controller
     {
-        private readonly ICategoryService _placeCategoryService;
-
-        public CategoryController(ICategoryService placeCategoryService)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(ICategoryService categoryService)
         {
-            _placeCategoryService = placeCategoryService;
+            _categoryService = categoryService;
         }
-
-        [HttpGet]
-        [Route("list")]
-        public async Task<IActionResult> getAllAsync()
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateCategoryAsync([FromBody] CreateCategoryViewModel model)
         {
-            var res = await _placeCategoryService.GetAllAsync();
-            if (res.IsSuccess)
-            {
-                return Ok(res);
-            }
-            return BadRequest(res);
+            var result = await _categoryService.CreateAsync(model);
+            if (result.IsSuccess == true)
+                return Ok(result);
+            return BadRequest(result);
         }
-
-        [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> createAsync([FromBody] CategoryCreateViewModel model)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateCategoryAsync([FromBody] UpdateCategoryViewModel model)
         {
-
-            var res = await _placeCategoryService.CreateAsync(model);
-            if (res.IsSuccess)
-            {
-                return Ok(res);
-            }
-            return BadRequest(res);
-        }
-
-        [HttpPut]
-        [Route("update")]
-        public async Task<IActionResult> updateAsync([FromBody] CategoryUpdateViewModel model)
-        {
-            var res = await _placeCategoryService.UpdateAsync(model);
-            if (res.IsSuccess)
-            {
-                return Ok(res);
-            }
-            return BadRequest(res);
-        }
-
-        [HttpDelete]
-        [Route("delete")]
-        public async Task<IActionResult> deleteAsync(int id)
-        {
-            var res = await _placeCategoryService.DeleteAsync(id);
-            if (res.IsSuccess)
-            {
-                return Ok(res);
-            }
-            return BadRequest(res);
+            var result = await _categoryService.UpdateAsync(model);
+            if (result.IsSuccess == true)
+                return Ok(result);
+            return BadRequest(result);
         }
     }
 }

@@ -137,12 +137,7 @@ namespace WebAsos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
 
                     b.ToTable("Categories");
                 });
@@ -326,15 +321,6 @@ namespace WebAsos.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
-                {
-                    b.HasOne("WebAsos.Data.Entitties.Catalog.CategoryEntity", "Parent")
-                        .WithMany("Childrens")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
             modelBuilder.Entity("WebAsos.Data.Entitties.IdentityUser.UserRoleEntity", b =>
                 {
                     b.HasOne("WebAsos.Data.Entitties.IdentityUser.RoleEntity", "Role")
@@ -352,11 +338,6 @@ namespace WebAsos.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
-                {
-                    b.Navigation("Childrens");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.IdentityUser.RoleEntity", b =>
