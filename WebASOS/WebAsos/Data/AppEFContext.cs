@@ -17,6 +17,9 @@ namespace WebAsos.Data
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
         public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<ProductImageEntity> ProductImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

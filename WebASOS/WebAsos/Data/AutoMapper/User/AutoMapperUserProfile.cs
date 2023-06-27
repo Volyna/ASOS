@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using WebAsos.Data.Entitties.Catalog;
+using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.Models;
@@ -14,6 +15,10 @@ namespace WebAsos.Data.AutoMapper.User
             CreateMap<RegisterUserProfileViewModel, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));
 
             CreateMap<CategoryEntity, CategoryViewModel>();
+            CreateMap<ProductEntity, ProductViewModel>();
+
+            CreateMap<ProductEntity, CreateProductDTO>();
+            CreateMap<CreateProductDTO, ProductEntity>();
 
             CreateMap<CategoryEntity, CategoryCreateViewModel>();
             CreateMap<CategoryCreateViewModel, CategoryEntity>()
@@ -26,6 +31,8 @@ namespace WebAsos.Data.AutoMapper.User
 
             CreateMap<CategoryEntity, CategoryGroupViewModel>();
             CreateMap<RegisterUserProfileViewModel, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));  
+
+
         }
 	}
 }

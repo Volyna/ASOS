@@ -15,6 +15,8 @@ using WebAsos.interfaces.JwtTokenService;
 using WebAsos.interfaces.Repository;
 using WebAsos.interfaces.Services;
 using WebAsos.interfaces.UserService;
+using WebAsos.Interfaces.Repository;
+using WebAsos.Interfaces.Services;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
 using WebAsos.Settings;
@@ -45,8 +47,16 @@ var googleAuthSettings = builder.Configuration
     .Get<GoogleAuthSettings>();
 
 builder.Services.AddSingleton(googleAuthSettings);
+
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
+
+
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductImageService, ProductImageService>();
 
 builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterUserValidation>());
 

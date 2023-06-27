@@ -11,5 +11,6 @@ namespace WebAsos.Data.Entitties.Catalog
         public int? ParentId { get; set; }
         public CategoryEntity Parent { get; set; }
         virtual public ICollection<CategoryEntity> Childrens { get; set; }
+        public ICollection<ProductEntity> Products { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace WebAsos.Data.Entitties
                 .GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<AppEFContext>();
-                context.Database.Migrate();
+                //context.Database.Migrate();
                 var userManager = scope.ServiceProvider
                     .GetRequiredService<UserManager<UserEntity>>();
 
