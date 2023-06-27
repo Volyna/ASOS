@@ -50,12 +50,57 @@ namespace WebAsos.Services
 
         public async Task<ServiceResponse> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = await _categoryRepository.GetById(id);
+                if (category != null)
+                {
+                    var result = await _categoryRepository.RemoveCategory(category);
+                    if (result.Succeeded == true)
+                    {
+                        return new ServiceResponse() { IsSuccess = true };
+                    }
+                    else
+                    {
+                        return new ServiceResponse() { IsSuccess = false,Message= "Something went wrong" };
+                    }
+                }
+                else
+                {
+                    return new ServiceResponse() { IsSuccess = false, Message = "Category with Id: " + id + "is not exist" };
+                }
+         
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse() { IsSuccess = false, Message = ex.Message, Payload = ex.Message };
+            }
         }
 
         public async Task<ServiceResponse> GetAllAsync()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<ServiceResponse> GetByIdAsync(int id)
+        {
+            try
+            {
+                var product = await _categoryRepository.GetById(id);
+                if (product != null)
+                {
+                    return new ServiceResponse() { IsSuccess = true, Payload = product };
+                }
+                else
+                {
+                    return new ServiceResponse() { IsSuccess = false, Message = "Category with id: " + id + "is not exist" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse() { IsSuccess = false, Message = ex.Message, Payload = ex.Message };
+            }
         }
 
         public async Task<ServiceResponse> UpdateAsync(UpdateCategoryViewModel model)

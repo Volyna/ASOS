@@ -9,5 +9,6 @@ namespace WebAsos.Interfaces.CategoryInterfaces
         Task<CategoryEntity> GetById(int id);
         Task<IdentityResult> CreateCategory(CategoryEntity model);
         Task UpdateCategory(CategoryEntity model);
+        Task<IdentityResult> RemoveCategory(CategoryEntity model);
     }
 }

@@ -42,6 +42,21 @@ namespace WebAsos.Repositories.Category
             return result;
         }
 
+        public async Task<IdentityResult> RemoveCategory(CategoryEntity model)
+        {
+            try
+            {
+                var result =  _context.Categories.Remove(model);
+                await _context.SaveChangesAsync();
+ 
+                return IdentityResult.Success;
+            }
+            catch (Exception ex)
+            {
+                return IdentityResult.Failed();
+            }
+        }
+
         public async Task UpdateCategory(CategoryEntity model)
         {
             _context.Categories.Update(model);

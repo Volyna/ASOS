@@ -31,5 +31,22 @@ namespace WebAsos.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteCategoryAsync(int id)
+        {
+            var result = await _categoryService.DeleteAsync(id);
+            if (result.IsSuccess == true)
+                return Ok(result);
+            return BadRequest(result);
+        }
+        [HttpDelete("getById")]
+        public async Task<IActionResult> GetByIdCategoryAsync(int id)
+        {
+
+            var result = await _categoryService.GetByIdAsync(id);
+            if (result.IsSuccess == true)
+                return Ok(result);
+            return BadRequest(result);
+        }
     }
 }

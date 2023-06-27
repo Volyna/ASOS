@@ -9,5 +9,6 @@ namespace WebAsos.interfaces.Services
         public Task<ServiceResponse> DeleteAsync(int id);
         public Task<ServiceResponse> UpdateAsync(UpdateCategoryViewModel model);
         public Task<ServiceResponse> GetAllAsync();
+        public Task<ServiceResponse> GetByIdAsync(int id);
     }
 }
