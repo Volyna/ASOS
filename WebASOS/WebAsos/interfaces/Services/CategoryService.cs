@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using WebAsos.Data.Entitties.Catalog;
 using WebAsos.interfaces.Repository;
 using WebAsos.Models;
@@ -84,6 +85,12 @@ namespace WebAsos.interfaces.Services
                 Payload = list,
                 Message = "Categories loaded"
             };
+        }
+
+        public async Task<CategoryEntity> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+
         }
 
         public async Task<ServiceResponse> UpdateAsync(CategoryUpdateViewModel model)

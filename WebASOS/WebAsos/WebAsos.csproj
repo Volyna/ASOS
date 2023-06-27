@@ -23,6 +23,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.1" />
     <PackageReference Include="FluentValidation" Version="11.5.2" />
@@ -50,7 +51,6 @@
     <Folder Include="Constants\" />
     <Folder Include="Constants\User\" />
     <Folder Include="Services\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="interfaces\JwtTokenService\" />
     <Folder Include="Data\Validation\User\" />
     <Folder Include="Data\AutoMapper\User\" />

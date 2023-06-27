@@ -44,6 +44,13 @@ namespace WebAsos.interfaces.Repository
                 .FirstOrDefaultAsync(e => e.Id.Equals(id));
         }
 
+        public async Task<TEntity> GetByNameAsync(string name)
+        {
+            return await _dbContext.Set<TEntity>()
+               .AsNoTracking()
+               .FirstOrDefaultAsync(e => e.Name == name);
+        }
+
         public async Task<bool> UpdateAsync(TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);

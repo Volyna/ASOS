@@ -1,4 +1,5 @@
-﻿using WebAsos.Models;
+﻿using WebAsos.Data.Entitties.Catalog;
+using WebAsos.Models;
 using WebAsos.Services;
 
 namespace WebAsos.interfaces.Services
@@ -9,5 +10,6 @@ namespace WebAsos.interfaces.Services
         public Task<ServiceResponse> DeleteAsync(int id);
         public Task<ServiceResponse> UpdateAsync(CategoryUpdateViewModel model);
         public Task<ServiceResponse> GetAllAsync();
+        public Task<CategoryEntity> GetByIdAsync(int id);
     }
 }
