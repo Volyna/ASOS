@@ -14,11 +14,18 @@ namespace WebAsos.Data.AutoMapper.User
 		{
             CreateMap<RegisterUserProfileViewModel, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));
 
+            CreateMap<ProductEntity, ProductViewModel>().ForMember(dst => dst.Category,
+            act =>
+                act.MapFrom(src => src.Category.Name));
+
             CreateMap<CategoryEntity, CategoryViewModel>();
             CreateMap<ProductEntity, ProductViewModel>();
 
             CreateMap<ProductEntity, CreateProductDTO>();
             CreateMap<CreateProductDTO, ProductEntity>();
+
+            CreateMap<ProductImageViewModel, ProductImageEntity>();
+            CreateMap<ProductImageEntity, ProductImageViewModel>();
 
             CreateMap<CategoryEntity, CategoryCreateViewModel>();
             CreateMap<CategoryCreateViewModel, CategoryEntity>()

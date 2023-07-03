@@ -90,7 +90,7 @@ namespace WebAsos.Controllers
 
         [HttpPut]
         [Route("UpdateProduct")]
-        public async Task<IActionResult> UpdateProductAsync([FromBody] ProductUpdateViewModel model)
+        public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProductDTO model)
         {
             var res = await _productService.UpdateProductAsync(model);
             if (res.IsSuccess)
