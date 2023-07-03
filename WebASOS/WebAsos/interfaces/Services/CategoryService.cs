@@ -89,8 +89,15 @@ namespace WebAsos.interfaces.Services
 
         public async Task<CategoryEntity> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = _categoryRepository.Categories().Include(c => c.Childrens).FirstOrDefault(c => c.Id == id);
 
+
+            if (category != null)
+            {
+                return category;
+            }
+
+            return null;
         }
 
         public async Task<ServiceResponse> UpdateAsync(CategoryUpdateViewModel model)

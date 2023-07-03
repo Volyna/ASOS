@@ -91,10 +91,26 @@ namespace WebAsos.Interfaces.Services
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return ex.Message.ToString();
             }
 
             return fileName;
+        }
+
+       
+
+        public async Task<string> UpdateProductImageAsync(ProductImageEntity imgName)
+        {
+            try
+            {
+                await _productImageRepository.UpdateAsync(imgName);
+
+                return "updated";
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

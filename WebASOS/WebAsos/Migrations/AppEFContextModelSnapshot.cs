@@ -432,7 +432,7 @@ namespace WebAsos.Migrations
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>
                 {
                     b.HasOne("WebAsos.Data.Entitties.Catalog.CategoryEntity", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -473,6 +473,8 @@ namespace WebAsos.Migrations
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
                 {
                     b.Navigation("Childrens");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>

@@ -60,7 +60,7 @@ namespace WebAsos.Interfaces.Services
 
                 return new ServiceResponse
                 {
-                    Message = "CreateProduct",
+                    Message = "Create Product",
                     IsSuccess = true,
                     Payload = "ok"
                 };
@@ -69,7 +69,7 @@ namespace WebAsos.Interfaces.Services
 
             return new ServiceResponse
             {
-                Message = "CreateProduct",
+                Message = "Create Product",
                 IsSuccess = false,
             };
         }
@@ -109,7 +109,7 @@ namespace WebAsos.Interfaces.Services
             };
         }
 
-        public Task<ServiceResponse> GetProductByCategoryId(int id)
+        public async Task<ServiceResponse> GetProductByCategoryId(int id)
         {
             throw new NotImplementedException();
         }
@@ -153,9 +153,51 @@ namespace WebAsos.Interfaces.Services
             };
         }
 
-        public async Task<ServiceResponse> UpdateProductAsync(ProductUpdateViewModel model)
+        public async Task<ServiceResponse> UpdateProductAsync(UpdateProductDTO model)
         {
-            throw new NotImplementedException();
+            var product = _mapper.Map<UpdateProductDTO, ProductEntity>(model);
+
+            var category = await _categoryService.GetByIdAsync(model.CategoryId);
+
+            product.CategoryId = category.Id;
+
+
+            bool isFirstPicture = true;
+
+            if (product != null)
+            {
+                await _productRepository.UpdateAsync(product);
+
+
+                foreach (var img in model.Images)
+                {
+                    var imgTemplate = img.Data;
+                    var imgFileName = await _productImageService.SaveImageAsync(imgTemplate);
+                    ProductImageEntity new_img_to_upload = new ProductImageEntity { Name = imgFileName, ProductId = product.Id };
+
+                    if (isFirstPicture == true)
+                    {
+                        new_img_to_upload.IsMainImage = true;
+                        isFirstPicture = false;
+                    }
+
+                    await _productImageService.UpdateProductImageAsync(new_img_to_upload);
+                }
+
+                return new ServiceResponse
+                {
+                    Message = "Update Product",
+                    IsSuccess = true,
+                    Payload = "ok"
+                };
+            }
+
+
+            return new ServiceResponse
+            {
+                Message = "Update Product",
+                IsSuccess = false,
+            };
         }
     }
 }

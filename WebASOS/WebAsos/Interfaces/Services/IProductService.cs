@@ -12,6 +12,6 @@ namespace WebAsos.Interfaces.Services
         public Task<ServiceResponse> GetProductsAsync();
         public Task<ServiceResponse> GetProductByCategoryId(int id);
         public Task DeleteProductAsync(int id);
-        public Task<ServiceResponse> UpdateProductAsync(ProductUpdateViewModel model);
+        public Task<ServiceResponse> UpdateProductAsync(UpdateProductDTO model);
     }
 }
