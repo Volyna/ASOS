@@ -1,0 +1,99 @@
+.mainblock{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+    align-content: center;
+}
+.headerText{
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+    color: black;
+}
+
+.links{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    text-decoration: none;
+    margin: 0 10%;
+}
+
+.links a{
+    color: #353535;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.links a:hover{
+    color: grey;
+    transition: 0.5s;
+}
+
+
+
+.second{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.userIcons{
+    display: flex;
+    margin: 0 10%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.userIcons img{
+    color: #3A3A3A;
+    margin-left:15px;
+}
+
+.noneM{
+    margin-right: 15px;
+}
+
+
+.first, .third{
+    display:flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+    padding-left: 10px;
+}
+
+.third{justify-content: flex-end;}
+
+.searchItem{
+    display: flex;
+    text-align: center;
+    width: 100%;
+    margin:0 10%;
+}
+
+ .line{
+    height: 0.5px;
+    width: 100%;
+    background-color: #353535;
+    bottom: 0;
+    margin:0 10%;
+}
+
+.searchItem img{
+    float: left;
+    vertical-align: middle;
+}
+
+.search{
+    border: none;
+    outline: none;
+    background-color: none;
+    position: relative;
+
+}
+
+
