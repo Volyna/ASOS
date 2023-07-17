@@ -30,6 +30,20 @@ namespace WebAsos.Repositories.Category
           
         }
 
+        public async Task<List<CategoryEntity>> GetAllCategories()
+        {
+            try
+            {
+                var result = await _context.Categories.ToListAsync();
+              
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<CategoryEntity> GetById(int id)
         {
             var result = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);

@@ -80,7 +80,24 @@ namespace WebAsos.Services
 
         public async Task<ServiceResponse> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                 var category = await _categoryRepository.GetAllCategories();
+                if (category != null)
+                {
+
+                    return new ServiceResponse() { IsSuccess = true, Payload = category };
+                  
+                }
+                else
+                {
+                    return new ServiceResponse() { IsSuccess = false, Message = "Category is empty" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse() { IsSuccess = false, Message = ex.Message };
+            }
         }
 
         public async Task<ServiceResponse> GetByIdAsync(int id)
