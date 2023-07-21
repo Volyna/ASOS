@@ -1,0 +1,170 @@
+.Mainblock{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Mainblock .header{
+    text-align: center;
+    font-family: Roboto Flex;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.Mainblock .buttons{
+    align-self: center;
+    margin: 30px 0 0 0;
+}
+
+.Mainblock img{
+    margin-top: 30px;
+}
+
+.section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 365px;
+    margin: 50px 0 50px 0;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.section .header {
+    margin: 0 auto;
+    font-family: Roboto Flex;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 70px;
+    text-transform: uppercase;
+}
+
+.section .text{
+    font-family: Roboto Flex;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+    text-transform: uppercase;
+    
+}
+
+.buttons{
+    border-radius: 30px;
+    border: 2px solid var(--black, #353535);
+    text-align: center;
+    width: 17%;
+    background-color: white;
+    color: var(--black, #353535);
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 50px;
+    text-transform: uppercase;
+    transition: 0.5s;
+    margin: 0 15px;
+
+}
+
+.buttons:hover{
+    transition: 0.5s;
+    color: white;
+    background-color: black;
+
+}
+
+.genres{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.genres img{
+    margin-bottom: 30px;
+}
+
+
+
+.men, .women{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.men .buttons{
+    margin-left: 30px;
+}
+
+.genres .buttons{
+    width: 30%;
+    margin: 0 auto;
+}
+
+.red{
+    background-color: #F05B53;
+    color:white;
+    border: none;
+}
+
+
+.btn-red{
+    border: 2px solid white;
+    transition: 0.5s;
+}
+
+.btn-red:hover{
+    transition: 0.5s;
+    color: #F05B53;
+    background-color: white;;
+}
+
+.wbuttons{
+    width: 100%;
+    text-align: center;
+
+}
+
+.items{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.itemName{
+    color: var(--black, #353535);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height:  88.889%;
+    margin: 30px;
+}
+
+.item{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 23%;
+    float: left;
+
+
+}
+
+.item .buttons{
+    width: 100%;
+    margin: 0;
+}
+
+
+
+

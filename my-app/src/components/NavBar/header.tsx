@@ -1,5 +1,5 @@
 
-import { Link } from '@mui/material'
+import { Link } from 'react-router-dom'
 import "bootstrap/dist/js/bootstrap.min.js";
 import "react-toastify/dist/ReactToastify.css";
 import './header.css'
@@ -18,8 +18,8 @@ const Header = () => {
             <div className='mainblock'>
                 <div className='first col-3'>
                     <div className='links'>
-                        <Link className='headerText' >Customer Service</Link>
-                        <Link className='headerText'>Shopping Form</Link>
+                        <Link className='headerText' to='/' >Customer Service</Link>
+                        <Link className='headerText' to='/'>Shopping Form</Link>
                     </div>
                     <div className='searchItem '>
                         <img src={search}/>
@@ -33,15 +33,15 @@ const Header = () => {
 
                 <div className='third col-3'>
                     <div className='links'>
-                        <Link className='headerText'>Newsletter</Link> 
-                        <Link className='headerText'>FAQs</Link>
-                        <Link className='headerText'>More</Link>
+                        <Link className='headerText' to='/'>Newsletter</Link> 
+                        <Link className='headerText' to='/'>FAQs</Link>
+                        <Link className='headerText' to='/'>More</Link>
                     </div>
 
                             <div className='userIcons'>
-                                <Link><img src={user} alt="" className='noneM'/></Link>
-                                <Link><img src={cart} alt="" className='noneM'/></Link>
-                                <Link><img src={like} alt="" /></Link>
+                                <Link to='/'><img src={user} alt="" className='noneM'/></Link>
+                                <Link to='/'><img src={cart} alt="" className='noneM'/></Link>
+                                <Link to='/'><img src={like} alt="" /></Link>
                             </div> 
                 </div>
             </div>

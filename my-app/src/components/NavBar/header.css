@@ -1,11 +1,15 @@
+body{
+    padding: 0 4%;
+}
 .mainblock{
     display: flex;
     justify-content: space-between;
-    margin-top: 35px;
+    margin-top: 32px;
     align-content: center;
+    margin-bottom: 38px;
 }
 .headerText{
-    font-family: Roboto Flex;
+    font-family:  Roboto Flex;
     font-size: 18px;
     font-style: normal;
     font-weight: 300;
@@ -19,7 +23,6 @@
     justify-content: space-between;
     color: black;
     text-decoration: none;
-    margin: 0 10%;
 }
 
 .links a{
@@ -43,7 +46,6 @@
 
 .userIcons{
     display: flex;
-    margin: 0 10%;
     justify-content: space-between;
     align-items: center;
 
@@ -72,15 +74,12 @@
     display: flex;
     text-align: center;
     width: 100%;
-    margin:0 10%;
 }
 
  .line{
     height: 0.5px;
     width: 100%;
     background-color: #353535;
-    bottom: 0;
-    margin:0 10%;
 }
 
 .searchItem img{
