@@ -54,7 +54,7 @@ function AuthorizationPage() {
                   </div>
                   <div className="field">
                     <label style={{ margin: "0 3% 11px 0" }}>
-                      EMAIL ADDRESS:
+                      Email:
                     </label>
                     <div className="edit-email-area">
                       <span>{email}</span>

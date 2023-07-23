@@ -1,11 +1,16 @@
 import { Link, Navigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
+import icon_Apple from "../../../images/icon_apple.png"
+import icon_Google from "../../../images/icon_google.png"
+import icon_facebook from "../../../images/icon_facebook.png"
 import "./RegisterPageStyle.css";
 import { useFormik } from "formik";
 import { IRegisterUser } from "../types";
 import { registerUserSchema } from "../validation";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
+import Footer from "../../Footer/Footer";
+import { date } from "yup";
 
 function RegisterPage() {
   const { email, user } = useTypedSelector((store) => store.UserReducer);
@@ -65,232 +70,148 @@ function RegisterPage() {
     formik;
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
         <div className="content">
-          <div className="header">
+        <header className="header">
             <div className="asosLogo">
               <h1>
                 <Link to={"/"}>
-                  <img alt="ASOS Logo" height={28} width={93} src={LOGO_ASOS} />
+                  <img alt="ASOS Logo" height={142} width={272} src={LOGO_ASOS} />
                 </Link>
               </h1>
             </div>
+          </header>
+
+          <div className="autorization">
+              <a href="login" className="log_in"> Log in </a>
+              <a href="register" className="join">Join</a>
           </div>
+
+          <div className="unified-info">
+                    <p className="sign_up_with">Sign up with:</p>
+          </div>
+                  <div>
+                    <ul  style={{ listStyleType: "none", padding: "0", marginBottom: "100px", textAlign: "center"}}>
+                      <li className="social-login">
+                        <a className="login_with" href="">
+                        <img src={icon_Apple} alt="Login with Apple" 
+                        />
+                        </a>
+                      </li>
+                      <li className="social-login">
+                        <a className="login_with" href="">
+                          <img src={icon_Google} alt="Login with Google"/>
+                          {/* <GoogleLogin
+                          onSuccess={responseGoogle}
+                          onError={errorGoogle}
+                          /> */}
+                        </a>
+                      </li>
+                      <li className="social-login">
+                        <a className="login_with" href="">
+                          <img src={icon_facebook} alt="L0gin with Facebook"/>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
           <div className="main">
             <div className="signinContainer">
               <div className="form">
                 <form onSubmit={handleSubmit}>
                   <div className="unified-info">
-                    <h2>Welcome</h2>
+                  <p className="label_withEmail" >Or with email:</p>
                   </div>
+                  
                   <div className="field">
-                    <label style={{ margin: "0 3% 11px 0" }}>
-                      EMAIL ADDRESS:
+                  <label className="label">
+                      Email
                     </label>
-                    <div className="edit-email-area">
-                      <span>{email}</span>
-                      <button className="edit-email-button">
-                        <span>Edit</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="unified-info-board ">
-                    <h2>We love new faces :)</h2>
-                    <h2>
-                      Fill in some quick details below to get started and place
-                      your first order
-                    </h2>
-                  </div>
-                  <div className="field">
-                    <label style={{ margin: "0 3% 11px 0" }}>FIRST NAME:</label>
+                    <input
+                      onChange={handleChange}
+                      value={values.email}
+                      type="email"
+                      className="input"
+                      id="email"
+                      placeholder="Enter your email"
+                      autoComplete="true"
+                    />
+                    {errors.email && (
+                      <p className="mt-2" style={{ color: "red" }}>
+                        <span className="font-medium">{errors.email}</span>
+                      </p>
+                    )}
+
+                    <label className="label">
+                      First name
+                    </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="input"
                       id="firstName"
                       placeholder="Enter first name"
                       onChange={handleChange}
                       value={values.firstName}
-                    />{" "}
+                    />
                     {errors.firstName && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.firstName}</span>
                       </p>
                     )}
-                  </div>
-                  <div className="field">
-                    <label style={{ margin: "0 3% 11px 0" }}>Last Name:</label>
+                    
+                    <label className="label">
+                      Last name
+                    </label>
                     <input
-                      onChange={handleChange}
-                      value={values.lastName}
                       type="text"
-                      className="form-control"
+                      className="input"
                       id="lastName"
                       placeholder="Enter last name"
+                      onChange={handleChange}
+                      value={values.lastName}
                     />
                     {errors.lastName && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.lastName}</span>
                       </p>
                     )}
-                  </div>
-                  <div className="field">
-                    <label style={{ margin: "0 3% 11px 0" }}>Password:</label>
+
+                    <label className="label">
+                      Password
+                    </label>
                     <input
                       onChange={handleChange}
                       value={values.password}
                       type="password"
-                      className="form-control"
+                      className="input input_password"
                       id="password"
-                      placeholder="Enter password"
-                    />{" "}
+                      placeholder="Enter your password"
+                      minLength={8}
+                      required
+                      autoComplete="true"
+                    />
                     {errors.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
                       </p>
                     )}
-                    <span className="hint">Must be 10 or more characters</span>
+                    <span className="hint">Must contain 8 or more characters</span>
+                    
+                    
                   </div>
-
                   <div className="field">
-                    <label style={{ margin: "0 3% 11px 0" }}>
-                      Date of birth:
+                  <label className="label">
+                      Date of birth
                     </label>
                     <div className="dataBirdth">
-                      <div className="birthDay">
-                        <select
-                          id="dayBirh"
-                          onChange={handleChange}
-                          value={values.dayBirh}
-                          className="form-select-day"
-                        >
-                          <option value="0">DD</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                          <option value="11">11</option>
-                          <option value="12">12</option>
-                          <option value="13">13</option>
-                          <option value="14">14</option>
-                          <option value="15">15</option>
-                          <option value="16">16</option>
-                          <option value="17">17</option>
-                          <option value="18">18</option>
-                          <option value="19">19</option>
-                          <option value="20">20</option>
-                          <option value="21">21</option>
-                          <option value="22">22</option>
-                          <option value="23">23</option>
-                          <option value="24">24</option>
-                          <option value="25">25</option>
-                          <option value="26">26</option>
-                          <option value="27">27</option>
-                          <option value="28">28</option>
-                          <option value="29">29</option>
-                          <option value="30">30</option>
-                          <option value="31">31</option>
-                        </select>
-                      </div>
-
-                      <div className="birthMonth">
-                        <select
-                          id="monthBirh"
-                          onChange={handleChange}
-                          value={values.monthBirh}
-                          className="form-select-month"
-                        >
-                          <option value="0">Month</option>
-                          <option value="1">January</option>
-                          <option value="2">February</option>
-                          <option value="3">March</option>
-                          <option value="4">April</option>
-                          <option value="5">May</option>
-                          <option value="6">June</option>
-                          <option value="7">July</option>
-                          <option value="8">August</option>
-                          <option value="9">September</option>
-                          <option value="10">October</option>
-                          <option value="11">November</option>
-                          <option value="12">December</option>
-                        </select>
-                      </div>
-                      <div className="birthYear">
-                        <select
-                          id="yearBirh"
-                          onChange={handleChange}
-                          value={values.yearBirh}
-                          className="form-select-year"
-                        >
-                          <option value="0">YYY</option>
-                          <option value="2007">2007</option>
-                          <option value="2006">2006</option>
-                          <option value="2005">2005</option>
-                          <option value="2004">2004</option>
-                          <option value="2003">2003</option>
-                          <option value="2002">2002</option>
-                          <option value="2001">2001</option>
-                          <option value="2000">2000</option>
-                          <option value="1999">1999</option>
-                          <option value="1998">1998</option>
-                          <option value="1997">1997</option>
-                          <option value="1996">1996</option>
-                          <option value="1995">1995</option>
-                          <option value="1994">1994</option>
-                          <option value="1993">1993</option>
-                          <option value="1992">1992</option>
-                          <option value="1991">1991</option>
-                          <option value="1990">1990</option>
-                          <option value="1989">1989</option>
-                          <option value="1988">1988</option>
-                          <option value="1987">1987</option>
-                          <option value="1986">1986</option>
-                          <option value="1985">1985</option>
-                          <option value="1984">1984</option>
-                          <option value="1983">1983</option>
-                          <option value="1982">1982</option>
-                          <option value="1981">1981</option>
-                          <option value="1980">1980</option>
-                          <option value="1979">1979</option>
-                          <option value="1978">1978</option>
-                          <option value="1977">1977</option>
-                          <option value="1976">1976</option>
-                          <option value="1975">1975</option>
-                          <option value="1974">1974</option>
-                          <option value="1973">1973</option>
-                          <option value="1972">1972</option>
-                          <option value="1971">1971</option>
-                          <option value="1970">1970</option>
-                          <option value="1969">1969</option>
-                          <option value="1968">1968</option>
-                          <option value="1967">1967</option>
-                          <option value="1966">1966</option>
-                          <option value="1965">1965</option>
-                          <option value="1964">1964</option>
-                          <option value="1963">1963</option>
-                          <option value="1962">1962</option>
-                          <option value="1961">1961</option>
-                          <option value="1960">1960</option>
-                          <option value="1959">1959</option>
-                          <option value="1958">1958</option>
-                          <option value="1957">1957</option>
-                          <option value="1956">1956</option>
-                          <option value="1955">1955</option>
-                          <option value="1954">1954</option>
-                          <option value="1953">1953</option>
-                          <option value="1952">1952</option>
-                          <option value="1951">1951</option>
-                          <option value="1950">1950</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div>
-                      {errors.dayBirh && touched.dayBirh && (
+                      <input
+                      onChange={handleChange}
+                      type="date"
+                      className="input date"
+                      id="date"
+                      autoComplete="true"
+                    /> 
+                    {errors.dayBirh && touched.dayBirh && (
                         <p className="mt-2" style={{ color: "red" }}>
                           <span className="font-medium">{errors.dayBirh}</span>
                         </p>
@@ -309,180 +230,116 @@ function RegisterPage() {
                       )}
                     </div>
                     <span className="hint">
-                      You need to be 16 or over to use ASOS
+                      You need to be 18 or over to use Focus
                     </span>
-                  </div>
+                    </div>
 
                   <div className="field">
-                    <label style={{ margin: "0 3% 11px 0" }}>
-                      MOSTLY INTERESTED IN:
+                    <label className="label">
+                    Receive emails about:
                     </label>
-
-                    <div className="gender-female">
-                      <div className="form-check womenswear">
-                        <input
-                          onChange={(e) => {
-                            setFieldValue(
-                              "mostlyInterested",
-                              "womenswear",
-                              false
-                            );
-                          }}
-                          type="radio"
-                          defaultChecked={true}
-                          className="form-check-input"
-                          name="flexRadioDefault"
-                          id="womenswear"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="womenswear"
-                        >
-                          Womenswear
-                        </label>
-                      </div>
-                      <div className="form-check menswear">
-                        <input
-                          onChange={(e) => {
-                            setFieldValue(
-                              "mostlyInterested",
-                              "menswear",
-                              false
-                            );
-                          }}
-                          className="form-check-input"
-                          type="radio"
-                          name="flexRadioDefault"
-                          id="menswear"
-                          defaultChecked={false}
-                        />
-                        <label className="form-check-label" htmlFor="menswear">
-                          Menswear
-                        </label>
-                      </div>
+                    
+                    <div className="addition">
+                    <input
+                    
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox"
+                      >
+                      </input>
+                      <p className="remember_me">Discount and sales</p>
+                      
                     </div>
-                  </div>
-
-                  <div className="field">
-                    <legend className="col-xs-12">
-                      <h2>Contact preferences</h2>
-                    </legend>
-                    <div className="consent-preferences-multi-option">
-                      <div className="container-all-checkbox">
-                        <div className="col-md-8">
-                          <span>Tell us which emails you’d like:</span>
-                        </div>
-                        <div className="all-check">
-                          <button
-                            className="btn btn-secondary"
-                            onClick={(e) => {
-                              SubscribeSubscriptions(e);
-                            }}
-                            type="button"
-                          >
-                            SELECT ALL
-                          </button>
-                        </div>
-                      </div>
+                    <div className="addition">
+                    <input
+                    
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox"
+                      >
+                      </input>
+                      <p className="remember_me">New arrivals</p>
+                      
                     </div>
-                    <div className="checkboxlist-container">
-                      <div className="form-box">
-                        <label
-                          className="form-check-label "
-                          htmlFor="flexCheckDefault"
-                        >
-                          Discounts and sales
-                        </label>
-                        <input
-                          onChange={(e) => {
-                            let ischeck = e.target.checked;
-                            setFieldValue("discountsAndSales", ischeck, false);
-                          }}
-                          className="form-check-input checkbox"
-                          type="checkbox"
-                          value="Discounts and sales"
-                          id="checkbox1"
-                        />
-                      </div>
-                      <div className="form-box">
-                        <label
-                          className="form-check-label "
-                          htmlFor="flexCheckDefault"
-                        >
-                          New stuff
-                        </label>
-                        <input
-                          onChange={(e) => {
-                            let ischeck = e.target.checked;
-                            setFieldValue("newStuff", ischeck, false);
-                          }}
-                          className="form-check-input checkbox"
-                          type="checkbox"
-                          value="New stuff"
-                          id="checkbox2"
-                        />
-                      </div>
-                      <div className="form-box">
-                        <label
-                          className="form-check-label "
-                          htmlFor="flexCheckDefault"
-                        >
-                          Your exclusives
-                        </label>
-                        <input
-                          onChange={(e) => {
-                            let ischeck = e.target.checked;
-                            setFieldValue("yourExclusives", ischeck, false);
-                          }}
-                          className="form-check-input checkbox"
-                          type="checkbox"
-                          value="Your exclusives"
-                          id="checkbox3"
-                        />
-                      </div>
-                      <div className="form-box">
-                        <label
-                          className="form-check-label "
-                          htmlFor="flexCheckDefault"
-                        >
-                          ASOS partners
-                        </label>
-                        <input
-                          onChange={(e) => {
-                            let ischeck = e.target.checked;
-                            setFieldValue("asosPartners", ischeck, false);
-                          }}
-                          className="form-check-input checkbox"
-                          type="checkbox"
-                          value="ASOS partners"
-                          id="checkbox4"
-                        />
-                      </div>
+                    <div className="addition">
+                    <input
+                    
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox"
+                      >
+                      </input>
+                      <p className="remember_me">Your exclusives</p>
+                      
+                    </div>
+                    <div className="addition">
+                    <input
+                    
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox"
+                      >
+                      </input>
+                      <p className="remember_me">Our partners</p>
+                      
+                    </div>
+                    <div className="addition">
+                    <input
+                    
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox"
+                      >
+                      </input>
+                      <p className="remember_me">No emails</p>
+                      
+                    </div>
+
+                    <div className="field">
+                      <label className="label interested">
+                        Choose a category you mostly interested in:
+                      </label>
+                      <div className="addition">
+                    <input
+                    
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox"
+                      >
+                      </input>
+                      <p className="remember_me">Womenswear</p>
+                      
+                    </div>
+                    <div className="addition">
+                    <input
+                    
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox"
+                      >
+                      </input>
+                      <p className="remember_me">Menswear</p>
+                      
+                    </div>
                     </div>
                   </div>
 
                   <div className="submit">
                     <button
                       type="submit"
-                      style={{ width: "100%" }}
-                      className="btn btn-dark"
-                      id="submitBtn"
+                      className="btn_join"
                     >
-                      JOIN ASOS
+                      JOIN
                     </button>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          <div className="terms">
-            <label>
-              <Link to={"/"}>Privacy Policy</Link> |{" "}
-              <Link to={"/"}>Terms and Conditions</Link>
-            </label>
-          </div>
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }
