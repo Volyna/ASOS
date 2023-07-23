@@ -1,13 +1,19 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
+import icon_Apple from "../../../images/icon_apple.png"
+import icon_Google from "../../../images/icon_google.png"
+import icon_facebook from "../../../images/icon_facebook.png"
 import "./loginePageStyle.css";
 import { useFormik } from "formik";
 import { loginBeforeUserSchema } from "../validation";
 import { IBeforeLoginUser, ILoginUserByGoogle } from "../types";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import Footer  from "../../Footer/Footer";
 import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
+import { colors } from "@mui/material";
+import styled from "@emotion/styled";
 function LoginePage() {
   const { email, user } = useTypedSelector((store) => store.UserReducer);
   let navigator = useNavigate();
@@ -51,37 +57,71 @@ function LoginePage() {
     formik;
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
         <div className="content">
-          <div className="header">
+          <header className="header">
             <div className="asosLogo">
               <h1>
                 <Link to={"/"}>
-                  <img alt="ASOS Logo" height={28} width={93} src={LOGO_ASOS} />
+                  <img alt="ASOS Logo" height={142} width={272} src={LOGO_ASOS} />
                 </Link>
               </h1>
             </div>
+          </header>
+
+          <div className="autorization">
+             <a href="login" className="logIn"> Log in </a>
+              <a href="register" className="joinL">Join</a>
           </div>
+
+          
+          <div className="unified-info">
+                    <p className="log_in_with">Log in with:</p>
+          </div>
+                  <div>
+                    <ul  style={{ listStyleType: "none", padding: "0", marginBottom: "100px", textAlign: "center"}}>
+                      <li className="social-login">
+                        <a className="login_with" href="">
+                        <img src={icon_Apple} alt="Login with Apple" 
+                        />
+                        </a>
+                      </li>
+                      <li className="social-login">
+                        <a className="login_with" href="">
+                          <img src={icon_Google} alt="Login with Google"/>
+                          {/* <GoogleLogin
+                          onSuccess={responseGoogle}
+                          onError={errorGoogle}
+                          /> */}
+                        </a>
+                      </li>
+                      <li className="social-login">
+                        <a className="login_with" href="">
+                          <img src={icon_facebook} alt="L0gin with Facebook"/>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
 
           <div className="main">
             <div className="signinContainer">
               <div className="form">
                 <form onSubmit={handleSubmit}>
-                  <div className="unified-info">
-                    <h2>Welcome</h2>
-                    <span>Enter your email to sign in or join</span>
+                  
+                  <div>
+                    <p className="label_withEmail" >Or with email:</p>
                   </div>
                   <div className="field">
-                    <label style={{ margin: "0 3% 11px 0" }}>
-                      Email address:
+                    <label className="label">
+                      Email
                     </label>
                     <input
                       onChange={handleChange}
                       value={values.email}
                       type="email"
-                      className="form-control"
+                      className="input"
                       id="email"
-                      placeholder="Enter email"
+                      placeholder="Enter your email"
                       autoComplete="true"
                     />
                     {errors.email && (
@@ -89,77 +129,51 @@ function LoginePage() {
                         <span className="font-medium">{errors.email}</span>
                       </p>
                     )}
+
+                    <label className="label">
+                      Password
+                    </label>
+                    <input
+                      onChange={handleChange}
+                      type="password"
+                      className="input input_password"
+                      id="password"
+                      placeholder="Enter your password"
+                      minLength={8}
+                      required
+                      autoComplete="true"
+                    />
+
+                    <div className="addition">
+                      <input
+                      className="checkbox"
+                      type="checkbox"
+                      id="checkbox">
+
+                      </input>
+                      <p className="remember_me">Remember me</p>
+                      <a href="" className="forgot">Forgot password?</a>
+                    </div>
+                   
+
                   </div>
                   <div className="submit">
                     <button
                       type="submit"
-                      style={{ width: "100%" }}
-                      className="btn btn-dark"
+                      className="btn_logIn"
                     >
-                      CONTINUE
+                      LOG IN
                     </button>
                   </div>
                 </form>
-
-                <div className="info-centre unified-info-center">
-                  <h2 className="unified-social-title">
-                    <span style={{ background: "#fff", padding: "0 10px" }}>
-                      Or sign in with...
-                    </span>
-                  </h2>
-                </div>
-                <div className="unified-info">
-                  <h2 className="unified-social-subtitle">
-                    Choose a social option to sign in or to join
-                  </h2>
-                </div>
-              </div>
-              <div className="info info-centre">
-                <div className="options three-buttons ">
-                  <ul style={{ listStyleType: "none", padding: "0" }}>
-                    <li className="social-register">
-                      <button
-                        type="button"
-                        className="btn btn-dark social-link"
-                      >
-                        <GoogleLogin
-                          onSuccess={responseGoogle}
-                          onError={errorGoogle}
-                        />
-                      </button>
-                    </li>
-                    <li className="social-register">
-                      <button
-                        type="button"
-                        className="btn btn-dark social-link"
-                      >
-                        Apple
-                      </button>
-                    </li>
-                    <li className="social-register">
-                      <button
-                        type="button"
-                        className="btn btn-dark social-link"
-                      >
-                        Facebook
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <div className="twitter-gone">
-                  <Link to={"/"}>Where has Twitter Gone?</Link>
-                </div>
               </div>
             </div>
           </div>
-          <div className="terms">
-            <label>
-              <Link to={"/"}>Privacy Policy</Link> |{" "}
-              <Link to={"/"}>Terms and Conditions</Link>
-            </label>
-          </div>
         </div>
       </div>
+
+     <Footer/>
+
     </>
   );
 }
