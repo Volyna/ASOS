@@ -10,7 +10,7 @@ import item4 from '../../../images/item4.png'
 
 import man from '../../../images/man.png'
 import woman from '../../../images/woman.png'
-import Footer from "../../Footer/Footer"
+import Footer from "../../Footer/FooterV"
 
 
 const MainPage = () => {
