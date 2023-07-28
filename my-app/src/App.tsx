@@ -24,9 +24,11 @@ function App() {
 
   return (
     <>
-        <Routes>
-        </Routes>
-        {/* <Route path="/" element={<DefaultLayout />}>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="customer-care" element={<FAQs />} />
+      </Routes>
+      {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<LoginePage />} />
@@ -62,8 +64,7 @@ function App() {
       </div>
 =======
         </Routes> */}
-        <MainPage/>
-
+      {/* <MainPage /> */}
     </>
   );
 }
