@@ -1,6 +1,6 @@
 import "./FAQs.css";
 import Header_full from "../../Header_full/Header_full";
-import Footer from "../../Footer/Footer";
+import Footer from "../../Footer/FooterV";
 
 const FAQs = () => {
   return (

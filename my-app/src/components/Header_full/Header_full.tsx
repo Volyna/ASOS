@@ -1,6 +1,7 @@
 import "./Header_full.css";
 import { Link } from "react-router-dom";
 import Logo_main from "../../images/logo_main.png";
+import Header from "../NavBar/header";
 import Search from "../../images/search.png";
 import User from "../../images/user.png";
 import Cart from "../../images/cart.png";
@@ -10,9 +11,10 @@ import { Container } from "@mui/material";
 const Header_full = () => {
   return (
     <>
+      <Header />
       <header className="header">
         <div className="container-fluid">
-          <div className="menu_wrapper">
+          {/* <div className="menu_wrapper">
             <ul className="leftColumn">
               <li>
                 <a className="headerText customerService" href="#">
@@ -72,7 +74,7 @@ const Header_full = () => {
                 <img src={Like} alt="" className="iconsHeader" />
               </Link>
             </div>
-          </div>
+          </div> */}
 
           <div className="categories">
             <a className="items" href="#">
