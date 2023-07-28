@@ -14,6 +14,7 @@ import AuthorizationPage from "./components/auth/login/AuthorizationPage";
 import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
+import FAQs from "./components/Pages/FAQs/FAQs";
 
 import Header from "./components/NavBar/header";
 import MainPage from "./components/Pages/Main/MainPage";
@@ -53,8 +54,16 @@ function App() {
               />
             </Route>
           </Route>
+
+          
+          <Route path="customer-care" element={<FAQs />}/>
+
+        </Routes>
+      </div>
+=======
         </Routes> */}
         <MainPage/>
+
     </>
   );
 }
