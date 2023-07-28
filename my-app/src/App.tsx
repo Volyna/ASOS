@@ -16,12 +16,17 @@ import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
 import FAQs from "./components/Pages/FAQs/FAQs";
 
+import Header from "./components/NavBar/header";
+import MainPage from "./components/Pages/Main/MainPage";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
     <>
-      <div className={darkMode ? "app dark" : "app"}>
+        <Routes>
+        </Routes>
+        {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<LoginePage />} />
@@ -49,11 +54,16 @@ function App() {
               />
             </Route>
           </Route>
+
           
           <Route path="customer-care" element={<FAQs />}/>
 
         </Routes>
       </div>
+=======
+        </Routes> */}
+        <MainPage/>
+
     </>
   );
 }
