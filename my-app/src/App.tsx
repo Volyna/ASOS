@@ -14,6 +14,7 @@ import AuthorizationPage from "./components/auth/login/AuthorizationPage";
 import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
+import FAQs from "./components/Pages/FAQs/FAQs";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -48,6 +49,9 @@ function App() {
               />
             </Route>
           </Route>
+          
+          <Route path="customer-care" element={<FAQs />}/>
+
         </Routes>
       </div>
     </>

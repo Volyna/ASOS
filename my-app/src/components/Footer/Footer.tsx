@@ -4,7 +4,6 @@ import footer_instagram from "../../images/footer_instagram.png"
 import footer_youtube from "../../images/footer_youtube.png"
 import footer_pinterest from "../../images/footer_pinterest.png"
 import footer_facebook from "../../images/footer_facebook.png"
-import { Link } from 'react-router-dom'
 
 const Footer = () =>{
     return(
