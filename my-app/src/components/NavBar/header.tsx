@@ -36,7 +36,7 @@ const Header = () => {
             <Link className="headerText" to="/">
               Newsletter
             </Link>
-            <Link className="headerText" to="customer-care/">
+            <Link className="headerText" to="/customer-care">
               FAQs
             </Link>
             <Link className="headerText" to="/">
@@ -48,7 +48,7 @@ const Header = () => {
             <Link to="/">
               <img src={user} alt="" className="noneM" />
             </Link>
-            <Link to="/">
+            <Link to="/basket-empty">
               <img src={cart} alt="" className="noneM" />
             </Link>
             <Link to="/">
