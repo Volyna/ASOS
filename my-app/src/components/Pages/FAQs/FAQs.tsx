@@ -7,17 +7,16 @@ import Menu from "../../NavBar/menu";
 const FAQs = () => {
   return (
     <>
-      
       <div className="staticnav">
-        <Header/>
-        <Menu/>
+        <Header />
+        <Menu />
       </div>
 
       <div className="container-fluid">
-       <BreadCrumbs/>
+        <BreadCrumbs />
         <div className="firstBlock">
           <div className="left">
-            <h1 className="title">Delivery</h1>
+            <h1 className="FAQtitle">Delivery</h1>
             <a className="questions" href="#">
               Where's my order?
             </a>
@@ -33,7 +32,7 @@ const FAQs = () => {
           </div>
 
           <div className="center">
-            <h1 className="title">Returns & refunds</h1>
+            <h1 className="FAQtitle">Returns & refunds</h1>
             <a className="questions" href="#">
               Our Returns Policy
             </a>
@@ -49,7 +48,7 @@ const FAQs = () => {
           </div>
 
           <div className="right order">
-            <h1 className="title">order issues</h1>
+            <h1 className="FAQtitle">order issues</h1>
             <a className="questions" href="#">
               Can I cancel an order?
             </a>
@@ -67,7 +66,7 @@ const FAQs = () => {
 
         <div className="secondBlock">
           <div className="left product">
-            <h1 className="title">product & stock</h1>
+            <h1 className="FAQtitle">product & stock</h1>
             <a className="questions" href="#">
               Will an item be back in stock?
             </a>
@@ -83,7 +82,7 @@ const FAQs = () => {
           </div>
 
           <div className="center technical">
-            <h1 className="title">payments, promos & gift cards</h1>
+            <h1 className="FAQtitle">payments, promos & gift cards</h1>
             <a className="questions" href="#">
               Payment options
             </a>
@@ -99,7 +98,7 @@ const FAQs = () => {
           </div>
 
           <div className="right ">
-            <h1 className="title">technical</h1>
+            <h1 className="FAQtitle">technical</h1>
             <a className="questions" href="#">
               Trouble signing into my account
             </a>

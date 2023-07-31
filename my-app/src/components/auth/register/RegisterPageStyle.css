@@ -66,6 +66,8 @@ body{
     font-size: 18px;
     line-height: 16px;
     margin: 0 0 10px 35px;
+    display: flex;
+    justify-content: left;
 }
 
 .input {
@@ -110,6 +112,8 @@ body{
     line-height: 16px;
     color: rgba(53, 53, 53, 0.5);
     margin: 0px 0px 30px 35px;
+    display: flex;
+    justify-content: left;
 }
 
 /* .checkbox {
@@ -176,5 +180,11 @@ input[type="checkbox"]::before {
     
 }
 
+.btn_join:hover{
+    transition: 0.5s;
+    color: rgba(255, 200, 24, 1);
+    background-color:rgba(53, 53, 53, 1);
+
+}
 
 

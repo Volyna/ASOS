@@ -28,12 +28,11 @@ import Error from "./components/Pages/Error/error";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
-  useLayoutEffect(()=> {
-    window.scrollTo({top:0, behavior:"smooth"});
-
-  },[pathname]);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
 
   return (
     <>
