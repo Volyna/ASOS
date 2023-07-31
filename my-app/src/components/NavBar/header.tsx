@@ -61,19 +61,7 @@ const Header = () => {
     </>
   );
 };
-
-                    <div className='userIcons'>
-                        <Link to='/'><img src={user} alt="" className='noneM'/></Link>
-                        <Link to='/'><img src={cart} alt="" className='noneM'/></Link>
-                        <Link to='/'><img src={like} alt="" /></Link>
-                    </div> 
-                </div>
-            </div>
-        
-        </>
-    )
-} 
-
+  
 export default Header
 
 
