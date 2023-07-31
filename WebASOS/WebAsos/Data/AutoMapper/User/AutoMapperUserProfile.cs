@@ -4,7 +4,6 @@ using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
-using WebAsos.Models;
 
 namespace WebAsos.Data.AutoMapper.User
 {

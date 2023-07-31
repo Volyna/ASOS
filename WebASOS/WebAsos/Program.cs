@@ -7,16 +7,18 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebAsos.Data;
+using WebAsos.Data.AutoMapper.Category;
 using WebAsos.Data.AutoMapper.User;
 using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.Validation.User;
 using WebAsos.interfaces.JwtTokenService;
-using WebAsos.interfaces.Repository;
 using WebAsos.interfaces.Services;
 using WebAsos.interfaces.UserService;
 using WebAsos.Interfaces.Repository;
 using WebAsos.Interfaces.Services;
+using WebAsos.Interfaces.CategoryInterfaces;
+using WebAsos.Repositories.Category;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
 using WebAsos.Settings;
@@ -25,7 +27,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperUserProfile));
+builder.Services.AddAutoMapper(typeof(AutoMapperCategory));
 
 
 // Add services to the container.
