@@ -15,7 +15,10 @@ import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
 import FAQs from "./components/Pages/FAQs/FAQs";
+
+import BasketEmpty from "./components/Pages/BasketEmpty/BasketEmpty";
 import Header from "./components/NavBar/header";
+import Basket from "./components/Pages/Basket/Basket";
 import MainPage from "./components/Pages/Main/MainPage";
 import Register from "./components/auth/register";
 import Men from "./components/Pages/Man and Woman Page/MenPage";
@@ -35,7 +38,14 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="login" element={<LoginePage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="admin" element={<AdminLayout />} />
         <Route path="customer-care" element={<FAQs />} />
+
+        <Route path="basket-empty" element={<BasketEmpty />} />
+        <Route path="basket" element={<Basket />} />
+
         <Route path="/men" element={<Men/>}/>
         <Route path="/women" element={<Women/>}/>
       </Routes>
@@ -73,7 +83,6 @@ function App() {
 
         </Routes>
       </div>
-=======
         </Routes> */}
     </>
   );

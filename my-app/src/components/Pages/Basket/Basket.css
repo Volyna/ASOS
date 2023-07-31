@@ -1,0 +1,189 @@
+
+.orderContent {
+    display: flex;
+    border-bottom: 1px solid rgba(53, 53, 53, 0.5);
+    margin-bottom: 30px;
+}
+
+.productName {
+    font-family: 'Roboto Flex', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23.44px;
+    color: black;
+}
+
+.content {
+    display: block;
+}
+
+.newPrice {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23.44px;
+    color: red;
+   
+}
+
+.oldPrice {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 16px;
+    color: red;
+    text-decoration: line-through;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.price {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23.44px;
+    color: black;
+}
+
+.removeProduct {
+    display: flex;
+    justify-content: end;
+    margin-left: 55px;
+    cursor: pointer;
+}
+
+.minus, .plus {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    color: rgba(53, 53, 53, 0.5);
+    text-align: center;
+    cursor: pointer;
+}
+
+.num {
+    width: 120px;
+    height: 33px;
+    border-radius: 30px;
+    border: 2px solid black;
+    text-align: center;
+    background-color: white;
+    margin: 63px 0 30px 0;
+}
+
+
+.textH1{
+    text-transform: uppercase;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 42.19px;
+    color: rgba(53, 53, 53, 1);
+    text-align: left;
+    margin-bottom: 50px;
+
+}
+
+.subColumns {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 30px;
+    /* justify-content: space-between; */
+}
+
+.result {
+    text-transform: uppercase;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 23.44px;
+    color: rgba(53, 53, 53, 1);
+    text-align: left;
+    margin-right: 150px;
+}
+
+.money {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23.44px;
+    color: rgba(53, 53, 53, 1);
+    text-align: center;
+}
+
+.link {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 16px;
+    color: rgba(53, 53, 53, 1);
+}
+
+.discount {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: rgba(53, 53, 53, 1);
+    margin-bottom: 30px;
+}
+
+.favorite {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 16px;
+    color: rgba(240, 91, 83, 1);
+    margin-bottom: 46px;
+}
+
+.btn-checkout{
+    border-radius: 30px;
+    text-align: center;
+    height: 50px;
+    width: 420px;
+    background-color:  rgba(255, 200, 24, 1);;
+    border: none;
+    color: rgba(53, 53, 53, 1);
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 16px;
+    text-transform: uppercase;
+    transition: 0.5s;
+    margin-bottom: 100px;
+    /* margin: 0 15px; */
+
+}
+
+.btn-checkout:hover{
+    transition: 0.5s;
+    color: rgba(255, 200, 24, 1);
+    background-color:rgba(53, 53, 53, 1);
+
+}
+
+.shipping {
+    text-transform: uppercase;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 23.44px;
+    color: black;
+    margin-bottom: 10px;
+
+}
+
+.pFaster {
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 18px;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.end {
+    margin-bottom: 98px;
+}
