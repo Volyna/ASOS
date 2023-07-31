@@ -3,10 +3,10 @@ import Login from "./components/admin/pages/login/Login";
 import List from "./components/admin/pages/list/List";
 import Single from "./components/admin/pages/single/Single";
 import New from "./components/admin/pages/new/New";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { productInputs, userInputs } from "./components/admin/formSource";
 import "./components/admin/style/dark.scss";
-import { useContext } from "react";
+import { useContext, useEffect, useLayoutEffect } from "react";
 import { DarkModeContext } from "./components/admin/context/darkModeContext";
 
 import LoginePage from "./components/auth/login";
@@ -15,15 +15,21 @@ import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
 import FAQs from "./components/Pages/FAQs/FAQs";
-
 import Header from "./components/NavBar/header";
 import MainPage from "./components/Pages/Main/MainPage";
 import Register from "./components/auth/register";
 import Men from "./components/Pages/Man and Woman Page/MenPage";
 import BreadCrumbs from "./components/BreadCrumbs/breadCrumbs";
+import Women from "./components/Pages/Man and Woman Page/WomanPage";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  const {pathname} = useLocation()
+
+  useLayoutEffect(()=> {
+    window.scrollTo({top:0, behavior:"smooth"});
+
+  },[pathname]);
 
   return (
     <>
@@ -31,6 +37,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="customer-care" element={<FAQs />} />
         <Route path="/men" element={<Men/>}/>
+        <Route path="/women" element={<Women/>}/>
       </Routes>
       {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>

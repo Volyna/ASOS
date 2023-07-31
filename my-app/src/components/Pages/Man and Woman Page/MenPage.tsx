@@ -13,6 +13,7 @@ import menItem2 from '../../../images/menItem2.png'
 import menItem3 from '../../../images/menItem3.png'
 import menItem4 from '../../../images/menItem4.png'
 import menItem5 from '../../../images/menItem5.png'
+import { useState } from "react";
 
 
 
@@ -34,7 +35,7 @@ const Men = () => {
             <BreadCrumbs/>
 
 
-            <div className="categories">
+            <div className="categors">
                 <Link to='/'>New in</Link>
                 <Link to='/'>clothing</Link>
                 <Link to='/'>dresses</Link>

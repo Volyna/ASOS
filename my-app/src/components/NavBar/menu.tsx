@@ -1,5 +1,6 @@
 import './header.css'
 import {Link} from 'react-router-dom'
+import { useState } from 'react'
 
 
 const menuItems = ['View all', 'Clothing', 'Shoes', 'Accessories', 'Face + Body']
@@ -7,6 +8,8 @@ const menuItems = ['View all', 'Clothing', 'Shoes', 'Accessories', 'Face + Body'
 
 
 const Menu = () => {
+
+
 
     return(
         <>
@@ -21,12 +24,11 @@ const Menu = () => {
                 <Link to='/'>brands</Link>
                 <Link to='/'>outlet</Link>
                 <Link to='/'>marketplace</Link>
-                <Link to='/'>men</Link>
-
-                <div className="newIn">
-                </div>
+                <Link to='/men'>men</Link>
             </div>
             <div className="line"/>
+
+            
         
         </>
 

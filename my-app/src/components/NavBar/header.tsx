@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "react-toastify/dist/ReactToastify.css";
 import './header.css'
@@ -11,6 +11,9 @@ import search from "../../images/search.svg"
 
 
 const Header = () => {
+    
+    const navigate = useNavigate();
+
     return(
         <>
             <div className='mainblock'>
@@ -33,7 +36,7 @@ const Header = () => {
             <Link className="headerText" to="/">
               Newsletter
             </Link>
-            <Link className="headerText" to="customer-care/">
+            <Link className="headerText" to="/customer-care">
               FAQs
             </Link>
             <Link className="headerText" to="/">

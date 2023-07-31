@@ -1,3 +1,13 @@
 body{
     padding: 0 4%;
 }
+
+.staticnav{
+    position: fixed;
+    top: 0;
+    width: 92%;
+    background-color: white;
+    border-bottom: 1px;
+    border-color: black;
+
+}
