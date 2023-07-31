@@ -1,3 +1,4 @@
+
 import { Link, Navigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
 import icon_Apple from "../../../images/icon_apple.png";
@@ -238,7 +239,7 @@ function RegisterPage() {
                     <span className="hint">
                       You need to be 18 or over to use Focus
                     </span>
-                  </div>
+                    </div>
 
                   <div className="field">
                     <label className="label">Receive emails about:</label>

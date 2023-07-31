@@ -1,6 +1,3 @@
-body{
-    padding: 0 4%;
-}
 .mainblock{
     display: flex;
     justify-content: space-between;
@@ -77,7 +74,7 @@ body{
 }
 
  .line{
-    height: 0.5px;
+    height: 1px;
     width: 100%;
     background-color: #353535;
 }
@@ -85,6 +82,7 @@ body{
 .searchItem img{
     float: left;
     vertical-align: middle;
+    margin: 10px 0px;
 }
 
 .search{
@@ -92,7 +90,30 @@ body{
     outline: none;
     background-color: none;
     position: relative;
+    width: 100%;
+    font-family:  Roboto Flex;
 
+}
+
+
+.menu_items{
+    margin: 50px 0 30px 0;
+    display: flex;
+    padding: 0 5%;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Roboto Flex;
+    font-size:20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    text-transform: uppercase;
+
+}
+
+.menu_items a{
+    color: black;
+    text-decoration: none;
 }
 
 

@@ -69,15 +69,27 @@
     line-height: 50px;
     text-transform: uppercase;
     transition: 0.5s;
-    margin: 0 15px;
+    margin: 40px 15px;
 
 }
+
+
 
 .buttons:hover{
     transition: 0.5s;
     color: white;
-    background-color: black;
+    background-color: #353535;
 
+}
+
+.menbtn:hover{
+    background-color: #3C6EBF;
+    border-color: #3C6EBF;
+}
+
+.womenbtn:hover{
+    background-color: #F05B53;
+    border-color: #F05B53;
 }
 
 .genres{
@@ -108,22 +120,45 @@
     margin: 0 auto;
 }
 
+.trans{
+    background-color: #F05B53;
+    color: white;
+    border-color: white;
+
+}
+
+.trans:hover{
+    background-color: #353535;
+    color: white;
+    border-color: #353535;
+
+}
+
+
+
 .red{
     background-color: #F05B53;
     color:white;
     border: none;
 }
 
-
-.btn-red{
-    border: 2px solid white;
-    transition: 0.5s;
+.blue{
+    background-color: #3C6EBF;
+    color:white;
+    border: none;
 }
 
-.btn-red:hover{
-    transition: 0.5s;
-    color: #F05B53;
-    background-color: white;;
+.blue button{
+    background-color: #3C6EBF;
+    color: white;
+    border-color: white;
+}
+
+.blue button:hover{
+    background-color: #353535;
+    color: white;
+    border-color: #353535;
+
 }
 
 .wbuttons{
@@ -148,6 +183,11 @@
     font-weight: 300;
     line-height:  88.889%;
     margin: 30px;
+}
+
+.itemName:hover{
+    color:#FFC818;
+    transition: 0.5s;
 }
 
 .item{

@@ -46,6 +46,10 @@
     display: block;
 }
 
+.footer_text:hover{
+    text-decoration: underline;
+}
+
 
 .social{
     display: flex;

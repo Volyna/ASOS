@@ -1,0 +1,123 @@
+.staticnav{
+    position: fixed;
+    top: 0;
+    width: 92%;
+    background-color: white;
+    border-bottom: 1px;
+    border-color: black;
+
+}
+
+
+.crumbComp{
+    color:rgba(53, 53, 53, 0.50);
+    text-decoration: none;
+    font-family: Roboto Flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    margin: 0.1%;
+    margin-top: 220px;
+}
+.last{
+    color: black;
+}
+
+.crumbs{
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.title{
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.categories{
+    display: flex;
+    flex-direction: column;
+    float: left;
+    overflow: hidden;
+    width: 20%;
+    color: black;
+}
+
+.categories a{
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+
+.menBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.menBlock button{
+    align-self: center;
+}
+
+
+.spam{
+    width: 90%;
+
+}
+
+.spam .left{
+    width: 50%;
+    float: left;
+    color: var(--black, #353535);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    margin: 50px 0;
+}
+
+.spam input{
+    color: var(--black, #353535);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    width: 45%;
+    margin-left: 15px;
+    line-height: 50px;
+    border-radius: 20px;
+    border: 2px solid var(--black-50, rgba(53, 53, 53, 0.50));
+    ;
+}
+
+.spam button{
+    width:45%;
+    margin-top: 20px;
+}
+
+.menBlock .items .item{
+    width:18%;
+}
+
+
+
+
