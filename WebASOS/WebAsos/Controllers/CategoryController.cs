@@ -39,7 +39,7 @@ namespace WebAsos.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
-        [HttpDelete("getById")]
+        [HttpGet("getById")]
         public async Task<IActionResult> GetByIdCategoryAsync(int id)
         {
 
