@@ -1,0 +1,86 @@
+.mainLink
+{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.focusCom {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 16px;
+    color: rgba(53, 53, 53, 0.5);
+    margin-top: 30px;
+}
+
+.help {
+    
+    color: rgba(53, 53, 53, 1);
+}
+
+
+
+.title {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28.13px;
+    color: rgba(53, 53, 53, 1);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.questions {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: rgba(53, 53, 53, 1);
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.showAll {
+    text-decoration:underline;
+    margin-bottom: 50px;
+}
+
+.firstBlock {
+    display: grid;
+    grid-auto-flow: column;
+    border-bottom: 1px solid rgba(53, 53, 53, 0.5);
+}
+
+.secondBlock {
+    display: grid;
+    /* grid-template-columns: repeat(3, 500px); */
+    grid-auto-flow: column;
+    margin: 50px 0 100px 0;
+} 
+.left {
+    display:grid;
+    justify-content: left;
+    margin-left: 245px;
+
+} 
+.center {
+    display:grid;
+    justify-content: center;
+}
+
+.right {
+    display:grid;
+    justify-content: right;
+    margin-right: 222px;
+}
+
+.product {
+    margin-right: 105px;
+}
+
+
+
+.order {
+    margin-right: 295px;
+}

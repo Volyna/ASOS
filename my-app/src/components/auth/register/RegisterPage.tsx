@@ -1,15 +1,16 @@
+
 import { Link, Navigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
-import icon_Apple from "../../../images/icon_apple.png"
-import icon_Google from "../../../images/icon_google.png"
-import icon_facebook from "../../../images/icon_facebook.png"
+import icon_Apple from "../../../images/icon_apple.png";
+import icon_Google from "../../../images/icon_google.png";
+import icon_facebook from "../../../images/icon_facebook.png";
 import "./RegisterPageStyle.css";
 import { useFormik } from "formik";
 import { IRegisterUser } from "../types";
 import { registerUserSchema } from "../validation";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
-import FooterV from "../../Footer/FooterV";
+import Footer from "../../Footer/FooterV";
 import { date } from "yup";
 
 function RegisterPage() {
@@ -72,61 +73,75 @@ function RegisterPage() {
     <>
       <div className="container-fluid">
         <div className="content">
-        <header className="header">
+          <header className="header">
             <div className="asosLogo">
               <h1>
                 <Link to={"/"}>
-                  <img alt="ASOS Logo" height={142} width={272} src={LOGO_ASOS} />
+                  <img
+                    alt="ASOS Logo"
+                    height={142}
+                    width={272}
+                    src={LOGO_ASOS}
+                  />
                 </Link>
               </h1>
             </div>
           </header>
 
           <div className="autorization">
-              <a href="login" className="log_in"> Log in </a>
-              <a href="register" className="join">Join</a>
+            <a href="login" className="log_in">
+              {" "}
+              Log in{" "}
+            </a>
+            <a href="register" className="join">
+              Join
+            </a>
           </div>
 
           <div className="unified-info">
-                    <p className="sign_up_with">Sign up with:</p>
+            <p className="sign_up_with">Sign up with:</p>
           </div>
-                  <div>
-                    <ul  style={{ listStyleType: "none", padding: "0", marginBottom: "100px", textAlign: "center"}}>
-                      <li className="social-login">
-                        <a className="login_with" href="">
-                        <img src={icon_Apple} alt="Login with Apple" 
-                        />
-                        </a>
-                      </li>
-                      <li className="social-login">
-                        <a className="login_with" href="">
-                          <img src={icon_Google} alt="Login with Google"/>
-                          {/* <GoogleLogin
+          <div>
+            <ul
+              style={{
+                listStyleType: "none",
+                padding: "0",
+                marginBottom: "100px",
+                textAlign: "center",
+              }}
+            >
+              <li className="social-login">
+                <a className="login_with" href="">
+                  <img src={icon_Apple} alt="Login with Apple" />
+                </a>
+              </li>
+              <li className="social-login">
+                <a className="login_with" href="">
+                  <img src={icon_Google} alt="Login with Google" />
+                  {/* <GoogleLogin
                           onSuccess={responseGoogle}
                           onError={errorGoogle}
                           /> */}
-                        </a>
-                      </li>
-                      <li className="social-login">
-                        <a className="login_with" href="">
-                          <img src={icon_facebook} alt="L0gin with Facebook"/>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                </a>
+              </li>
+              <li className="social-login">
+                <a className="login_with" href="">
+                  <img src={icon_facebook} alt="L0gin with Facebook" />
+                </a>
+              </li>
+            </ul>
+          </div>
 
           <div className="main">
             <div className="signinContainer">
               <div className="form">
                 <form onSubmit={handleSubmit}>
                   <div className="unified-info">
-                  <p className="label_withEmail" >Or with email:</p>
+                    <p className="label_withEmail">Or with email:</p>
                   </div>
-                  
+
                   <div className="field">
-                  <label className="label">
-                      Email
-                    </label>
+                    <label className="label">Email</label>
                     <input
                       onChange={handleChange}
                       value={values.email}
@@ -142,9 +157,7 @@ function RegisterPage() {
                       </p>
                     )}
 
-                    <label className="label">
-                      First name
-                    </label>
+                    <label className="label">First name</label>
                     <input
                       type="text"
                       className="input"
@@ -158,10 +171,8 @@ function RegisterPage() {
                         <span className="font-medium">{errors.firstName}</span>
                       </p>
                     )}
-                    
-                    <label className="label">
-                      Last name
-                    </label>
+
+                    <label className="label">Last name</label>
                     <input
                       type="text"
                       className="input"
@@ -176,9 +187,7 @@ function RegisterPage() {
                       </p>
                     )}
 
-                    <label className="label">
-                      Password
-                    </label>
+                    <label className="label">Password</label>
                     <input
                       onChange={handleChange}
                       value={values.password}
@@ -195,23 +204,21 @@ function RegisterPage() {
                         <span className="font-medium">{errors.password}</span>
                       </p>
                     )}
-                    <span className="hint">Must contain 8 or more characters</span>
-                    
-                    
+                    <span className="hint">
+                      Must contain 8 or more characters
+                    </span>
                   </div>
                   <div className="field">
-                  <label className="label">
-                      Date of birth
-                    </label>
+                    <label className="label">Date of birth</label>
                     <div className="dataBirdth">
                       <input
-                      onChange={handleChange}
-                      type="date"
-                      className="input date"
-                      id="date"
-                      autoComplete="true"
-                    /> 
-                    {errors.dayBirh && touched.dayBirh && (
+                        onChange={handleChange}
+                        type="date"
+                        className="input date"
+                        id="date"
+                        autoComplete="true"
+                      />
+                      {errors.dayBirh && touched.dayBirh && (
                         <p className="mt-2" style={{ color: "red" }}>
                           <span className="font-medium">{errors.dayBirh}</span>
                         </p>
@@ -235,64 +242,47 @@ function RegisterPage() {
                     </div>
 
                   <div className="field">
-                    <label className="label">
-                    Receive emails about:
-                    </label>
-                    
+                    <label className="label">Receive emails about:</label>
+
                     <div className="addition">
-                    <input
-                    
-                      className="checkbox"
-                      type="checkbox"
-                      id="checkbox"
-                      >
-                      </input>
+                      <input
+                        className="checkbox"
+                        type="checkbox"
+                        id="checkbox"
+                      ></input>
                       <p className="remember_me">Discount and sales</p>
-                      
                     </div>
                     <div className="addition">
-                    <input
-                    
-                      className="checkbox"
-                      type="checkbox"
-                      id="checkbox"
-                      >
-                      </input>
+                      <input
+                        className="checkbox"
+                        type="checkbox"
+                        id="checkbox"
+                      ></input>
                       <p className="remember_me">New arrivals</p>
-                      
                     </div>
                     <div className="addition">
-                    <input
-                    
-                      className="checkbox"
-                      type="checkbox"
-                      id="checkbox"
-                      >
-                      </input>
+                      <input
+                        className="checkbox"
+                        type="checkbox"
+                        id="checkbox"
+                      ></input>
                       <p className="remember_me">Your exclusives</p>
-                      
                     </div>
                     <div className="addition">
-                    <input
-                    
-                      className="checkbox"
-                      type="checkbox"
-                      id="checkbox"
-                      >
-                      </input>
+                      <input
+                        className="checkbox"
+                        type="checkbox"
+                        id="checkbox"
+                      ></input>
                       <p className="remember_me">Our partners</p>
-                      
                     </div>
                     <div className="addition">
-                    <input
-                    
-                      className="checkbox"
-                      type="checkbox"
-                      id="checkbox"
-                      >
-                      </input>
+                      <input
+                        className="checkbox"
+                        type="checkbox"
+                        id="checkbox"
+                      ></input>
                       <p className="remember_me">No emails</p>
-                      
                     </div>
 
                     <div className="field">
@@ -300,35 +290,26 @@ function RegisterPage() {
                         Choose a category you mostly interested in:
                       </label>
                       <div className="addition">
-                    <input
-                    
-                      className="checkbox"
-                      type="checkbox"
-                      id="checkbox"
-                      >
-                      </input>
-                      <p className="remember_me">Womenswear</p>
-                      
-                    </div>
-                    <div className="addition">
-                    <input
-                    
-                      className="checkbox"
-                      type="checkbox"
-                      id="checkbox"
-                      >
-                      </input>
-                      <p className="remember_me">Menswear</p>
-                      
-                    </div>
+                        <input
+                          className="checkbox"
+                          type="checkbox"
+                          id="checkbox"
+                        ></input>
+                        <p className="remember_me">Womenswear</p>
+                      </div>
+                      <div className="addition">
+                        <input
+                          className="checkbox"
+                          type="checkbox"
+                          id="checkbox"
+                        ></input>
+                        <p className="remember_me">Menswear</p>
+                      </div>
                     </div>
                   </div>
 
                   <div className="submit">
-                    <button
-                      type="submit"
-                      className="btn_join"
-                    >
+                    <button type="submit" className="btn_join">
                       JOIN
                     </button>
                   </div>
@@ -336,11 +317,10 @@ function RegisterPage() {
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
-      <FooterV/>
 
-      
+      <Footer />
     </>
   );
 }

@@ -1,5 +1,4 @@
-
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "react-toastify/dist/ReactToastify.css";
 import './header.css'
@@ -29,13 +28,18 @@ const Header = () => {
                 <div className='second col-6'>
                     <Link to='/' ><img src={Logo} alt="" /></Link>
                 </div>
-
-                <div className='third col-3'>
-                    <div className='links'>
-                        <Link className='headerText' to='/'>Newsletter</Link> 
-                        <Link className='headerText' to='/'>FAQs</Link>
-                        <Link className='headerText' to='/'>More</Link>
-                    </div>
+        <div className="third col-3">
+          <div className="links">
+            <Link className="headerText" to="/">
+              Newsletter
+            </Link>
+            <Link className="headerText" to="customer-care/">
+              FAQs
+            </Link>
+            <Link className="headerText" to="/">
+              More
+            </Link>
+          </div>
 
                     <div className='userIcons'>
                         <Link to='/'><img src={user} alt="" className='noneM'/></Link>
