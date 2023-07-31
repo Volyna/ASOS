@@ -1,16 +1,20 @@
 import "./FAQs.css";
-import Header_full from "../../Header_full/Header_full";
+import Header from "../../NavBar/header";
 import Footer from "../../Footer/FooterV";
+import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
+import Menu from "../../NavBar/menu";
 
 const FAQs = () => {
   return (
     <>
-      <Header_full />
+      
+      <div className="staticnav">
+        <Header/>
+        <Menu/>
+      </div>
+
       <div className="container-fluid">
-        <div className="mainLink">
-          <p className="focusCom">focus.com |</p>
-          <p className="focusCom help"> Help</p>
-        </div>
+       <BreadCrumbs/>
         <div className="firstBlock">
           <div className="left">
             <h1 className="title">Delivery</h1>
