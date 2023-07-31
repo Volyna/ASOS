@@ -33,13 +33,31 @@ const Header = () => {
             <Link className="headerText" to="/">
               Newsletter
             </Link>
-            <Link className="headerText" to="customer-care/">
+            <Link className="headerText" to="/customer-care">
               FAQs
             </Link>
             <Link className="headerText" to="/">
               More
             </Link>
           </div>
+
+
+          <div className="userIcons">
+            <Link to="/">
+              <img src={user} alt="" className="noneM" />
+            </Link>
+            <Link to="/basket-empty">
+              <img src={cart} alt="" className="noneM" />
+            </Link>
+            <Link to="/">
+              <img src={like} alt="" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
                     <div className='userIcons'>
                         <Link to='/'><img src={user} alt="" className='noneM'/></Link>
@@ -54,4 +72,5 @@ const Header = () => {
 } 
 
 export default Header
+
 
