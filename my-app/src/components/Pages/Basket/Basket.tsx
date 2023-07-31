@@ -1,5 +1,5 @@
 import "./Basket.css";
-import Header from "../../Header_full/Header_full";
+import Header from "../../NavBar/header";
 import Footer from "../../Footer/FooterV";
 import Clothes1 from "../../../images/firstProduct.png";
 import Clothes2 from "../../../images/secondProduct.png";
@@ -7,16 +7,20 @@ import Clothes3 from "../../../images/thirdProduct.png";
 import Delete from "../../../images/delete.png";
 import Minus from "../../../images/minus.png";
 import Plus from "../../../images/plus.png";
+import Menu from "../../NavBar/menu";
+import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 
 const Basket = () => {
   return (
     <>
-      <Header />
+      <div className="staticnav">
+        <Header />
+        <Menu/>
+      </div>
       <div className="container-fluid">
-        <div className="mainLink">
-          <p className="focusCom">focus.com|</p>
-          <p className="focusCom basket"> Basket</p>
-        </div>
+
+      <BreadCrumbs/>
+        
         <div className="mainInformation">
           {/* <div className="orderContent col-8">
             <img width={119} height={175} src={Clothes1} alt="" />

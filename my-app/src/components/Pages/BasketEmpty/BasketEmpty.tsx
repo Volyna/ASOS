@@ -1,16 +1,20 @@
 import "./BasketEmpty.css";
-import Header from "../../Header_full/Header_full";
+import Header from "../../NavBar/header";
 import Footer from "../../Footer/FooterV";
+import Menu from "../../NavBar/menu";
+import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 
 const BasketEmpty = () => {
   return (
     <>
+    <div className="staticnav">
       <Header />
+      <Menu/>
+    </div>
+    <BreadCrumbs/>
+      
       <div className="container-fluid">
-        <div className="mainLink">
-          <p className="focusCom">focus.com|</p>
-          <p className="focusCom basket"> Basket</p>
-        </div>
+        
         <div className="mainInformation">
           <div className="content col-8">
             <p className="basket_text">Ops, your basket is empty(((</p>
