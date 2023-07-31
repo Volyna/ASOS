@@ -104,6 +104,8 @@
     font-size: 18px;
     line-height: 16px;
     margin: 0 0 10px 35px;
+    display: flex;
+    justify-content: left;
 }
 
 .input {
@@ -129,6 +131,7 @@
 .input_password {
     background: url(../../../images/icon_password.png) no-repeat center right 10px;
     background-size: 30px 30px;
+    margin-bottom: 16px;
 
 }
 
@@ -199,8 +202,15 @@ input[type="checkbox"]::before {
     font-size: 20px;
     line-height: 16px;
     padding: 0;
-    margin-bottom: 100px;
+    margin: 50px 0 100px 0;
     
+}
+
+.btn_logIn:hover{
+    transition: 0.5s;
+    color: rgba(255, 200, 24, 1);
+    background-color:rgba(53, 53, 53, 1);
+
 }
 
 .font-medium {

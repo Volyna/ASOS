@@ -20,7 +20,7 @@
 
 
 
-.title {
+.FAQtitle {
     font-family: 'Roboto Flex', sans-serif;
     font-weight: 500;
     font-size: 24px;
@@ -49,6 +49,7 @@
     display: grid;
     grid-auto-flow: column;
     border-bottom: 1px solid rgba(53, 53, 53, 0.5);
+    margin-top: 100px;
 }
 
 .secondBlock {

@@ -1,4 +1,3 @@
-
 import { Link, Navigate } from "react-router-dom";
 import LOGO_ASOS from "../../../images/asos_logo.png";
 import icon_Apple from "../../../images/icon_apple.png";
@@ -126,7 +125,7 @@ function RegisterPage() {
               </li>
               <li className="social-login">
                 <a className="login_with" href="">
-                  <img src={icon_facebook} alt="L0gin with Facebook" />
+                  <img src={icon_facebook} alt="Login with Facebook" />
                 </a>
               </li>
             </ul>
@@ -141,7 +140,7 @@ function RegisterPage() {
                   </div>
 
                   <div className="field">
-                    <label className="label">Email</label>
+                    <label className="label ">Email</label>
                     <input
                       onChange={handleChange}
                       value={values.email}
@@ -239,7 +238,7 @@ function RegisterPage() {
                     <span className="hint">
                       You need to be 18 or over to use Focus
                     </span>
-                    </div>
+                  </div>
 
                   <div className="field">
                     <label className="label">Receive emails about:</label>

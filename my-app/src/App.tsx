@@ -27,12 +27,11 @@ import Women from "./components/Pages/Man and Woman Page/WomanPage";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
-  useLayoutEffect(()=> {
-    window.scrollTo({top:0, behavior:"smooth"});
-
-  },[pathname]);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
 
   return (
     <>
@@ -41,13 +40,13 @@ function App() {
         <Route path="login" element={<LoginePage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="admin" element={<AdminLayout />} />
-        <Route path="customer-care" element={<FAQs />} />
+        <Route path="help" element={<FAQs />} />
 
         <Route path="basket-empty" element={<BasketEmpty />} />
         <Route path="basket" element={<Basket />} />
 
-        <Route path="/men" element={<Men/>}/>
-        <Route path="/women" element={<Women/>}/>
+        <Route path="/men" element={<Men />} />
+        <Route path="/women" element={<Women />} />
       </Routes>
       {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>
