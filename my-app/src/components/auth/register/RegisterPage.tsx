@@ -9,7 +9,7 @@ import { IRegisterUser } from "../types";
 import { registerUserSchema } from "../validation";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
-import Footer from "../../Footer/Footer";
+import FooterV from "../../Footer/FooterV";
 import { date } from "yup";
 
 function RegisterPage() {
@@ -336,10 +336,11 @@ function RegisterPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
+      <FooterV/>
 
-      <Footer/>
+      
     </>
   );
 }

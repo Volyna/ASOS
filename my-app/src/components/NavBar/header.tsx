@@ -11,7 +11,6 @@ import search from "../../images/search.svg"
 
 
 
-
 const Header = () => {
     return(
         <>
@@ -23,12 +22,12 @@ const Header = () => {
                     </div>
                     <div className='searchItem '>
                         <img src={search}/>
-                        <input className='search' type="search"/>
+                        <input className='search'/>
                     </div> 
                     <div className="line"/>
                 </div>
                 <div className='second col-6'>
-                    <img src={Logo} alt="" />
+                    <Link to='/' ><img src={Logo} alt="" /></Link>
                 </div>
 
                 <div className='third col-3'>
@@ -38,11 +37,11 @@ const Header = () => {
                         <Link className='headerText' to='/'>More</Link>
                     </div>
 
-                            <div className='userIcons'>
-                                <Link to='/'><img src={user} alt="" className='noneM'/></Link>
-                                <Link to='/'><img src={cart} alt="" className='noneM'/></Link>
-                                <Link to='/'><img src={like} alt="" /></Link>
-                            </div> 
+                    <div className='userIcons'>
+                        <Link to='/'><img src={user} alt="" className='noneM'/></Link>
+                        <Link to='/'><img src={cart} alt="" className='noneM'/></Link>
+                        <Link to='/'><img src={like} alt="" /></Link>
+                    </div> 
                 </div>
             </div>
         

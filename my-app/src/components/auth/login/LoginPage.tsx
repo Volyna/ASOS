@@ -9,7 +9,7 @@ import { loginBeforeUserSchema } from "../validation";
 import { IBeforeLoginUser, ILoginUserByGoogle } from "../types";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import Footer  from "../../Footer/Footer";
+import Footer  from "../../Footer/FooterV";
 import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 import { colors } from "@mui/material";

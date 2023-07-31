@@ -11,11 +11,18 @@ import item4 from '../../../images/item4.png'
 import man from '../../../images/man.png'
 import woman from '../../../images/woman.png'
 import Footer from "../../Footer/FooterV"
+import { Link, useNavigate } from "react-router-dom"
+import Men from "../Man and Woman Page/MenPage"
+
 
 
 const MainPage = () => {
+
+    const navigate = useNavigate();
     return(
         <>
+
+        
             <Header/>
 
             <div className="Mainblock">
@@ -26,8 +33,8 @@ const MainPage = () => {
                 <p className="header">new arrivals</p>
                 <p className="text">meet this summer stylishly with focus</p>
                 <div className="wbuttons">
-                    <button className="buttons">Women</button>
-                    <button className="buttons">Men</button>
+                    <button className="womenbtn buttons" onClick={()=> navigate('/women')}>Women</button>
+                    <button className="menbtn buttons" onClick={()=> navigate('/men')}>Men</button>
                 </div>
                 
             </div>
@@ -42,12 +49,12 @@ const MainPage = () => {
 
                 <div className="women col-6">
                     <img src={woman}/>
-                    <button className="buttons">Women</button>
+                    <button className=" womenbtn buttons" onClick={()=> navigate('/women')}>Women</button>
                 </div>
 
                 <div className="men col-6">
                     <img src={man}/>
-                    <button className="buttons">Men</button>
+                    <button className="menbtn buttons" onClick={()=> navigate('/men')}>Men</button>
                 </div>
 
             </div>
@@ -61,7 +68,10 @@ const MainPage = () => {
             <div className=" red section">
                 <p className="header white">summer sale</p>
                 <p className="text white">Up to 50% off!</p>
-                <button className="btn-red buttons red">Show more</button>
+                <div className="wbuttons">
+                    <button className="buttons trans" onClick={()=> navigate('/women')}>Women</button>
+                    <button className="buttons trans" onClick={()=> navigate('/men')}>Men</button>
+                </div>   
             </div>
 
             <div className="Mainblock">
@@ -74,8 +84,8 @@ const MainPage = () => {
                 <p className="header">Linen clothes collection!</p>
                 <p className="text">Get ready for sun and warmer temperatures with us</p>
                 <div className="wbuttons">
-                    <button className="buttons">Women</button>
-                    <button className="buttons">Men</button>
+                    <button className="womenbtn buttons" onClick={()=> navigate('/women')}>Women</button>
+                    <button className="menbtn buttons" onClick={()=> navigate('/men')}>Men</button>
                 </div>   
             </div>
 
@@ -83,25 +93,21 @@ const MainPage = () => {
                 <div className="item">
                     <img src={item1} />
                     <p className="itemName">Summer pajamas</p>
-                    <button className="buttons">Open</button>
                 </div>
 
                 <div className="item">
                     <img src={item2} />
                     <p className="itemName">Shorts</p>
-                    <button className="buttons">Open</button>
                 </div>
 
                 <div className="item">
                     <img src={item3} />
                     <p className="itemName">Summer dresses</p>
-                    <button className="buttons">Open</button>
                 </div>
 
                 <div className="item">
                     <img src={item4} />
                     <p className="itemName">Linen trousers</p>
-                    <button className="buttons">Open</button>
                 </div>
             </div>
 

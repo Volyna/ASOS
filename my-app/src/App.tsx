@@ -17,6 +17,9 @@ import AdminLayout from "./components/containers/admin/AdminLayout";
 
 import Header from "./components/NavBar/header";
 import MainPage from "./components/Pages/Main/MainPage";
+import Register from "./components/auth/register";
+import Men from "./components/Pages/Man and Woman Page/MenPage";
+import BreadCrumbs from "./components/BreadCrumbs/breadCrumbs";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -24,6 +27,8 @@ function App() {
   return (
     <>
         <Routes>
+          <Route path="/" element={<MainPage/>}/>
+          <Route path="/men" element={<Men/>}/>
         </Routes>
         {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>
@@ -54,7 +59,6 @@ function App() {
             </Route>
           </Route>
         </Routes> */}
-        <MainPage/>
     </>
   );
 }
