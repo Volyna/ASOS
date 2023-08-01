@@ -48,7 +48,7 @@ const Header = () => {
           </div>
 
           <div className="userIcons">
-            <Link to="/">
+            <Link to="/account/contact-information">
               <img src={user} alt="" className="noneM" />
             </Link>
             <Link to="/basket-empty">

@@ -24,6 +24,7 @@ import Register from "./components/auth/register";
 import Men from "./components/Pages/Man and Woman Page/MenPage";
 import BreadCrumbs from "./components/BreadCrumbs/breadCrumbs";
 import Women from "./components/Pages/Man and Woman Page/WomanPage";
+import ContactInf from "./components/Pages/Account/ContactInf/ContactInf";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -44,6 +45,8 @@ function App() {
 
         <Route path="basket-empty" element={<BasketEmpty />} />
         <Route path="basket" element={<Basket />} />
+
+        <Route path="/account/contact-information" element={<ContactInf />} />
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
