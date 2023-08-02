@@ -26,9 +26,10 @@ import BreadCrumbs from "./components/BreadCrumbs/breadCrumbs";
 import Women from "./components/Pages/Man and Woman Page/WomanPage";
 
 import ContactInf from "./components/Pages/Account/ContactInf/ContactInf";
+import Payment from "./components/Pages/Account/Payment/Payment";
+import PaymentEmpty from "./components/Pages/Account/PaymentEmpty/PaymentEmpty";
 
 import Error from "./components/Pages/Error/error";
-
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -48,13 +49,17 @@ function App() {
         <Route path="customer-care" element={<FAQs />} />
         <Route path="basket-empty" element={<BasketEmpty />} />
         <Route path="basket" element={<Basket />} />
-        
-        <Route path="/account/contact-information" element={<ContactInf />} />
-        
-        <Route path="/men" element={<Men/>}/>
-        <Route path="/women" element={<Women/>}/>
-        <Route path="*" element={<Error/>}/>
 
+        <Route path="/account/contact-information" element={<ContactInf />} />
+        <Route path="/account/shopping-history" element={<Payment />} />
+        <Route
+          path="/account/shopping-history-empty"
+          element={<PaymentEmpty />}
+        />
+
+        <Route path="/men" element={<Men />} />
+        <Route path="/women" element={<Women />} />
+        <Route path="*" element={<Error />} />
       </Routes>
       {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>

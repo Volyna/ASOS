@@ -3,22 +3,25 @@ import Header from "../../NavBar/header";
 import Footer from "../../Footer/FooterV";
 import Menu from "../../NavBar/menu";
 import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
+import { Link, useNavigate } from "react-router-dom";
 
 const BasketEmpty = () => {
+  const navigate = useNavigate();
   return (
     <>
-    <div className="staticnav">
-      <Header />
-      <Menu/>
-    </div>
-    <BreadCrumbs/>
-      
+      <div className="staticnav">
+        <Header />
+        <Menu />
+      </div>
+      <BreadCrumbs />
+
       <div className="container-fluid">
-        
         <div className="mainInformation">
           <div className="content col-8">
             <p className="basket_text">Ops, your basket is empty(((</p>
-            <button className="btn_continue">continue shopping</button>
+            <button onClick={() => navigate("/")} className="btn_continue">
+              continue shopping
+            </button>
           </div>
           <div className="total col-4">
             <h1 className="textH1">total</h1>

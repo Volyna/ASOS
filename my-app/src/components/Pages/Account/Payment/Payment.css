@@ -1,0 +1,32 @@
+
+.payment_menu{
+    margin: 50px 0 50px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: rgba(53, 53, 53, 0.5);
+    text-transform: uppercase;
+    padding: 0 15%;
+   border-bottom: 1px solid rgba(53, 53, 53, 0.5);
+   padding-bottom: 50px;
+}
+
+.user_payment {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15%;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: black;
+    margin-bottom: 48px;
+}
+
+.show {
+    margin-top: 100px;
+}
