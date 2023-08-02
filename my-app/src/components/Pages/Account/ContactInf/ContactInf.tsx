@@ -14,10 +14,10 @@ const ContactInf = () => {
         </div>
         <div className="container">
           <div className="menu_item">
-            <Link className="main_item" to="/">
+            <Link className="main_item" to="/account/contact-information">
               Contact information
             </Link>
-            <Link className="account_item" to="/">
+            <Link className="account_item" to="/account/shopping-history-empty">
               shopping history
             </Link>
             <Link className="account_item" to="/">
