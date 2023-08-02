@@ -26,8 +26,12 @@ import BreadCrumbs from "./components/BreadCrumbs/breadCrumbs";
 import Women from "./components/Pages/Man and Woman Page/WomanPage";
 
 import ContactInf from "./components/Pages/Account/ContactInf/ContactInf";
+
 import Payment from "./components/Pages/Account/Payment/Payment";
 import PaymentEmpty from "./components/Pages/Account/PaymentEmpty/PaymentEmpty";
+
+import Returns from "./components/Pages/Account/Returns/Returns";
+import ReturnsEmpty from "./components/Pages/Account/ReturnsEmpty/ReturnsEmpty";
 
 import Error from "./components/Pages/Error/error";
 
@@ -51,11 +55,15 @@ function App() {
         <Route path="basket" element={<Basket />} />
 
         <Route path="/account/contact-information" element={<ContactInf />} />
+
         <Route path="/account/shopping-history" element={<Payment />} />
         <Route
           path="/account/shopping-history-empty"
           element={<PaymentEmpty />}
         />
+
+        <Route path="/account/returns" element={<Returns />} />
+        <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
