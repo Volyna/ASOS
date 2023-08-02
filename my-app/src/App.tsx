@@ -33,6 +33,9 @@ import PaymentEmpty from "./components/Pages/Account/PaymentEmpty/PaymentEmpty";
 import Returns from "./components/Pages/Account/Returns/Returns";
 import ReturnsEmpty from "./components/Pages/Account/ReturnsEmpty/ReturnsEmpty";
 
+import Favourites from "./components/Pages/Account/Favourites/Favourites";
+import CustomerService from "./components/Pages/CustomerService/CustomerService";
+
 import Error from "./components/Pages/Error/error";
 
 function App() {
@@ -50,7 +53,10 @@ function App() {
         <Route path="login" element={<LoginePage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="admin" element={<AdminLayout />} />
+
         <Route path="customer-care" element={<FAQs />} />
+        <Route path="customer-service" element={<CustomerService />} />
+
         <Route path="basket-empty" element={<BasketEmpty />} />
         <Route path="basket" element={<Basket />} />
 
@@ -64,6 +70,8 @@ function App() {
 
         <Route path="/account/returns" element={<Returns />} />
         <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
+
+        <Route path="/account/favourites" element={<Favourites />} />
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />

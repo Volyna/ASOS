@@ -23,7 +23,7 @@ const ContactInf = () => {
             <Link className="account_item" to="/account/returns-empty">
               returns
             </Link>
-            <Link className="account_item" to="/">
+            <Link className="account_item" to="/account/favourites">
               favourites
             </Link>
             <Link className="log_out" to="/">
