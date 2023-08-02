@@ -16,7 +16,7 @@ const Header = () => {
       <div className="mainblock">
         <div className="first col-3">
           <div className="links">
-            <Link className="headerText" to="/">
+            <Link className="headerText" to="/customer-service">
               Customer Service
             </Link>
             <Link className="headerText" to="/">
@@ -63,4 +63,4 @@ const Header = () => {
     </>
   );
 };
-export default Header
+export default Header;
