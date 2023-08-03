@@ -15,12 +15,11 @@ const Basket = () => {
     <>
       <div className="staticnav">
         <Header />
-        <Menu/>
+        <Menu />
       </div>
       <div className="container-fluid">
+        <BreadCrumbs />
 
-      <BreadCrumbs/>
-        
         <div className="mainInformation">
           {/* <div className="orderContent col-8">
             <img width={119} height={175} src={Clothes1} alt="" />

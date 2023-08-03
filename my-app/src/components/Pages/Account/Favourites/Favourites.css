@@ -1,0 +1,140 @@
+
+.favourites-cards {
+    display: flex;
+    border-bottom: 1px solid rgba(154, 154, 154, 1);
+}
+
+.favourite-card {
+    border-right: 1px solid rgba(154, 154, 154, 1);
+}
+
+.ellipse {
+    width: 17px; 
+    height: 17px;
+    border-radius: 50%;
+    margin: 0 5px 30px 0;
+}
+.card1{
+    background: rgba(29, 29, 29, 1);
+}
+
+.card2_1 {
+    background-color: rgba(144, 155, 117, 1);
+}
+
+.card2_2 {
+    border: 1px solid rgba(154, 154, 154, 1);
+    background-color: rgba(255, 255, 255, 1)
+}
+
+.card3_1 {
+    background-color: rgba(41, 55, 85, 1)
+}
+
+.card3_2 {
+    background-color: rgba(174, 191, 214, 1)
+}
+
+.card4_1 {
+    background-color: rgba(15, 15, 17, 1);
+}
+
+.card4_2 {
+    background-color:rgba(216, 182, 232, 1);
+}
+
+.card4_3 {
+    background-color: rgba(210, 239, 213, 1);
+}
+
+.card5_1 {
+    background-color: rgba(17, 15, 13, 1);
+}
+
+.card5_2 {
+    background-color: rgba(216, 182, 232, 1);
+}
+
+.card5_3 {
+    background-color: rgba(31, 66, 32, 1)         ;
+}
+
+.card6_1 {
+    background-color: rgba(75, 77, 63, 1);
+}
+
+.card6_2 {
+    background-color: rgba(66, 66, 66, 1);
+}
+
+.card6_3 {
+    background-color: rgba(165, 182, 142, 1);
+}
+
+.more_color {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: black;
+}
+.btn-favourites {
+    width: 214px;
+    height: 50px;
+    margin-bottom: 31px;
+}
+
+.liked {
+    display: flex;
+    justify-content: right;
+    margin-right: 25px;
+}
+
+.add_to_basket {
+    display: flex;
+    justify-content: center;
+}
+
+.favourites-title {
+    margin-bottom: 10px;
+}
+
+.card-old-price {
+    color: black;
+    margin-bottom: 10px;
+}
+
+.card-new-price {
+    font-family: 'Roboto Flex', sans-serif;
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: red;
+}
+
+.favourite-image {
+    display: flex;
+    justify-content: center;
+}
+
+.favourite-price {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.colors {
+    display: flex;
+}
+
+.distance {
+    margin-left: 18px;
+}
+
+.without-border {
+    border: none;
+}
