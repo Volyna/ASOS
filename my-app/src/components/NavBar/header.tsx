@@ -54,7 +54,7 @@ const Header = () => {
             <Link to="/basket-empty">
               <img src={cart} alt="" className="noneM" />
             </Link>
-            <Link to="/">
+            <Link to="/account/favourites">
               <img src={like} alt="" />
             </Link>
           </div>
