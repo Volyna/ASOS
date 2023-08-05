@@ -8,6 +8,7 @@ import Delete from "../../../images/delete.png";
 import Minus from "../../../images/minus.png";
 import Plus from "../../../images/plus.png";
 import Menu from "../../NavBar/menu";
+import Arrow_down from "../../../images/arrow-down.png";
 import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 
 const Basket = () => {
@@ -46,6 +47,9 @@ const Basket = () => {
                 <div className="row">
                   <p className="col-2">Color: Black</p>
                   <p className="col-2">Size: M</p>
+                  <div className="col-1">
+                    <img height={20} width={20} src={Arrow_down} alt="" />
+                  </div>
                 </div>
                 <div className="row">
                   <p className="newPrice col-2">55.00$</p>
@@ -86,6 +90,9 @@ const Basket = () => {
                 <div className="row">
                   <p className="col-2">Color: Blue</p>
                   <p className="col-2">Size: M</p>
+                  <div className="col-1">
+                    <img height={20} width={20} src={Arrow_down} alt="" />
+                  </div>
                 </div>
                 <div className="row">
                   <p className="price col-2">39.00$</p>
@@ -125,6 +132,9 @@ const Basket = () => {
                 <div className="row">
                   <p className="col-3">Color: Dark grey</p>
                   <p className="col-2">Size: M</p>
+                  <div className="col-1">
+                    <img height={20} width={20} src={Arrow_down} alt="" />
+                  </div>
                 </div>
                 <div className="row">
                   <p className="newPrice col-2">15.00$</p>

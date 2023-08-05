@@ -1,0 +1,139 @@
+.h1_checkout {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 56.25px;
+    text-transform: uppercase;
+    color: black;
+    border-bottom: 1px solid rgba(154, 154, 154, 1);
+    padding-bottom: 50px;
+    
+    
+}
+
+.h3_checkout {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28.13px;
+    text-transform: uppercase;
+    color: black;
+    margin-bottom: 50px;
+}
+
+.contact-inf {
+    display: flex;
+}
+
+.edit-img {
+    height: 30px;
+    width: 30px;
+}
+
+.checkout-input {
+    width: 70%;
+    margin-left: 0;
+}
+.discount-input {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 50px;
+}
+
+.checkout-label {
+    margin-left: 0;
+}
+
+.checkout-checkbox {
+    margin: 0px 10px 30px 0px;
+}
+
+.additional-inf {
+    display: flex;
+}
+
+.checkout-delivery-inf {
+    display: flex;
+}
+
+.checkout-p {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    color: rgba(0, 0, 0, 1);
+    margin-bottom: 10px;
+} 
+
+.btn-delivery {
+    width: 70%;
+}
+
+.payment-img {
+    width: 42px;
+    height: 29.33px;
+    margin: 0 11.5px 0 -9px;
+    justify-content: flex-end;
+}
+
+.payment-input {
+    width: 70%;
+    margin-left: 0;
+}
+
+.exDate-input {
+    width: 95%;
+    margin-left: 0;
+}
+
+.payment-checkboxes {
+    display: flex;
+}
+
+.btn-shop-bag {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.bottom {
+    margin-bottom: 100px;
+}
+
+.number {
+    width: 120px;
+    height: 33px;
+    border-radius: 30px;
+    border: 2px solid black;
+    text-align: center;
+    background-color: white;
+    margin: 20px 0 30px 0;
+}
+
+.amount{font-family: 'Roboto Flex', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23.44px;
+    color: rgba(53, 53, 53, 1);
+    text-align: end;}    
+
+.normal {
+    font-weight: 300;
+}
+
+.purchase-inf {
+    margin-bottom: 0;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 23.44px;
+    color: black;
+}
+.bold {
+    font-weight: 500;
+}
+
+.ordersContent {
+    display: flex;
+    border-bottom: 1px solid rgba(53, 53, 53, 0.5);
+    margin-bottom: 50px;
+}

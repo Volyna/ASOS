@@ -39,7 +39,7 @@ const Header = () => {
             <Link className="headerText" to="/">
               Newsletter
             </Link>
-            <Link className="headerText" to="/help">
+            <Link className="headerText" to="/customer-care">
               FAQs
             </Link>
             <Link className="headerText" to="/">
