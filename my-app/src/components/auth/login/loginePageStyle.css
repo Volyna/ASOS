@@ -137,12 +137,12 @@
 
 .addition {
     display: flex;
+    margin: 0px 10px 15px 35px ; 
 }
 
 input[type="checkbox"] {
     appearance: none;
     background-color: #fff;
-    margin: 0;
     font: inherit;
     color: rgba(58, 58, 58, 1);
     width: 22.5px;
@@ -150,7 +150,7 @@ input[type="checkbox"] {
     border: 2px solid rgba(58, 58, 58, 1);
     border-radius: 5px;
     display: grid;
-    margin: 0px 10px 15px 35px ;
+    /* margin: 0px 10px 15px 35px ; */
     place-content: center;
   }
   

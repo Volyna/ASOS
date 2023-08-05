@@ -35,6 +35,7 @@ import ReturnsEmpty from "./components/Pages/Account/ReturnsEmpty/ReturnsEmpty";
 
 import Favourites from "./components/Pages/Account/Favourites/Favourites";
 import CustomerService from "./components/Pages/CustomerService/CustomerService";
+import Checkout from "./components/Pages/Checkout/Checkout";
 
 import Error from "./components/Pages/Error/error";
 
@@ -72,6 +73,7 @@ function App() {
         <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
 
         <Route path="/account/favourites" element={<Favourites />} />
+        <Route path="/checkout" element={<Checkout />} />
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
