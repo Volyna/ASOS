@@ -1,16 +1,14 @@
 import Header_full from "../../../Header_full/Header_full";
 import Footer from "../../../Footer/FooterV";
 import { Link, useNavigate } from "react-router-dom";
+import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 
 const Returns = () => {
   return (
     <>
       <Header_full />
+      <BreadCrumbs/>
       <div className="container-fluid">
-        <div className="mainLink">
-          <p className="focusCom">focus.com | Account |</p>
-          <p className="focusCom basket"> Returns</p>
-        </div>
         <div className="container">
           <div className="menu_item">
             <Link className="account_item" to="/account/contact-information">

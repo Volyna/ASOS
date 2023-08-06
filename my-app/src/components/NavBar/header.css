@@ -4,6 +4,7 @@
     margin-top: 32px;
     align-content: center;
     margin-bottom: 38px;
+    z-index: auto;
 }
 .headerText{
     font-family:  Roboto Flex;

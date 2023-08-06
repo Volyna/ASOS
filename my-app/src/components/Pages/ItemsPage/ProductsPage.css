@@ -1,0 +1,80 @@
+.prodBlock{
+    display: flex;
+    flex-direction: column;
+}
+
+.prd{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.prd .itemName{
+    width: 20%;
+    border: 0.01px solid rgba(154, 154, 154, 1);
+    border-top: 0px;
+    margin: 0;
+
+}
+
+.prd .titleImg{
+    width: 90%;
+}
+
+
+
+.cards{
+    display: flex;
+}
+
+.favourite-card{
+    width: 20%;
+}
+
+.prd .headerText{
+    text-align: start;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.info{
+    padding-left:20px;
+    text-align: start;
+}
+
+.dot{
+    width:17px;
+    height: 17px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px 20px 0px;
+    
+}
+
+.itemName{
+    position: relative;
+    z-index: -10;
+}
+
+.titleImg{
+    position: relative;
+    z-index: -10;
+}
+
+.like{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    width: 12%;
+    z-index: -10;
+}
+
+
+
