@@ -1,16 +1,14 @@
 import "./CustomerService.css";
 import Header_full from "../../Header_full/Header_full";
 import Footer from "../../Footer/FooterV";
+import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 
 const CustomerService = () => {
   return (
     <>
       <Header_full />
+      <BreadCrumbs/>
       <div className="container-fluid">
-        <div className="mainLink">
-          <p className="focusCom">focus.com |</p>
-          <p className="focusCom basket">Customer service</p>
-        </div>
         <div className="help">
           <div className="for_help container">
             <h2 className="FAQtitle search_for">Search for help?</h2>

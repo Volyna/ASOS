@@ -10,16 +10,14 @@ import Card5 from "../../../../images/favourite_card5.png";
 import Card6 from "../../../../images/favourite_card6.png";
 import { Link } from "react-router-dom";
 import { Card } from "@mui/material";
+import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 
 const Favourites = () => {
   return (
     <>
       <Header_full />
+      <BreadCrumbs/>
       <div className="container-fluid">
-        <div className="mainLink">
-          <p className="focusCom">focus.com | Account |</p>
-          <p className="focusCom basket">Favourites</p>
-        </div>
         <div className="favourites-cards">
           <div className="favourite-card col-2">
             <div className="liked">

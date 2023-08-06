@@ -11,10 +11,10 @@ import Menu from "../NavBar/menu";
 
 const Header_full = () => {
   return (
-    <>
+    <div className="staticnav">
       <Header/>
       <Menu/>
-    </>
+    </div>
   );
 };
 export default Header_full;

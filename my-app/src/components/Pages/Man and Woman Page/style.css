@@ -43,10 +43,12 @@
 .categors{
     display: flex;
     flex-direction: column;
+    width: 200px;
     float: left;
-    overflow: hidden;
-    width: 20%;
     color: black;
+    margin-right: 0;
+    margin-bottom: 10px;
+
 }
 
 .categors a{
