@@ -2,7 +2,7 @@
 using WebAsos.Models;
 using WebAsos.Services;
 
-namespace WebAsos.Interfaces.Services
+namespace WebAsos.Interfaces.Services.Interfaces
 {
     public interface IProductService
     {

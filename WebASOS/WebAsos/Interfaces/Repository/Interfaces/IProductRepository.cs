@@ -1,7 +1,6 @@
 ﻿using WebAsos.Data.Entitties.Catalog;
-using WebAsos.interfaces.Repository;
 
-namespace WebAsos.Interfaces.Repository
+namespace WebAsos.Interfaces.Repository.Interfaces
 {
     public interface IProductRepository : IGenericRepository<ProductEntity, int>
     {

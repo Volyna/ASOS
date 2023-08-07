@@ -1,7 +1,7 @@
 ﻿using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Services;
 
-namespace WebAsos.Interfaces.Services
+namespace WebAsos.Interfaces.Services.Interfaces
 {
     public interface IProductImageService
     {

@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
@@ -60,6 +61,11 @@ namespace WebAsos.Services
 
             var payload = await GoogleJsonWebSignature.ValidateAsync(request.Token, settings);
             return payload;
+        }
+        public class Tokens
+        {
+            public string token { get; set; }
+            public RefreshToken refreshToken { get; set; }
         }
     }
 }

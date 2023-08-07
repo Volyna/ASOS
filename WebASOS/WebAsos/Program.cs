@@ -12,11 +12,11 @@ using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.Validation.User;
 using WebAsos.interfaces.JwtTokenService;
-using WebAsos.interfaces.Repository;
-using WebAsos.interfaces.Services;
 using WebAsos.interfaces.UserService;
-using WebAsos.Interfaces.Repository;
-using WebAsos.Interfaces.Services;
+using WebAsos.Interfaces.Repository.Classes;
+using WebAsos.Interfaces.Repository.Interfaces;
+using WebAsos.Interfaces.Services.Classes;
+using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
 using WebAsos.Settings;
@@ -47,6 +47,7 @@ var googleAuthSettings = builder.Configuration
     .Get<GoogleAuthSettings>();
 
 builder.Services.AddSingleton(googleAuthSettings);
+builder.Services.AddTransient<EmailService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 

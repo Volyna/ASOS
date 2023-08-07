@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using WebAsos.Data.Entitties.Catalog;
-using WebAsos.interfaces.Repository;
+using WebAsos.Interfaces.Repository.Interfaces;
+using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
 using WebAsos.Services;
 
-namespace WebAsos.interfaces.Services
+namespace WebAsos.Interfaces.Services.Classes
 {
     public class CategoryService : ICategoryService
     {
@@ -77,7 +77,7 @@ namespace WebAsos.interfaces.Services
             var res = await _categoryRepository.Categories().Include(c => c.Childrens).ToListAsync();
             var resVM = _mapper.Map<List<CategoryGroupViewModel>>(res);
 
-            var list = CategoryHelper.BuildTree(resVM);
+            var list = resVM.BuildTree();
 
             return new ServiceResponse
             {
@@ -87,17 +87,9 @@ namespace WebAsos.interfaces.Services
             };
         }
 
-        public async Task<CategoryEntity> GetByIdAsync(int id)
+        public Task<CategoryEntity> GetByIdAsync(int id)
         {
-            var category = _categoryRepository.Categories().Include(c => c.Childrens).FirstOrDefault(c => c.Id == id);
-
-
-            if (category != null)
-            {
-                return category;
-            }
-
-            return null;
+            throw new NotImplementedException();
         }
 
         public async Task<ServiceResponse> UpdateAsync(CategoryUpdateViewModel model)

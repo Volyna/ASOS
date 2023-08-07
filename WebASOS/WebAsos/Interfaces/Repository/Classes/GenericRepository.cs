@@ -1,8 +1,9 @@
 ﻿using WebAsos.Data.Entitties;
 using WebAsos.Data;
 using Microsoft.EntityFrameworkCore;
+using WebAsos.Interfaces.Repository.Interfaces;
 
-namespace WebAsos.interfaces.Repository
+namespace WebAsos.Interfaces.Repository.Classes
 {
     public class GenericRepository<TEntity, T> : IGenericRepository<TEntity, T> where TEntity : class, IEntity<T>
     {

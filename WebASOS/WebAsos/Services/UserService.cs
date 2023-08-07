@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Net;
+using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json.Linq;
 using WebAsos.Constants.User;
 using WebAsos.Data.Entitties.IdentityUser;
@@ -15,15 +18,19 @@ namespace WebAsos.Services
     public class UserService : IUserService
     {
         private readonly UserManager<UserEntity> _userManager;
+        private IConfiguration _configuration;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        public UserService(UserManager<UserEntity> userManager, IJwtTokenService jwtTokenService, IMapper mapper, IUserRepository userRepository)
+        private EmailService _emailService;
+        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IMapper mapper, IUserRepository userRepository, EmailService emailService)
         {
             _userRepository = userRepository;
+            _configuration = configuration;
             _mapper = mapper;
             _jwtTokenService = jwtTokenService;
             _userManager = userManager;
+            _emailService = emailService;
         }
 
         public async Task<ServiceResponse> LoginUserAsync(LoginViewModel model)
@@ -75,9 +82,22 @@ namespace WebAsos.Services
                     var resultRole = await _userRepository.AddToRoleAsync(newUser, Roles.User);
                     if (resultRole.Succeeded)
                     {
+                        var token = await _userRepository.GenerateEmailConfirmationTokenAsync(newUser);
 
-                        var token = await _jwtTokenService.CreateToken(newUser);
-                        return new ServiceResponse() { Payload = token };
+                        var encodedEmailToken = Encoding.UTF8.GetBytes(token);
+                        var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
+
+                        string url = $"{_configuration["FrontEndUrl"]}/confirmemail?userid={newUser.Id}&token={validEmailToken}";
+                        await _emailService.SendEmailAsync(Emails.ConfirmAccountByEmail(user.Email, url));
+
+
+                        var aceessToken = await _jwtTokenService.CreateToken(newUser);
+
+                        return new ServiceResponse() {
+                            Message = "User successfully created.",
+                            Payload = aceessToken,
+                            IsSuccess = true
+                        };
 
                     }
                     else
@@ -100,11 +120,6 @@ namespace WebAsos.Services
 
                 return new ServiceResponse() { Payload = ex.Message };
             }
-
-           
-
-
-
         }
 
         public async Task<ServiceResponse> GoogleExternalLoginAsync(ExternalLoginRequest request)

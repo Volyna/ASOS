@@ -2,7 +2,7 @@
 using WebAsos.Models;
 using WebAsos.Services;
 
-namespace WebAsos.interfaces.Services
+namespace WebAsos.Interfaces.Services.Interfaces
 {
     public interface ICategoryService
     {
