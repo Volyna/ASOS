@@ -1,6 +1,6 @@
 ﻿using WebAsos.Data.Entitties;
 
-namespace WebAsos.interfaces.Repository
+namespace WebAsos.Interfaces.Repository.Interfaces
 {
     public interface IGenericRepository<TEntity, T> where TEntity : class, IEntity<T>
     {

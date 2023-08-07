@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAsos.Data.Entitties.DTO;
-using WebAsos.Interfaces.Services;
+using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
 
 namespace WebAsos.Controllers

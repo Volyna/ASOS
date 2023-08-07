@@ -1,10 +1,10 @@
 ﻿using WebAsos.Data;
 using WebAsos.Data.Entitties.Catalog;
-using WebAsos.interfaces.Repository;
+using WebAsos.Interfaces.Repository.Interfaces;
 
-namespace WebAsos.Interfaces.Repository
+namespace WebAsos.Interfaces.Repository.Classes
 {
-    public class ProductImageRepository : GenericRepository<ProductImageEntity, int>, 
+    public class ProductImageRepository : GenericRepository<ProductImageEntity, int>,
         IProductImageRepository
     {
         private readonly AppEFContext _dbContext;

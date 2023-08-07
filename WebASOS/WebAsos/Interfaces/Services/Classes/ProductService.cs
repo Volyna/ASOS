@@ -1,13 +1,13 @@
 ﻿using WebAsos.Data.Entitties.DTO;
-using WebAsos.Interfaces.Repository;
-using WebAsos.interfaces.Services;
 using WebAsos.Services;
 using AutoMapper;
 using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Models;
 using System.Data;
+using WebAsos.Interfaces.Repository.Interfaces;
+using WebAsos.Interfaces.Services.Interfaces;
 
-namespace WebAsos.Interfaces.Services
+namespace WebAsos.Interfaces.Services.Classes
 {
     public class ProductService : IProductService
     {

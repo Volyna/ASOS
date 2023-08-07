@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebAsos.Data;
 using WebAsos.Data.Entitties.Catalog;
-using WebAsos.interfaces.Repository;
+using WebAsos.Interfaces.Repository.Interfaces;
 
-namespace WebAsos.Interfaces.Repository
+namespace WebAsos.Interfaces.Repository.Classes
 {
-    public class ProductRepository : GenericRepository<ProductEntity, int>, 
+    public class ProductRepository : GenericRepository<ProductEntity, int>,
         IProductRepository
     {
         private readonly AppEFContext _dbContext;
@@ -25,7 +25,7 @@ namespace WebAsos.Interfaces.Repository
 
         public ICollection<ProductEntity> GetProductsAsync()
         {
-            return  GetAll().Include(i => i.Category).ToList();
+            return GetAll().Include(i => i.Category).ToList();
 
         }
 

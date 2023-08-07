@@ -1,9 +1,10 @@
 ﻿using SixLabors.ImageSharp.Formats.Jpeg;
 using WebAsos.Data.Entitties.Catalog;
-using WebAsos.Interfaces.Repository;
+using WebAsos.Interfaces.Repository.Interfaces;
+using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Services;
 
-namespace WebAsos.Interfaces.Services
+namespace WebAsos.Interfaces.Services.Classes
 {
     public class ProductImageService : IProductImageService
     {
@@ -97,7 +98,7 @@ namespace WebAsos.Interfaces.Services
             return fileName;
         }
 
-       
+
 
         public async Task<string> UpdateProductImageAsync(ProductImageEntity imgName)
         {

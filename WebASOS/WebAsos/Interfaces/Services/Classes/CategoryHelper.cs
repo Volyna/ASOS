@@ -1,6 +1,6 @@
 ﻿using WebAsos.Models;
 
-namespace WebAsos.interfaces.Services
+namespace WebAsos.Interfaces.Services.Classes
 {
     public static class CategoryHelper
     {
