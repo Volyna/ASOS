@@ -17,6 +17,9 @@ namespace WebAsos.interfaces.UserService
         Task<string> GeneratePasswordResetTokenAsync(UserEntity model);
         Task<string> GenerateEmailConfirmationTokenAsync(UserEntity appUser);
         Task<List<UserEntity>> GetAllUsersAsync();
+        Task<IdentityResult> LockUserAsync(UserEntity model, int days);
+        Task<IdentityResult> UnLockUserAsync(UserEntity model);
+        Task<IdentityResult> DeleteUserAsync(UserEntity model);
     }
 }
 

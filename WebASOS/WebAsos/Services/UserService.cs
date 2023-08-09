@@ -25,7 +25,8 @@ namespace WebAsos.Services
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private EmailService _emailService;
-        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IHttpContextAccessor httpContextAccessor, IMapper mapper, IUserRepository userRepository, EmailService emailService)
+        private readonly RecaptchaService _recaptchaService;
+        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IHttpContextAccessor httpContextAccessor, IMapper mapper, IUserRepository userRepository, EmailService emailService, RecaptchaService recaptchaService)
         {
             _userRepository = userRepository;
             _configuration = configuration;
@@ -34,12 +35,14 @@ namespace WebAsos.Services
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _emailService = emailService;
+            _recaptchaService = recaptchaService;
         }
 
         public async Task<ServiceResponse> LoginUserAsync(LoginViewModel model)
         {
             try
             {
+
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user == null)
                 {
@@ -268,6 +271,80 @@ namespace WebAsos.Services
             {
                 IsSuccess = false,
                 Errors = result.Errors
+            };
+        }
+
+        public async Task<ServiceResponse> LockUserAsync(string userId, int days)
+        {
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(userId);
+            if (userEntity == null)
+            {
+                return new ServiceResponse(){ 
+                    Message = "No user found",
+                    IsSuccess = false,
+                } ;
+            }
+            var result = await _userRepository.LockUserAsync(userEntity, days);
+
+            return new ServiceResponse()
+            {
+                Message = "The user is blocked",
+                IsSuccess = true
+            };
+        }
+
+        public async Task<ServiceResponse> UnLockUserAsync(string userId)
+        {
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(userId);
+            if (userEntity == null)
+            {
+                return new ServiceResponse()
+                {
+                    Message = "No user found",
+                    IsSuccess = false
+                };
+            }
+
+            var result = await _userRepository.UnLockUserAsync(userEntity);
+
+            return new ServiceResponse()
+            {
+                Message = "The user is unlocked",
+                IsSuccess = true
+            };
+        }
+
+        public async Task<ServiceResponse> DeleteUserAsync(string? userId = null)
+        {
+            if (userId == null)
+            {
+                userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
+            }
+
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(userId);
+            if (userEntity == null)
+            {
+                return new ServiceResponse()
+                {
+                    Message = "No user found",
+                    IsSuccess = false
+                };
+            }
+            var result = await _userRepository.DeleteUserAsync(userEntity);
+
+            if (result.Succeeded)
+            {
+                return new ServiceResponse()
+                {
+                    Message = "The user is deleted",
+                    IsSuccess = true
+                };
+            }
+
+            return new ServiceResponse()
+            {
+                IsSuccess = false,
+                Errors = result.Errors.Select(e => e.Description)
             };
         }
     }

@@ -14,6 +14,9 @@ namespace WebAsos.interfaces.UserService
         public Task<ServiceResponse> ConfirmEmailAsync(String userId, string token);
         public Task<SimpleResponseDTO> ResetPasswordAsync(string? email = null);
         public Task<ChangePasswordResponseDTO> ChangePasswordAsync(ChangePasswordRequestDTO model);
+        public Task<ServiceResponse> LockUserAsync(string userId, int days);
+        public Task<ServiceResponse> UnLockUserAsync(string userId);
+        public Task<ServiceResponse> DeleteUserAsync(string? userId = null);
     }
 }
 
