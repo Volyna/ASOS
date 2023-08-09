@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using WebAsos.Data;
 using WebAsos.Data.AutoMapper.User;
 using WebAsos.Data.Entitties;
+using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.Validation.User;
 using WebAsos.interfaces.JwtTokenService;
@@ -25,6 +26,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(AutoMapperUserProfile));
 
 
@@ -62,6 +64,11 @@ builder.Services.AddScoped<IProductImageService, ProductImageService>();
 builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterUserValidation>());
 
 var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<String>("JWTSecretKey")));
+
+var emailSettings = builder.Configuration
+    .GetSection("EmailSettings")
+    .Get<EmailSettings>();
+builder.Services.AddSingleton(emailSettings);
 
 builder.Services.AddAuthentication(options =>
 {

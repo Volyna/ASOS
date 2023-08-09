@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json.Linq;
 using WebAsos.Constants.User;
+using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
@@ -20,15 +21,17 @@ namespace WebAsos.Services
         private readonly UserManager<UserEntity> _userManager;
         private IConfiguration _configuration;
         private readonly IJwtTokenService _jwtTokenService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private EmailService _emailService;
-        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IMapper mapper, IUserRepository userRepository, EmailService emailService)
+        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IHttpContextAccessor httpContextAccessor, IMapper mapper, IUserRepository userRepository, EmailService emailService)
         {
             _userRepository = userRepository;
             _configuration = configuration;
             _mapper = mapper;
             _jwtTokenService = jwtTokenService;
+            _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _emailService = emailService;
         }
@@ -59,7 +62,7 @@ namespace WebAsos.Services
             catch (Exception ex)
             {
 
-                return new ServiceResponse() { Payload =  ex.Message  };
+                return new ServiceResponse() { Payload =  ex.Message.ToString()  };
             }
             
         }
@@ -118,7 +121,7 @@ namespace WebAsos.Services
             catch (Exception ex)
             {
 
-                return new ServiceResponse() { Payload = ex.Message };
+                return new ServiceResponse() { Payload = ex.Message.ToString() };
             }
         }
 
@@ -168,6 +171,104 @@ namespace WebAsos.Services
             {
                 return new ServiceResponse { IsSuccess = false, Message = ex.Message.ToString() };
             }
+        }
+        public async Task<ServiceResponse> ConfirmEmailAsync(string userId, string token)
+        {
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+                return new ServiceResponse
+                {
+                    IsSuccess = false,
+                    Message = "User not found"
+                };
+
+            var decodedToken = WebEncoders.Base64UrlDecode(token);
+            string normalToken = Encoding.UTF8.GetString(decodedToken);
+
+            var result = await _userRepository.ConfirmEmailAsync(user, normalToken);
+
+            if (result.Succeeded)
+            {
+                return new ServiceResponse
+                {
+                    Message = "Email confirmed successfully!",
+                    IsSuccess = true,
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    IsSuccess = false,
+                    Message = "Email didn't confirm",
+                    Errors = result.Errors.Select(e => e.Description)
+                };
+            }
+        }
+
+        public async Task<SimpleResponseDTO> ResetPasswordAsync(string? email = null)
+        {
+            
+            UserEntity user = null;
+            if (email == null)
+            {
+                user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            }
+            else
+            {
+                user = await _userManager.FindByEmailAsync(email);
+            }
+
+            if (user == null)
+            {
+                return new SimpleResponseDTO() {
+                    IsSuccess = true,
+                    Message = "The password has been changed"
+                };
+            }
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedEmailToken = Encoding.UTF8.GetBytes(token);
+            var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
+            string url = $"{_configuration["FrontEndUrl"]}/resetPassword/?userId={user.Id}&token={validEmailToken}";
+            await _emailService.SendEmailAsync(Emails.ResetPassword(user.Email, url));
+
+
+            return new SimpleResponseDTO()
+            {
+                IsSuccess = true,
+                Message = "The password has been changed"
+            };
+        }
+
+        public async Task<ChangePasswordResponseDTO> ChangePasswordAsync(ChangePasswordRequestDTO model)
+        {
+            UserEntity user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return new ChangePasswordResponseDTO() { 
+                    IsSuccess = true 
+                };
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.ConfirmPassword);
+
+            if (result.Succeeded)
+            {
+                await _emailService.SendEmailAsync(Emails.PasswordChanged(user.Email));
+                string accessToken = await _jwtTokenService.CreateToken(user);
+                return new ChangePasswordResponseDTO()
+                {
+                    IsSuccess = true,
+                    AccessToken = accessToken
+                };
+            }
+
+            return new ChangePasswordResponseDTO()
+            {
+                IsSuccess = false,
+                Errors = result.Errors
+            };
         }
     }
 }

@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Net;
 using WebAsos.Constants.User;
+using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
@@ -63,5 +66,51 @@ namespace WebAsos.Controllers
             }
 
         }
+        [AllowAnonymous]
+        [HttpGet("confirmEmail")]
+        public async Task<IActionResult> ConfirmEmailAsync(string userId, string token)
+        {
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
+                return NotFound();
+
+            var result = await _userService.ConfirmEmailAsync(userId, token);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("resetPassword")]
+        public async Task<IActionResult> ResetPasswordAsync([FromQuery] string? email = null)
+        {
+            
+            try
+            {
+                var result = await _userService.ResetPasswordAsync(email);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+        [AllowAnonymous]
+        [HttpPost("changePassword")]
+        public async Task<IActionResult> ChangePasswordAsync([FromBody] ChangePasswordRequestDTO model)
+        {
+            try
+            {
+                var result = await _userService.ChangePasswordAsync(model);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
