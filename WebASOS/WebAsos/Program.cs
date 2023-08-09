@@ -50,6 +50,7 @@ var googleAuthSettings = builder.Configuration
 
 builder.Services.AddSingleton(googleAuthSettings);
 builder.Services.AddTransient<EmailService>();
+builder.Services.AddTransient<RecaptchaService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 

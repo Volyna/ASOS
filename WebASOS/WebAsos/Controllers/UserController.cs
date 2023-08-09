@@ -112,5 +112,54 @@ namespace WebAsos.Controllers
             }
         }
 
+
+
+        //only for admin
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("admin/lockUser/{userId}")]
+        public async Task<IActionResult> LockUserAsync([FromRoute] string userId, [FromQuery] int days = 3650)
+        {
+            try
+            {
+                var result = await _userService.LockUserAsync(userId, days);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("admin/unlockUser/{userId}")]
+        public async Task<IActionResult> UnLockUserAsync([FromRoute] string userId)
+        {
+            try
+            {
+                var result = await _userService.UnLockUserAsync(userId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("admin/{userId}")]
+        public async Task<IActionResult> DeleteUserAsync([FromRoute] string userId)
+        {
+            try
+            {
+                var result = await _userService.DeleteUserAsync(userId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }

@@ -75,6 +75,24 @@ namespace WebAsos.Repositories.User
             var result = await _userManager.Users.ToListAsync();
             return result;
         }
+
+        public async Task<IdentityResult> LockUserAsync(UserEntity model, int days)
+        {
+            var result = await _userManager.SetLockoutEndDateAsync(model, DateTimeOffset.UtcNow.AddDays(days));
+            return result;
+        }
+
+        public async Task<IdentityResult> UnLockUserAsync(UserEntity model)
+        {
+            var result = await _userManager.SetLockoutEndDateAsync(model, null);
+            return result;
+        }
+
+        public async Task<IdentityResult> DeleteUserAsync(UserEntity model)
+        {
+            var result = await _userManager.DeleteAsync(model);
+            return result;
+        }
     }
 }
 
