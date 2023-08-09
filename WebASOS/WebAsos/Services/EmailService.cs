@@ -19,7 +19,7 @@ namespace WebAsos.Services
             {
                 try
                 {
-                    message.From.Add(new MailboxAddress("Focus", _configuration["EmailSettings:User"]));
+                    message.From.Add(new MailboxAddress("Focus", _configuration["EmailSettings:From"]));
                     client.Connect(_configuration["EmailSettings:SMTP"], Int32.Parse(_configuration["EmailSettings:PORT"]), false);
                     client.Authenticate(_configuration["EmailSettings:User"], _configuration["EmailSettings:Password"]);
                     client.Send(message);
