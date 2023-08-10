@@ -15,6 +15,7 @@ namespace WebAsos.Data.ViewModels.User
         public bool NewStuff { get; set; }
         public bool YourExclusives { get; set; }
         public bool AsosPartners { get; set; }
+        public string RecaptchaToken { get; set; }
     }
 }
 
