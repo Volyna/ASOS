@@ -17,7 +17,8 @@ namespace WebAsos.Data.Entitties
         public T Id { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime DateCreated { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
     }
 }
 

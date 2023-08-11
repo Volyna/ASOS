@@ -11,10 +11,12 @@ namespace WebAsos.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IProductImageService _productImageService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IProductImageService productImageService)
         {
             _productService = productService;
+            _productImageService = productImageService;
         }
 
 
@@ -64,7 +66,7 @@ namespace WebAsos.Controllers
             return Ok(model);
         }
 
-        [HttpGet("GetProductById")]
+        [HttpPost("GetProductById")]
         public async Task<IActionResult> GetProductByIdAsync([FromBody] FindByIdViewModel Id)
         {
             var res = await _productService.GetProductByIdAsync(Id.Id);
@@ -76,7 +78,7 @@ namespace WebAsos.Controllers
             return BadRequest(res);
         }
 
-        [HttpGet("GetProductByCategoryId")]
+        [HttpPost("GetProductByCategoryId")]
         public async Task<IActionResult> GetProductByCategoryIdAsync([FromBody] FindByIdViewModel Id)
         {
             var res = await _productService.GetProductByCategoryId(Id.Id);

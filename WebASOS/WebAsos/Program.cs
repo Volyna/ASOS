@@ -13,6 +13,10 @@ using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.Validation.User;
 using WebAsos.interfaces.JwtTokenService;
+using WebAsos.interfaces.Repository.Classes;
+using WebAsos.interfaces.Repository.Interfaces;
+using WebAsos.interfaces.Services.Classes;
+using WebAsos.interfaces.Services.Interfaces;
 using WebAsos.interfaces.UserService;
 using WebAsos.Interfaces.Repository.Classes;
 using WebAsos.Interfaces.Repository.Interfaces;
@@ -53,14 +57,15 @@ builder.Services.AddTransient<EmailService>();
 builder.Services.AddTransient<RecaptchaService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterUserValidation>());
 
