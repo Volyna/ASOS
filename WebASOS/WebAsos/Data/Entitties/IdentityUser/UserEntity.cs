@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using WebAsos.Data.Entitties.Catalog;
 
 namespace WebAsos.Data.Entitties.IdentityUser
 {
@@ -18,6 +19,8 @@ namespace WebAsos.Data.Entitties.IdentityUser
         public bool? NewStuff { get; set; }
         public bool? YourExclusives { get; set; }
         public bool? AsosPartners { get; set; }
+
+        public AddressEntity Address { get; set; }
         public virtual ICollection<UserRoleEntity> UserRoles { get; set; }
     }
 }
