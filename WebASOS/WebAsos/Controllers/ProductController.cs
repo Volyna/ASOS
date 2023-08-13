@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAsos.Data.Entitties.DTO;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
@@ -125,5 +126,14 @@ namespace WebAsos.Controllers
             var url = $@"{Request.Scheme}://{Request.Host.Host}{port}/images/{fileName}";
             return Ok(url);
         }
+
+        [HttpPost]
+        [Route("toggleFavorite")]
+        public async Task<IActionResult> ToggleFavorite([FromBody] FindByIdViewModel Id)
+        {
+            var isFavorite = _productService.ToggleFavoriteStatus(Id.Id);
+            return Ok(new { IsFavorite = isFavorite });
+        }
     }
+    
 }
