@@ -6,6 +6,8 @@ using WebAsos.Models;
 using System.Data;
 using WebAsos.Interfaces.Repository.Interfaces;
 using WebAsos.Interfaces.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace WebAsos.Interfaces.Services.Classes
 {
@@ -103,7 +105,7 @@ namespace WebAsos.Interfaces.Services.Classes
 
             return new ServiceResponse
             {
-                Message = "GetProducts",
+                Message = "Get products",
                 IsSuccess = true,
                 Payload = list
             };
@@ -121,7 +123,7 @@ namespace WebAsos.Interfaces.Services.Classes
 
             return new ServiceResponse
             {
-                Message = "GetProduct",
+                Message = "Get product",
                 IsSuccess = true,
                 Payload = item
             };
@@ -147,9 +149,31 @@ namespace WebAsos.Interfaces.Services.Classes
 
             return new ServiceResponse
             {
-                Message = "GetProducts",
+                Message = "Get products",
                 IsSuccess = true,
                 Payload = list
+            };
+        }
+
+        public async Task<ServiceResponse> ToggleFavoriteStatus(int id)
+        {
+            var product =  await _productRepository.GetByIdAsync(id);
+            if (product == null)
+            {
+                return new ServiceResponse
+                {
+                    Message = "No product found",
+                    IsSuccess = false
+                };
+            }
+
+            product.IsFavorite = !product.IsFavorite;
+
+            return new ServiceResponse
+            {
+                Message = "Toggle favorite status",
+                IsSuccess = true,
+                Payload = product.IsFavorite
             };
         }
 

@@ -37,6 +37,8 @@ namespace WebAsos.Data.Entitties.Catalog
 
         public bool IsInTheStock { get; set; }
 
+        public bool IsFavorite { get; set; }
+
 
 
         //Foreign keys:
