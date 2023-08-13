@@ -17,5 +17,16 @@ namespace WebAsos.Interfaces.Repository.Classes
 
         public IQueryable<CategoryEntity> Categories() => GetAll();
 
+        public async Task<CategoryEntity> GetById(int id)
+        {
+            var result = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            return result;
+        }
+        public async Task<CategoryEntity> GetByName(string name)
+        {
+            var result = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
+            return result;
+        }
+
     }
 }
