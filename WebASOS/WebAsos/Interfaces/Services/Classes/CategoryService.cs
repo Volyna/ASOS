@@ -87,9 +87,24 @@ namespace WebAsos.Interfaces.Services.Classes
             };
         }
 
-        public Task<CategoryEntity> GetByIdAsync(int id)
+        public async Task<CategoryEntity> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var product = await _categoryRepository.GetById(id);
+                if (product != null)
+                {
+                    return product;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<ServiceResponse> UpdateAsync(CategoryUpdateViewModel model)
@@ -125,5 +140,6 @@ namespace WebAsos.Interfaces.Services.Classes
                 Payload = null
             };
         }
+
     }
 }
