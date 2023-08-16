@@ -16,7 +16,7 @@ const Header = () => {
       <div className="mainblock">
         <div className="first col-3">
           <div className="links">
-            <Link className="headerText" to="/">
+            <Link className="headerText" to="/customer-service">
               Customer Service
             </Link>
             <Link className="headerText" to="/">
@@ -39,7 +39,7 @@ const Header = () => {
             <Link className="headerText" to="/">
               Newsletter
             </Link>
-            <Link className="headerText" to="/help">
+            <Link className="headerText" to="/customer-care">
               FAQs
             </Link>
             <Link className="headerText" to="/">
@@ -48,13 +48,13 @@ const Header = () => {
           </div>
 
           <div className="userIcons">
-            <Link to="/">
+            <Link to="/account/contact-information">
               <img src={user} alt="" className="noneM" />
             </Link>
             <Link to="/basket-empty">
               <img src={cart} alt="" className="noneM" />
             </Link>
-            <Link to="/">
+            <Link to="/account/favourites">
               <img src={like} alt="" />
             </Link>
           </div>
@@ -63,5 +63,4 @@ const Header = () => {
     </>
   );
 };
-
 export default Header;

@@ -114,6 +114,67 @@ namespace WebAsos.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.AddressEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("HomeNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int?>("UserId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ZipCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("tblAddresses");
+                });
+
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -162,9 +223,6 @@ namespace WebAsos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Created_At")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
 
@@ -176,6 +234,9 @@ namespace WebAsos.Migrations
                         .HasColumnType("integer");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsFavorite")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsInTheStock")
@@ -415,6 +476,17 @@ namespace WebAsos.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.AddressEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.IdentityUser.UserEntity", "User")
+                        .WithOne("Address")
+                        .HasForeignKey("WebAsos.Data.Entitties.Catalog.AddressEntity", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
                 {
                     b.HasOne("WebAsos.Data.Entitties.Catalog.CategoryEntity", "Parent")
@@ -484,6 +556,9 @@ namespace WebAsos.Migrations
 
             modelBuilder.Entity("WebAsos.Data.Entitties.IdentityUser.UserEntity", b =>
                 {
+                    b.Navigation("Address")
+                        .IsRequired();
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

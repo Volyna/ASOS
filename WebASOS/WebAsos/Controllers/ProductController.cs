@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAsos.Data.Entitties.DTO;
-using WebAsos.Interfaces.Services;
+using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
 
 namespace WebAsos.Controllers
@@ -11,10 +12,12 @@ namespace WebAsos.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IProductImageService _productImageService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IProductImageService productImageService)
         {
             _productService = productService;
+            _productImageService = productImageService;
         }
 
 
@@ -64,7 +67,7 @@ namespace WebAsos.Controllers
             return Ok(model);
         }
 
-        [HttpGet("GetProductById")]
+        [HttpPost("GetProductById")]
         public async Task<IActionResult> GetProductByIdAsync([FromBody] FindByIdViewModel Id)
         {
             var res = await _productService.GetProductByIdAsync(Id.Id);
@@ -76,7 +79,7 @@ namespace WebAsos.Controllers
             return BadRequest(res);
         }
 
-        [HttpGet("GetProductByCategoryId")]
+        [HttpPost("GetProductByCategoryId")]
         public async Task<IActionResult> GetProductByCategoryIdAsync([FromBody] FindByIdViewModel Id)
         {
             var res = await _productService.GetProductByCategoryId(Id.Id);
@@ -123,5 +126,14 @@ namespace WebAsos.Controllers
             var url = $@"{Request.Scheme}://{Request.Host.Host}{port}/images/{fileName}";
             return Ok(url);
         }
+
+        [HttpPost]
+        [Route("toggleFavorite")]
+        public async Task<IActionResult> ToggleFavorite([FromBody] FindByIdViewModel Id)
+        {
+            var isFavorite = _productService.ToggleFavoriteStatus(Id.Id);
+            return Ok(new { IsFavorite = isFavorite });
+        }
     }
+    
 }

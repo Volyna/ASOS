@@ -1,5 +1,5 @@
 import "./Basket.css";
-import Header from "../../Header_full/Header_full";
+import Header from "../../NavBar/header";
 import Footer from "../../Footer/FooterV";
 import Clothes1 from "../../../images/firstProduct.png";
 import Clothes2 from "../../../images/secondProduct.png";
@@ -7,16 +7,20 @@ import Clothes3 from "../../../images/thirdProduct.png";
 import Delete from "../../../images/delete.png";
 import Minus from "../../../images/minus.png";
 import Plus from "../../../images/plus.png";
+import Menu from "../../NavBar/menu";
+import Arrow_down from "../../../images/arrow-down.png";
+import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 
 const Basket = () => {
   return (
     <>
-      <Header />
+      <div className="staticnav">
+        <Header />
+        <Menu />
+      </div>
       <div className="container-fluid">
-        <div className="mainLink">
-          <p className="focusCom">focus.com|</p>
-          <p className="focusCom basket"> Basket</p>
-        </div>
+        <BreadCrumbs />
+
         <div className="mainInformation">
           {/* <div className="orderContent col-8">
             <img width={119} height={175} src={Clothes1} alt="" />
@@ -43,6 +47,9 @@ const Basket = () => {
                 <div className="row">
                   <p className="col-2">Color: Black</p>
                   <p className="col-2">Size: M</p>
+                  <div className="col-1">
+                    <img height={20} width={20} src={Arrow_down} alt="" />
+                  </div>
                 </div>
                 <div className="row">
                   <p className="newPrice col-2">55.00$</p>
@@ -83,6 +90,9 @@ const Basket = () => {
                 <div className="row">
                   <p className="col-2">Color: Blue</p>
                   <p className="col-2">Size: M</p>
+                  <div className="col-1">
+                    <img height={20} width={20} src={Arrow_down} alt="" />
+                  </div>
                 </div>
                 <div className="row">
                   <p className="price col-2">39.00$</p>
@@ -122,6 +132,9 @@ const Basket = () => {
                 <div className="row">
                   <p className="col-3">Color: Dark grey</p>
                   <p className="col-2">Size: M</p>
+                  <div className="col-1">
+                    <img height={20} width={20} src={Arrow_down} alt="" />
+                  </div>
                 </div>
                 <div className="row">
                   <p className="newPrice col-2">15.00$</p>

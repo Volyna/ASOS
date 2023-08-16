@@ -12,6 +12,7 @@
         public string Brand { get; set; }
         public int Quantity { get; set; }
         public bool IsInTheStock { get; set; }
+        public bool IsFavorite { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
     }
@@ -27,6 +28,7 @@
         public string Brand { get; set; }
         public int Quantity { get; set; }
         public bool IsInTheStock { get; set; }
+        public bool IsFavorite { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
     }
@@ -42,6 +44,7 @@
         public string Brand { get; set; }
         public int Quantity { get; set; }
         public bool IsInTheStock { get; set; }
+        public bool IsFavorite { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
     }

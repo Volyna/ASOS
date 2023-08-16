@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebAsos.Interfaces.Services;
+using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
 
 namespace WebAsos.Controllers
@@ -16,7 +16,7 @@ namespace WebAsos.Controllers
             _productImageService = productImageService;
         }
 
-        [HttpGet("GetImageById")]
+        [HttpPost("GetImageById")]
         public async Task<IActionResult> GetImageByIdAsync(FindByIdViewModel model)
         {
             var res = await _productImageService.GetMainImageByIdAsync(model.Id);

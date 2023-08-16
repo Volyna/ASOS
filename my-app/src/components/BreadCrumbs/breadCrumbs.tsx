@@ -1,5 +1,5 @@
 import { Key } from "@mui/icons-material"
-import { Link, useLocation } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 
 
 
@@ -14,15 +14,12 @@ export default function BreadCrumbs(){
     const crumbsLink = crumbs.map(crumb => {
         currentLink += `/${crumb}`
 
-            if(crumb === crumbs[crumbs.length-1]){
-                return(
-                <Link to={currentLink} className="last crumbComp "> {" " + crumb.charAt(0).toUpperCase()+crumb.slice(1)}</Link>
-                ) 
-            }else{
-                return(
-                    <Link to={currentLink} className="crumbComp "> {" " + crumb.charAt(0).toUpperCase()+crumb.slice(1)} |</Link>
-                    ) 
-            }      
+            return(
+                    <NavLink className={({isActive}) => {return isActive ? 'last crumbComp' : 'crumbComp'}} to={currentLink}> 
+                        {" " + crumb.charAt(0).toUpperCase()+crumb.slice(1)}
+                    </NavLink>
+            )
+      
     })
 
 

@@ -25,6 +25,21 @@ import Men from "./components/Pages/Man and Woman Page/MenPage";
 import BreadCrumbs from "./components/BreadCrumbs/breadCrumbs";
 import Women from "./components/Pages/Man and Woman Page/WomanPage";
 
+import ContactInf from "./components/Pages/Account/ContactInf/ContactInf";
+
+import Payment from "./components/Pages/Account/Payment/Payment";
+import PaymentEmpty from "./components/Pages/Account/PaymentEmpty/PaymentEmpty";
+
+import Returns from "./components/Pages/Account/Returns/Returns";
+import ReturnsEmpty from "./components/Pages/Account/ReturnsEmpty/ReturnsEmpty";
+
+import Favourites from "./components/Pages/Account/Favourites/Favourites";
+import CustomerService from "./components/Pages/CustomerService/CustomerService";
+import Checkout from "./components/Pages/Checkout/Checkout";
+
+import Error from "./components/Pages/Error/error";
+import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { pathname } = useLocation();
@@ -40,13 +55,31 @@ function App() {
         <Route path="login" element={<LoginePage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="admin" element={<AdminLayout />} />
-        <Route path="help" element={<FAQs />} />
+
+        <Route path="customer-care" element={<FAQs />} />
+        <Route path="customer-service" element={<CustomerService />} />
 
         <Route path="basket-empty" element={<BasketEmpty />} />
         <Route path="basket" element={<Basket />} />
 
+        <Route path="/account/contact-information" element={<ContactInf />} />
+
+        <Route path="/account/shopping-history" element={<Payment />} />
+        <Route
+          path="/account/shopping-history-empty"
+          element={<PaymentEmpty />}
+        />
+
+        <Route path="/account/returns" element={<Returns />} />
+        <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
+
+        <Route path="/account/favourites" element={<Favourites />} />
+        <Route path="/checkout" element={<Checkout />} />
+
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
+        <Route path="/ViewAll" element={<ProductsPage/>}/>
+        <Route path="*" element={<Error />} />
       </Routes>
       {/* <Route path="/" element={<DefaultLayout />}>
         <Routes>

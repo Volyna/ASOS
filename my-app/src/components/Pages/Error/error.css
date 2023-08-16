@@ -1,0 +1,32 @@
+.gif{
+    margin-top: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gif img{
+    width: 40%;
+    display: flex;
+}
+
+.error_text{
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Quicksand;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 25.5px;
+}
+
+.error{
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 100%;
+    text-align: center;
+}

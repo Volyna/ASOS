@@ -9,6 +9,7 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.60.0" />
+    <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="7.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.5" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -19,6 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MimeKit" Version="4.1.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -50,9 +52,6 @@
     <None Remove="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Constants\" />
-    <Folder Include="Constants\User\" />
-    <Folder Include="Services\" />
     <Folder Include="interfaces\JwtTokenService\" />
     <Folder Include="interfaces\JwtTokenInterfaces\" />
     <Folder Include="Data\Validation\User\" />

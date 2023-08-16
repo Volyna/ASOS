@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Globalization;
+using System.Net;
+using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json.Linq;
 using WebAsos.Constants.User;
+using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
@@ -15,21 +20,40 @@ namespace WebAsos.Services
     public class UserService : IUserService
     {
         private readonly UserManager<UserEntity> _userManager;
+        private IConfiguration _configuration;
         private readonly IJwtTokenService _jwtTokenService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        public UserService(UserManager<UserEntity> userManager, IJwtTokenService jwtTokenService, IMapper mapper, IUserRepository userRepository)
+        private EmailService _emailService;
+        private readonly RecaptchaService _recaptchaService;
+        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IHttpContextAccessor httpContextAccessor, IMapper mapper, IUserRepository userRepository, EmailService emailService, RecaptchaService recaptchaService)
         {
             _userRepository = userRepository;
+            _configuration = configuration;
             _mapper = mapper;
             _jwtTokenService = jwtTokenService;
+            _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
+            _emailService = emailService;
+            _recaptchaService = recaptchaService;
         }
 
         public async Task<ServiceResponse> LoginUserAsync(LoginViewModel model)
         {
             try
             {
+                var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
+                float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
+                if (!recaptchaResult.Success)
+                {
+                    return new ServiceResponse()
+                    {
+                        IsSuccess = false,
+                        Message = "Recaptcha failed"
+                    };
+                }
+
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user == null)
                 {
@@ -52,7 +76,7 @@ namespace WebAsos.Services
             catch (Exception ex)
             {
 
-                return new ServiceResponse() { Payload =  ex.Message  };
+                return new ServiceResponse() { Payload =  ex.Message.ToString()  };
             }
             
         }
@@ -61,6 +85,18 @@ namespace WebAsos.Services
         {
             try
             {
+                var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
+                float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
+
+                if (!recaptchaResult.Success || recaptchaResult.Score < minScore)
+                {
+                    return new ServiceResponse()
+                    {
+                        IsSuccess = false,
+                        Message = "Recaptcha failed"
+                    };
+                }
+
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user != null)
                 {
@@ -75,9 +111,22 @@ namespace WebAsos.Services
                     var resultRole = await _userRepository.AddToRoleAsync(newUser, Roles.User);
                     if (resultRole.Succeeded)
                     {
+                        var token = await _userRepository.GenerateEmailConfirmationTokenAsync(newUser);
 
-                        var token = await _jwtTokenService.CreateToken(newUser);
-                        return new ServiceResponse() { Payload = token };
+                        var encodedEmailToken = Encoding.UTF8.GetBytes(token);
+                        var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
+
+                        string url = $"{_configuration["FrontEndUrl"]}/confirmemail?userid={newUser.Id}&token={validEmailToken}";
+                        await _emailService.SendEmailAsync(Emails.ConfirmAccountByEmail(user.Email, url));
+
+
+                        var aceessToken = await _jwtTokenService.CreateToken(newUser);
+
+                        return new ServiceResponse() {
+                            Message = "User successfully created.",
+                            Payload = aceessToken,
+                            IsSuccess = true
+                        };
 
                     }
                     else
@@ -98,13 +147,8 @@ namespace WebAsos.Services
             catch (Exception ex)
             {
 
-                return new ServiceResponse() { Payload = ex.Message };
+                return new ServiceResponse() { Payload = ex.Message.ToString() };
             }
-
-           
-
-
-
         }
 
         public async Task<ServiceResponse> GoogleExternalLoginAsync(ExternalLoginRequest request)
@@ -153,6 +197,178 @@ namespace WebAsos.Services
             {
                 return new ServiceResponse { IsSuccess = false, Message = ex.Message.ToString() };
             }
+        }
+        public async Task<ServiceResponse> ConfirmEmailAsync(string userId, string token)
+        {
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+                return new ServiceResponse
+                {
+                    IsSuccess = false,
+                    Message = "User not found"
+                };
+
+            var decodedToken = WebEncoders.Base64UrlDecode(token);
+            string normalToken = Encoding.UTF8.GetString(decodedToken);
+
+            var result = await _userRepository.ConfirmEmailAsync(user, normalToken);
+
+            if (result.Succeeded)
+            {
+                return new ServiceResponse
+                {
+                    Message = "Email confirmed successfully!",
+                    IsSuccess = true,
+                };
+            }
+            else
+            {
+                return new ServiceResponse
+                {
+                    IsSuccess = false,
+                    Message = "Email didn't confirm",
+                    Errors = result.Errors.Select(e => e.Description)
+                };
+            }
+        }
+
+        public async Task<SimpleResponseDTO> ResetPasswordAsync(string? email = null)
+        {
+            
+            UserEntity user = null;
+            if (email == null)
+            {
+                user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            }
+            else
+            {
+                user = await _userManager.FindByEmailAsync(email);
+            }
+
+            if (user == null)
+            {
+                return new SimpleResponseDTO() {
+                    IsSuccess = true,
+                    Message = "The password has been changed"
+                };
+            }
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedEmailToken = Encoding.UTF8.GetBytes(token);
+            var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
+            string url = $"{_configuration["FrontEndUrl"]}/resetPassword/?userId={user.Id}&token={validEmailToken}";
+            await _emailService.SendEmailAsync(Emails.ResetPassword(user.Email, url));
+
+
+            return new SimpleResponseDTO()
+            {
+                IsSuccess = true,
+                Message = "The password has been changed"
+            };
+        }
+
+        public async Task<ChangePasswordResponseDTO> ChangePasswordAsync(ChangePasswordRequestDTO model)
+        {
+            UserEntity user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return new ChangePasswordResponseDTO() { 
+                    IsSuccess = true 
+                };
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.ConfirmPassword);
+
+            if (result.Succeeded)
+            {
+                await _emailService.SendEmailAsync(Emails.PasswordChanged(user.Email));
+                string accessToken = await _jwtTokenService.CreateToken(user);
+                return new ChangePasswordResponseDTO()
+                {
+                    IsSuccess = true,
+                    AccessToken = accessToken
+                };
+            }
+
+            return new ChangePasswordResponseDTO()
+            {
+                IsSuccess = false,
+                Errors = result.Errors
+            };
+        }
+
+        public async Task<ServiceResponse> LockUserAsync(string userId, int days)
+        {
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(userId);
+            if (userEntity == null)
+            {
+                return new ServiceResponse(){ 
+                    Message = "No user found",
+                    IsSuccess = false,
+                } ;
+            }
+            var result = await _userRepository.LockUserAsync(userEntity, days);
+
+            return new ServiceResponse()
+            {
+                Message = "The user is blocked",
+                IsSuccess = true
+            };
+        }
+
+        public async Task<ServiceResponse> UnLockUserAsync(string userId)
+        {
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(userId);
+            if (userEntity == null)
+            {
+                return new ServiceResponse()
+                {
+                    Message = "No user found",
+                    IsSuccess = false
+                };
+            }
+
+            var result = await _userRepository.UnLockUserAsync(userEntity);
+
+            return new ServiceResponse()
+            {
+                Message = "The user is unlocked",
+                IsSuccess = true
+            };
+        }
+
+        public async Task<ServiceResponse> DeleteUserAsync(string? userId = null)
+        {
+            if (userId == null)
+            {
+                userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
+            }
+
+            UserEntity userEntity = await _userRepository.GetUserByIdAsync(userId);
+            if (userEntity == null)
+            {
+                return new ServiceResponse()
+                {
+                    Message = "No user found",
+                    IsSuccess = false
+                };
+            }
+            var result = await _userRepository.DeleteUserAsync(userEntity);
+
+            if (result.Succeeded)
+            {
+                return new ServiceResponse()
+                {
+                    Message = "The user is deleted",
+                    IsSuccess = true
+                };
+            }
+
+            return new ServiceResponse()
+            {
+                IsSuccess = false,
+                Errors = result.Errors.Select(e => e.Description)
+            };
         }
     }
 }
