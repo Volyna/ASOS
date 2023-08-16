@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebAsos.Data.ViewModels.Category;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.Services;
+using WebAsos.Interfaces.Services.Interfaces;
 
 namespace WebAsos.Controllers
 {
@@ -39,14 +40,20 @@ namespace WebAsos.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
-        [HttpDelete("getById")]
+        [HttpGet("getById")]
         public async Task<IActionResult> GetByIdCategoryAsync(int id)
         {
 
             var result = await _categoryService.GetByIdAsync(id);
-            if (result.IsSuccess == true)
+            if (result != null)
                 return Ok(result);
             return BadRequest(result);
+        }
+        [HttpGet("getAllCategories")]
+        public async Task<IActionResult> GetAllCategorriesAsync()
+        {
+            var result = await _categoryService.GetAllAsync();
+            return Ok(result);
         }
     }
 }

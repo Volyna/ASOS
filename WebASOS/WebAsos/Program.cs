@@ -23,14 +23,11 @@ using WebAsos.interfaces.UserService;
 using WebAsos.Interfaces.Repository.Classes;
 using WebAsos.Interfaces.Repository.Interfaces;
 using WebAsos.Interfaces.Services.Classes;
-using WebAsos.Interfaces.Services.Interfaces;
-using WebAsos.Interfaces.Repository;
-using WebAsos.Interfaces.Services;
-using WebAsos.Interfaces.CategoryInterfaces;
-using WebAsos.Repositories.Category;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
 using WebAsos.Settings;
+using WebAsos.Interfaces.Services.Interfaces;
+using WebAsos.Interfaces.CategoryInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -65,7 +62,6 @@ builder.Services.AddSingleton(googleAuthSettings);
 builder.Services.AddTransient<EmailService>();
 builder.Services.AddTransient<RecaptchaService>();
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();

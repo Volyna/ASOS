@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+
+  <ItemGroup>
+    <Compile Remove="interfaces\JwtTokenService\**" />
+    <Content Remove="interfaces\JwtTokenService\**" />
+    <EmbeddedResource Remove="interfaces\JwtTokenService\**" />
+    <None Remove="interfaces\JwtTokenService\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.60.0" />
     <PackageReference Include="MailKit" Version="4.1.0" />
@@ -52,7 +59,6 @@
     <None Remove="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="interfaces\JwtTokenService\" />
     <Folder Include="interfaces\JwtTokenInterfaces\" />
     <Folder Include="Data\Validation\User\" />
     <Folder Include="Data\AutoMapper\User\" />
