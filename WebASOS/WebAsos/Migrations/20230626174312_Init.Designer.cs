@@ -12,8 +12,8 @@ using WebAsos.Data;
 namespace WebAsos.Migrations
 {
     [DbContext(typeof(AppEFContext))]
-    [Migration("20230529170048_Add tblCategires")]
-    partial class AddtblCategires
+    [Migration("20230626174312_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,7 +126,7 @@ namespace WebAsos.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -140,12 +140,7 @@ namespace WebAsos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
 
                     b.ToTable("Categories");
                 });
@@ -190,9 +185,18 @@ namespace WebAsos.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
+                    b.Property<bool?>("AsosPartners")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("DataBirth")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool?>("DiscountsAndSales")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -207,7 +211,6 @@ namespace WebAsos.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -221,6 +224,12 @@ namespace WebAsos.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("MostlyInterested")
+                        .HasColumnType("text");
+
+                    b.Property<bool?>("NewStuff")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -248,6 +257,9 @@ namespace WebAsos.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<bool?>("YourExclusives")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
@@ -312,15 +324,6 @@ namespace WebAsos.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
-                {
-                    b.HasOne("WebAsos.Data.Entitties.Catalog.CategoryEntity", "Parent")
-                        .WithMany("Childrens")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
             modelBuilder.Entity("WebAsos.Data.Entitties.IdentityUser.UserRoleEntity", b =>
                 {
                     b.HasOne("WebAsos.Data.Entitties.IdentityUser.RoleEntity", "Role")
@@ -338,11 +341,6 @@ namespace WebAsos.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
-                {
-                    b.Navigation("Childrens");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.IdentityUser.RoleEntity", b =>

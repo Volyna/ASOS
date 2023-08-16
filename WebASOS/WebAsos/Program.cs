@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebAsos.Data;
+using WebAsos.Data.AutoMapper.Category;
 using WebAsos.Data.AutoMapper.User;
 using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.DTO;
@@ -17,21 +18,26 @@ using WebAsos.interfaces.Repository.Classes;
 using WebAsos.interfaces.Repository.Interfaces;
 using WebAsos.interfaces.Services.Classes;
 using WebAsos.interfaces.Services.Interfaces;
+using WebAsos.interfaces.Services;
 using WebAsos.interfaces.UserService;
 using WebAsos.Interfaces.Repository.Classes;
 using WebAsos.Interfaces.Repository.Interfaces;
 using WebAsos.Interfaces.Services.Classes;
-using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Repositories.User;
 using WebAsos.Services;
 using WebAsos.Settings;
+using WebAsos.Interfaces.Services.Interfaces;
+using WebAsos.Interfaces.CategoryInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperUserProfile));
+builder.Services.AddAutoMapper(typeof(AutoMapperCategory));
 
 
 // Add services to the container.
@@ -56,7 +62,6 @@ builder.Services.AddSingleton(googleAuthSettings);
 builder.Services.AddTransient<EmailService>();
 builder.Services.AddTransient<RecaptchaService>();
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
