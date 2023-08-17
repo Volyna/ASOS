@@ -42,6 +42,12 @@ namespace WebAsos.Data.AutoMapper.User
             CreateMap<AddressEntity, AddressDTO>();
             CreateMap<AddressDTO, AddressEntity>();
 
+            CreateMap<CreditCardEntity, CreditCardWithIdDTO>();
+            CreateMap<CreditCardWithIdDTO, CreditCardEntity>();
+
+            CreateMap<CreditCardEntity, CreditCardDTO>();
+            CreateMap<CreditCardDTO, CreditCardEntity>();
+
 
         }
 	}
