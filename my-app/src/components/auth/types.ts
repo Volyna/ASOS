@@ -28,9 +28,7 @@ export interface IRegisterUser {
     password: string;
     firstName:string;
     lastName:string;
-    dayBirh:number;
-    monthBirh:number;
-    yearBirh:number;
+    dataBirdth:Date;
     mostlyInterested:string;
     discountsAndSales:boolean;
     newStuff:boolean;

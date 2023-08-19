@@ -125,11 +125,11 @@ function LoginePage() {
               </li>
               <li className="social-login">
                 <a className="login_with" href="">
-                  <img src={icon_Google} alt="Login with Google" />
+                  <img src={icon_Google} alt="Login with Google"></img>
                   {/* <GoogleLogin
-                          onSuccess={responseGoogle}
-                          onError={errorGoogle}
-                          /> */}
+                    onSuccess={responseGoogle}
+                    onError={errorGoogle}
+                  ></GoogleLogin> */}
                 </a>
               </li>
               <li className="social-login">

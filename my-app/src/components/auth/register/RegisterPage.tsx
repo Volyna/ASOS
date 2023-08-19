@@ -20,9 +20,7 @@ function RegisterPage() {
     password: "",
     firstName: "",
     lastName: "",
-    dayBirh: 0,
-    monthBirh: 0,
-    yearBirh: 0,
+    dataBirdth: new Date("22-07-2001"),
     mostlyInterested: "womenswear",
     discountsAndSales: false,
     newStuff: false,
@@ -55,7 +53,8 @@ function RegisterPage() {
   }
 
   const onSubmitFormik = async (values: IRegisterUser) => {
-    RegisterUser(values);
+    console.log(values);
+    // RegisterUser(values);
   };
 
   const formik = useFormik({
@@ -207,6 +206,7 @@ function RegisterPage() {
                       Must contain 8 or more characters
                     </span>
                   </div>
+
                   <div className="field">
                     <label className="label">Date of birth</label>
                     <div className="dataBirdth">
@@ -215,23 +215,12 @@ function RegisterPage() {
                         type="date"
                         className="input date"
                         id="date"
-                        autoComplete="true"
                       />
-                      {errors.dayBirh && touched.dayBirh && (
-                        <p className="mt-2" style={{ color: "red" }}>
-                          <span className="font-medium">{errors.dayBirh}</span>
-                        </p>
-                      )}
-                      {errors.monthBirh && touched.monthBirh && (
+                      {errors.dataBirdth && touched.dataBirdth && (
                         <p className="mt-2" style={{ color: "red" }}>
                           <span className="font-medium">
-                            {errors.monthBirh}
+                            Date is't correct!!!
                           </span>
-                        </p>
-                      )}
-                      {errors.yearBirh && touched.yearBirh && (
-                        <p className="mt-2" style={{ color: "red" }}>
-                          <span className="font-medium">{errors.yearBirh}</span>
                         </p>
                       )}
                     </div>

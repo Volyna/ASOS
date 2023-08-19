@@ -15,9 +15,10 @@ export const loginUserSchema = yup.object({
 });
 export const registerUserSchema = yup.object({
   mostlyInterested:yup.string().oneOf(["womenswear","menswear"]),
-  dayBirh:yup.string().notOneOf(["0","DD"],"Enter your day of birth").required("Enter your day of birth"),
-  monthBirh:yup.string().notOneOf(["0","Month"],"Enter your month date of birth").required("Enter your month of birth"),
-  yearBirh:yup.string().notOneOf(["0","YYY"],"Enter your year date of birth").required("Enter your year of birth"),
+  // dayBirh:yup.string().notOneOf(["0","DD"],"Enter your day of birth").required("Enter your day of birth"),
+  // monthBirh:yup.string().notOneOf(["0","Month"],"Enter your month date of birth").required("Enter your month of birth"),
+  // yearBirh:yup.string().notOneOf(["0","YYY"],"Enter your year date of birth").required("Enter your year of birth"),
+  dataBirdth: yup.date().nullable(),
   firstName: yup.string().required("The field must not be empty"),
   lastName: yup.string().required("The field must not be empty"),
   email: yup.string().required("The field must not be empty").email("Email fail! Please type in your correct email address"),
