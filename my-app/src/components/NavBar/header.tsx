@@ -7,10 +7,11 @@ import user from "../../images/user.svg";
 import cart from "../../images/cart.svg";
 import like from "../../images/like.svg";
 import search from "../../images/search.svg";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const { isAuth } = useTypedSelector((store) => store.UserReducer);
   return (
     <>
       <div className="mainblock">
@@ -48,9 +49,16 @@ const Header = () => {
           </div>
 
           <div className="userIcons">
-            <Link to="/account/contact-information">
-              <img src={user} alt="" className="noneM" />
-            </Link>
+            {isAuth == true ? (
+              <Link to="/account/contact-information">
+                <img src={user} alt="" className="noneM" />
+              </Link>
+            ) : (
+              <Link to="/register">
+                <img src={user} alt="" className="noneM" />
+              </Link>
+            )}
+
             <Link to="/basket-empty">
               <img src={cart} alt="" className="noneM" />
             </Link>

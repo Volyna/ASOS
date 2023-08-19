@@ -3,12 +3,13 @@ import Header_full from "../../../Header_full/Header_full";
 import Footer from "../../../Footer/FooterV";
 import { Link } from "react-router-dom";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 
 const ContactInf = () => {
   return (
     <>
       <Header_full />
-      <BreadCrumbs/>
+      <BreadCrumbs />
       <div className="container-fluid">
         <div className="container">
           <div className="menu_item">
