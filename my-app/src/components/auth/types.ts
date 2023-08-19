@@ -8,11 +8,16 @@ export interface IUser {
     roles: string;
 }
 export interface IBeforeLoginUser {
-    email: string;
+    RecaptchaToken:string,
+    remember:boolean,
+    email:string,
+    password:string
 }
 export interface ILoginUser {
     email: string;
     password: string;
+    IsRemember:boolean;
+    RecaptchaToken:string;
 }
 export interface ILoginUserByGoogle {
     provider: string;

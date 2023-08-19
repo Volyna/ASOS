@@ -6,7 +6,7 @@ import icon_facebook from "../../../images/icon_facebook.png";
 import "./loginePageStyle.css";
 import { useFormik } from "formik";
 import { loginBeforeUserSchema } from "../validation";
-import { IBeforeLoginUser, ILoginUserByGoogle } from "../types";
+import { IBeforeLoginUser, ILoginUser, ILoginUserByGoogle } from "../types";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Footer from "../../Footer/FooterV";
@@ -14,24 +14,46 @@ import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 import { colors } from "@mui/material";
 import styled from "@emotion/styled";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 function LoginePage() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
   let navigator = useNavigate();
-  const { IsUserExist, SetEmail, LoginUserByGoogle } = useActions();
+  const { IsUserExist, SetEmail, LoginUserByGoogle, LoginUser } = useActions();
+
   const onSubmitFormik = async (values: IBeforeLoginUser) => {
+    if (!executeRecaptcha) return;
+    values.RecaptchaToken = await executeRecaptcha();
+    console.log("values IBeforeLoginUser: ", values);
     let resultExistUser = await IsUserExist(values);
     let isUserExits =
       resultExistUser.toString().toLowerCase() == "true" ? true : false;
     if (isUserExits == true) {
-      SetEmail(values.email);
-      navigator("/login");
+      let userData: ILoginUser = {
+        email: values.email,
+        password: values.password,
+        RecaptchaToken: values.RecaptchaToken,
+        IsRemember: values.remember,
+      };
+      console.log("Login userData:", userData);
+      LoginUser(userData);
     } else {
-      SetEmail(values.email);
-      navigator("/register");
+      console.log("Register");
+      toast.error(
+        "You have entered an incorrect password.\n Check your password and try again.",
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
+      );
     }
   };
 
-  const initValues: IBeforeLoginUser = { email: email.trim() };
+  const initValues: IBeforeLoginUser = {
+    RecaptchaToken: "",
+    remember: false,
+    password: "",
+    email: "",
+  };
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
@@ -57,7 +79,7 @@ function LoginePage() {
     formik;
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-flui">
         <div className="content">
           <header className="header">
             <div className="asosLogo">
@@ -129,7 +151,6 @@ function LoginePage() {
                     <label className="label">Email</label>
                     <input
                       onChange={handleChange}
-                      value={values.email}
                       type="email"
                       className="input"
                       id="email"
@@ -141,7 +162,6 @@ function LoginePage() {
                         <span className="font-medium">{errors.email}</span>
                       </p>
                     )}
-
                     <label className="label">Password</label>
                     <input
                       onChange={handleChange}
@@ -152,13 +172,18 @@ function LoginePage() {
                       minLength={8}
                       required
                       autoComplete="true"
-                    />
-
+                    />{" "}
+                    {errors.password && (
+                      <p className="mt-2" style={{ color: "red" }}>
+                        <span className="font-medium">{errors.password}</span>
+                      </p>
+                    )}
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="remember"
                       ></input>
                       <p className="remember_me">Remember me</p>
                       <a href="" className="forgot">

@@ -42,9 +42,18 @@ export const LoginUser = (user: ILoginUser) => {
       dispatch({ type: UserActionTypes.START_REQUESTS_USER });
       const data = await login(user);
       const { response } = data;
-      console.log("response", response.data.payload);
+      console.log("response LoginUser:", response.data.payload);
+      if (response.data.payload === "Password incorrect !") {
+        toast.error(
+          "You have entered an incorrect password.\n Check your password and try again.",
+          {
+            position: toast.POSITION.TOP_RIGHT,
+          }
+        );
+      }
       AuthUserToken(response.data.payload, dispatch);
     } catch (e) {
+      console.log("sad");
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
       });
