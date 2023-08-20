@@ -28,10 +28,11 @@ export interface IRegisterUser {
     password: string;
     firstName:string;
     lastName:string;
-    dataBirdth:Date;
+    dataBirdth:Date | null;
     mostlyInterested:string;
     discountsAndSales:boolean;
     newStuff:boolean;
     yourExclusives:boolean;
     asosPartners:boolean;
+    RecaptchaToken:string;
 }

@@ -11,8 +11,10 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import Footer from "../../Footer/FooterV";
 import { date } from "yup";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 function RegisterPage() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
   const { RegisterUser } = useActions();
   const initValues: IRegisterUser = {
@@ -20,41 +22,45 @@ function RegisterPage() {
     password: "",
     firstName: "",
     lastName: "",
-    dataBirdth: new Date("22-07-2001"),
+    dataBirdth: null,
     mostlyInterested: "womenswear",
     discountsAndSales: false,
     newStuff: false,
     yourExclusives: false,
     asosPartners: false,
+    RecaptchaToken: "",
   };
-  function SubscribeSubscriptions(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    var checkedBoxes = document.getElementsByClassName("checkbox");
-    if (e.currentTarget.textContent?.trim() == "SELECT ALL") {
-      e.currentTarget.textContent = "CLEAR";
-      for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
-        (checkedBoxes[i] as HTMLInputElement).checked = true;
-      }
-      formik.values.discountsAndSales = true;
-      formik.values.newStuff = true;
-      formik.values.yourExclusives = true;
-      formik.values.asosPartners = true;
-    } else {
-      e.currentTarget.textContent = "SELECT ALL";
-      for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
-        (checkedBoxes[i] as HTMLInputElement).checked = false;
-      }
-      formik.values.discountsAndSales = false;
-      formik.values.newStuff = false;
-      formik.values.yourExclusives = false;
-      formik.values.asosPartners = false;
-    }
-  }
+  // function SubscribeSubscriptions(
+  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) {
+  //   var checkedBoxes = document.getElementsByClassName("checkbox");
+  //   if (e.currentTarget.textContent?.trim() == "SELECT ALL") {
+  //     e.currentTarget.textContent = "CLEAR";
+  //     for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
+  //       (checkedBoxes[i] as HTMLInputElement).checked = true;
+  //     }
+  //     formik.values.discountsAndSales = true;
+  //     formik.values.newStuff = true;
+  //     formik.values.yourExclusives = true;
+  //     formik.values.asosPartners = true;
+  //   } else {
+  //     e.currentTarget.textContent = "SELECT ALL";
+  //     for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
+  //       (checkedBoxes[i] as HTMLInputElement).checked = false;
+  //     }
+  //     formik.values.discountsAndSales = false;
+  //     formik.values.newStuff = false;
+  //     formik.values.yourExclusives = false;
+  //     formik.values.asosPartners = false;
+  //   }
+  // }
 
   const onSubmitFormik = async (values: IRegisterUser) => {
     console.log(values);
-    // RegisterUser(values);
+    if (!executeRecaptcha) return;
+    values.RecaptchaToken = await executeRecaptcha();
+
+    RegisterUser(values);
   };
 
   const formik = useFormik({
@@ -149,7 +155,7 @@ function RegisterPage() {
                       placeholder="Enter your email"
                       autoComplete="true"
                     />
-                    {errors.email && (
+                    {errors.email && touched.email && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.email}</span>
                       </p>
@@ -164,7 +170,7 @@ function RegisterPage() {
                       onChange={handleChange}
                       value={values.firstName}
                     />
-                    {errors.firstName && (
+                    {errors.firstName && touched.firstName && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.firstName}</span>
                       </p>
@@ -214,12 +220,12 @@ function RegisterPage() {
                         onChange={handleChange}
                         type="date"
                         className="input date"
-                        id="date"
+                        id="dataBirdth"
                       />
                       {errors.dataBirdth && touched.dataBirdth && (
                         <p className="mt-2" style={{ color: "red" }}>
                           <span className="font-medium">
-                            Date is't correct!!!
+                            {errors.dataBirdth}
                           </span>
                         </p>
                       )}
@@ -234,44 +240,48 @@ function RegisterPage() {
 
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="discountsAndSales"
                       ></input>
                       <p className="remember_me">Discount and sales</p>
                     </div>
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="newStuff"
                       ></input>
                       <p className="remember_me">New arrivals</p>
                     </div>
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="yourExclusives"
                       ></input>
                       <p className="remember_me">Your exclusives</p>
                     </div>
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="asosPartners"
                       ></input>
                       <p className="remember_me">Our partners</p>
                     </div>
-                    <div className="addition">
+                    {/* <div className="addition">
                       <input
                         className="checkbox"
                         type="checkbox"
                         id="checkbox"
                       ></input>
                       <p className="remember_me">No emails</p>
-                    </div>
+                    </div> */}
 
                     <div className="field">
                       <label className="label interested">
@@ -279,17 +289,45 @@ function RegisterPage() {
                       </label>
                       <div className="addition">
                         <input
+                          name="womenswear"
+                          onChange={(e) => {
+                            setFieldValue(
+                              "mostlyInterested",
+                              "womenswear",
+                              false
+                            );
+                            var checkedBoxes = document.getElementById(
+                              "menswear"
+                            ) as HTMLInputElement;
+                            checkedBoxes.checked = false;
+                          }}
+                          defaultChecked={true}
                           className="checkbox"
                           type="checkbox"
-                          id="checkbox"
+                          id="womenswear"
                         ></input>
                         <p className="remember_me">Womenswear</p>
                       </div>
                       <div className="addition">
                         <input
+                          name="menswear"
+                          onChange={(e) => {
+                            setFieldValue(
+                              "mostlyInterested",
+                              "menswear",
+                              false
+                            );
+                            var checkedBoxes = document.getElementById(
+                              "womenswear"
+                            ) as HTMLInputElement;
+                            checkedBoxes.checked = false;
+                            // var checkedBoxes =
+                            //   document.getElementById("womenswear");
+                            // checkedBoxes.setAttribute("disabled", "false");
+                          }}
                           className="checkbox"
                           type="checkbox"
-                          id="checkbox"
+                          id="menswear"
                         ></input>
                         <p className="remember_me">Menswear</p>
                       </div>

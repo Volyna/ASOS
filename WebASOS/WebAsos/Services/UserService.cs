@@ -103,7 +103,7 @@ namespace WebAsos.Services
                     return new ServiceResponse() { Payload = "User was register" };
                 }
                 UserEntity newUser = _mapper.Map<RegisterUserProfileViewModel, UserEntity>(model);
-                DateTime dataBirth = new DateTime(model.YearBirh, model.MonthBirh, model.DayBirh);
+                DateTime dataBirth = model.DataBirdth;
                 newUser.DataBirth = dataBirth;
                 var result = await _userRepository.RegisterUserAsync(newUser, model.Password);
                 if (result.Succeeded)
@@ -117,7 +117,7 @@ namespace WebAsos.Services
                         var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
 
                         string url = $"{_configuration["FrontEndUrl"]}/confirmemail?userid={newUser.Id}&token={validEmailToken}";
-                        await _emailService.SendEmailAsync(Emails.ConfirmAccountByEmail(user.Email, url));
+                        await _emailService.SendEmailAsync(Emails.ConfirmAccountByEmail(newUser.Email, url));
 
 
                         var aceessToken = await _jwtTokenService.CreateToken(newUser);
@@ -131,7 +131,7 @@ namespace WebAsos.Services
                     }
                     else
                     {
-                        return new ServiceResponse() { Payload = "User was added but wasn't add to role error !!!" };
+                        return new ServiceResponse() { IsSuccess = true,Payload = "User was added but wasn't add to role error !!!" };
                     }
 
                 }

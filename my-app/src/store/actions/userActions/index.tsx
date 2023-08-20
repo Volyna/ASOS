@@ -81,7 +81,13 @@ export const RegisterUser = (user: IRegisterUser) => {
       dispatch({ type: UserActionTypes.START_REQUESTS_USER });
       const data = await register(user);
       const { response } = data;
-      console.log(response.data.payload);
+      console.log("Response", response);
+      console.log("RegisterUser:", response.data.payload);
+      if (response.data.payload === "User was register") {
+        toast.error("User was register!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
       AuthUserToken(response.data.payload, dispatch);
     } catch (e) {
       toast.error("Error Notification !", {
