@@ -7,10 +7,10 @@ namespace WebAsos.Services
 {
     public class EmailService
     {
-        private static IConfiguration _configuration;
-        public EmailService(IConfiguration configuration)
+        private readonly EmailSettings _settings;
+        public EmailService(EmailSettings settings)
         {
-            _configuration = configuration;
+            _settings = settings;
         }
 
         public async Task SendEmailAsync(MimeMessage message)
@@ -19,9 +19,9 @@ namespace WebAsos.Services
             {
                 try
                 {
-                    message.From.Add(new MailboxAddress("Focus", _configuration["EmailSettings:From"]));
-                    client.Connect(_configuration["EmailSettings:SMTP"], Int32.Parse(_configuration["EmailSettings:PORT"]), false);
-                    client.Authenticate(_configuration["EmailSettings:User"], _configuration["EmailSettings:Password"]);
+                    message.From.Add(new MailboxAddress("Focus", _settings.From));
+                    client.Connect(_settings.SMTP,_settings.PORT, false);
+                    client.Authenticate(_settings.User, _settings.Password);
                     client.Send(message);
 
                     client.Disconnect(true);
