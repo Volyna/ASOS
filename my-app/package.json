@@ -8,7 +8,7 @@
     "@mui/icons-material": "^5.4.4",
     "@mui/material": "^5.4.4",
     "@mui/x-data-grid": "^5.5.1",
-    "@react-oauth/google": "^0.11.0",
+    "@react-oauth/google": "^0.11.1",
     "@redux-devtools/extension": "^3.2.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

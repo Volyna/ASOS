@@ -10,16 +10,32 @@ import { IBeforeLoginUser, ILoginUser, ILoginUserByGoogle } from "../types";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Footer from "../../Footer/FooterV";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 import { colors } from "@mui/material";
 import styled from "@emotion/styled";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import axios from "axios";
 function LoginePage() {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
   let navigator = useNavigate();
   const { IsUserExist, SetEmail, LoginUserByGoogle, LoginUser } = useActions();
+  const login = useGoogleLogin({
+    onError: () => {
+      errorGoogle();
+    },
+    onSuccess: async (tokenResponse) => {
+      responseGoogle(tokenResponse.access_token);
+      // const userInfo = await axios
+      //   .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+      //     headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+      //   })
+      //   .then((res) => res.data);
+      // console.log("userInfo", userInfo);
+      // responseGoogle(userInfo);
+    },
+  });
 
   const onSubmitFormik = async (values: IBeforeLoginUser) => {
     if (!executeRecaptcha) return;
@@ -60,11 +76,14 @@ function LoginePage() {
     validationSchema: loginBeforeUserSchema,
   });
   const responseGoogle = (resp: any) => {
-    const token = resp.credential;
+    const token = resp;
+    // const token = resp.credential;
+    console.log("token: ", token);
     let response: ILoginUserByGoogle = {
       provider: "Google",
       token: token,
     };
+    console.log("responseGoogle to back end: ", response);
     LoginUserByGoogle(response);
   };
   if (user != null) {
@@ -75,6 +94,7 @@ function LoginePage() {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
+
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;
   return (
@@ -125,7 +145,15 @@ function LoginePage() {
               </li>
               <li className="social-login">
                 <a className="login_with" href="">
-                  <img src={icon_Google} alt="Login with Google"></img>
+                  <img
+                    src={icon_Google}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      login();
+                    }}
+                    alt="Login with Google"
+                  ></img>
+
                   {/* <GoogleLogin
                     onSuccess={responseGoogle}
                     onError={errorGoogle}

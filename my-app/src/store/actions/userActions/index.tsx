@@ -102,7 +102,8 @@ export const LoginUserByGoogle = (model: ILoginUserByGoogle) => {
       dispatch({ type: UserActionTypes.START_REQUESTS_USER });
       const data = await loginByGoogle(model);
       const { response } = data;
-      console.log("response", response.data.payload);
+      // console.log("response LoginUserByGoogle", response.data.payload);
+
       AuthUserToken(response.data.payload, dispatch);
     } catch (e) {
       toast.error("Error Notification !", {

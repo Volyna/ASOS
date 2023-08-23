@@ -14,6 +14,7 @@ using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
 using WebAsos.interfaces.UserService;
+using WebAsos.SMTP_Email;
 
 namespace WebAsos.Services
 {
@@ -25,9 +26,10 @@ namespace WebAsos.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        private EmailService _emailService;
+        //private EmailService _emailService;
         private readonly RecaptchaService _recaptchaService;
-        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IHttpContextAccessor httpContextAccessor, IMapper mapper, IUserRepository userRepository, EmailService emailService, RecaptchaService recaptchaService)
+        private readonly SmtpEmailService _emailService;
+        public UserService(UserManager<UserEntity> userManager, IConfiguration configuration, IJwtTokenService jwtTokenService, IHttpContextAccessor httpContextAccessor, IMapper mapper, IUserRepository userRepository, RecaptchaService recaptchaService, SmtpEmailService emailService)
         {
             _userRepository = userRepository;
             _configuration = configuration;
@@ -35,8 +37,9 @@ namespace WebAsos.Services
             _jwtTokenService = jwtTokenService;
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
-            _emailService = emailService;
+            //_emailService = emailService;
             _recaptchaService = recaptchaService;
+            _emailService = emailService;
         }
 
         public async Task<ServiceResponse> LoginUserAsync(LoginViewModel model)
@@ -117,7 +120,18 @@ namespace WebAsos.Services
                         var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
 
                         string url = $"{_configuration["FrontEndUrl"]}/confirmemail?userid={newUser.Id}&token={validEmailToken}";
-                        await _emailService.SendEmailAsync(Emails.ConfirmAccountByEmail(newUser.Email, url));
+
+                        //await _emailService.SendEmailAsync(Emails.ConfirmAccountByEmail(newUser.Email, url));
+                        Message info = new Message()
+                        {
+                            Subject = "Confirm email",
+                            //Body = "Не втрачаємо час. Треба іти купатися",
+                            To = newUser.Email
+                        };
+                        string html = File.ReadAllText("SMTP_Email/html/confirmEmail.html");
+                        html = html.Replace("{url}", url);
+                        info.Body = html;
+                        _emailService.Send(info);
 
 
                         var aceessToken = await _jwtTokenService.CreateToken(newUser);
@@ -156,6 +170,7 @@ namespace WebAsos.Services
             try
             {
                 var payload = await _jwtTokenService.VerifyGoogleToken(request);
+                //var payload = await _jwtTokenService.VerifyGoogleAccessTokenAsync(request.Token);
                 if (payload == null)
                 {
                     return new ServiceResponse { IsSuccess=false,Message= "Something went wrong..." };
@@ -257,7 +272,7 @@ namespace WebAsos.Services
             var encodedEmailToken = Encoding.UTF8.GetBytes(token);
             var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
             string url = $"{_configuration["FrontEndUrl"]}/resetPassword/?userId={user.Id}&token={validEmailToken}";
-            await _emailService.SendEmailAsync(Emails.ResetPassword(user.Email, url));
+            //await _emailService.SendEmailAsync(Emails.ResetPassword(user.Email, url));
 
 
             return new SimpleResponseDTO()
@@ -281,7 +296,7 @@ namespace WebAsos.Services
 
             if (result.Succeeded)
             {
-                await _emailService.SendEmailAsync(Emails.PasswordChanged(user.Email));
+                //await _emailService.SendEmailAsync(Emails.PasswordChanged(user.Email));
                 string accessToken = await _jwtTokenService.CreateToken(user);
                 return new ChangePasswordResponseDTO()
                 {
