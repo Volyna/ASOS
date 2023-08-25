@@ -1,15 +1,22 @@
 ﻿using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using WebAsos.Constants.User;
 using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
 using WebAsos.Settings;
+using static Google.Apis.Requests.BatchRequest;
+
+
 
 namespace WebAsos.Services
 {
@@ -66,28 +73,35 @@ namespace WebAsos.Services
             return payload;
         }
         //new =>
-        public async Task<bool> VerifyGoogleAccessTokenAsync(string accessToken)
+        public async Task<UserInformation> VerifyGoogleAccessTokenAsync(string accessToken)
         {
             // Step 1: Retrieve Google's public keys
             string apiUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
 
-            using (WebClient client = new WebClient())
+            using (HttpClient client = new HttpClient())
             {
-                client.Headers.Add("Authorization", $"Bearer {accessToken}");
-
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
                 try
                 {
-                    string response = await client.DownloadStringTaskAsync(apiUrl);
-                    Console.WriteLine(response);
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseContent = await response.Content.ReadAsStringAsync();
+                        // Parse the response content into a JSON object
+                        UserInformation person = JsonConvert.DeserializeObject<UserInformation>(responseContent);
+
+                        return person;
+                    }
+                    else
+                    {
+                        return null; // Request was not successful
+                    }
                 }
-                catch (WebException ex)
+                catch (HttpRequestException)
                 {
-                    // Handle exceptions or errors
-                    Console.WriteLine("An error occurred: " + ex.Message);
-                    return true;
-                }
+                    return null; // An error occurred
+                }            
             }
-            return true;
         }
 
         public class Tokens

@@ -168,15 +168,15 @@ namespace WebAsos.Services
         {
             try
             {
-                var payload = await _jwtTokenService.VerifyGoogleToken(request);
-                //var payload = await _jwtTokenService.VerifyGoogleAccessTokenAsync(request.Token);
+                var payload = await _jwtTokenService.VerifyGoogleAccessTokenAsync(request.Token);
+                //var payload = await _jwtTokenService.VerifyGoogleToken(request);
                 if (payload == null)
                 {
                     return new ServiceResponse { IsSuccess=false,Message= "Something went wrong..." };
                 }
-
-                var info = new UserLoginInfo(request.Provider, payload.Subject, request.Provider);
+                var info = new UserLoginInfo(request.Provider, payload.Sub, request.Provider);
                 var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+                //var user = await _userRepository.GetUserByEmailAsync(
                 if (user == null)
                 {
                     user = await _userManager.FindByEmailAsync(payload.Email);

@@ -87,7 +87,7 @@ function LoginePage() {
     LoginUserByGoogle(response);
   };
   if (user != null) {
-    return <Navigate to={"/asos"}></Navigate>;
+    return <Navigate to={"/"}></Navigate>;
   }
   const errorGoogle = () => {
     toast.error("Error Google login!!!", {

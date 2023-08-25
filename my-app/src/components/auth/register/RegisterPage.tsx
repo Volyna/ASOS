@@ -5,18 +5,19 @@ import icon_Google from "../../../images/icon_google.png";
 import icon_facebook from "../../../images/icon_facebook.png";
 import "./RegisterPageStyle.css";
 import { useFormik } from "formik";
-import { IRegisterUser } from "../types";
+import { ILoginUserByGoogle, IRegisterUser } from "../types";
 import { registerUserSchema } from "../validation";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import Footer from "../../Footer/FooterV";
 import { date } from "yup";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-
+import { useGoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
 function RegisterPage() {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
-  const { RegisterUser } = useActions();
+  const { RegisterUser, LoginUserByGoogle } = useActions();
   const initValues: IRegisterUser = {
     email: email,
     password: "",
@@ -54,7 +55,6 @@ function RegisterPage() {
   //     formik.values.asosPartners = false;
   //   }
   // }
-
   const onSubmitFormik = async (values: IRegisterUser) => {
     console.log(values);
     if (!executeRecaptcha) return;
@@ -62,12 +62,46 @@ function RegisterPage() {
 
     RegisterUser(values);
   };
-
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
     validationSchema: registerUserSchema,
   });
+  const login = useGoogleLogin({
+    onError: () => {
+      errorGoogle();
+    },
+    onSuccess: async (tokenResponse) => {
+      responseGoogle(tokenResponse.access_token);
+      // const userInfo = await axios
+      //   .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+      //     headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+      //   })
+      //   .then((res) => res.data);
+      // console.log("userInfo", userInfo);
+      // responseGoogle(userInfo);
+    },
+  });
+  const responseGoogle = (resp: any) => {
+    const token = resp;
+    // const token = resp.credential;
+    console.log("token: ", token);
+    let response: ILoginUserByGoogle = {
+      provider: "Google",
+      token: token,
+    };
+    console.log("responseGoogle to back end: ", response);
+    LoginUserByGoogle(response);
+  };
+  if (user != null) {
+    return <Navigate to={"/"}></Navigate>;
+  }
+  const errorGoogle = () => {
+    toast.error("Error Google login!!!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   if (user != null) {
     return <Navigate to={"/asos"}></Navigate>;
   }
@@ -121,7 +155,14 @@ function RegisterPage() {
               </li>
               <li className="social-login">
                 <a className="login_with" href="">
-                  <img src={icon_Google} alt="Login with Google" />
+                  <img
+                    src={icon_Google}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      login();
+                    }}
+                    alt="Login with Google"
+                  ></img>
                   {/* <GoogleLogin
                           onSuccess={responseGoogle}
                           onError={errorGoogle}
