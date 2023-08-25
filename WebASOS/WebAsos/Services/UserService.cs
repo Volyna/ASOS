@@ -125,7 +125,6 @@ namespace WebAsos.Services
                         Message info = new Message()
                         {
                             Subject = "Confirm email",
-                            //Body = "Не втрачаємо час. Треба іти купатися",
                             To = newUser.Email
                         };
                         string html = File.ReadAllText("SMTP_Email/html/confirmEmail.html");
@@ -273,6 +272,16 @@ namespace WebAsos.Services
             var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
             string url = $"{_configuration["FrontEndUrl"]}/resetPassword/?userId={user.Id}&token={validEmailToken}";
             //await _emailService.SendEmailAsync(Emails.ResetPassword(user.Email, url));
+            Message info = new Message()
+            {
+                Subject = "Reset Password",
+                To = user.Email
+            };
+            string html = File.ReadAllText("SMTP_Email/html/resetPassword.html");
+            html = html.Replace("{url}", url);
+            info.Body = html;
+            _emailService.Send(info);
+
 
 
             return new SimpleResponseDTO()
@@ -297,6 +306,14 @@ namespace WebAsos.Services
             if (result.Succeeded)
             {
                 //await _emailService.SendEmailAsync(Emails.PasswordChanged(user.Email));
+                Message info = new Message()
+                {
+                    Subject = "Reset Password",
+                    To = user.Email
+                };
+                string html = File.ReadAllText("SMTP_Email/html/changedPassword.html");
+                info.Body = html;
+                _emailService.Send(info);
                 string accessToken = await _jwtTokenService.CreateToken(user);
                 return new ChangePasswordResponseDTO()
                 {

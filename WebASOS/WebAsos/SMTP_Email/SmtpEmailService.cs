@@ -20,15 +20,15 @@ namespace WebAsos.SMTP_Email
             };
             //string path = @"C:\Users\novak\Desktop\images\192221526.jpg";
             
-            var attachment = new MimePart("image", "jpeg")
-            {
-                FileName = "Не для роботи",
-                //Content = new MimeContent(File.OpenRead(path))
-            };
+            //var attachment = new MimePart("image", "jpeg")
+            //{
+            //    FileName = "Не для роботи",
+            //    //Content = new MimeContent(File.OpenRead(path))
+            //};
 
             var multipart = new Multipart("mixed");
             multipart.Add(body);
-            multipart.Add(attachment);
+            //multipart.Add(attachment);
 
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress(_configuration.From));
