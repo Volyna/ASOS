@@ -5,64 +5,81 @@ import icon_Google from "../../../images/icon_google.png";
 import icon_facebook from "../../../images/icon_facebook.png";
 import "./RegisterPageStyle.css";
 import { useFormik } from "formik";
-import { IRegisterUser } from "../types";
+import { ILoginUserByGoogle, IRegisterUser } from "../types";
 import { registerUserSchema } from "../validation";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import Footer from "../../Footer/FooterV";
 import { date } from "yup";
-
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useGoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 function RegisterPage() {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
-  const { RegisterUser } = useActions();
+  const { RegisterUser, LoginUserByGoogle } = useActions();
   const initValues: IRegisterUser = {
     email: email,
     password: "",
     firstName: "",
     lastName: "",
-    dayBirh: 0,
-    monthBirh: 0,
-    yearBirh: 0,
+    dataBirdth: null,
     mostlyInterested: "womenswear",
     discountsAndSales: false,
     newStuff: false,
     yourExclusives: false,
     asosPartners: false,
+    RecaptchaToken: "",
   };
-  function SubscribeSubscriptions(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    var checkedBoxes = document.getElementsByClassName("checkbox");
-    if (e.currentTarget.textContent?.trim() == "SELECT ALL") {
-      e.currentTarget.textContent = "CLEAR";
-      for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
-        (checkedBoxes[i] as HTMLInputElement).checked = true;
-      }
-      formik.values.discountsAndSales = true;
-      formik.values.newStuff = true;
-      formik.values.yourExclusives = true;
-      formik.values.asosPartners = true;
-    } else {
-      e.currentTarget.textContent = "SELECT ALL";
-      for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
-        (checkedBoxes[i] as HTMLInputElement).checked = false;
-      }
-      formik.values.discountsAndSales = false;
-      formik.values.newStuff = false;
-      formik.values.yourExclusives = false;
-      formik.values.asosPartners = false;
-    }
-  }
 
   const onSubmitFormik = async (values: IRegisterUser) => {
+    console.log(values);
+    if (!executeRecaptcha) return;
+    values.RecaptchaToken = await executeRecaptcha();
+
     RegisterUser(values);
   };
-
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
     validationSchema: registerUserSchema,
   });
+  const login = useGoogleLogin({
+    onError: () => {
+      errorGoogle();
+    },
+    onSuccess: async (tokenResponse) => {
+      responseGoogle(tokenResponse.access_token);
+      // const userInfo = await axios
+      //   .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+      //     headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+      //   })
+      //   .then((res) => res.data);
+      // console.log("userInfo", userInfo);
+      // responseGoogle(userInfo);
+    },
+  });
+  const responseGoogle = (resp: any) => {
+    const token = resp;
+    // const token = resp.credential;
+    console.log("token: ", token);
+    let response: ILoginUserByGoogle = {
+      provider: "Google",
+      token: token,
+    };
+    console.log("responseGoogle to back end: ", response);
+    LoginUserByGoogle(response);
+  };
+  if (user != null) {
+    return <Navigate to={"/"}></Navigate>;
+  }
+  const errorGoogle = () => {
+    toast.error("Error Google login!!!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
   if (user != null) {
     return <Navigate to={"/asos"}></Navigate>;
   }
@@ -116,7 +133,14 @@ function RegisterPage() {
               </li>
               <li className="social-login">
                 <a className="login_with" href="">
-                  <img src={icon_Google} alt="Login with Google" />
+                  <img
+                    src={icon_Google}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      login();
+                    }}
+                    alt="Login with Google"
+                  ></img>
                   {/* <GoogleLogin
                           onSuccess={responseGoogle}
                           onError={errorGoogle}
@@ -150,7 +174,7 @@ function RegisterPage() {
                       placeholder="Enter your email"
                       autoComplete="true"
                     />
-                    {errors.email && (
+                    {errors.email && touched.email && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.email}</span>
                       </p>
@@ -165,7 +189,7 @@ function RegisterPage() {
                       onChange={handleChange}
                       value={values.firstName}
                     />
-                    {errors.firstName && (
+                    {errors.firstName && touched.firstName && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.firstName}</span>
                       </p>
@@ -187,17 +211,30 @@ function RegisterPage() {
                     )}
 
                     <label className="label">Password</label>
-                    <input
-                      onChange={handleChange}
-                      value={values.password}
-                      type="password"
-                      className="input input_password"
-                      id="password"
-                      placeholder="Enter your password"
-                      minLength={8}
-                      required
-                      autoComplete="true"
-                    />
+                    <div className="password-container">
+                      <input
+                        onChange={handleChange}
+                        value={values.password}
+                        type={passwordShown ? "text" : "password"}
+                        className="input"
+                        id="password"
+                        placeholder="Enter your password"
+                        minLength={8}
+                        required
+                        autoComplete="true"
+                      ></input>
+                      <button
+                        onClick={() => {
+                          setPasswordShown(!passwordShown);
+                        }}
+                        className={
+                          passwordShown
+                            ? "input_password_show"
+                            : "input_password"
+                        }
+                        id="input_password"
+                      ></button>
+                    </div>
                     {errors.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
@@ -207,6 +244,7 @@ function RegisterPage() {
                       Must contain 8 or more characters
                     </span>
                   </div>
+
                   <div className="field">
                     <label className="label">Date of birth</label>
                     <div className="dataBirdth">
@@ -214,24 +252,14 @@ function RegisterPage() {
                         onChange={handleChange}
                         type="date"
                         className="input date"
-                        id="date"
-                        autoComplete="true"
+                        id="dataBirdth"
+                        placeholder="dd.mm.yyyy"
                       />
-                      {errors.dayBirh && touched.dayBirh && (
-                        <p className="mt-2" style={{ color: "red" }}>
-                          <span className="font-medium">{errors.dayBirh}</span>
-                        </p>
-                      )}
-                      {errors.monthBirh && touched.monthBirh && (
+                      {errors.dataBirdth && touched.dataBirdth && (
                         <p className="mt-2" style={{ color: "red" }}>
                           <span className="font-medium">
-                            {errors.monthBirh}
+                            {errors.dataBirdth}
                           </span>
-                        </p>
-                      )}
-                      {errors.yearBirh && touched.yearBirh && (
-                        <p className="mt-2" style={{ color: "red" }}>
-                          <span className="font-medium">{errors.yearBirh}</span>
                         </p>
                       )}
                     </div>
@@ -245,44 +273,48 @@ function RegisterPage() {
 
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="discountsAndSales"
                       ></input>
                       <p className="remember_me">Discount and sales</p>
                     </div>
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="newStuff"
                       ></input>
                       <p className="remember_me">New arrivals</p>
                     </div>
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="yourExclusives"
                       ></input>
                       <p className="remember_me">Your exclusives</p>
                     </div>
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="asosPartners"
                       ></input>
                       <p className="remember_me">Our partners</p>
                     </div>
-                    <div className="addition">
+                    {/* <div className="addition">
                       <input
                         className="checkbox"
                         type="checkbox"
                         id="checkbox"
                       ></input>
                       <p className="remember_me">No emails</p>
-                    </div>
+                    </div> */}
 
                     <div className="field">
                       <label className="label interested">
@@ -290,17 +322,45 @@ function RegisterPage() {
                       </label>
                       <div className="addition">
                         <input
+                          name="womenswear"
+                          onChange={(e) => {
+                            setFieldValue(
+                              "mostlyInterested",
+                              "womenswear",
+                              false
+                            );
+                            var checkedBoxes = document.getElementById(
+                              "menswear"
+                            ) as HTMLInputElement;
+                            checkedBoxes.checked = false;
+                          }}
+                          defaultChecked={true}
                           className="checkbox"
                           type="checkbox"
-                          id="checkbox"
+                          id="womenswear"
                         ></input>
                         <p className="remember_me">Womenswear</p>
                       </div>
                       <div className="addition">
                         <input
+                          name="menswear"
+                          onChange={(e) => {
+                            setFieldValue(
+                              "mostlyInterested",
+                              "menswear",
+                              false
+                            );
+                            var checkedBoxes = document.getElementById(
+                              "womenswear"
+                            ) as HTMLInputElement;
+                            checkedBoxes.checked = false;
+                            // var checkedBoxes =
+                            //   document.getElementById("womenswear");
+                            // checkedBoxes.setAttribute("disabled", "false");
+                          }}
                           className="checkbox"
                           type="checkbox"
-                          id="checkbox"
+                          id="menswear"
                         ></input>
                         <p className="remember_me">Menswear</p>
                       </div>
@@ -325,3 +385,9 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+function flatpickr(
+  dateInput: HTMLElement | null,
+  arg1: { dateFormat: string; locale: string }
+) {
+  throw new Error("Function not implemented.");
+}

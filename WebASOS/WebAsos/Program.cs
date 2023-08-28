@@ -28,6 +28,7 @@ using WebAsos.Services;
 using WebAsos.Settings;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Interfaces.CategoryInterfaces;
+using WebAsos.SMTP_Email;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -60,6 +61,7 @@ var googleAuthSettings = builder.Configuration
 
 builder.Services.AddSingleton(googleAuthSettings);
 builder.Services.AddTransient<EmailService>();
+builder.Services.AddTransient<SmtpEmailService>();
 builder.Services.AddTransient<RecaptchaService>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

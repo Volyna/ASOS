@@ -79,29 +79,58 @@ body{
     font-family: 'Roboto Flex', sans-serif;
     font-weight: 300;
     font-size: 18px;
-    color: rgba(53, 53, 53, 0.5);
+    color: black;
     line-height: 16px;
     border-radius: 10px;
-    border-color: rgba(53, 53, 53, 0.5);
+    /* border-color: rgba(53, 53, 53, 0.5); */
     border: 2px;
     appearance: none;
     border-style:solid;
     margin: 0 0 30px 35px;
     
 }
+.input_password_show{
+    background: url(../../../images/icon_password_show.png) no-repeat center right 10px;
+    background-size: 30px 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+    padding: 20px;
+    z-index: 10000;
+    margin-bottom: 27px;
+}
+.input:focus {
+    border-color: yellow;
+    outline: none;
+}
 
 .date {
     border-radius: 30px;
     margin-bottom: 10px;
+    
+    
 }
 
 .input_password {
     background: url(../../../images/icon_password.png) no-repeat center right 10px;
     background-size: 30px 30px;
     margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+    padding: 20px;
+    z-index: 10000;
+    margin-bottom: 27px;
 
 }
-
+.password-container{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.password-container .input{
+    margin: 0 -40px 30px 35px;;
+    padding: 17px 55px 17px 20px;
+}
 .addition {
     display: flex;
     margin: 0px 10px 15px 35px ; 
