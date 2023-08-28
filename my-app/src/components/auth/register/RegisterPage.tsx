@@ -14,7 +14,9 @@ import { date } from "yup";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 function RegisterPage() {
+  const [passwordShown, setPasswordShown] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
   const { RegisterUser, LoginUserByGoogle } = useActions();
@@ -31,30 +33,7 @@ function RegisterPage() {
     asosPartners: false,
     RecaptchaToken: "",
   };
-  // function SubscribeSubscriptions(
-  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  // ) {
-  //   var checkedBoxes = document.getElementsByClassName("checkbox");
-  //   if (e.currentTarget.textContent?.trim() == "SELECT ALL") {
-  //     e.currentTarget.textContent = "CLEAR";
-  //     for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
-  //       (checkedBoxes[i] as HTMLInputElement).checked = true;
-  //     }
-  //     formik.values.discountsAndSales = true;
-  //     formik.values.newStuff = true;
-  //     formik.values.yourExclusives = true;
-  //     formik.values.asosPartners = true;
-  //   } else {
-  //     e.currentTarget.textContent = "SELECT ALL";
-  //     for (var i = 0, l = checkedBoxes.length; i < l; ++i) {
-  //       (checkedBoxes[i] as HTMLInputElement).checked = false;
-  //     }
-  //     formik.values.discountsAndSales = false;
-  //     formik.values.newStuff = false;
-  //     formik.values.yourExclusives = false;
-  //     formik.values.asosPartners = false;
-  //   }
-  // }
+
   const onSubmitFormik = async (values: IRegisterUser) => {
     console.log(values);
     if (!executeRecaptcha) return;
@@ -101,7 +80,6 @@ function RegisterPage() {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-
   if (user != null) {
     return <Navigate to={"/asos"}></Navigate>;
   }
@@ -233,17 +211,30 @@ function RegisterPage() {
                     )}
 
                     <label className="label">Password</label>
-                    <input
-                      onChange={handleChange}
-                      value={values.password}
-                      type="password"
-                      className="input input_password"
-                      id="password"
-                      placeholder="Enter your password"
-                      minLength={8}
-                      required
-                      autoComplete="true"
-                    />
+                    <div className="password-container">
+                      <input
+                        onChange={handleChange}
+                        value={values.password}
+                        type={passwordShown ? "text" : "password"}
+                        className="input"
+                        id="password"
+                        placeholder="Enter your password"
+                        minLength={8}
+                        required
+                        autoComplete="true"
+                      ></input>
+                      <button
+                        onClick={() => {
+                          setPasswordShown(!passwordShown);
+                        }}
+                        className={
+                          passwordShown
+                            ? "input_password_show"
+                            : "input_password"
+                        }
+                        id="input_password"
+                      ></button>
+                    </div>
                     {errors.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
@@ -262,6 +253,7 @@ function RegisterPage() {
                         type="date"
                         className="input date"
                         id="dataBirdth"
+                        placeholder="dd.mm.yyyy"
                       />
                       {errors.dataBirdth && touched.dataBirdth && (
                         <p className="mt-2" style={{ color: "red" }}>
@@ -393,3 +385,9 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+function flatpickr(
+  dateInput: HTMLElement | null,
+  arg1: { dateFormat: string; locale: string }
+) {
+  throw new Error("Function not implemented.");
+}

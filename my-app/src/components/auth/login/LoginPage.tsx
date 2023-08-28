@@ -16,7 +16,9 @@ import { colors } from "@mui/material";
 import styled from "@emotion/styled";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import axios from "axios";
+import { useState } from "react";
 function LoginePage() {
+  const [passwordShown, setPasswordShown] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
   let navigator = useNavigate();
@@ -181,6 +183,7 @@ function LoginePage() {
                       onChange={handleChange}
                       type="email"
                       className="input"
+                      required
                       id="email"
                       placeholder="Enter your email"
                       autoComplete="true"
@@ -191,16 +194,29 @@ function LoginePage() {
                       </p>
                     )}
                     <label className="label">Password</label>
-                    <input
-                      onChange={handleChange}
-                      type="password"
-                      className="input input_password"
-                      id="password"
-                      placeholder="Enter your password"
-                      minLength={8}
-                      required
-                      autoComplete="true"
-                    />{" "}
+                    <div className="password-container">
+                      <input
+                        onChange={handleChange}
+                        type={passwordShown ? "text" : "password"}
+                        className="input "
+                        id="password"
+                        placeholder="Enter your password"
+                        minLength={8}
+                        required
+                        autoComplete="true"
+                      />{" "}
+                      <button
+                        onClick={() => {
+                          setPasswordShown(!passwordShown);
+                        }}
+                        className={
+                          passwordShown
+                            ? "input_password_show"
+                            : "input_password_login"
+                        }
+                        id="input_password"
+                      ></button>
+                    </div>
                     {errors.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
