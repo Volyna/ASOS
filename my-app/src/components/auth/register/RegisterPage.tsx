@@ -15,6 +15,7 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import axios from "axios";
 function RegisterPage() {
   const [passwordShown, setPasswordShown] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();

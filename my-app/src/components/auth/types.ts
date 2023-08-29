@@ -13,6 +13,21 @@ export interface IBeforeLoginUser {
     email:string,
     password:string
 }
+export interface IChangeContactInfo {
+    email:string,
+    phone:string,
+    firstName:string,
+    lastName:string,
+    discountsAndSales:boolean,
+    passwordOld:string ,
+    passwordNew:string ,
+    Country:string,
+    State:string,
+    Street:string,
+    ZipCode:string,
+    City:string,
+    homePhone:string
+}
 export interface ILoginUser {
     email: string;
     password: string;
