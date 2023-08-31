@@ -1,10 +1,25 @@
+import { IUser } from "../../actions/userActions/types";
 import { UserActionTypes, UserActions, UserState } from "./types";
+const userTemp: IUser = {
+  name: "",
+  surname: "",
+  email: "",
+  phone: "",
+  image: "",
+  roles: "",
+  discountsAndSales: false,
+  Country: "",
+  State: "",
+  Street: "",
+  ZipCode: "",
+  City: "",
+};
 const initialState: UserState = {
-  user: null,
   message: null,
   loading: false,
   isAuth: false,
   email: "",
+  user: userTemp,
 };
 
 const UserReducer = (state = initialState, action: UserActions): UserState => {

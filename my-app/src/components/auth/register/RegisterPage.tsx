@@ -81,8 +81,8 @@ function RegisterPage() {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-  if (user != null) {
-    return <Navigate to={"/asos"}></Navigate>;
+  if (user === null) {
+    return <Navigate to={"/login"}></Navigate>;
   }
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;

@@ -2,7 +2,7 @@ import { IUser } from "../../actions/userActions/types";
 
 export interface UserState {
     email:string;
-    user: IUser | null;
+    user: IUser ;
     message: null | string;
     loading: boolean;
     isAuth: boolean;

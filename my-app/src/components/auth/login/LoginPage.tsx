@@ -20,7 +20,9 @@ import { useState } from "react";
 function LoginePage() {
   const [passwordShown, setPasswordShown] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const { email, user } = useTypedSelector((store) => store.UserReducer);
+  const { email, user, isAuth } = useTypedSelector(
+    (store) => store.UserReducer
+  );
   let navigator = useNavigate();
   const { IsUserExist, SetEmail, LoginUserByGoogle, LoginUser } = useActions();
   const login = useGoogleLogin({
@@ -88,7 +90,7 @@ function LoginePage() {
     console.log("responseGoogle to back end: ", response);
     LoginUserByGoogle(response);
   };
-  if (user != null) {
+  if (isAuth == true) {
     return <Navigate to={"/"}></Navigate>;
   }
   const errorGoogle = () => {

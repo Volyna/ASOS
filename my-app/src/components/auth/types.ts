@@ -1,12 +1,4 @@
 
-export interface IUser {
-    name:string;
-  surname:string;
-  email: string;
-    phone: string;
-    image: string;
-    roles: string;
-}
 export interface IBeforeLoginUser {
     RecaptchaToken:string,
     remember:boolean,
@@ -21,11 +13,11 @@ export interface IChangeContactInfo {
     discountsAndSales:boolean,
     passwordOld:string ,
     passwordNew:string ,
-    Country:string,
-    State:string,
-    Street:string,
-    ZipCode:string,
-    City:string,
+    country:string,
+    state:string,
+    street:string,
+    zipCode:string,
+    city:string,
     homePhone:string
 }
 export interface ILoginUser {

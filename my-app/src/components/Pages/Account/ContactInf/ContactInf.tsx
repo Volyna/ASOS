@@ -1,7 +1,7 @@
 import "./ContactInf.css";
 import Header_full from "../../../Header_full/Header_full";
 import Footer from "../../../Footer/FooterV";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { IChangeContactInfo } from "../../../auth/types";
@@ -11,28 +11,29 @@ import { useEffect, useMemo, useState } from "react";
 import countryList from "react-select-country-list";
 import axios from "axios";
 import { Country } from "../../types";
-
 const ContactInf = () => {
-  const [selectedRegion, setSelectedRegion] = useState<string>(
-    "Select Your Country"
-  );
+  const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [myState, setMyState] = useState<JSX.Element | null>(null);
-  const { email, user } = useTypedSelector((store) => store.UserReducer);
+  const { email, user, isAuth } = useTypedSelector(
+    (store) => store.UserReducer
+  );
+
   const options = useMemo(() => countryList().getData(), []);
   const initValues: IChangeContactInfo = {
-    email: user!.email,
-    phone: user!.phone,
-    firstName: user!.name,
-    lastName: user!.surname,
-    discountsAndSales: user!.discountsAndSales,
+    email: user.email,
+    phone: user.phone,
+    firstName: user.name,
+    lastName: user.surname,
+    discountsAndSales:
+      user.discountsAndSales == null ? false : user.discountsAndSales,
     passwordOld: "",
     passwordNew: "",
-    Country: user!.Country,
-    State: user!.State,
-    Street: user!.Street,
-    ZipCode: user!.ZipCode,
-    City: user!.City,
-    homePhone: user!.phone,
+    country: user.Country,
+    state: user.State,
+    street: user.Street,
+    zipCode: user.ZipCode,
+    city: user.City,
+    homePhone: user.phone,
   };
   const [countries, setCountries] = useState<Country[]>([]);
   const fetchData = async () => {
@@ -41,27 +42,48 @@ const ContactInf = () => {
         "https://restcountries.com/v3/all"
       );
       setCountries(response.data);
-      console.log("Data Countries: ", response.data);
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(() => {
     fetchData();
     setMyState(<span>Hi</span>);
   }, []);
-  const onSubmitFormik = async (values: IChangeContactInfo) => {};
+  const onSubmitFormik = async (values: IChangeContactInfo) => {
+    console.log("onSubmitFormik: ", values);
+  };
 
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
     validationSchema: ChangeContactInfoSchema,
   });
+  if (user == null || isAuth == false) {
+    return <Navigate to={"/login"}></Navigate>;
+  }
   const mapCountry = countries.map((region, index) => (
     <option defaultChecked={false} key={index} value={region.name.common}>
       {<span>{region.name.common}</span>}
     </option>
   ));
+  const mapState = countries.map((region, index) => (
+    <option defaultChecked={false} key={index} value={region.region}>
+      {<span>{region.region}</span>}
+    </option>
+  ));
+
+  const authorOptions = countries
+    .filter((state, index, array) => {
+      const stateIndex = array.findIndex((b) => state.region === b.region);
+      return index === stateIndex;
+    })
+    .map((region, index) => (
+      <option defaultChecked={false} key={index} value={region.region}>
+        {<span>{region.region}</span>}
+      </option>
+    ));
 
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;
@@ -131,8 +153,11 @@ const ContactInf = () => {
                     className="checkbox"
                     type="checkbox"
                     id="discountsAndSales"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    checked={formik.values.discountsAndSales}
                   ></input>
-                  <p className="remember_me">Receive SMS with site news</p>
+                  <p className="remember_me">Subscribe for news</p>
                 </div>
               </div>
               <div className="fields right-fields col-6">
@@ -173,7 +198,7 @@ const ContactInf = () => {
                     type="checkbox"
                     id="checkbox"
                   ></input>
-                  <p className="remember_me">Subscribe for news</p>
+                  <p className="remember_me">Receive SMS with site news</p>
                 </div>
               </div>
             </div>
@@ -190,7 +215,6 @@ const ContactInf = () => {
                   id="passwordOld"
                   placeholder="Old Password"
                   onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
                   value={formik.values.passwordOld}
                 />
                 {errors.passwordOld && (
@@ -207,8 +231,6 @@ const ContactInf = () => {
                   id="passwordNew"
                   placeholder="New Password"
                   minLength={8}
-                  required
-                  autoComplete="true"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.passwordNew}
@@ -229,31 +251,39 @@ const ContactInf = () => {
                 <label className="label">Country</label>
                 <select
                   className="input arrow_down"
-                  id="regionSelect"
-                  value={selectedRegion}
-                  // onChange={(e) => setSelectedRegion(e.target.value)}
-                  defaultValue={selectedRegion}
+                  id="country"
+                  value={formik.values.country}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                 >
+                  <option>
+                    <span>Choose your country</span>
+                  </option>
                   {mapCountry}
                 </select>
-                {errors.Country && (
+                {errors.country && (
                   <p className="mt-2" style={{ color: "red" }}>
-                    <span className="font-medium">{errors.Country}</span>
+                    <span className="font-medium">{errors.country}</span>
                   </p>
                 )}
                 <label className="label">State</label>
-                <input
-                  type="text"
+                <select
                   className="input arrow_down"
                   id="state"
-                  placeholder="Choose your state"
+                  value={formik.values.state}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.State}
-                />
-                {errors.State && (
+                >
+                  <option>
+                    <span>Choose your state</span>
+                  </option>
+                  {authorOptions}
+                  {/* {mapState} */}
+                </select>
+
+                {errors.state && (
                   <p className="mt-2" style={{ color: "red" }}>
-                    <span className="font-medium">{errors.State}</span>
+                    <span className="font-medium">{errors.state}</span>
                   </p>
                 )}
                 <label className="label">Street</label>
@@ -264,11 +294,11 @@ const ContactInf = () => {
                   placeholder="Enter your street"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Street}
+                  value={formik.values.street}
                 />
-                {errors.Street && (
+                {errors.street && (
                   <p className="mt-2" style={{ color: "red" }}>
-                    <span className="font-medium">{errors.Street}</span>
+                    <span className="font-medium">{errors.street}</span>
                   </p>
                 )}
               </div>
@@ -280,13 +310,13 @@ const ContactInf = () => {
                   id="zipCode"
                   placeholder="Enter your zip code"
                   autoComplete="true"
+                  value={formik.values.zipCode}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.ZipCode}
-                />{" "}
-                {errors.ZipCode && (
+                />
+                {errors.zipCode && (
                   <p className="mt-2" style={{ color: "red" }}>
-                    <span className="font-medium">{errors.ZipCode}</span>
+                    <span className="font-medium">{errors.zipCode}</span>
                   </p>
                 )}
                 <label className="label">City</label>
@@ -297,23 +327,24 @@ const ContactInf = () => {
                   placeholder="Choose your city"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.City}
+                  value={formik.values.city}
                 />
-                {errors.City && (
+                {errors.city && (
                   <p className="mt-2" style={{ color: "red" }}>
-                    <span className="font-medium">{errors.City}</span>
+                    <span className="font-medium">{errors.city}</span>
                   </p>
                 )}
                 <label className="label">Home number</label>
                 <input
                   type="text"
                   className="input indent"
-                  id="Homephone"
+                  id="homePhone"
                   placeholder="Enter your home number"
+                  autoComplete="true"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.homePhone}
-                />{" "}
+                />
                 {errors.homePhone && (
                   <p className="mt-2" style={{ color: "red" }}>
                     <span className="font-medium">{errors.homePhone}</span>
@@ -325,12 +356,19 @@ const ContactInf = () => {
 
           <div className="container myButtons">
             <div className="save col-6">
-              <button className="btn_continue save_changes">
+              <button type="submit" className="btn_continue save_changes">
                 Save changes
               </button>
             </div>
             <div className="save col-6">
-              <button className="btn-black">Reset changes</button>
+              <button
+                className="btn-black"
+                onClick={(e) => {
+                  window.location.reload();
+                }}
+              >
+                Reset changes
+              </button>
             </div>
           </div>
         </form>
@@ -341,3 +379,6 @@ const ContactInf = () => {
 };
 
 export default ContactInf;
+function geocodeByAddress(selectedAddress: any) {
+  throw new Error("Function not implemented.");
+}
