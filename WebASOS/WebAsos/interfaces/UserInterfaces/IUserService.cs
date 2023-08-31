@@ -17,6 +17,7 @@ namespace WebAsos.interfaces.UserService
         public Task<ServiceResponse> LockUserAsync(string userId, int days);
         public Task<ServiceResponse> UnLockUserAsync(string userId);
         public Task<ServiceResponse> DeleteUserAsync(string? userId = null);
+        public Task<ServiceResponse> UpdateUserProfileAsync(UpdateUserProfileDTO model);
     }
 }
 

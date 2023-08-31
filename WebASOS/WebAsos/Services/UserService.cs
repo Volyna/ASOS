@@ -18,7 +18,7 @@ using WebAsos.SMTP_Email;
 
 namespace WebAsos.Services
 {
-    public class UserService : IUserService
+    public class UserService : IUserService   
     {
         private readonly UserManager<UserEntity> _userManager;
         private IConfiguration _configuration;
@@ -297,7 +297,7 @@ namespace WebAsos.Services
             if (user == null)
             {
                 return new ChangePasswordResponseDTO() { 
-                    IsSuccess = true 
+                    IsSuccess = false 
                 };
             }
 
@@ -401,6 +401,25 @@ namespace WebAsos.Services
                 IsSuccess = false,
                 Errors = result.Errors.Select(e => e.Description)
             };
+        }
+
+        public async Task<ServiceResponse> UpdateUserProfileAsync(UpdateUserProfileDTO model)
+        {
+            try
+            {
+                UserEntity user = await _userManager.FindByEmailAsync(model.Email);
+                if (model.passwordOld != null)
+                {
+                    var result = await _userManager.ResetPasswordAsync(user,"", model.passwordNew);
+                }
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse { IsSuccess = false, Message = ex.Message.ToString() };
+            }
         }
     }
 }
