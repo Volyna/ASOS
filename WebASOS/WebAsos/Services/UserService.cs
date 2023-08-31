@@ -410,7 +410,7 @@ namespace WebAsos.Services
                 UserEntity user = await _userManager.FindByEmailAsync(model.Email);
                 if (model.passwordOld != null)
                 {
-                    var result = await _userManager.ResetPasswordAsync(user,"", model.passwordNew);
+                    var result = await _userManager.ResetPasswordAsync(user,"Token", model.passwordNew);
                 }
                 return null;
 
