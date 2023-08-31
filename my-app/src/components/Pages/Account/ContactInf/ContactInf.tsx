@@ -28,11 +28,11 @@ const ContactInf = () => {
       user.discountsAndSales == null ? false : user.discountsAndSales,
     passwordOld: "",
     passwordNew: "",
-    country: user.Country,
-    state: user.State,
-    street: user.Street,
-    zipCode: user.ZipCode,
-    city: user.City,
+    country: user.country,
+    state: user.state,
+    street: user.street,
+    zipCode: user.zipCode,
+    city: user.city,
     homePhone: user.phone,
   };
   const [countries, setCountries] = useState<Country[]>([]);

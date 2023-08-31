@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Xml.Linq;
 using WebAsos.Constants.User;
 using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
@@ -43,7 +44,14 @@ namespace WebAsos.Services
                 new Claim("surname", user.LastName ?? ""),
                 new Claim("phone", user.PhoneNumber ?? ""),
                 new Claim("email", user.Email ?? ""),
-                new Claim("image", user.Image??"")
+                new Claim("image", user.Image??""),
+                new Claim("discountsAndSales", user.DiscountsAndSales == false ? "false" : "true"),
+                new Claim("country", user.Country ?? ""),
+                new Claim("state", user.State ?? ""),
+                new Claim("street", user.Street ?? ""),
+                new Claim("zipCode", user.ZipCode ?? ""),
+                new Claim("city", user.City ?? ""),
+
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var claim in roles)

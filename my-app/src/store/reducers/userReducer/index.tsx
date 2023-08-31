@@ -8,11 +8,11 @@ const userTemp: IUser = {
   image: "",
   roles: "",
   discountsAndSales: false,
-  Country: "",
-  State: "",
-  Street: "",
-  ZipCode: "",
-  City: "",
+  country: "",
+  state: "",
+  street: "",
+  zipCode: "",
+  city: "",
 };
 const initialState: UserState = {
   message: null,
