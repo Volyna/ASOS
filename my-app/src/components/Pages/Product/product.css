@@ -1,0 +1,203 @@
+.product{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photos{
+    width: 65%;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.photos img{
+    padding: 15px;
+    width: 50%;
+}
+
+.info{
+    width: 30%;
+    margin-left: 4%;
+}
+
+.info h1{
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;}
+
+.info .code{
+    color: var(--black-50, #9A9A9A);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+}
+
+.info .price{
+    font-size: 36px;
+}
+
+
+.blocke{
+    margin-bottom: 50px;
+}
+
+.square{
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.colors{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.sizes{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.size{
+    width:70px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    text-transform:uppercase;
+}
+
+.active:hover{
+    border: 1px solid black;
+}
+
+.helpinfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: gray;
+    
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.helpinfo p{
+    transition: 0.5s;
+    text-decoration: underline;
+    text-decoration-color: gray;
+}
+
+.helpinfo p:hover{
+    transition: 0.5s;
+    color: #FFC818;
+    text-decoration: underline;
+    text-decoration-color: #FFC818;
+}
+
+.but{
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.but:hover{
+    transition: 0.5s;
+    background-color:#F05B53;
+    color:white;
+    border: 2px solid #F05B53;
+}
+
+.additional{
+    color: gray;
+    font-family: Roboto Flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+}
+
+.description{
+    width: 100%;
+    list-style-type: none;
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px; 
+    padding: 0;
+}
+
+.description li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.description hr{
+    margin: 5px 0;
+}
+
+.description p{
+    margin: 10px 0 10px 0;
+}
+
+.cont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-top: 100px;
+    border-bottom: 1px solid gray;
+
+}
+
+.cont h1{
+    font-family: Roboto Flex;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.itemName{
+    width: 13%;
+}
+
+.carousel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.carousel p{
+    display: block;
+    width: 100%;
+}

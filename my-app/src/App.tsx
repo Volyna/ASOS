@@ -38,6 +38,7 @@ import Checkout from "./components/Pages/Checkout/Checkout";
 
 import Error from "./components/Pages/Error/error";
 import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
+import ProductPage from "./components/Pages/Product/product";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -77,7 +78,9 @@ function App() {
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
-        <Route path="/ViewAll" element={<ProductsPage />} />
+        <Route path="/ViewAll" element={<ProductsPage/>}/>
+        <Route path="/Prod" element={<ProductPage/>}/>
+
         <Route path="*" element={<Error />} />
       </Routes>
       {/* <Route path="/" element={<DefaultLayout />}>
