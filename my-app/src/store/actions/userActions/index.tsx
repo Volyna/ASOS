@@ -53,7 +53,6 @@ export const LoginUser = (user: ILoginUser) => {
       }
       AuthUserToken(response.data.payload, dispatch);
     } catch (e) {
-      console.log("sad");
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -67,7 +66,8 @@ export const AuthUserToken = (
   try {
     const user = jwtDecode(token) as IUser;
     setAuthToken(token);
-    localStorage.token = token;
+    window.localStorage.setItem("Token", token);
+    // window.localStorage.token = token;
 
     dispatch({
       type: UserActionTypes.LOGIN_USER,

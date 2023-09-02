@@ -15,6 +15,7 @@
         public string zipCode { get; set; }
         public string city { get; set; }
         public string homePhone { get; set; }
+        public string Token { get; set; }
 
     }
 }

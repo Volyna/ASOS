@@ -7,5 +7,9 @@ const setAuthToken = (token: string) => {
     delete http.defaults.headers.common["Authorization"];
   }
 };
+export function getToken(): null | string {
+  const accessToken = window.localStorage.getItem("Token");
+  return accessToken;
+}
 
 export default setAuthToken;
