@@ -7,9 +7,16 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+
+  <ItemGroup>
+    <Compile Remove="interfaces\JwtTokenService\**" />
+    <Content Remove="interfaces\JwtTokenService\**" />
+    <EmbeddedResource Remove="interfaces\JwtTokenService\**" />
+    <None Remove="interfaces\JwtTokenService\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.60.0" />
-    <PackageReference Include="MailKit" Version="4.1.0" />
+	  <PackageReference Include="NETCore.MailKit" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="7.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.5" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -20,7 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MimeKit" Version="4.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -28,6 +35,7 @@
     </PackageReference>
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.1" />
     <PackageReference Include="FluentValidation" Version="11.5.2" />
     <PackageReference Include="AutoMapper" Version="12.0.1" />
@@ -51,10 +59,14 @@
     <None Remove="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="interfaces\JwtTokenService\" />
+    <Folder Include="interfaces\JwtTokenInterfaces\" />
     <Folder Include="Data\Validation\User\" />
     <Folder Include="Data\AutoMapper\User\" />
-    <Folder Include="Repositories\" />
     <Folder Include="Repositories\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="SMTP_Email\html\confirmEmail.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

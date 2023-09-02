@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using MailKit.Search;
 using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.Entitties.IdentityUser;
@@ -42,7 +43,23 @@ namespace WebAsos.Data.AutoMapper.User
             CreateMap<AddressEntity, AddressDTO>();
             CreateMap<AddressDTO, AddressEntity>();
 
+            CreateMap<CreditCardEntity, CreditCardWithIdDTO>();
+            CreateMap<CreditCardWithIdDTO, CreditCardEntity>();
 
+            CreateMap<CreditCardEntity, CreditCardDTO>();
+            CreateMap<CreditCardDTO, CreditCardEntity>();
+
+            CreateMap<OrderDTO, OrderEntity>();
+            CreateMap<OrderEntity, OrderDTO>();
+
+            CreateMap<OrderedProductEntity, OrderedProductDTO>();
+            CreateMap<OrderedProductDTO, OrderedProductEntity>();
+
+            CreateMap<OrderedProductEntity, OrderedProductUpdatedDTO>();
+            CreateMap<OrderedProductUpdatedDTO, OrderedProductEntity>();
+
+            CreateMap<OrderWithUpdateProductsDTO, OrderEntity>();
+            CreateMap<OrderEntity, OrderWithUpdateProductsDTO>();
         }
 	}
 }

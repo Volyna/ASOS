@@ -208,6 +208,136 @@ namespace WebAsos.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CreditCardEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CardHolderName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cvv")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("UserId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("tblCreditCard");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AddressId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("CreditCardId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("UserId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("CreditCardId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("tblOrders");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderedProductEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderedProducts");
+                });
+
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -501,6 +631,63 @@ namespace WebAsos.Migrations
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CreditCardEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.IdentityUser.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.AddressEntity", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.CreditCardEntity", "CreditCard")
+                        .WithMany()
+                        .HasForeignKey("CreditCardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAsos.Data.Entitties.IdentityUser.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("CreditCard");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderedProductEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.OrderEntity", "Order")
+                        .WithMany("OrderedProducts")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.ProductEntity", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>
                 {
                     b.HasOne("WebAsos.Data.Entitties.Catalog.CategoryEntity", "Category")
@@ -547,6 +734,11 @@ namespace WebAsos.Migrations
                     b.Navigation("Childrens");
 
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderEntity", b =>
+                {
+                    b.Navigation("OrderedProducts");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>

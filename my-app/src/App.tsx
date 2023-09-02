@@ -10,7 +10,6 @@ import { useContext, useEffect, useLayoutEffect } from "react";
 import { DarkModeContext } from "./components/admin/context/darkModeContext";
 
 import LoginePage from "./components/auth/login";
-import AuthorizationPage from "./components/auth/login/AuthorizationPage";
 import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
@@ -81,6 +80,7 @@ function App() {
         <Route path="/women" element={<Women />} />
         <Route path="/ViewAll" element={<ProductsPage/>}/>
         <Route path="/Prod" element={<ProductPage/>}/>
+
         <Route path="*" element={<Error />} />
       </Routes>
       {/* <Route path="/" element={<DefaultLayout />}>

@@ -8,11 +8,16 @@ export interface IUser {
     roles: string;
 }
 export interface IBeforeLoginUser {
-    email: string;
+    RecaptchaToken:string,
+    remember:boolean,
+    email:string,
+    password:string
 }
 export interface ILoginUser {
     email: string;
     password: string;
+    IsRemember:boolean;
+    RecaptchaToken:string;
 }
 export interface ILoginUserByGoogle {
     provider: string;
@@ -23,12 +28,11 @@ export interface IRegisterUser {
     password: string;
     firstName:string;
     lastName:string;
-    dayBirh:number;
-    monthBirh:number;
-    yearBirh:number;
+    dataBirdth:Date | null;
     mostlyInterested:string;
     discountsAndSales:boolean;
     newStuff:boolean;
     yourExclusives:boolean;
     asosPartners:boolean;
+    RecaptchaToken:string;
 }
