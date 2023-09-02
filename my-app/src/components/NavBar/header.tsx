@@ -7,6 +7,7 @@ import user from "../../images/user.svg";
 import cart from "../../images/cart.svg";
 import like from "../../images/like.svg";
 import search from "../../images/search.svg";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();

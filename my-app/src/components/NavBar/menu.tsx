@@ -16,15 +16,15 @@ const Menu = () => {
         <>
             <div className="menu_items">
                 <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to='/women'>Women</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/ViewAll"}>new in</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Sale"}>sale</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Clothing"}>clothing</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Shoes"}>shoes</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Acccessories"}>accessories</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Face&Body"}>face & body</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Brands"}>brands</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Outlet"}>outlet</NavLink>
-                <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to={path + "/Marketplace"}>marketplace</NavLink>
+                <NavLink  to={path + "/ViewAll"}>new in</NavLink>
+                <NavLink to={path + "/Sale"}>sale</NavLink>
+                <NavLink to={path + "/Clothing"}>clothing</NavLink>
+                <NavLink to={path + "/Shoes"}>shoes</NavLink>
+                <NavLink to={path + "/Acccessories"}>accessories</NavLink>
+                <NavLink to={path + "/Face&Body"}>face & body</NavLink>
+                <NavLink to={path + "/Brands"}>brands</NavLink>
+                <NavLink to={path + "/Outlet"}>outlet</NavLink>
+                <NavLink to={path + "/Marketplace"}>marketplace</NavLink>
                 <NavLink style={({isActive}) => {return isActive ? {fontWeight:500} : {}}} to='/men'>men</NavLink>
             </div>
             <div className="line"/>
