@@ -23,6 +23,7 @@ namespace WebAsos.Services
 {
     public class JwtTokenService : IJwtTokenService
     {
+       
         private const string GoogleCertsEndpoint = "https://www.googleapis.com/oauth2/v3/certs";
         private const string YourClientId = "579487123707-nsn0hncgmdfrptb3ensmn85v08g8aubf.apps.googleusercontent.com";
         private readonly IConfiguration _config;
@@ -35,7 +36,7 @@ namespace WebAsos.Services
             _googleAuthSettings = googleAuthSettings;
         }
 
-        public async Task<string> CreateToken(UserEntity user)
+        public async Task<string> CreateToken(UserEntity user,string loginBy)
         {
            
             List<Claim> claims = new List<Claim>()
@@ -51,6 +52,7 @@ namespace WebAsos.Services
                 new Claim("street", user.Street ?? ""),
                 new Claim("zipCode", user.ZipCode ?? ""),
                 new Claim("city", user.City ?? ""),
+                new Claim("isHavePassword", loginBy),
 
             };
             var roles = await _userManager.GetRolesAsync(user);

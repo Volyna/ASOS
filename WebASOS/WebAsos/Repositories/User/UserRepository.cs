@@ -97,13 +97,24 @@ namespace WebAsos.Repositories.User
             var result = await _userManager.DeleteAsync(model);
             return result;
         }
+        
+        public async Task UpdateUserProfile(UserEntity model)
+        {
+            try
+            {
+              
+                _context.Users.Update(model);
+               
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
 
-        public Task UpdateUserProfile(UserEntity model)
-        {          
-            _context.Users.Update(model);
-            _context.SaveChanges();
-            return null;
+            }
+          
         }
+
+        
     }
 }
 

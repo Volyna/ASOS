@@ -13,6 +13,13 @@ export const ChangeContactInfoSchema = yup.object().shape({
     .matches(/[A-Z]/, 'Password requires an uppercase letter')
     .matches(/[^\w]/, 'Password requires a symbol')   
    ,
+   newPasswordAnotherLogin: yup .string()
+    .min(6, 'Password must be 6 characters long')
+    .matches(/[0-9]/, 'Password requires a number')
+    .matches(/[a-z]/, 'Password requires a lowercase letter')
+    .matches(/[A-Z]/, 'Password requires an uppercase letter')
+    .matches(/[^\w]/, 'Password requires a symbol')   
+   ,
     passwordNew: yup .string()
     .min(6, 'Password must be 6 characters long')
     .matches(/[0-9]/, 'Password requires a number')

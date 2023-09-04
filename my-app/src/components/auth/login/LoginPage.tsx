@@ -79,17 +79,17 @@ function LoginePage() {
     onSubmit: onSubmitFormik,
     validationSchema: loginBeforeUserSchema,
   });
+
   const responseGoogle = (resp: any) => {
     const token = resp;
     // const token = resp.credential;
-    console.log("token: ", token);
     let response: ILoginUserByGoogle = {
       provider: "Google",
       token: token,
     };
-    console.log("responseGoogle to back end: ", response);
     LoginUserByGoogle(response);
   };
+
   if (isAuth == true) {
     return <Navigate to={"/"}></Navigate>;
   }
@@ -190,7 +190,7 @@ function LoginePage() {
                       placeholder="Enter your email"
                       autoComplete="true"
                     />
-                    {errors.email && (
+                    {errors.email && touched.email && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.email}</span>
                       </p>
@@ -219,7 +219,7 @@ function LoginePage() {
                         id="input_password"
                       ></button>
                     </div>
-                    {errors.password && (
+                    {errors.password && touched.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
                       </p>

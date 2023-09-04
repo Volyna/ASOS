@@ -15,7 +15,7 @@ import {
   updateUserProfile,
 } from "../../../services/api-user-service";
 import jwtDecode from "jwt-decode";
-import setAuthToken from "../../../services/setAuthToken";
+import setAuthToken, { removeTokens } from "../../../services/setAuthToken";
 import { IUser } from "./types";
 import { toast } from "react-toastify";
 export const IsUserExist = (email: IBeforeLoginUser) => {
@@ -70,7 +70,7 @@ export const AuthUserToken = (
     setAuthToken(token);
     window.localStorage.setItem("Token", token);
     // window.localStorage.token = token;
-
+    console.log("Login user");
     dispatch({
       type: UserActionTypes.LOGIN_USER,
       payload: user,
@@ -104,9 +104,12 @@ export const LoginUserByGoogle = (model: ILoginUserByGoogle) => {
       dispatch({ type: UserActionTypes.START_REQUESTS_USER });
       const data = await loginByGoogle(model);
       const { response } = data;
-      // console.log("response LoginUserByGoogle", response.data.payload);
-
-      AuthUserToken(response.data.payload, dispatch);
+      console.log("LoginUserByGoogle Data:", response.data);
+      console.log("IsSuccess:", response.data.IsSuccess);
+      if (response.data.isSuccess === true) {
+        console.log("ata.IsSuccess  ", data);
+        AuthUserToken(response.data.payload, dispatch);
+      }
     } catch (e) {
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
@@ -136,5 +139,13 @@ export const UpdateUserProfile = (model: IChangeContactInfo) => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+  };
+};
+export const LogOut = () => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    removeTokens();
+    dispatch({
+      type: UserActionTypes.LOGOUT_USER,
+    });
   };
 };

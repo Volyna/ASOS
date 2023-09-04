@@ -16,7 +16,7 @@ import { useActions } from "../../../../hooks/useActions";
 const ContactInf = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [myState, setMyState] = useState<JSX.Element | null>(null);
-  const { UpdateUserProfile } = useActions();
+  const { UpdateUserProfile, LogOut } = useActions();
   const { email, user, isAuth } = useTypedSelector(
     (store) => store.UserReducer
   );
@@ -36,7 +36,8 @@ const ContactInf = () => {
     zipCode: user.zipCode,
     city: user.city,
     homePhone: user.phone,
-    token: "",
+    isHavePassword: user.isHavePassword,
+    newPasswordAnotherLogin: "",
   };
   const [countries, setCountries] = useState<Country[]>([]);
   const fetchData = async () => {
@@ -56,11 +57,11 @@ const ContactInf = () => {
   }, []);
   const onSubmitFormik = async (values: IChangeContactInfo) => {
     var token = getToken();
-    values.token = token;
     values.discountsAndSales =
       values.discountsAndSales == "true" ? "true" : "false";
     console.log("onSubmitFormik: ", values);
     UpdateUserProfile(values);
+    
   };
 
   const formik = useFormik({
@@ -114,7 +115,7 @@ const ContactInf = () => {
             <Link className="account_item" to="/account/favourites">
               favourites
             </Link>
-            <Link className="log_out" to="/">
+            <Link className="log_out" onClick={LogOut} to="/">
               log out
             </Link>
           </div>
@@ -208,46 +209,71 @@ const ContactInf = () => {
               </div>
             </div>
           </div>
-
-          <div className="contactInformation">
-            <h3 className="contactTitle">changing password</h3>
-            <div className="myFields">
-              <div className="fields left-fields col-6">
-                <label className="label">Enter old password</label>
-                <input
-                  type="password"
-                  className="input"
-                  id="passwordOld"
-                  placeholder="Old Password"
-                  onChange={formik.handleChange}
-                  value={formik.values.passwordOld}
-                />
-                {errors.passwordOld && (
-                  <p className="mt-2" style={{ color: "red" }}>
-                    <span className="font-medium">{errors.passwordOld}</span>
-                  </p>
-                )}
-              </div>
-              <div className="fields right-fields col-6">
-                <label className="label">Enter new password</label>
-                <input
-                  type="password"
-                  className="input "
-                  id="passwordNew"
-                  placeholder="New Password"
-                  minLength={8}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.passwordNew}
-                />
-                {errors.passwordNew && (
-                  <p className="mt-2" style={{ color: "red" }}>
-                    <span className="font-medium">{errors.passwordNew}</span>
-                  </p>
-                )}
+          {user.isHavePassword == "true" ? (
+            <div className="contactInformation">
+              <h3 className="contactTitle">changing password</h3>
+              <div className="myFields">
+                <div className="fields left-fields col-6">
+                  <label className="label">Enter old password</label>
+                  <input
+                    type="password"
+                    className="input"
+                    id="passwordOld"
+                    placeholder="Old Password"
+                    onChange={formik.handleChange}
+                    value={formik.values.passwordOld}
+                  />
+                  {errors.passwordOld && (
+                    <p className="mt-2" style={{ color: "red" }}>
+                      <span className="font-medium">{errors.passwordOld}</span>
+                    </p>
+                  )}
+                </div>
+                <div className="fields right-fields col-6">
+                  <label className="label">Enter new password</label>
+                  <input
+                    type="password"
+                    className="input "
+                    id="passwordNew"
+                    placeholder="New Password"
+                    minLength={8}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.passwordNew}
+                  />
+                  {errors.passwordNew && (
+                    <p className="mt-2" style={{ color: "red" }}>
+                      <span className="font-medium">{errors.passwordNew}</span>
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="contactInformation">
+              <h3 className="contactTitle">Set password</h3>
+              <div className="myFields">
+                <div className="fields left-fields col-6">
+                  <label className="label">Enter new password</label>
+                  <input
+                    type="password"
+                    className="input"
+                    id="newPasswordAnotherLogin"
+                    placeholder="New Password"
+                    onChange={formik.handleChange}
+                    value={formik.values.newPasswordAnotherLogin}
+                  />
+                  {errors.newPasswordAnotherLogin && (
+                    <p className="mt-2" style={{ color: "red" }}>
+                      <span className="font-medium">
+                        {errors.newPasswordAnotherLogin}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="contactInformation">
             <h3 className="contactTitle">address</h3>
@@ -327,7 +353,7 @@ const ContactInf = () => {
                 <label className="label">City</label>
                 <input
                   type="text"
-                  className="input arrow_down"
+                  className="input "
                   id="city"
                   placeholder="Choose your city"
                   onChange={formik.handleChange}

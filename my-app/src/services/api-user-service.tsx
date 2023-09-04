@@ -5,6 +5,7 @@ import {
   ILoginUserByGoogle,
   IRegisterUser,
 } from "../components/auth/types";
+import { ServiceResponse } from "../store/actions/userActions/types";
 import http from "./http_common";
 
 export async function isUserExist(email: IBeforeLoginUser) {
@@ -36,7 +37,7 @@ export async function login(user: ILoginUser) {
 }
 export async function loginByGoogle(user: ILoginUserByGoogle) {
   const data = await http
-    .post(`api/User/GoogleExternalLogin`, user)
+    .post<ServiceResponse>(`api/User/GoogleExternalLogin`, user)
     .then((response) => {
       return {
         response,

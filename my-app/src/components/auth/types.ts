@@ -19,7 +19,8 @@ export interface IChangeContactInfo {
     zipCode:string,
     city:string,
     homePhone:string,
-    token:string | null,
+    isHavePassword:string | null,
+    newPasswordAnotherLogin:string,
 }
 export interface ILoginUser {
     email: string;

@@ -13,6 +13,7 @@ const userTemp: IUser = {
   street: "",
   zipCode: "",
   city: "",
+  isHavePassword: "",
 };
 const initialState: UserState = {
   message: null,
@@ -42,6 +43,19 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
         ...state,
         user: action.payload,
         isAuth: true,
+        loading: false,
+        email: "",
+        message: "",
+      };
+    }
+    case UserActionTypes.LOGOUT_USER: {
+      return {
+        ...state,
+        user: userTemp,
+        isAuth: false,
+        loading: false,
+        email: "",
+        message: "",
       };
     }
     case UserActionTypes.REGISTER_USER: {

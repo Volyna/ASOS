@@ -204,7 +204,7 @@ function RegisterPage() {
                       onChange={handleChange}
                       value={values.lastName}
                     />
-                    {errors.lastName && (
+                    {errors.lastName && touched.lastName && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.lastName}</span>
                       </p>
@@ -235,7 +235,7 @@ function RegisterPage() {
                         id="input_password"
                       ></button>
                     </div>
-                    {errors.password && (
+                    {errors.password && touched.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
                       </p>

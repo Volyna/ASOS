@@ -1,4 +1,4 @@
-import { IUser } from "../../actions/userActions/types";
+import { IUser, ServiceResponse } from "../../actions/userActions/types";
 
 export interface UserState {
     email:string;
@@ -13,9 +13,19 @@ export interface UserState {
     SET_USER_EMAIL = "SET_USER_EMAIL",
     LOGIN_USER = "LOGIN_USER",
     REGISTER_USER = "REGISTER_USER",
+    LOGOUT_USER = "LOGOUT_USER",
+    LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL",
+  }
+  interface LoginSuccessfulAction {
+    type: UserActionTypes.LOGIN_SUCCESSFUL;
+    payload:ServiceResponse;
   }
   interface StartRequestUserAction {
     type: UserActionTypes.START_REQUESTS_USER;
+  
+  }
+  interface LogoutUserAction {
+    type: UserActionTypes.LOGOUT_USER;
   }
   interface StartSetUserEmailAction {
     type: UserActionTypes.SET_USER_EMAIL;
@@ -33,5 +43,7 @@ export interface UserState {
   | StartRequestUserAction
   | StartSetUserEmailAction
   | SuccessfulRequestLoginUserAction
-  |SuccessfulRequestRegisterUserAction;
+  |SuccessfulRequestRegisterUserAction
+  | LogoutUserAction
+  | LoginSuccessfulAction;
  

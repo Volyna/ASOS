@@ -11,4 +11,10 @@ export interface IUser {
   street:string,
   zipCode:string,
   city:string,
+  isHavePassword:string;
   }
+  export interface ServiceResponse{
+    Message: string;
+    Payload:object;
+    IsSuccess: any;
+  };

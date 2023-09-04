@@ -11,8 +11,9 @@ export function getToken(): null | string {
   const accessToken = window.localStorage.getItem("Token");
   return accessToken;
 }
-export function removeToken() {
+export function removeTokens() {
   window.localStorage.removeItem("Token");
+  window.localStorage.removeItem("_grecaptcha");
 }
 
 export default setAuthToken;
