@@ -15,6 +15,7 @@ export interface UserState {
     REGISTER_USER = "REGISTER_USER",
     LOGOUT_USER = "LOGOUT_USER",
     LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL",
+    BAG_REQUEST = "BAG_REQUEST",
   }
   interface LoginSuccessfulAction {
     type: UserActionTypes.LOGIN_SUCCESSFUL;
@@ -22,7 +23,10 @@ export interface UserState {
   }
   interface StartRequestUserAction {
     type: UserActionTypes.START_REQUESTS_USER;
-  
+  }
+  interface BadRequestUserAction {
+    type: UserActionTypes.BAG_REQUEST;
+    payload:string;
   }
   interface LogoutUserAction {
     type: UserActionTypes.LOGOUT_USER;
@@ -45,5 +49,6 @@ export interface UserState {
   | SuccessfulRequestLoginUserAction
   |SuccessfulRequestRegisterUserAction
   | LogoutUserAction
-  | LoginSuccessfulAction;
+  | LoginSuccessfulAction
+  |BadRequestUserAction;
  

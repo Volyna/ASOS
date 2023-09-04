@@ -38,8 +38,11 @@ import Checkout from "./components/Pages/Checkout/Checkout";
 
 import Error from "./components/Pages/Error/error";
 import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
+import { useTypedSelector } from "./hooks/useTypedSelector";
+import Loader from "./components/loader";
 
 function App() {
+  const { loading } = useTypedSelector((store) => store.UserReducer);
   const { darkMode } = useContext(DarkModeContext);
   const { pathname } = useLocation();
 
@@ -49,72 +52,41 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="login" element={<LoginePage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="admin" element={<AdminLayout />} />
-
-        <Route path="customer-care" element={<FAQs />} />
-        <Route path="customer-service" element={<CustomerService />} />
-
-        <Route path="basket-empty" element={<BasketEmpty />} />
-        <Route path="basket" element={<Basket />} />
-
-        <Route path="/account/contact-information" element={<ContactInf />} />
-
-        <Route path="/account/shopping-history" element={<Payment />} />
-        <Route
-          path="/account/shopping-history-empty"
-          element={<PaymentEmpty />}
-        />
-
-        <Route path="/account/returns" element={<Returns />} />
-        <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
-
-        <Route path="/account/favourites" element={<Favourites />} />
-        <Route path="/checkout" element={<Checkout />} />
-
-        <Route path="/men" element={<Men />} />
-        <Route path="/women" element={<Women />} />
-        <Route path="/ViewAll" element={<ProductsPage />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      {/* <Route path="/" element={<DefaultLayout />}>
+      {loading == true ? (
+        <Loader />
+      ) : (
         <Routes>
-          <Route path="/" element={<DefaultLayout />}>
-            <Route index element={<LoginePage />} />
-            <Route path="login" element={<AuthorizationPage />} />
-            <Route path="register" element={<RegisterPage />} />
-          </Route>
+          <Route path="/" element={<MainPage />} />
+          <Route path="login" element={<LoginePage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="admin" element={<AdminLayout />} />
 
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Home />} />
-            <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
-            </Route>
+          <Route path="customer-care" element={<FAQs />} />
+          <Route path="customer-service" element={<CustomerService />} />
 
-            <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route>
-          </Route>
+          <Route path="basket-empty" element={<BasketEmpty />} />
+          <Route path="basket" element={<Basket />} />
 
-          
-          <Route path="customer-care" element={<FAQs />}/>
+          <Route path="/account/contact-information" element={<ContactInf />} />
 
+          <Route path="/account/shopping-history" element={<Payment />} />
+          <Route
+            path="/account/shopping-history-empty"
+            element={<PaymentEmpty />}
+          />
+
+          <Route path="/account/returns" element={<Returns />} />
+          <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
+
+          <Route path="/account/favourites" element={<Favourites />} />
+          <Route path="/checkout" element={<Checkout />} />
+
+          <Route path="/men" element={<Men />} />
+          <Route path="/women" element={<Women />} />
+          <Route path="/ViewAll" element={<ProductsPage />} />
+          <Route path="*" element={<Error />} />
         </Routes>
-      </div>
-        </Routes> */}
+      )}
     </>
   );
 }

@@ -65,6 +65,13 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
         isAuth: true,
       };
     }
+    case UserActionTypes.BAG_REQUEST: {
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
+    }
     default: {
       return state;
     }
