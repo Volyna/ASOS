@@ -6,58 +6,102 @@ import icon_facebook from "../../../images/icon_facebook.png";
 import "./loginePageStyle.css";
 import { useFormik } from "formik";
 import { loginBeforeUserSchema } from "../validation";
-import { IBeforeLoginUser, ILoginUserByGoogle } from "../types";
+import { IBeforeLoginUser, ILoginUser, ILoginUserByGoogle } from "../types";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Footer from "../../Footer/FooterV";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 import { colors } from "@mui/material";
 import styled from "@emotion/styled";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import axios from "axios";
+import { useState } from "react";
 function LoginePage() {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user } = useTypedSelector((store) => store.UserReducer);
   let navigator = useNavigate();
-  const { IsUserExist, SetEmail, LoginUserByGoogle } = useActions();
+  const { IsUserExist, SetEmail, LoginUserByGoogle, LoginUser } = useActions();
+  const login = useGoogleLogin({
+    onError: () => {
+      errorGoogle();
+    },
+    onSuccess: async (tokenResponse) => {
+      responseGoogle(tokenResponse.access_token);
+      // const userInfo = await axios
+      //   .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+      //     headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+      //   })
+      //   .then((res) => res.data);
+      // console.log("userInfo", userInfo);
+      // responseGoogle(userInfo);
+    },
+  });
+
   const onSubmitFormik = async (values: IBeforeLoginUser) => {
+    if (!executeRecaptcha) return;
+    values.RecaptchaToken = await executeRecaptcha();
+    console.log("values IBeforeLoginUser: ", values);
     let resultExistUser = await IsUserExist(values);
     let isUserExits =
       resultExistUser.toString().toLowerCase() == "true" ? true : false;
     if (isUserExits == true) {
-      SetEmail(values.email);
-      navigator("/login");
+      let userData: ILoginUser = {
+        email: values.email,
+        password: values.password,
+        RecaptchaToken: values.RecaptchaToken,
+        IsRemember: values.remember,
+      };
+      console.log("Login userData:", userData);
+      LoginUser(userData);
     } else {
-      SetEmail(values.email);
-      navigator("/register");
+      console.log("Register");
+      toast.error(
+        "You have entered an incorrect password.\n Check your password and try again.",
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
+      );
     }
   };
 
-  const initValues: IBeforeLoginUser = { email: email.trim() };
+  const initValues: IBeforeLoginUser = {
+    RecaptchaToken: "",
+    remember: false,
+    password: "",
+    email: "",
+  };
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
     validationSchema: loginBeforeUserSchema,
   });
   const responseGoogle = (resp: any) => {
-    const token = resp.credential;
+    const token = resp;
+    // const token = resp.credential;
+    console.log("token: ", token);
     let response: ILoginUserByGoogle = {
       provider: "Google",
       token: token,
     };
+    console.log("responseGoogle to back end: ", response);
     LoginUserByGoogle(response);
   };
   if (user != null) {
-    return <Navigate to={"/asos"}></Navigate>;
+    return <Navigate to={"/"}></Navigate>;
   }
   const errorGoogle = () => {
     toast.error("Error Google login!!!", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
+
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-flui">
         <div className="content">
           <header className="header">
             <div className="asosLogo">
@@ -103,11 +147,19 @@ function LoginePage() {
               </li>
               <li className="social-login">
                 <a className="login_with" href="">
-                  <img src={icon_Google} alt="Login with Google" />
+                  <img
+                    src={icon_Google}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      login();
+                    }}
+                    alt="Login with Google"
+                  ></img>
+
                   {/* <GoogleLogin
-                          onSuccess={responseGoogle}
-                          onError={errorGoogle}
-                          /> */}
+                    onSuccess={responseGoogle}
+                    onError={errorGoogle}
+                  ></GoogleLogin> */}
                 </a>
               </li>
               <li className="social-login">
@@ -129,9 +181,9 @@ function LoginePage() {
                     <label className="label">Email</label>
                     <input
                       onChange={handleChange}
-                      value={values.email}
                       type="email"
                       className="input"
+                      required
                       id="email"
                       placeholder="Enter your email"
                       autoComplete="true"
@@ -141,24 +193,41 @@ function LoginePage() {
                         <span className="font-medium">{errors.email}</span>
                       </p>
                     )}
-
                     <label className="label">Password</label>
-                    <input
-                      onChange={handleChange}
-                      type="password"
-                      className="input input_password"
-                      id="password"
-                      placeholder="Enter your password"
-                      minLength={8}
-                      required
-                      autoComplete="true"
-                    />
-
+                    <div className="password-container">
+                      <input
+                        onChange={handleChange}
+                        type={passwordShown ? "text" : "password"}
+                        className="input "
+                        id="password"
+                        placeholder="Enter your password"
+                        minLength={8}
+                        required
+                        autoComplete="true"
+                      />{" "}
+                      <button
+                        onClick={() => {
+                          setPasswordShown(!passwordShown);
+                        }}
+                        className={
+                          passwordShown
+                            ? "input_password_show"
+                            : "input_password_login"
+                        }
+                        id="input_password"
+                      ></button>
+                    </div>
+                    {errors.password && (
+                      <p className="mt-2" style={{ color: "red" }}>
+                        <span className="font-medium">{errors.password}</span>
+                      </p>
+                    )}
                     <div className="addition">
                       <input
+                        onChange={handleChange}
                         className="checkbox"
                         type="checkbox"
-                        id="checkbox"
+                        id="remember"
                       ></input>
                       <p className="remember_me">Remember me</p>
                       <a href="" className="forgot">

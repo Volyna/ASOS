@@ -128,10 +128,27 @@
     
 }
 
-.input_password {
+.input_password_login {
     background: url(../../../images/icon_password.png) no-repeat center right 10px;
     background-size: 30px 30px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+    padding: 20px;
+    z-index: 10000;
+    margin-bottom: 27px;
+
+}
+.input_password_show {
+
+    background: url(../../../images/icon_password_show.png) no-repeat center right 10px;
+    background-size: 30px 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+    padding: 20px;
+    z-index: 10000;
+    margin-bottom: 27px;
 
 }
 
