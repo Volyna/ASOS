@@ -28,6 +28,7 @@ using WebAsos.Services;
 using WebAsos.Settings;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Interfaces.CategoryInterfaces;
+using WebAsos.SMTP_Email;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -60,17 +61,23 @@ var googleAuthSettings = builder.Configuration
 
 builder.Services.AddSingleton(googleAuthSettings);
 builder.Services.AddTransient<EmailService>();
+builder.Services.AddTransient<SmtpEmailService>();
 builder.Services.AddTransient<RecaptchaService>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<ICreditCardRepository, CreditCardRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderedProductRepository, OrderedProductRepository>();
 
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<ICreditCardService, CreditCardServise>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterUserValidation>());
 

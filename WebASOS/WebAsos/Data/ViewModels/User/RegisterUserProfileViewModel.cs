@@ -7,9 +7,7 @@ namespace WebAsos.Data.ViewModels.User
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int DayBirh { get; set; }
-        public int MonthBirh { get; set; }
-        public int YearBirh { get; set; }
+        public DateTime DataBirdth { get; set; }
         public string MostlyInterested { get; set; }
         public bool DiscountsAndSales { get; set; }
         public bool NewStuff { get; set; }

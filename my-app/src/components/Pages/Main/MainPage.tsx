@@ -19,11 +19,9 @@ const MainPage = () => {
   return (
     <>
       <Header />
-
       <div className="Mainblock">
         <img src={main1} alt="mainImage" />
       </div>
-
       <div className="section">
         <p className="header">new arrivals</p>
         <p className="text">meet this summer stylishly with focus</p>
@@ -39,13 +37,11 @@ const MainPage = () => {
           </button>
         </div>
       </div>
-
       {/* <div className="section">
                 <p className="header">HOLIDAY SHOP! </p>
                 <p className="text">Get ready for sun and warmer temperatures with us</p>
                 <button className="buttons">Show more</button>
             </div> */}
-
       <div className="genres">
         <div className="women col-6">
           <img src={woman} />
@@ -64,13 +60,11 @@ const MainPage = () => {
           </button>
         </div>
       </div>
-
       <div className="Mainblock">
         <p className="header">New vintage inspired collection</p>
         <img src={main2} alt="mainImage" />
         <button className="buttons">Show more</button>
       </div>
-
       <div className=" red section">
         <p className="header white">summer sale</p>
         <p className="text white">Up to 50% off!</p>
@@ -83,13 +77,11 @@ const MainPage = () => {
           </button>
         </div>
       </div>
-
       <div className="Mainblock">
         <p className="header">complete your look with bright details!</p>
         <img src={main3} alt="sunglasses" />
         <button className="buttons">sunglasses</button>
       </div>
-
       <div className="section">
         <p className="header">Linen clothes collection!</p>
         <p className="text">
@@ -107,7 +99,6 @@ const MainPage = () => {
           </button>
         </div>
       </div>
-
       <div className="items">
         <div className="item">
           <img src={item1} />
@@ -129,7 +120,6 @@ const MainPage = () => {
           <p className="itemName">Linen trousers</p>
         </div>
       </div>
-
       <Footer />
     </>
   );

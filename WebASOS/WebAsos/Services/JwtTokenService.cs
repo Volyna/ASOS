@@ -1,19 +1,29 @@
 ﻿using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
+using WebAsos.Constants.User;
 using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.JwtTokenService;
 using WebAsos.Settings;
+using static Google.Apis.Requests.BatchRequest;
+
+
 
 namespace WebAsos.Services
 {
     public class JwtTokenService : IJwtTokenService
     {
+        private const string GoogleCertsEndpoint = "https://www.googleapis.com/oauth2/v3/certs";
+        private const string YourClientId = "579487123707-nsn0hncgmdfrptb3ensmn85v08g8aubf.apps.googleusercontent.com";
         private readonly IConfiguration _config;
         private readonly UserManager<UserEntity> _userManager;
         private readonly GoogleAuthSettings _googleAuthSettings;
@@ -62,6 +72,38 @@ namespace WebAsos.Services
             var payload = await GoogleJsonWebSignature.ValidateAsync(request.Token, settings);
             return payload;
         }
+        //new =>
+        public async Task<UserInformation> VerifyGoogleAccessTokenAsync(string accessToken)
+        {
+            // Step 1: Retrieve Google's public keys
+            string apiUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseContent = await response.Content.ReadAsStringAsync();
+                        // Parse the response content into a JSON object
+                        UserInformation person = JsonConvert.DeserializeObject<UserInformation>(responseContent);
+
+                        return person;
+                    }
+                    else
+                    {
+                        return null; // Request was not successful
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    return null; // An error occurred
+                }            
+            }
+        }
+
         public class Tokens
         {
             public string token { get; set; }

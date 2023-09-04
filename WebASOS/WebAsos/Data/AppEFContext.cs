@@ -20,6 +20,9 @@ namespace WebAsos.Data
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<ProductImageEntity> ProductImages { get; set; }
         public DbSet<AddressEntity> Address { get; set; }
+        public DbSet<CreditCardEntity> CreditCard { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<OrderedProductEntity> OrderedProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
