@@ -6,7 +6,7 @@
         public string Phone { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public bool discountsAndSales { get; set; }
+        public string discountsAndSales { get; set; }
         public string passwordOld { get; set; }
         public string passwordNew { get; set; }
         public string country { get; set; }

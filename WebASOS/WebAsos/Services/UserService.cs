@@ -90,7 +90,6 @@ namespace WebAsos.Services
             {
                 var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
                 float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
-
                 if (!recaptchaResult.Success || recaptchaResult.Score < minScore)
                 {
                     return new ServiceResponse()
@@ -99,7 +98,6 @@ namespace WebAsos.Services
                         Message = "Recaptcha failed"
                     };
                 }
-
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user != null)
                 {
@@ -130,10 +128,7 @@ namespace WebAsos.Services
                         html = html.Replace("{url}", url);
                         info.Body = html;
                         _emailService.Send(info);
-
-
                         var aceessToken = await _jwtTokenService.CreateToken(newUser);
-
                         return new ServiceResponse() {
                             Message = "User successfully created.",
                             Payload = aceessToken,
@@ -415,7 +410,7 @@ namespace WebAsos.Services
                         Message = "No user associated with email",
                     };
                 }
-                else if (model.passwordOld != null)
+                else if (!String.IsNullOrEmpty(model.passwordNew))
                 {
                     var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
                     string normalToken = Encoding.UTF8.GetString(decodedToken);
@@ -423,7 +418,6 @@ namespace WebAsos.Services
                     if (result.Succeeded)
                     {
                         UserEntity updatedUser = _mapper.Map<UpdateUserProfileDTO, UserEntity>(model);
-                        updatedUser.Id = user.Id;
                         var resUpdateUser = await _userManager.UpdateAsync(updatedUser);
                         if (resUpdateUser.Succeeded) { 
                             return new ServiceResponse() { IsSuccess = true,Message= "Succeeded Update User!!!" };
@@ -435,8 +429,7 @@ namespace WebAsos.Services
                                 Message = "Error with Update User!!!",
                                 IsSuccess = false
                             };
-                        }
-                        
+                        }                      
                     }
                     return new ServiceResponse
                     {
@@ -448,20 +441,9 @@ namespace WebAsos.Services
                 else
                 {
                     UserEntity updatedUser = _mapper.Map<UpdateUserProfileDTO, UserEntity>(model);
-                    updatedUser.Id = user.Id;
-                    var resUpdateUser = await _userManager.UpdateAsync(updatedUser);
-                    if (resUpdateUser.Succeeded)
-                    {
+                    _userRepository.UpdateUserProfile(updatedUser);
                         return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!" };
-                    }
-                    else
-                    {
-                        return new ServiceResponse
-                        {
-                            Message = "Error with Update User!!!",
-                            IsSuccess = false
-                        };
-                    }
+                 
                 }
 
             }

@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import {
   IBeforeLoginUser,
+  IChangeContactInfo,
   ILoginUser,
   ILoginUserByGoogle,
   IRegisterUser,
@@ -11,6 +12,7 @@ import {
   login,
   loginByGoogle,
   register,
+  updateUserProfile,
 } from "../../../services/api-user-service";
 import jwtDecode from "jwt-decode";
 import setAuthToken from "../../../services/setAuthToken";
@@ -105,6 +107,30 @@ export const LoginUserByGoogle = (model: ILoginUserByGoogle) => {
       // console.log("response LoginUserByGoogle", response.data.payload);
 
       AuthUserToken(response.data.payload, dispatch);
+    } catch (e) {
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+};
+export const UpdateUserProfile = (model: IChangeContactInfo) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      dispatch({ type: UserActionTypes.START_REQUESTS_USER });
+      console.log("Start Update Profile");
+      const data = await updateUserProfile(model);
+      const { response } = data;
+      console.log("response UpdateUserProfile", response.data);
+      if (response.data.isSuccess == true) {
+        toast.success("Profile update successful", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        toast.error("Error Notification !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
     } catch (e) {
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,

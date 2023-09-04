@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WebAsos.Data.Entitties;
+using WebAsos.Data;
 using WebAsos.Data.Entitties.IdentityUser;
 using WebAsos.Data.ViewModels.User;
 using WebAsos.interfaces.UserService;
@@ -11,10 +13,12 @@ namespace WebAsos.Repositories.User
     {
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
-        public UserRepository(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
+        private readonly AppEFContext _context;
+        public UserRepository(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, AppEFContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
         public async Task<IdentityResult> RegisterUserAsync(UserEntity model, string password)
         {
@@ -92,6 +96,13 @@ namespace WebAsos.Repositories.User
         {
             var result = await _userManager.DeleteAsync(model);
             return result;
+        }
+
+        public Task UpdateUserProfile(UserEntity model)
+        {          
+            _context.Users.Update(model);
+            _context.SaveChanges();
+            return null;
         }
     }
 }

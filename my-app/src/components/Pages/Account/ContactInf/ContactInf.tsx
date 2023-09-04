@@ -11,9 +11,12 @@ import { useEffect, useMemo, useState } from "react";
 import countryList from "react-select-country-list";
 import axios from "axios";
 import { Country } from "../../types";
+import { getToken } from "../../../../services/setAuthToken";
+import { useActions } from "../../../../hooks/useActions";
 const ContactInf = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [myState, setMyState] = useState<JSX.Element | null>(null);
+  const { UpdateUserProfile } = useActions();
   const { email, user, isAuth } = useTypedSelector(
     (store) => store.UserReducer
   );
@@ -24,8 +27,7 @@ const ContactInf = () => {
     phone: user.phone,
     firstName: user.name,
     lastName: user.surname,
-    discountsAndSales:
-      user.discountsAndSales == null ? false : user.discountsAndSales,
+    discountsAndSales: "true",
     passwordOld: "",
     passwordNew: "",
     country: user.country,
@@ -34,6 +36,7 @@ const ContactInf = () => {
     zipCode: user.zipCode,
     city: user.city,
     homePhone: user.phone,
+    token: "",
   };
   const [countries, setCountries] = useState<Country[]>([]);
   const fetchData = async () => {
@@ -52,7 +55,12 @@ const ContactInf = () => {
     setMyState(<span>Hi</span>);
   }, []);
   const onSubmitFormik = async (values: IChangeContactInfo) => {
+    var token = getToken();
+    values.token = token;
+    values.discountsAndSales =
+      values.discountsAndSales == "true" ? "true" : "false";
     console.log("onSubmitFormik: ", values);
+    UpdateUserProfile(values);
   };
 
   const formik = useFormik({
@@ -153,9 +161,6 @@ const ContactInf = () => {
                     className="checkbox"
                     type="checkbox"
                     id="discountsAndSales"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    checked={formik.values.discountsAndSales}
                   ></input>
                   <p className="remember_me">Subscribe for news</p>
                 </div>

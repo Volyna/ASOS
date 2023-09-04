@@ -19,7 +19,9 @@ import axios from "axios";
 function RegisterPage() {
   const [passwordShown, setPasswordShown] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const { email, user } = useTypedSelector((store) => store.UserReducer);
+  const { email, user, isAuth } = useTypedSelector(
+    (store) => store.UserReducer
+  );
   const { RegisterUser, LoginUserByGoogle } = useActions();
   const initValues: IRegisterUser = {
     email: email,
@@ -73,16 +75,13 @@ function RegisterPage() {
     console.log("responseGoogle to back end: ", response);
     LoginUserByGoogle(response);
   };
-  if (user != null) {
-    return <Navigate to={"/"}></Navigate>;
-  }
   const errorGoogle = () => {
     toast.error("Error Google login!!!", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-  if (user === null) {
-    return <Navigate to={"/login"}></Navigate>;
+  if (isAuth == true) {
+    return <Navigate to={"/"}></Navigate>;
   }
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;

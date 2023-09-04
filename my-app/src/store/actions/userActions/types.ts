@@ -5,7 +5,7 @@ export interface IUser {
   phone: string;
   image: string;
   roles: string;
-  discountsAndSales:boolean;
+  discountsAndSales:string;
   country:string,
   state:string,
   street:string,

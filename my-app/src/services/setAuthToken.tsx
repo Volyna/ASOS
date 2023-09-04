@@ -11,5 +11,8 @@ export function getToken(): null | string {
   const accessToken = window.localStorage.getItem("Token");
   return accessToken;
 }
+export function removeToken() {
+  window.localStorage.removeItem("Token");
+}
 
 export default setAuthToken;

@@ -7,7 +7,7 @@ const userTemp: IUser = {
   phone: "",
   image: "",
   roles: "",
-  discountsAndSales: false,
+  discountsAndSales: "false",
   country: "",
   state: "",
   street: "",

@@ -10,7 +10,7 @@ export interface IChangeContactInfo {
     phone:string,
     firstName:string,
     lastName:string,
-    discountsAndSales:boolean,
+    discountsAndSales:string,
     passwordOld:string ,
     passwordNew:string ,
     country:string,
@@ -18,7 +18,8 @@ export interface IChangeContactInfo {
     street:string,
     zipCode:string,
     city:string,
-    homePhone:string
+    homePhone:string,
+    token:string | null,
 }
 export interface ILoginUser {
     email: string;

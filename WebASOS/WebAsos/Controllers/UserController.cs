@@ -111,6 +111,20 @@ namespace WebAsos.Controllers
                 return BadRequest();
             }
         }
+        [AllowAnonymous]
+        [HttpPost("updateUser")]
+        public async Task<IActionResult> UpdateUserProfileAsync([FromBody] UpdateUserProfileDTO model)
+        {
+            try
+            {
+                var result = await _userService.UpdateUserProfileAsync(model);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
 
 
 
