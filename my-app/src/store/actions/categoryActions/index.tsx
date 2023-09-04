@@ -12,9 +12,9 @@ import {
   updateCategory,
 } from "../../../services/api-categories-service";
 import {
-  CategoryActionTypes,
   CategoryesActions,
-} from "../../reducers/categoryReducer/types";
+  CategoryActionTypes,
+} from "../../reducers/CategoryReducer/types";
 
 export const GetCategories = () => {
   return async (dispatch: Dispatch<CategoryesActions>) => {

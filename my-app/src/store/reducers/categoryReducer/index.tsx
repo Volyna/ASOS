@@ -1,4 +1,4 @@
-import { CategoryState, CategoryesActions, CategoryActionTypes } from "./types";
+import { CategoryState, CategoryActionTypes, CategoryesActions } from "./types";
 
 const initialState: CategoryState = {
   categories: [],
