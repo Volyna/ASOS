@@ -1,7 +1,7 @@
 import Home from "./components/admin/pages/home/Home";
 import Login from "./components/admin/pages/login/Login";
 import List from "./components/admin/pages/list/List";
-import Single from "./components/admin/pages/single/Single";
+import SingleUser from "./components/admin/pages/single/SingleUser";
 import New from "./components/admin/pages/new/New";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { productInputs, userInputs } from "./components/admin/formSource";
@@ -14,6 +14,8 @@ import AuthorizationPage from "./components/auth/login/AuthorizationPage";
 import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
+import CategoryCreatePage from "./components/admin/components/categories/create/CategoryCreatePage";
+// import CategoryEditPage from "./components/admin/components/categories/edit/CategoryEditPage";
 import FAQs from "./components/Pages/FAQs/FAQs";
 
 import BasketEmpty from "./components/Pages/BasketEmpty/BasketEmpty";
@@ -22,7 +24,6 @@ import Basket from "./components/Pages/Basket/Basket";
 import MainPage from "./components/Pages/Main/MainPage";
 import Register from "./components/auth/register";
 import Men from "./components/Pages/Man and Woman Page/MenPage";
-import BreadCrumbs from "./components/BreadCrumbs/breadCrumbs";
 import Women from "./components/Pages/Man and Woman Page/WomanPage";
 
 import ContactInf from "./components/Pages/Account/ContactInf/ContactInf";
@@ -40,6 +41,9 @@ import Checkout from "./components/Pages/Checkout/Checkout";
 import Error from "./components/Pages/Error/error";
 import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
 
+// import ProductCreatePage from "./components/admin/components/products/create/ProductCreatePage";
+// import ProductEditPage from "./components/admin/components/products/edit/ProductEditPage";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { pathname } = useLocation();
@@ -51,10 +55,36 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/admin">
+          <Route index element={<Home />} />
+          {/* <Route path="login" element={<Login />} /> */}
+          <Route path="categoryCreate" element={<CategoryCreatePage />} />
+          {/* <Route path="categoryEdit" element={<CategoryEditPage />} />
+          <Route path="productCreate" element={<ProductCreatePage />} />
+          <Route path="productEdit" element={<ProductEditPage />} /> */}
+
+          <Route path="users">
+            <Route index element={<List />} />
+            <Route path=":userId" element={<SingleUser />} />
+            <Route
+              path="new"
+              element={<New inputs={userInputs} title="Add New User" />}
+            />
+          </Route>
+          <Route path="products">
+            <Route index element={<List />} />
+            {/* <Route path=":productId" element={<Single />} /> */}
+            <Route
+              path="new"
+              element={<New inputs={productInputs} title="Add New Product" />}
+            />
+          </Route>
+        </Route>
+
         <Route path="/" element={<MainPage />} />
         <Route path="login" element={<LoginePage />} />
         <Route path="register" element={<RegisterPage />} />
-        <Route path="admin" element={<AdminLayout />} />
+        {/* <Route path="admin" element={<AdminLayout />} /> */}
 
         <Route path="customer-care" element={<FAQs />} />
         <Route path="customer-service" element={<CustomerService />} />
@@ -78,7 +108,7 @@ function App() {
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
-        <Route path="/ViewAll" element={<ProductsPage/>}/>
+        <Route path="/ViewAll" element={<ProductsPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
       {/* <Route path="/" element={<DefaultLayout />}>
