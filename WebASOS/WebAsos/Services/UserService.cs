@@ -244,20 +244,20 @@ namespace WebAsos.Services
         {
             
             UserEntity user = null;
-            if (email == null)
-            {
-                user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            }
-            else
-            {
+            //if (email == null)
+            //{
+            //    user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            //}
+            //else
+            //{
                 user = await _userManager.FindByEmailAsync(email);
-            }
+            //}
 
             if (user == null)
             {
                 return new SimpleResponseDTO() {
-                    IsSuccess = true,
-                    Message = "The password has been changed"
+                    IsSuccess = false,
+                    Message = "User with " + email + " is not exist !"
                 };
             }
 

@@ -45,3 +45,4 @@ export const ChangeContactInfoSchema = yup.object().shape({
     lastName: yup.string(),
     email: yup.string().email("Email fail! Please type in your correct email address"),
   });
+export const ReceivePasswordSchema = yup.object().shape({email: yup.string().email("Email fail! Please type in your correct email address")});

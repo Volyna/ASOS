@@ -1,5 +1,4 @@
 import Home from "./components/admin/pages/home/Home";
-import Login from "./components/admin/pages/login/Login";
 import List from "./components/admin/pages/list/List";
 import Single from "./components/admin/pages/single/Single";
 import New from "./components/admin/pages/new/New";
@@ -40,6 +39,7 @@ import Error from "./components/Pages/Error/error";
 import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import Loader from "./components/loader";
+import PasswordRecovery from "./components/Pages/passwordRecovery";
 
 function App() {
   const { loading } = useTypedSelector((store) => store.UserReducer);
@@ -59,6 +59,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="login" element={<LoginePage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="forgotPassword" element={<PasswordRecovery />} />
           <Route path="admin" element={<AdminLayout />} />
 
           <Route path="customer-care" element={<FAQs />} />

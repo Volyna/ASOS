@@ -138,7 +138,7 @@ function LoginePage() {
               style={{
                 listStyleType: "none",
                 padding: "0",
-                marginBottom: "100px",
+                marginBottom: "50px",
                 textAlign: "center",
               }}
             >
@@ -232,9 +232,9 @@ function LoginePage() {
                         id="remember"
                       ></input>
                       <p className="remember_me">Remember me</p>
-                      <a href="" className="forgot">
+                      <Link to={"/forgotPassword"} className="forgot">
                         Forgot password?
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="submit">
