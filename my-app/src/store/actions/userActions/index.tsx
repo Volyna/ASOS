@@ -152,7 +152,9 @@ export const UpdateUserProfile = (model: IChangeContactInfo) => {
       const data = await updateUserProfile(model);
       const { response } = data;
       console.log("response UpdateUserProfile", response.data);
+
       if (response.data.isSuccess == true) {
+        dispatch({ type: UserActionTypes.SUCCESSFUL_REQUEST });
         toast.success("Profile update successful", {
           position: toast.POSITION.TOP_RIGHT,
         });
