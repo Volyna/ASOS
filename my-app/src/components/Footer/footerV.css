@@ -6,6 +6,7 @@
     padding-bottom: 0;
     margin-left: -4%;
     background-color: #353535;
+    z-index: -10;
 
 }
 
