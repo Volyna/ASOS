@@ -157,7 +157,15 @@ export const UpdateUserProfile = (model: IChangeContactInfo) => {
       console.log("response UpdateUserProfile", response.data);
 
       if (response.data.isSuccess == true) {
-        dispatch({ type: UserActionTypes.SUCCESSFUL_REQUEST });
+        const user = jwtDecode(response.data.payload) as IUser;
+        console.log("user: ", user);
+        window.localStorage.setItem("Token", response.data.payload);
+        dispatch({
+          type: UserActionTypes.LOGIN_USER,
+          payload: user,
+        });
+
+        // dispatch({ type: UserActionTypes.SUCCESSFUL_REQUEST });
         toast.success("Profile update successful", {
           position: toast.POSITION.TOP_RIGHT,
         });

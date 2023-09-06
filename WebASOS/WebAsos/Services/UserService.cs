@@ -432,7 +432,9 @@ namespace WebAsos.Services
                         user.City = model.city;
 
                         await _userRepository.UpdateUserProfile(user);
-                        return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!" };
+                       
+                        var aceessToken = await _jwtTokenService.CreateToken(user, "true");
+                        return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!",Payload = aceessToken };
                     }
                     else
                     {
@@ -458,7 +460,8 @@ namespace WebAsos.Services
                     user.City = model.city;
       
                     await _userRepository.UpdateUserProfile(user);
-                    return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!" };
+                    var aceessToken = await _jwtTokenService.CreateToken(user, "true");
+                    return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!",Payload = aceessToken };
                  
                 }
 
