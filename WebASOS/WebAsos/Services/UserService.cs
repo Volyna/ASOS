@@ -18,7 +18,7 @@ using WebAsos.SMTP_Email;
 
 namespace WebAsos.Services
 {
-    public class UserService : IUserService
+    public class UserService : IUserService   
     {
         private readonly UserManager<UserEntity> _userManager;
         private IConfiguration _configuration;
@@ -70,7 +70,7 @@ namespace WebAsos.Services
                 {
                     return new ServiceResponse { Payload = "Password incorrect !" };
                 }
-                string token = await _jwtTokenService.CreateToken(user);
+                string token = await _jwtTokenService.CreateToken(user,"true");
                 return new ServiceResponse()
                 {
                     Payload = token,
@@ -90,7 +90,6 @@ namespace WebAsos.Services
             {
                 var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
                 float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
-
                 if (!recaptchaResult.Success || recaptchaResult.Score < minScore)
                 {
                     return new ServiceResponse()
@@ -99,7 +98,6 @@ namespace WebAsos.Services
                         Message = "Recaptcha failed"
                     };
                 }
-
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user != null)
                 {
@@ -115,7 +113,6 @@ namespace WebAsos.Services
                     if (resultRole.Succeeded)
                     {
                         var token = await _userRepository.GenerateEmailConfirmationTokenAsync(newUser);
-
                         var encodedEmailToken = Encoding.UTF8.GetBytes(token);
                         var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
 
@@ -131,10 +128,7 @@ namespace WebAsos.Services
                         html = html.Replace("{url}", url);
                         info.Body = html;
                         _emailService.Send(info);
-
-
-                        var aceessToken = await _jwtTokenService.CreateToken(newUser);
-
+                        var aceessToken = await _jwtTokenService.CreateToken(newUser,"true");
                         return new ServiceResponse() {
                             Message = "User successfully created.",
                             Payload = aceessToken,
@@ -176,7 +170,6 @@ namespace WebAsos.Services
                 }
                 var info = new UserLoginInfo(request.Provider, payload.Sub, request.Provider);
                 var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
-                //var user = await _userRepository.GetUserByEmailAsync(
                 if (user == null)
                 {
                     user = await _userManager.FindByEmailAsync(payload.Email);
@@ -203,8 +196,9 @@ namespace WebAsos.Services
                         return new ServiceResponse { IsSuccess = false, Message = "Error creating a login through Google" };           
                     }
                 }
-
-                string token = await _jwtTokenService.CreateToken(user);
+                var isHavePasswordTemp = await _userManager.HasPasswordAsync(user);
+                var isHavePassword = isHavePasswordTemp == true ? "true" : "false";
+                string token = await _jwtTokenService.CreateToken(user, isHavePassword);
                 return new ServiceResponse { Payload = token, IsSuccess=true};
             }
             catch (Exception ex)
@@ -250,20 +244,20 @@ namespace WebAsos.Services
         {
             
             UserEntity user = null;
-            if (email == null)
-            {
-                user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            }
-            else
-            {
+            //if (email == null)
+            //{
+            //    user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            //}
+            //else
+            //{
                 user = await _userManager.FindByEmailAsync(email);
-            }
+            //}
 
             if (user == null)
             {
                 return new SimpleResponseDTO() {
-                    IsSuccess = true,
-                    Message = "The password has been changed"
+                    IsSuccess = false,
+                    Message = "User with " + email + " is not exist !"
                 };
             }
 
@@ -297,7 +291,7 @@ namespace WebAsos.Services
             if (user == null)
             {
                 return new ChangePasswordResponseDTO() { 
-                    IsSuccess = true 
+                    IsSuccess = false 
                 };
             }
 
@@ -314,7 +308,7 @@ namespace WebAsos.Services
                 string html = File.ReadAllText("SMTP_Email/html/changedPassword.html");
                 info.Body = html;
                 _emailService.Send(info);
-                string accessToken = await _jwtTokenService.CreateToken(user);
+                string accessToken = await _jwtTokenService.CreateToken(user,"");
                 return new ChangePasswordResponseDTO()
                 {
                     IsSuccess = true,
@@ -401,6 +395,75 @@ namespace WebAsos.Services
                 IsSuccess = false,
                 Errors = result.Errors.Select(e => e.Description)
             };
+        }
+
+        public async Task<ServiceResponse> UpdateUserProfileAsync(UpdateUserProfileDTO model)
+        {
+            try
+            {
+                UserEntity user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    return new ServiceResponse
+                    {
+                        IsSuccess = false,
+                        Message = "No user associated with email",
+                    };
+                }
+                else if (!String.IsNullOrEmpty(model.passwordNew))
+                {
+
+                    if (await _userManager.CheckPasswordAsync(user, model.passwordOld) == true)
+                    {
+                        await _userManager.ChangePasswordAsync(user, model.passwordOld, model.passwordNew);
+                        user.FirstName = model.firstName;
+                        user.Email = model.Email;
+                        user.LastName = model.lastName;
+                        user.PhoneNumber = model.Phone;
+                        user.DiscountsAndSales = model.discountsAndSales == "true" ? true : false;
+                        user.Country = model.country;
+                        user.State = model.state;
+                        user.Street = model.street;
+                        user.ZipCode = model.zipCode;
+                        user.City = model.city;
+
+                        await _userRepository.UpdateUserProfile(user);
+                        return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!" };
+                    }
+                    else
+                    {
+                        return new ServiceResponse() { IsSuccess = false, Message = "Invalid old password!!!" };
+                    }
+                   
+                }
+                else
+                {
+                    if (model.newPasswordAnotherLogin != null)
+                    {
+                        await _userManager.AddPasswordAsync(user, model.newPasswordAnotherLogin);
+                    }
+                    user.FirstName = model.firstName;
+                    user.Email = model.Email;
+                    user.LastName = model.lastName;
+                    user.PhoneNumber = model.Phone;
+                    user.DiscountsAndSales = model.discountsAndSales == "true" ? true :false;
+                    user.Country = model.country;
+                    user.State = model.state;
+                    user.Street = model.street;
+                    user.ZipCode = model.zipCode;
+                    user.City = model.city;
+      
+                    await _userRepository.UpdateUserProfile(user);
+                    return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!" };
+                 
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse { IsSuccess = false, Message = ex.Message.ToString() };
+            }
         }
     }
 }

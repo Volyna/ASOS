@@ -20,6 +20,8 @@ namespace WebAsos.interfaces.UserService
         Task<IdentityResult> LockUserAsync(UserEntity model, int days);
         Task<IdentityResult> UnLockUserAsync(UserEntity model);
         Task<IdentityResult> DeleteUserAsync(UserEntity model);
+        Task UpdateUserProfile(UserEntity model);
+
     }
 }
 

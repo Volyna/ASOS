@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import {
   IBeforeLoginUser,
+  IChangeContactInfo,
   ILoginUser,
   ILoginUserByGoogle,
   IRegisterUser,
@@ -11,9 +12,10 @@ import {
   login,
   loginByGoogle,
   register,
+  updateUserProfile,
 } from "../../../services/api-user-service";
 import jwtDecode from "jwt-decode";
-import setAuthToken from "../../../services/setAuthToken";
+import setAuthToken, { removeTokens } from "../../../services/setAuthToken";
 import { IUser } from "./types";
 import { toast } from "react-toastify";
 export const IsUserExist = (email: IBeforeLoginUser) => {
@@ -24,6 +26,7 @@ export const IsUserExist = (email: IBeforeLoginUser) => {
       const { response } = data;
       return response.data;
     } catch (e: any) {
+      dispatch({ type: UserActionTypes.BAG_REQUEST, payload: "" });
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -44,6 +47,11 @@ export const LoginUser = (user: ILoginUser) => {
       const { response } = data;
       console.log("response LoginUser:", response.data.payload);
       if (response.data.payload === "Password incorrect !") {
+        dispatch({
+          type: UserActionTypes.BAG_REQUEST,
+          payload:
+            "You have entered an incorrect password.\n Check your password and try again.",
+        });
         toast.error(
           "You have entered an incorrect password.\n Check your password and try again.",
           {
@@ -53,7 +61,6 @@ export const LoginUser = (user: ILoginUser) => {
       }
       AuthUserToken(response.data.payload, dispatch);
     } catch (e) {
-      console.log("sad");
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -67,13 +74,19 @@ export const AuthUserToken = (
   try {
     const user = jwtDecode(token) as IUser;
     setAuthToken(token);
-    localStorage.token = token;
-
+    window.localStorage.setItem("Token", token);
+    // window.localStorage.token = token;
+    console.log("Login user");
     dispatch({
       type: UserActionTypes.LOGIN_USER,
       payload: user,
     });
-  } catch (e) {}
+  } catch (e) {
+    dispatch({
+      type: UserActionTypes.BAG_REQUEST,
+      payload: "",
+    });
+  }
 };
 export const RegisterUser = (user: IRegisterUser) => {
   return async (dispatch: Dispatch<UserActions>) => {
@@ -84,12 +97,20 @@ export const RegisterUser = (user: IRegisterUser) => {
       console.log("Response", response);
       console.log("RegisterUser:", response.data.payload);
       if (response.data.payload === "User was register") {
+        dispatch({
+          type: UserActionTypes.BAG_REQUEST,
+          payload: "User was register!",
+        });
         toast.error("User was register!", {
           position: toast.POSITION.TOP_RIGHT,
         });
       }
       AuthUserToken(response.data.payload, dispatch);
     } catch (e) {
+      dispatch({
+        type: UserActionTypes.BAG_REQUEST,
+        payload: "Error Notification !",
+      });
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -102,13 +123,64 @@ export const LoginUserByGoogle = (model: ILoginUserByGoogle) => {
       dispatch({ type: UserActionTypes.START_REQUESTS_USER });
       const data = await loginByGoogle(model);
       const { response } = data;
-      // console.log("response LoginUserByGoogle", response.data.payload);
-
-      AuthUserToken(response.data.payload, dispatch);
+      console.log("LoginUserByGoogle Data:", response.data);
+      console.log("IsSuccess:", response.data.IsSuccess);
+      if (response.data.isSuccess === true) {
+        AuthUserToken(response.data.payload, dispatch);
+      } else {
+        dispatch({
+          type: UserActionTypes.BAG_REQUEST,
+          payload: "Error Notification !",
+        });
+      }
     } catch (e) {
+      dispatch({
+        type: UserActionTypes.BAG_REQUEST,
+        payload: "Error Notification !",
+      });
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+  };
+};
+export const UpdateUserProfile = (model: IChangeContactInfo) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      dispatch({ type: UserActionTypes.START_REQUESTS_USER });
+      console.log("Start Update Profile");
+      const data = await updateUserProfile(model);
+      const { response } = data;
+      console.log("response UpdateUserProfile", response.data);
+      if (response.data.isSuccess == true) {
+        toast.success("Profile update successful", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        dispatch({
+          type: UserActionTypes.BAG_REQUEST,
+          payload: "Error Notification !",
+        });
+        toast.error("Error Notification !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.BAG_REQUEST,
+        payload: "Error Notification !",
+      });
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+};
+export const LogOut = () => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    removeTokens();
+    dispatch({
+      type: UserActionTypes.LOGOUT_USER,
+    });
   };
 };

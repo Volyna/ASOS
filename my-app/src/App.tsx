@@ -1,5 +1,4 @@
 import Home from "./components/admin/pages/home/Home";
-import Login from "./components/admin/pages/login/Login";
 import List from "./components/admin/pages/list/List";
 import Single from "./components/admin/pages/single/Single";
 import New from "./components/admin/pages/new/New";
@@ -39,8 +38,12 @@ import Checkout from "./components/Pages/Checkout/Checkout";
 import Error from "./components/Pages/Error/error";
 import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
 import ProductPage from "./components/Pages/Product/product";
+import { useTypedSelector } from "./hooks/useTypedSelector";
+import Loader from "./components/loader";
+import PasswordRecovery from "./components/Pages/passwordRecovery";
 
 function App() {
+  const { loading } = useTypedSelector((store) => store.UserReducer);
   const { darkMode } = useContext(DarkModeContext);
   const { pathname } = useLocation();
 
@@ -50,31 +53,35 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="login" element={<LoginePage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="admin" element={<AdminLayout />} />
+      {loading == true ? (
+        <Loader />
+      ) : (
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="login" element={<LoginePage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="forgotPassword" element={<PasswordRecovery />} />
+          <Route path="admin" element={<AdminLayout />} />
 
-        <Route path="customer-care" element={<FAQs />} />
-        <Route path="customer-service" element={<CustomerService />} />
+          <Route path="customer-care" element={<FAQs />} />
+          <Route path="customer-service" element={<CustomerService />} />
 
-        <Route path="basket-empty" element={<BasketEmpty />} />
-        <Route path="basket" element={<Basket />} />
+          <Route path="basket-empty" element={<BasketEmpty />} />
+          <Route path="basket" element={<Basket />} />
 
-        <Route path="/account/contact-information" element={<ContactInf />} />
+          <Route path="/account/contact-information" element={<ContactInf />} />
 
-        <Route path="/account/shopping-history" element={<Payment />} />
-        <Route
-          path="/account/shopping-history-empty"
-          element={<PaymentEmpty />}
-        />
+          <Route path="/account/shopping-history" element={<Payment />} />
+          <Route
+            path="/account/shopping-history-empty"
+            element={<PaymentEmpty />}
+          />
 
-        <Route path="/account/returns" element={<Returns />} />
-        <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
+          <Route path="/account/returns" element={<Returns />} />
+          <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
 
-        <Route path="/account/favourites" element={<Favourites />} />
-        <Route path="/checkout" element={<Checkout />} />
+          <Route path="/account/favourites" element={<Favourites />} />
+          <Route path="/checkout" element={<Checkout />} />
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
