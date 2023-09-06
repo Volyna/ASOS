@@ -4,6 +4,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
+import { CategoryOutlined } from "@mui/icons-material";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -21,14 +22,14 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/admin" style={{ textDecoration: "none" }}>
-          <span className="logo">lamadmin</span>
+          <span className="logo">admin</span>
         </Link>
       </div>
       <hr />
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/admin" style={{ textDecoration: "none" }}>
           <li>
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
@@ -41,16 +42,24 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
+          <Link to="/admin/categories" style={{ textDecoration: "none" }}>
+            <li>
+              <CategoryOutlined className="icon" />
+              <span>Categories</span>
+            </li>
+          </Link>
           <Link to="/admin/products" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
               <span>Products</span>
             </li>
           </Link>
+          <Link to="/admin/orders" style={{ textDecoration: "none" }}>
           <li>
             <CreditCardIcon className="icon" />
             <span>Orders</span>
           </li>
+          </Link>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
