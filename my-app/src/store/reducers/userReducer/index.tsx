@@ -65,6 +65,12 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
         isAuth: true,
       };
     }
+    case UserActionTypes.SUCCESSFUL_REQUEST: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
     case UserActionTypes.BAG_REQUEST: {
       return {
         ...state,
