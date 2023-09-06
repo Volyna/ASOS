@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 
-const Single = () => {
+const SingleUser = () => {
   return (
     <div className="single">
       <Sidebar />
@@ -56,4 +56,4 @@ const Single = () => {
   );
 };
 
-export default Single;
+export default SingleUser;

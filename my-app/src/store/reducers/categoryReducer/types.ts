@@ -8,7 +8,7 @@ export interface CategoryState {
   interface IItemCategory {
     id: number;
     name: string;
-    imageBase64: string;
+    // imageBase64: string;
   }
   
   export enum CategoryActionTypes {

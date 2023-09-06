@@ -4,7 +4,7 @@ const initialState: CategoryState = {
   categories: [],
   message: null,
   loading: false,
-  categoryForUpdate: { id: 0, name: "", imageBase64: "" },
+  categoryForUpdate: { id: 0, name: "" },
 };
 
 const CategoryReducer = (
@@ -17,7 +17,7 @@ const CategoryReducer = (
         ...state,
         loading: false,
         message: action.payload.message,
-        categoryForUpdate: { id: 0, name: "", imageBase64: "" },
+        categoryForUpdate: { id: 0, name: "" },
         categories: [],
       };
     }
@@ -55,7 +55,7 @@ const CategoryReducer = (
         categoryForUpdate: {
           id: 0,
           name: "",
-          imageBase64: "",
+          // imageBase64: "",
         },
         message: action.payload.message,
       };

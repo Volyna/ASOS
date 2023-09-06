@@ -16,23 +16,22 @@ const CategoryCreate = () => {
 
   const [model, setModel] = useState<ICategoryCreate>({
     name: "",
-    imageBase64: "",
   });
 
-  const onFileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { target } = e;
-    const { files } = target;
-    if (files) {
-      const file = files[0];
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = (e) => {
-        const imageBase64 = e.target?.result as string;
-        setModel({ ...model, imageBase64 });
-      };
-    }
-    target.value = "";
-  };
+  // const onFileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { target } = e;
+  //   const { files } = target;
+  //   if (files) {
+  //     const file = files[0];
+  //     const fileReader = new FileReader();
+  //     fileReader.readAsDataURL(file);
+  //     fileReader.onload = (e) => {
+  //       const imageBase64 = e.target?.result as string;
+  //       setModel({ ...model, imageBase64 });
+  //     };
+  //   }
+  //   target.value = "";
+  // };
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +39,7 @@ const CategoryCreate = () => {
     const data = new FormData(e.currentTarget);
     const newCategory: ICategoryCreate = {
       name: data.get("name")?.toString()!,
-      imageBase64: model.imageBase64,
+      // imageBase64: model.imageBase64,
     };
     console.log("New category", newCategory);
     CreateCategory(newCategory);
@@ -83,7 +82,7 @@ const CategoryCreate = () => {
                     ) : null}
                   </div>
 
-                  <div>
+                  {/* <div>
                     <label className="label">Image</label>
 
                     <div className="mt-1 flex items-center">
@@ -118,7 +117,7 @@ const CategoryCreate = () => {
                       id="selectImage"
                       className="hidden"
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="space-x-4 mt-8">
                   <button
