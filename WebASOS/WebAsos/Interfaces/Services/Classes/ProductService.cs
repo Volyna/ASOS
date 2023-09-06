@@ -34,6 +34,14 @@ namespace WebAsos.Interfaces.Services.Classes
             var product = _mapper.Map<CreateProductDTO, ProductEntity>(model);
 
             var category = await _categoryService.GetByIdAsync(model.CategoryId);
+            if (category == null)
+            {
+                return new ServiceResponse
+                {
+                    Message = "Category is not exist with id: " + model.CategoryId,
+                    IsSuccess = false,
+                };
+            }
 
             product.CategoryId = category.Id;
 
