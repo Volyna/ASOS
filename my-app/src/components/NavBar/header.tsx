@@ -55,7 +55,7 @@ const Header = () => {
                 <img src={user} alt="" className="noneM" />
               </Link>
             ) : (
-              <Link to="/register">
+              <Link to="/login">
                 <img src={user} alt="" className="noneM" />
               </Link>
             )}
