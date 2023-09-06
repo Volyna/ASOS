@@ -205,7 +205,7 @@ input[type="checkbox"]::before {
     font-size: 20px;
     line-height: 16px;
     padding: 0;
-    margin: 50px 0px 100px 0px;
+    margin: 50px 0px 0px 0px;
     
 }
 

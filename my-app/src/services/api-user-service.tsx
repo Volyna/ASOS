@@ -5,6 +5,7 @@ import {
   ILoginUserByGoogle,
   IRegisterUser,
 } from "../components/auth/types";
+import { IRecoveryPasswordUpdate } from "../components/Pages/types";
 import { ServiceResponse } from "../store/actions/userActions/types";
 import http from "./http_common";
 
@@ -64,6 +65,32 @@ export async function register(user: IRegisterUser) {
 export async function updateUserProfile(user: IChangeContactInfo) {
   const data = await http
     .post(`api/User/updateUser`, user)
+    .then((response) => {
+      return {
+        response,
+      };
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return data;
+}
+export async function recoveryPassword(email: string) {
+  const data = await http
+    .get(`api/User/resetPassword` + "?email=" + email)
+    .then((response) => {
+      return {
+        response,
+      };
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return data;
+}
+export async function recoveryPasswordUpdate(model: IRecoveryPasswordUpdate) {
+  const data = await http
+    .post(`api/User/changePassword`, model)
     .then((response) => {
       return {
         response,
