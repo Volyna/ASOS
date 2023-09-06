@@ -41,6 +41,7 @@ import ProductPage from "./components/Pages/Product/product";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import Loader from "./components/loader";
 import PasswordRecovery from "./components/Pages/passwordRecovery";
+import PasswordUpdateRecovery from "./components/Pages/passwordUpdateRecovery";
 
 function App() {
   const { loading } = useTypedSelector((store) => store.UserReducer);
@@ -59,6 +60,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="login" element={<LoginePage />} />
+          <Route path="resetPassword" element={<PasswordUpdateRecovery />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="forgotPassword" element={<PasswordRecovery />} />
           <Route path="admin" element={<AdminLayout />} />

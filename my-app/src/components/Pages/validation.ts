@@ -46,3 +46,21 @@ export const ChangeContactInfoSchema = yup.object().shape({
     email: yup.string().email("Email fail! Please type in your correct email address"),
   });
 export const ReceivePasswordSchema = yup.object().shape({email: yup.string().email("Email fail! Please type in your correct email address")});
+export const PasswordUpdateRecoverySchema = yup.object().shape({
+  password:yup .string()
+  .min(6, 'Password must be 6 characters long')
+  .matches(/[0-9]/, 'Password requires a number')
+  .matches(/[a-z]/, 'Password requires a lowercase letter')
+  .matches(/[A-Z]/, 'Password requires an uppercase letter')
+  .matches(/[^\w]/, 'Password requires a symbol') 
+  .required("required")  
+ ,
+ confirmPassword: yup .string()
+ .min(6, 'Password must be 6 characters long')
+ .matches(/[0-9]/, 'Password requires a number')
+ .matches(/[a-z]/, 'Password requires a lowercase letter')
+ .matches(/[A-Z]/, 'Password requires an uppercase letter')
+ .matches(/[^\w]/, 'Password requires a symbol')
+ .required("required")
+ .oneOf([Yup.ref('password'), "Passwords must match"], 'Passwords must match') 
+});
