@@ -16,7 +16,7 @@ export default function BreadCrumbs(){
 
             return(
                     <NavLink className={({isActive}) => {return isActive ? 'last crumbComp' : 'crumbComp'}} to={currentLink}> 
-                        {" " + crumb.charAt(0).toUpperCase()+crumb.slice(1).replace('-', " ")}
+                         {" " + crumb.charAt(0).toUpperCase()+crumb.slice(1).replace('-', " ")}
                     </NavLink>
             )
       

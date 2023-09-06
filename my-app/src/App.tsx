@@ -78,46 +78,11 @@ function App() {
 
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
-        <Route path="/ViewAll" element={<ProductsPage/>}/>
-        <Route path="/Prod" element={<ProductPage/>}/>
+        <Route path="/ViewAll" element={<ProductsPage />} />
+        <Route path="/Prod" element={<ProductPage />} />
 
         <Route path="*" element={<Error />} />
       </Routes>
-      {/* <Route path="/" element={<DefaultLayout />}>
-        <Routes>
-          <Route path="/" element={<DefaultLayout />}>
-            <Route index element={<LoginePage />} />
-            <Route path="login" element={<AuthorizationPage />} />
-            <Route path="register" element={<RegisterPage />} />
-          </Route>
-
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Home />} />
-            <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
-            </Route>
-
-            <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route>
-          </Route>
-
-          
-          <Route path="customer-care" element={<FAQs />}/>
-
-        </Routes>
-      </div>
-        </Routes> */}
     </>
   );
 }
