@@ -12,8 +12,8 @@ using WebAsos.Data;
 namespace WebAsos.Migrations
 {
     [DbContext(typeof(AppEFContext))]
-    [Migration("20230822125410_fix tblOrders")]
-    partial class fixtblOrders
+    [Migration("20230906114021_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -478,9 +478,17 @@ namespace WebAsos.Migrations
                     b.Property<bool?>("AsosPartners")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("City")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime?>("DataBirth")
                         .HasColumnType("timestamp without time zone");
@@ -541,6 +549,14 @@ namespace WebAsos.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
+                    b.Property<string>("State")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Street")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -550,6 +566,10 @@ namespace WebAsos.Migrations
 
                     b.Property<bool?>("YourExclusives")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("ZipCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 

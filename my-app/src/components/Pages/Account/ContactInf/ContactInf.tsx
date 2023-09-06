@@ -61,7 +61,6 @@ const ContactInf = () => {
       values.discountsAndSales == "true" ? "true" : "false";
     console.log("onSubmitFormik: ", values);
     UpdateUserProfile(values);
-    
   };
 
   const formik = useFormik({
@@ -162,6 +161,12 @@ const ContactInf = () => {
                     className="checkbox"
                     type="checkbox"
                     id="discountsAndSales"
+                    defaultChecked={Boolean(formik.values.discountsAndSales)}
+                    onClick={(e) => {
+                      formik.values.discountsAndSales = String(
+                        e.currentTarget.checked
+                      );
+                    }}
                   ></input>
                   <p className="remember_me">Subscribe for news</p>
                 </div>
