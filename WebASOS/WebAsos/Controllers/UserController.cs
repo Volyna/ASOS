@@ -84,12 +84,12 @@ namespace WebAsos.Controllers
 
         [AllowAnonymous]
         [HttpGet("resetPassword")]
-        public async Task<IActionResult> ResetPasswordAsync([FromQuery] string? email = null)
+        public async Task<IActionResult> ResetPasswordAsync([FromQuery] ResetPasswordViewModel model)
         {
             
             try
             {
-                var result = await _userService.ResetPasswordAsync(email);
+                var result = await _userService.ResetPasswordAsync(model.Email);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -104,6 +104,20 @@ namespace WebAsos.Controllers
             try
             {
                 var result = await _userService.ChangePasswordAsync(model);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+        [AllowAnonymous]
+        [HttpPost("updateUser")]
+        public async Task<IActionResult> UpdateUserProfileAsync([FromBody] UpdateUserProfileDTO model)
+        {
+            try
+            {
+                var result = await _userService.UpdateUserProfileAsync(model);
                 return Ok(result);
             }
             catch (Exception ex)

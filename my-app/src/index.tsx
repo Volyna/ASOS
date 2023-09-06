@@ -11,9 +11,17 @@ import { store } from "./store";
 import "./index.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
+import { getToken } from "./services/setAuthToken";
+import { AuthUserToken } from "./store/actions/userActions";
+import Loader from "./components/loader";
+const token = getToken();
+if (token) {
+  AuthUserToken(token, store.dispatch);
+}
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <Provider store={store}>
     <BrowserRouter>

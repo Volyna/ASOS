@@ -1,5 +1,4 @@
 import Home from "./components/admin/pages/home/Home";
-import Login from "./components/admin/pages/login/Login";
 import List from "./components/admin/pages/list/List";
 import SingleUser from "./components/admin/pages/single/SingleUser";
 import New from "./components/admin/pages/new/New";
@@ -40,11 +39,16 @@ import Checkout from "./components/Pages/Checkout/Checkout";
 import Error from "./components/Pages/Error/error";
 import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
 import ProductPage from "./components/Pages/Product/product";
+import { useTypedSelector } from "./hooks/useTypedSelector";
+import Loader from "./components/loader";
+import PasswordRecovery from "./components/Pages/passwordRecovery";
+import PasswordUpdateRecovery from "./components/Pages/passwordUpdateRecovery";
 
 // import ProductCreatePage from "./components/admin/components/products/create/ProductCreatePage";
 // import ProductEditPage from "./components/admin/components/products/edit/ProductEditPage";
 
 function App() {
+  const { loading } = useTypedSelector((store) => store.UserReducer);
   const { darkMode } = useContext(DarkModeContext);
   const { pathname } = useLocation();
 
@@ -54,6 +58,16 @@ function App() {
 
   return (
     <>
+      {loading == true ? (
+        <Loader />
+      ) : (
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="login" element={<LoginePage />} />
+          <Route path="resetPassword" element={<PasswordUpdateRecovery />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="forgotPassword" element={<PasswordRecovery />} />
+          <Route path="admin" element={<AdminLayout />} />
       <Routes>
         <Route path="/admin">
           <Route index element={<Home />} />
@@ -86,68 +100,34 @@ function App() {
         <Route path="register" element={<RegisterPage />} />
         {/* <Route path="admin" element={<AdminLayout />} /> */}
 
-        <Route path="customer-care" element={<FAQs />} />
-        <Route path="customer-service" element={<CustomerService />} />
+          <Route path="customer-care" element={<FAQs />} />
+          <Route path="customer-service" element={<CustomerService />} />
 
-        <Route path="basket-empty" element={<BasketEmpty />} />
-        <Route path="basket" element={<Basket />} />
+          <Route path="basket-empty" element={<BasketEmpty />} />
+          <Route path="basket" element={<Basket />} />
 
-        <Route path="/account/contact-information" element={<ContactInf />} />
+          <Route path="/account/contact-information" element={<ContactInf />} />
 
-        <Route path="/account/shopping-history" element={<Payment />} />
-        <Route
-          path="/account/shopping-history-empty"
-          element={<PaymentEmpty />}
-        />
+          <Route path="/account/shopping-history" element={<Payment />} />
+          <Route
+            path="/account/shopping-history-empty"
+            element={<PaymentEmpty />}
+          />
 
-        <Route path="/account/returns" element={<Returns />} />
-        <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
+          <Route path="/account/returns" element={<Returns />} />
+          <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
 
-        <Route path="/account/favourites" element={<Favourites />} />
-        <Route path="/checkout" element={<Checkout />} />
+          <Route path="/account/favourites" element={<Favourites />} />
+          <Route path="/checkout" element={<Checkout />} />
 
-        <Route path="/men" element={<Men />} />
-        <Route path="/women" element={<Women />} />
-        <Route path="/ViewAll" element={<ProductsPage/>}/>
-        <Route path="/Prod" element={<ProductPage/>}/>
+          <Route path="/men" element={<Men />} />
+          <Route path="/women" element={<Women />} />
+          <Route path="/ViewAll" element={<ProductsPage />} />
+          <Route path="/Prod" element={<ProductPage />} />
 
-        <Route path="*" element={<Error />} />
-      </Routes>
-      {/* <Route path="/" element={<DefaultLayout />}>
-        <Routes>
-          <Route path="/" element={<DefaultLayout />}>
-            <Route index element={<LoginePage />} />
-            <Route path="login" element={<AuthorizationPage />} />
-            <Route path="register" element={<RegisterPage />} />
-          </Route>
-
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Home />} />
-            <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
-            </Route>
-
-            <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route>
-          </Route>
-
-          
-          <Route path="customer-care" element={<FAQs />}/>
-
+          <Route path="*" element={<Error />} />
         </Routes>
-      </div>
-        </Routes> */}
+      )}
     </>
   );
 }

@@ -39,6 +39,8 @@ namespace WebAsos.Data.AutoMapper.User
 
             CreateMap<CategoryEntity, CategoryGroupViewModel>();
             CreateMap<RegisterUserProfileViewModel, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));
+            CreateMap<UpdateUserProfileDTO, UserEntity>().ForMember(dst => dst.UserName, act => act.MapFrom(src => src.Email));
+            
 
             CreateMap<AddressEntity, AddressDTO>();
             CreateMap<AddressDTO, AddressEntity>();

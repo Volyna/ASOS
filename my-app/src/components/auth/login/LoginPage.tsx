@@ -20,7 +20,9 @@ import { useState } from "react";
 function LoginePage() {
   const [passwordShown, setPasswordShown] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const { email, user } = useTypedSelector((store) => store.UserReducer);
+  const { email, user, isAuth } = useTypedSelector(
+    (store) => store.UserReducer
+  );
   let navigator = useNavigate();
   const { IsUserExist, SetEmail, LoginUserByGoogle, LoginUser } = useActions();
   const login = useGoogleLogin({
@@ -77,18 +79,18 @@ function LoginePage() {
     onSubmit: onSubmitFormik,
     validationSchema: loginBeforeUserSchema,
   });
+
   const responseGoogle = (resp: any) => {
     const token = resp;
     // const token = resp.credential;
-    console.log("token: ", token);
     let response: ILoginUserByGoogle = {
       provider: "Google",
       token: token,
     };
-    console.log("responseGoogle to back end: ", response);
     LoginUserByGoogle(response);
   };
-  if (user != null) {
+
+  if (isAuth == true) {
     return <Navigate to={"/"}></Navigate>;
   }
   const errorGoogle = () => {
@@ -136,7 +138,7 @@ function LoginePage() {
               style={{
                 listStyleType: "none",
                 padding: "0",
-                marginBottom: "100px",
+                marginBottom: "50px",
                 textAlign: "center",
               }}
             >
@@ -188,7 +190,7 @@ function LoginePage() {
                       placeholder="Enter your email"
                       autoComplete="true"
                     />
-                    {errors.email && (
+                    {errors.email && touched.email && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.email}</span>
                       </p>
@@ -217,7 +219,7 @@ function LoginePage() {
                         id="input_password"
                       ></button>
                     </div>
-                    {errors.password && (
+                    {errors.password && touched.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
                       </p>
@@ -230,9 +232,9 @@ function LoginePage() {
                         id="remember"
                       ></input>
                       <p className="remember_me">Remember me</p>
-                      <a href="" className="forgot">
+                      <Link to={"/forgotPassword"} className="forgot">
                         Forgot password?
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="submit">
