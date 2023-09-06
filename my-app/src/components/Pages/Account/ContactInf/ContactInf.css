@@ -11,6 +11,10 @@
     line-height: normal;
     text-transform: uppercase;
 }
+.input{
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
 
 .menu_item a{
     text-decoration: none;

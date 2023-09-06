@@ -19,6 +19,16 @@ namespace WebAsos.Data.Entitties.IdentityUser
         public bool? NewStuff { get; set; }
         public bool? YourExclusives { get; set; }
         public bool? AsosPartners { get; set; }
+        [StringLength(100)]
+        public string? Country { get; set; }
+        [StringLength(100)]
+        public string? State { get; set; }
+        [StringLength(100)]
+        public string? Street { get; set; } 
+        [StringLength(100)]
+        public string? ZipCode { get; set; } 
+        [StringLength(100)]
+        public string? City { get; set; }
 
         public AddressEntity Address { get; set; }
         public virtual ICollection<UserRoleEntity> UserRoles { get; set; }

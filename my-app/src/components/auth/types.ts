@@ -1,17 +1,26 @@
 
-export interface IUser {
-    name:string;
-  surname:string;
-  email: string;
-    phone: string;
-    image: string;
-    roles: string;
-}
 export interface IBeforeLoginUser {
     RecaptchaToken:string,
     remember:boolean,
     email:string,
     password:string
+}
+export interface IChangeContactInfo {
+    email:string,
+    phone:string,
+    firstName:string,
+    lastName:string,
+    discountsAndSales:string,
+    passwordOld:string ,
+    passwordNew:string ,
+    country:string,
+    state:string,
+    street:string,
+    zipCode:string,
+    city:string,
+    homePhone:string,
+    isHavePassword:string | null,
+    newPasswordAnotherLogin:string,
 }
 export interface ILoginUser {
     email: string;

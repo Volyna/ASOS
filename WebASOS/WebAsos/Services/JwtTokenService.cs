@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Xml.Linq;
 using WebAsos.Constants.User;
 using WebAsos.Data.Entitties;
 using WebAsos.Data.Entitties.IdentityUser;
@@ -22,6 +23,7 @@ namespace WebAsos.Services
 {
     public class JwtTokenService : IJwtTokenService
     {
+       
         private const string GoogleCertsEndpoint = "https://www.googleapis.com/oauth2/v3/certs";
         private const string YourClientId = "579487123707-nsn0hncgmdfrptb3ensmn85v08g8aubf.apps.googleusercontent.com";
         private readonly IConfiguration _config;
@@ -34,7 +36,7 @@ namespace WebAsos.Services
             _googleAuthSettings = googleAuthSettings;
         }
 
-        public async Task<string> CreateToken(UserEntity user)
+        public async Task<string> CreateToken(UserEntity user,string loginBy)
         {
            
             List<Claim> claims = new List<Claim>()
@@ -43,7 +45,15 @@ namespace WebAsos.Services
                 new Claim("surname", user.LastName ?? ""),
                 new Claim("phone", user.PhoneNumber ?? ""),
                 new Claim("email", user.Email ?? ""),
-                new Claim("image", user.Image??"")
+                new Claim("image", user.Image??""),
+                new Claim("discountsAndSales", user.DiscountsAndSales == false ? "false" : "true"),
+                new Claim("country", user.Country ?? ""),
+                new Claim("state", user.State ?? ""),
+                new Claim("street", user.Street ?? ""),
+                new Claim("zipCode", user.ZipCode ?? ""),
+                new Claim("city", user.City ?? ""),
+                new Claim("isHavePassword", loginBy),
+
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var claim in roles)

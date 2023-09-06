@@ -15,10 +15,13 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import axios from "axios";
 function RegisterPage() {
   const [passwordShown, setPasswordShown] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const { email, user } = useTypedSelector((store) => store.UserReducer);
+  const { email, user, isAuth } = useTypedSelector(
+    (store) => store.UserReducer
+  );
   const { RegisterUser, LoginUserByGoogle } = useActions();
   const initValues: IRegisterUser = {
     email: email,
@@ -72,16 +75,13 @@ function RegisterPage() {
     console.log("responseGoogle to back end: ", response);
     LoginUserByGoogle(response);
   };
-  if (user != null) {
-    return <Navigate to={"/"}></Navigate>;
-  }
   const errorGoogle = () => {
     toast.error("Error Google login!!!", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-  if (user != null) {
-    return <Navigate to={"/asos"}></Navigate>;
+  if (isAuth == true) {
+    return <Navigate to={"/"}></Navigate>;
   }
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } =
     formik;
@@ -204,7 +204,7 @@ function RegisterPage() {
                       onChange={handleChange}
                       value={values.lastName}
                     />
-                    {errors.lastName && (
+                    {errors.lastName && touched.lastName && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.lastName}</span>
                       </p>
@@ -235,7 +235,7 @@ function RegisterPage() {
                         id="input_password"
                       ></button>
                     </div>
-                    {errors.password && (
+                    {errors.password && touched.password && (
                       <p className="mt-2" style={{ color: "red" }}>
                         <span className="font-medium">{errors.password}</span>
                       </p>
