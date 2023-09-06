@@ -83,13 +83,14 @@ function App() {
           <Route path="/account/favourites" element={<Favourites />} />
           <Route path="/checkout" element={<Checkout />} />
 
-        <Route path="/men" element={<Men />} />
-        <Route path="/women" element={<Women />} />
-        <Route path="/ViewAll" element={<ProductsPage />} />
-        <Route path="/Prod" element={<ProductPage />} />
+          <Route path="/men" element={<Men />} />
+          <Route path="/women" element={<Women />} />
+          <Route path="/ViewAll" element={<ProductsPage />} />
+          <Route path="/Prod" element={<ProductPage />} />
 
-        <Route path="*" element={<Error />} />
-      </Routes>
+          <Route path="*" element={<Error />} />
+        </Routes>
+      )}
     </>
   );
 }
