@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import UserReducer from "./userReducer";
 import { IsLoadingReducer } from "./isLoadingReducer";
-import CategoryReducer from "./CategoryReducer";
-import ProductsReducer from "./productReducer";
+
 import { categoryReducer } from "./CategoryReducer/categoryReducer";
+import CategoryReducer from "./CategoryReducer";
+import ProductsReducer from "./ProductReducer";
 
 export const rootReducer = combineReducers({
   UserReducer,

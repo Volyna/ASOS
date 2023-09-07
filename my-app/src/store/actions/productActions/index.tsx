@@ -1,9 +1,8 @@
 import { Dispatch } from "react";
-import { toast } from "react-toastify";
 import {
-  IProductCreate,
-  IProductEditPost,
-} from "../../../components/admin/components/products/types";
+  ProductActionTypes,
+  ProductsActions,
+} from "../../reducers/ProductReducer/types";
 import {
   createProduct,
   getByIdProduct,
@@ -11,10 +10,11 @@ import {
   removeProduct,
   updateProduct,
 } from "../../../services/api-products-service";
+import { toast } from "react-toastify";
 import {
-  ProductActionTypes,
-  ProductsActions,
-} from "../../reducers/productReducer/types";
+  IProductCreate,
+  IProductEditPost,
+} from "../../../components/admin/components/products/types";
 
 export const GetProductsCategories = (idCategory: number) => {
   return async (dispatch: Dispatch<ProductsActions>) => {
