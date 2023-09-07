@@ -9,6 +9,7 @@ namespace WebAsos.Interfaces.Services.Interfaces
         public Task<string> CreateProductImageAsync(ProductImageEntity imgName);
         public Task<string> UpdateProductImageAsync(ProductImageEntity imgName);
         public Task<ProductImageEntity> GetMainImageByIdAsync(int id);
+        public Task<ProductImageEntity> GetMainImageByParentId(int id);
         public Task DeleteAllImagesByProductId(int id);
         public string GetBase64ByName(string name);
     }

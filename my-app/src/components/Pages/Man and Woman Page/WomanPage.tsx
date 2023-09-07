@@ -13,7 +13,11 @@ import womenItem2 from '../../../images/womenItem2.png'
 import womenItem3 from '../../../images/womenItem3.png'
 import womenItem4 from '../../../images/womenItem4.png'
 import womenItem5 from '../../../images/womenItem5.png'
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { showCategory } from "../../../store/actions/Categories/categoryAction";
+import { RootState } from "../../../store/reducers";
 
 
 
@@ -23,6 +27,29 @@ import { useState } from "react";
 
 const Women = () => {
     const navigate = useNavigate();
+    const location = useLocation().pathname;
+
+    const disp = useDispatch()
+    const fetchCat = async () => {
+        const response = await axios
+        .get('https://basos.itstep.click/api/Category/getAllCategories');
+        disp(showCategory(response.data.payload))
+    }
+    
+    useEffect(()=> {
+    fetchCat();
+    }, [])
+
+   const cat =  useSelector((state:RootState) => state.allCategory.categories)
+   
+
+
+    const categories = cat.map((category:any) => {
+    const {id, name} = category;
+    return(
+        <Link to={location + "/" + name} key={id}>{name}</Link>
+    )
+   })
 
     return (
         <>
@@ -36,17 +63,7 @@ const Women = () => {
 
 
             <div className="categors">
-                <Link to='/'>New in</Link>
-                <Link to='/'>clothing</Link>
-                <Link to='/'>dresses</Link>
-                <Link to='/'>shoes</Link>
-                <Link to='/'>accessories</Link>
-                <Link to='/'>face&body</Link>
-                <Link to='/'>topshop</Link>
-                <Link to='/'>sportswear</Link>
-                <Link to='/'>brands</Link>
-                <Link to='/'>outlet</Link>
-                <Link to='/'>marketplace</Link>
+                {categories}
             </div>
 
             <p className="title">WOMEN</p>
