@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebAsos.Data.Entitties.DTO;
 using WebAsos.Data.ViewModels.Category;
 using WebAsos.interfaces.BasketInterfaces;
@@ -17,9 +18,27 @@ namespace WebAsos.Controllers
             _basketService = basketService;
         }
         [HttpPost("create")]
-        public async Task<ServiceResponse> CreateCategoryAsync([FromBody] CreaterBasketDTO model)
+        public async Task<ServiceResponse> CreateBasketAsync([FromBody] CreaterBasketDTO model)
         {
             var result = await _basketService.CeateAsync(model);
+            return result;
+        }
+        [HttpPut("update")]
+        public async Task<ServiceResponse> UpdateBasketAsync([FromBody] UpdateBasketDTO model)
+        {
+            var result = await _basketService.UpdateAsync(model);
+            return result;
+        }
+        [HttpDelete("delete")]
+        public async Task<ServiceResponse> DeleteBasketAsync([FromBody] DeleteBasketDTO model)
+        {
+            var result = await _basketService.DeleteAsync(model);
+            return result;
+        }
+        [HttpGet("getBaskets")]
+        public async Task<ServiceResponse> GetBasketAsync()
+        {
+            var result = await _basketService.GetBasketsAsync();
             return result;
         }
 

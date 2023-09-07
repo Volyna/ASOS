@@ -22,6 +22,7 @@ namespace WebAsos.Services
                 newBasket.ProductId = model.ProductId;
                 newBasket.CountProducts = model.CountProducts;
                 newBasket.UserIdOrder = model.UserIdOrder;
+                newBasket.Name = "Basket";
                 var result = await _basketRepository.CreateBasketAsync(newBasket);
                 if (result.Succeeded== true)
                 {
@@ -41,6 +42,95 @@ namespace WebAsos.Services
                 };
             }
 
+        }
+
+        public async Task<ServiceResponse> DeleteAsync(DeleteBasketDTO model)
+        {
+            try
+            {
+                if (model == null || model.CountProducts == null || model.ProductId == null || model.UserIdOrder == null)
+                {
+                    return new ServiceResponse { IsSuccess = false, Message = "Some data is null !!!" };
+                }
+                var baketToDelete = await _basketRepository.GetBasketAsync(model.UserIdOrder,model.CountProducts,model.ProductId);
+                if (baketToDelete == null)
+                {
+                    return new ServiceResponse { IsSuccess = false, Message = "Some data is null or basket is not exist !!!" };
+                }
+                var resultDelete = await _basketRepository.DeleteBasketAsync(baketToDelete);
+                if (resultDelete.Succeeded == true)
+                {
+                    return new ServiceResponse { IsSuccess = true, Message = "Successfully delete basket" };
+                }
+                else
+                {
+                    return new ServiceResponse { IsSuccess = false, Message = "Something went wrong" };
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse
+                {
+                    Message = ex.Message,
+                    IsSuccess = false,
+                };
+            }
+        }
+
+        public async Task<ServiceResponse> GetBasketsAsync()
+        {
+            try
+            {
+                var baskets = await _basketRepository.GetBasketsAsync();
+                if (baskets == null)
+                {
+                    return new ServiceResponse { IsSuccess = false, Message = "Some data is null or basket empty !!!" };
+                }
+                else
+                {
+                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request baskets",Payload = baskets };
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<ServiceResponse> UpdateAsync(UpdateBasketDTO model)
+        {
+            try
+            {
+                if (model == null || model.CountProducts == null || model.ProductId == null || model.UserIdOrder == null)
+                {
+                    return new ServiceResponse { IsSuccess = false, Message = "Some data is null !!!" };
+                }
+                var basketToUpdate = await _basketRepository.GetBasketUpdateDTOAsync(model);
+                if (basketToUpdate == null)
+                {
+                    return new ServiceResponse { IsSuccess = false, Message = "Some data is null !!!" };
+                }
+                basketToUpdate.CountProducts = model.CountProducts;
+                var resultUpdate = await _basketRepository.UpdateBasketAsync(basketToUpdate);
+                if (resultUpdate.Succeeded == true)
+                {
+                    return new ServiceResponse { IsSuccess = true, Message = "Successful update basket" };
+                }
+                else
+                {
+                    return new ServiceResponse { IsSuccess = false, Message = "problem with update basket" };
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse { IsSuccess = false, Message = "Some problem!!!" };
+            }
         }
     }
 }
