@@ -29,6 +29,8 @@ using WebAsos.Settings;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Interfaces.CategoryInterfaces;
 using WebAsos.SMTP_Email;
+using WebAsos.interfaces.BasketInterfaces;
+using WebAsos.Repositories.Basket;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -37,6 +39,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperUserProfile));
 builder.Services.AddAutoMapper(typeof(AutoMapperCategory));
 

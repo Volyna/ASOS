@@ -24,6 +24,7 @@ namespace WebAsos.Data
         public DbSet<CreditCardEntity> CreditCard { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<OrderedProductEntity> OrderedProducts { get; set; }
+        public DbSet<BasketEntity> Basket { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
