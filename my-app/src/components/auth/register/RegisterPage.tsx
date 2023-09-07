@@ -122,7 +122,7 @@ function RegisterPage() {
               style={{
                 listStyleType: "none",
                 padding: "0",
-                marginBottom: "100px",
+                marginBottom: "50px",
                 textAlign: "center",
               }}
             >

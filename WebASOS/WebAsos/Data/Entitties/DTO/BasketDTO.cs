@@ -29,4 +29,10 @@ namespace WebAsos.Data.Entitties.DTO
         [Required(ErrorMessage = "Field ProductId  is required")]
         public int ProductId { get; set; }
     }
+    public class GetBasketsByIDTO
+    {
+        [Required(ErrorMessage = "Field idUser is required")]
+        public int idUser { get; set; }
+
+    }
 }

@@ -79,11 +79,11 @@ namespace WebAsos.Services
             }
         }
 
-        public async Task<ServiceResponse> GetBasketsAsync()
+        public async Task<ServiceResponse> GetBasketsAsync(int idUser)
         {
             try
             {
-                var baskets = await _basketRepository.GetBasketsAsync();
+                var baskets = await _basketRepository.GetBasketsByIdAsync(idUser);
                 if (baskets == null)
                 {
                     return new ServiceResponse { IsSuccess = false, Message = "Some data is null or basket empty !!!" };

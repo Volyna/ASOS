@@ -4,9 +4,18 @@ import Footer from "../../Footer/FooterV";
 import Menu from "../../NavBar/menu";
 import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 import { Link, useNavigate } from "react-router-dom";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useEffect } from "react";
 
 const BasketEmpty = () => {
   const navigate = useNavigate();
+  const { GetBasketsByid } = useActions();
+  const { user } = useTypedSelector((store) => store.UserReducer);
+  useEffect(() => {
+    GetBasketsByid(user.id);
+  }, []);
+
   return (
     <>
       <div className="staticnav">

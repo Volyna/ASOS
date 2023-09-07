@@ -65,11 +65,6 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
 
-
-  
-
-
-
   return (
     <>
       {loading == true ? (
@@ -126,8 +121,8 @@ function App() {
           <Route path="customer-care" element={<FAQs />} />
           <Route path="customer-service" element={<CustomerService />} />
 
-          <Route path="basket-empty" element={<BasketEmpty />} />
-          <Route path="basket" element={<Basket />} />
+          {/* <Route path="basket-empty" element={<Basket />} /> */}
+          <Route path="basket" element={<BasketEmpty />} />
 
           <Route path="/account/contact-information" element={<ContactInf />} />
 

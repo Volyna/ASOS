@@ -60,7 +60,7 @@ const Header = () => {
               </Link>
             )}
 
-            <Link to="/basket-empty">
+            <Link to="/basket">
               <img src={cart} alt="" className="noneM" />
             </Link>
             <Link to="/account/favourites">

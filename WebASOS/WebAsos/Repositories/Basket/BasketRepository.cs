@@ -54,11 +54,11 @@ namespace WebAsos.Repositories.Basket
             }
         }
 
-        public async Task<List<BasketEntity>> GetBasketsAsync()
+        public async Task<List<BasketEntity>> GetBasketsByIdAsync(int idUser)
         {
             try
             {
-                var result = await _context.Basket.ToListAsync();
+                var result = await _context.Basket.Where(b => b.UserIdOrder == idUser).ToListAsync();
                 return result;
             }
             catch (Exception)

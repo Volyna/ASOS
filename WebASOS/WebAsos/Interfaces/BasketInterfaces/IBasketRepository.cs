@@ -10,7 +10,7 @@ namespace WebAsos.interfaces.BasketInterfaces
         public Task<IdentityResult> UpdateBasketAsync(BasketEntity model);
         public Task<IdentityResult> DeleteBasketAsync(BasketEntity model);
         public Task<BasketEntity> GetBasketUpdateDTOAsync(UpdateBasketDTO model);
-        public Task<List<BasketEntity>> GetBasketsAsync();
+        public Task<List<BasketEntity>> GetBasketsByIdAsync(int idUser);
         public Task<BasketEntity> GetBasketAsync(int idUser, int countProduct, int idProduct);
     }
 }
