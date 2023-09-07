@@ -264,6 +264,8 @@ namespace WebAsos.Services
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var encodedEmailToken = Encoding.UTF8.GetBytes(token);
             var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
+            //var decodedToken = WebEncoders.Base64UrlDecode(token);
+            //var normalToken = Encoding.UTF8.GetString(decodedToken);
             string url = $"{_configuration["FrontEndUrl"]}/resetPassword/?userId={user.Id}&token={validEmailToken}";
             //await _emailService.SendEmailAsync(Emails.ResetPassword(user.Email, url));
             Message info = new Message()
@@ -281,21 +283,23 @@ namespace WebAsos.Services
             return new SimpleResponseDTO()
             {
                 IsSuccess = true,
-                Message = "The password has been changed"
+                Message = "The letter was sent to Email"
             };
         }
 
         public async Task<ChangePasswordResponseDTO> ChangePasswordAsync(ChangePasswordRequestDTO model)
         {
             UserEntity user = await _userManager.FindByIdAsync(model.UserId);
-            if (user == null)
+            if (user == null || model.Password != model.ConfirmPassword)
             {
                 return new ChangePasswordResponseDTO() { 
                     IsSuccess = false 
                 };
             }
-
-            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.ConfirmPassword);
+            var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
+            var normalToken = Encoding.UTF8.GetString(decodedToken);
+            var result = await _userManager.ResetPasswordAsync(user, normalToken, model.ConfirmPassword);
+            
 
             if (result.Succeeded)
             {
@@ -428,7 +432,9 @@ namespace WebAsos.Services
                         user.City = model.city;
 
                         await _userRepository.UpdateUserProfile(user);
-                        return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!" };
+                       
+                        var aceessToken = await _jwtTokenService.CreateToken(user, "true");
+                        return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!",Payload = aceessToken };
                     }
                     else
                     {
@@ -454,7 +460,8 @@ namespace WebAsos.Services
                     user.City = model.city;
       
                     await _userRepository.UpdateUserProfile(user);
-                    return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!" };
+                    var aceessToken = await _jwtTokenService.CreateToken(user, "true");
+                    return new ServiceResponse() { IsSuccess = true, Message = "Succeeded Update User!!!",Payload = aceessToken };
                  
                 }
 

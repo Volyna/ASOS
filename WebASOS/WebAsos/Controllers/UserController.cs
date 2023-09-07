@@ -84,12 +84,12 @@ namespace WebAsos.Controllers
 
         [AllowAnonymous]
         [HttpGet("resetPassword")]
-        public async Task<IActionResult> ResetPasswordAsync([FromQuery] string? email = null)
+        public async Task<IActionResult> ResetPasswordAsync([FromQuery] ResetPasswordViewModel model)
         {
             
             try
             {
-                var result = await _userService.ResetPasswordAsync(email);
+                var result = await _userService.ResetPasswordAsync(model.Email);
                 return Ok(result);
             }
             catch (Exception ex)

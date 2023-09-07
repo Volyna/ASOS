@@ -14,9 +14,10 @@ function PasswordRecoveryPage() {
   const { email, user, isAuth } = useTypedSelector(
     (store) => store.UserReducer
   );
-  const {} = useActions();
+  const { RecoveryPassword } = useActions();
   const onSubmitFormik = async (values: any) => {
     console.log(values.email);
+    RecoveryPassword(values.email);
   };
   const formik = useFormik({
     initialValues: { email: "" },
@@ -90,11 +91,7 @@ function PasswordRecoveryPage() {
                   </button>
                 </div>
                 <div className="unified-info">
-                  <Link
-                    to={"/login"}
-                    style={{ marginBottom: "50px" }}
-                    className="label_withEmail"
-                  >
+                  <Link to={"/login"} className="label_withEmail">
                     Remembered your password?
                   </Link>
                 </div>

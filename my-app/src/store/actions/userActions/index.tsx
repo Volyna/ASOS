@@ -6,11 +6,14 @@ import {
   ILoginUserByGoogle,
   IRegisterUser,
 } from "../../../components/auth/types";
+import { IRecoveryPasswordUpdate } from "../../../components/Pages/types";
 import { UserActionTypes, UserActions } from "../../reducers/userReducer/types";
 import {
   isUserExist,
   login,
   loginByGoogle,
+  recoveryPassword,
+  recoveryPasswordUpdate,
   register,
   updateUserProfile,
 } from "../../../services/api-user-service";
@@ -154,7 +157,15 @@ export const UpdateUserProfile = (model: IChangeContactInfo) => {
       console.log("response UpdateUserProfile", response.data);
 
       if (response.data.isSuccess == true) {
-        dispatch({ type: UserActionTypes.SUCCESSFUL_REQUEST });
+        const user = jwtDecode(response.data.payload) as IUser;
+        console.log("user: ", user);
+        window.localStorage.setItem("Token", response.data.payload);
+        dispatch({
+          type: UserActionTypes.LOGIN_USER,
+          payload: user,
+        });
+
+        // dispatch({ type: UserActionTypes.SUCCESSFUL_REQUEST });
         toast.success("Profile update successful", {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -184,5 +195,69 @@ export const LogOut = () => {
     dispatch({
       type: UserActionTypes.LOGOUT_USER,
     });
+  };
+};
+export const RecoveryPassword = (email: string) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      dispatch({ type: UserActionTypes.START_REQUESTS_USER });
+      const data = await recoveryPassword(email);
+      const { response } = data;
+      if (response.data.isSuccess == true) {
+        toast.success(response.data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        dispatch({ type: UserActionTypes.SUCCESSFUL_REQUEST });
+      } else {
+        toast.error(response.data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        dispatch({
+          type: UserActionTypes.BAG_REQUEST,
+          payload: response.data.message,
+        });
+      }
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.BAG_REQUEST,
+        payload: "Error Notification !",
+      });
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+};
+export const RecoveryPasswordUpdate = (model: IRecoveryPasswordUpdate) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      dispatch({ type: UserActionTypes.START_REQUESTS_USER });
+      const data = await recoveryPasswordUpdate(model);
+      const { response } = data;
+      console.log("RecoveryPasswordUpdate response: ", data);
+      if (response.data.isSuccess == true) {
+        toast.success("Successful Update password!!!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        // dispatch({ type: UserActionTypes.SUCCESSFUL_REQUEST });
+        AuthUserToken(response.data.accessToken, dispatch);
+      } else {
+        toast.error("Error !!!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        dispatch({
+          type: UserActionTypes.BAG_REQUEST,
+          payload: response.data.message,
+        });
+      }
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.BAG_REQUEST,
+        payload: "Error Notification !",
+      });
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 };
