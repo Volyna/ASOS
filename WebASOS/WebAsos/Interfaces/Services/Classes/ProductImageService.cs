@@ -58,7 +58,15 @@ namespace WebAsos.Interfaces.Services.Classes
             var img = _productImageRepository.GetAll().Where(img => img.ProductId == id).FirstOrDefault(img => img.IsMainImage == true);
             return img;
         }
-       
+
+        public async Task<ProductImageEntity> GetMainImageByParentId(int parentId)
+        {
+            var img = _productImageRepository.GetAll().Where(img => img.ProductId == parentId).First(img => img.IsMainImage == true);
+            return img;
+        }
+
+
+
         public async Task<string> SaveImageAsync(string imgName)
         {
             int quality = 85;

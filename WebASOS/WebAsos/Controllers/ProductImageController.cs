@@ -28,5 +28,12 @@ namespace WebAsos.Controllers
 
             return BadRequest();
         }
+
+        [HttpGet("GetMainImageByProductId")]
+        public async Task<IActionResult> GetMainImageByPorductId(int id)
+        {
+            var res = await _productImageService.GetMainImageByParentId(id);
+            return Ok(res);
+        }
     }
 }

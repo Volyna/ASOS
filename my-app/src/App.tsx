@@ -51,6 +51,11 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
 
+
+  
+
+
+
   return (
     <>
       {loading == true ? (
