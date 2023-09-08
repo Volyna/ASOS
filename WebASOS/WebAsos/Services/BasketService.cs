@@ -84,13 +84,14 @@ namespace WebAsos.Services
             try
             {
                 var baskets = await _basketRepository.GetBasketsByIdAsync(idUser);
+                var basketsToResponse = await _basketRepository.GetProductsForBasket(baskets);
                 if (baskets == null)
                 {
                     return new ServiceResponse { IsSuccess = false, Message = "Some data is null or basket empty !!!" };
                 }
                 else
                 {
-                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request baskets",Payload = baskets };
+                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request baskets",Payload = basketsToResponse };
                 }
             }
             catch (Exception)

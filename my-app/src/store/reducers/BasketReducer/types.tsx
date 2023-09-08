@@ -4,7 +4,7 @@ export interface IBasketState {
   isBasketLoading: boolean;
 }
 
-interface IItemProduct {
+export interface IItemProduct {
   id: number;
   name: string;
   price: number;
@@ -15,8 +15,11 @@ interface IItemProduct {
   brand: string;
   quantity: number;
   isInTheStock: boolean;
-  images: Array<File>;
+  images: string;
   category_id: number;
+  countProducts: number;
+  productId: number;
+  userIdOrder: number;
 }
 
 export enum BasketActionTypes {
