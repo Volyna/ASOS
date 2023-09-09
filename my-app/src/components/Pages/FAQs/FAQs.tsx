@@ -65,7 +65,7 @@ const FAQs = () => {
         </div>
 
         <div className="secondBlock">
-          <div className="left product">
+          <div className="left">
             <h1 className="FAQtitle">product & stock</h1>
             <a className="questions" href="#">
               Will an item be back in stock?

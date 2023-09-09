@@ -109,6 +109,7 @@ export const productColumns = [
 ];
 
 export const categoryColumns = [
+  
   { field: "id", headerName: "ID", width: 100 },
   {
     field: "categoryName",
@@ -116,6 +117,7 @@ export const categoryColumns = [
     width: 430,
     
   },
+ 
 ];
 
 export const orderColumns = [

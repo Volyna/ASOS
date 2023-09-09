@@ -104,7 +104,9 @@ const ProductsPage = () => {
       <div className="categors">{categories}</div>
 
       <div className="prodBlock">
-        <div className="prd">{prod}</div>
+        <Link to="/Prod">
+          <div className="prd">{prod}</div>
+        </Link>
       </div>
 
       <Footer />

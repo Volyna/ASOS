@@ -25,8 +25,8 @@ namespace WebAsos.Services
                 if (isExistCategory == null)
                 {
                     var newCategory = _mapper.Map<CreateCategoryViewModel,CategoryEntity>(model);
-                    //var pathImage = ImageWorker.SaveImage(model.ImageBase64);
-                    //newCategory.Image = pathImage;
+                    var pathImage = ImageWorker.SaveImage(model.ImageBase64);
+                    newCategory.Image = pathImage;
                     var result = await _categoryRepository.CreateCategory(newCategory);
                     if (result.Succeeded)
                     {
@@ -145,9 +145,9 @@ namespace WebAsos.Services
                 if (oldCategory != null)
                 {
                     var newCategory = _mapper.Map<UpdateCategoryViewModel, CategoryEntity>(model, oldCategory);
-                    //ImageWorker.RemoveImage(oldCategory.Image);
-                    //var pathImage = ImageWorker.SaveImage(model.ImageBase64);
-                    //newCategory.Image = pathImage;
+                    ImageWorker.RemoveImage(oldCategory.Image);
+                    var pathImage = ImageWorker.SaveImage(model.ImageBase64);
+                    newCategory.Image = pathImage;
                     var result = _categoryRepository.UpdateCategory(newCategory);
                     return new ServiceResponse() { IsSuccess = true };
 
