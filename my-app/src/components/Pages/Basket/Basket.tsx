@@ -34,136 +34,136 @@ const Basket = () => {
               <p>Size: M</p>
             </div>
           </div> */}
-
-          <div className="allOrders col-8">
-            <div className="orderContent col-9">
-              <div className="col-2">
-                <img width={119} height={175} src={Clothes1} alt="" />
+        </div>
+        <div className="allOrders col-8">
+          <div className="orderContent col-9">
+            <div className="col-2">
+              <img width={119} height={175} src={Clothes1} alt="" />
+            </div>
+            <div className="col-9">
+              <div className="row text-muted">
+                <h3 className="productName ">Draped jersey dress</h3>
               </div>
-              <div className="col-9">
-                <div className="row text-muted">
-                  <h3 className="productName ">Draped jersey dress</h3>
-                </div>
-                <div className="row">
-                  <p className="col-2">Color: Black</p>
-                  <p className="col-2">Size: M</p>
-                  <div className="col-1">
-                    <img height={20} width={20} src={Arrow_down} alt="" />
-                  </div>
-                </div>
-                <div className="row">
-                  <p className="newPrice col-2">55.00$</p>
-                  <p className="oldPrice col-1">65.00$</p>
-                </div>
-                <div className="row">
-                  <div>
-                    <span className="minus col-1">
-                      <img src={Minus} alt="minus" />
-                    </span>
-                    <button className="num">1</button>
-                    <span className="plus col-1">
-                      <img src={Plus} alt="plus" />
-                    </span>
-                  </div>
+              <div className="row">
+                <p className="col-2">Color: Black</p>
+                <p className="col-2">Size: M</p>
+                <div className="col-1">
+                  <img height={20} width={20} src={Arrow_down} alt="" />
                 </div>
               </div>
-
-              <div className="col-1">
-                <img
-                  className="removeProduct"
-                  width={30}
-                  height={30}
-                  src={Delete}
-                  alt="remove"
-                />
+              <div className="row">
+                <p className="newPrice col-2">55.00$</p>
+                <p className="oldPrice col-1">65.00$</p>
+              </div>
+              <div className="row">
+                <div>
+                  <span className="minus col-1">
+                    <img src={Minus} alt="minus" />
+                  </span>
+                  <button className="num">1</button>
+                  <span className="plus col-1">
+                    <img src={Plus} alt="plus" />
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="orderContent col-9">
-              <div className="col-2">
-                <img width={119} height={175} src={Clothes2} alt="" />
-              </div>
-              <div className="col-9">
-                <div className="row text-muted">
-                  <h3 className="productName">Double-weave blouse</h3>
-                </div>
-                <div className="row">
-                  <p className="col-2">Color: Blue</p>
-                  <p className="col-2">Size: M</p>
-                  <div className="col-1">
-                    <img height={20} width={20} src={Arrow_down} alt="" />
-                  </div>
-                </div>
-                <div className="row">
-                  <p className="price col-2">39.00$</p>
-                </div>
-                <div className="row">
-                  <div>
-                    <span className="minus col-1">
-                      <img src={Minus} alt="minus" />
-                    </span>
-                    <button className="num">1</button>
-                    <span className="plus col-1">
-                      <img src={Plus} alt="plus" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-1">
-                <img
-                  className="removeProduct"
-                  width={30}
-                  height={30}
-                  src={Delete}
-                  alt="remove"
-                />
-              </div>
-            </div>
-
-            <div className="orderContent col-9">
-              <div className="col-2">
-                <img width={119} height={175} src={Clothes3} alt="" />
-              </div>
-              <div className="col-9">
-                <div className="row text-muted">
-                  <h3 className="productName">Oversized T-shirt</h3>
-                </div>
-                <div className="row">
-                  <p className="col-3">Color: Dark grey</p>
-                  <p className="col-2">Size: M</p>
-                  <div className="col-1">
-                    <img height={20} width={20} src={Arrow_down} alt="" />
-                  </div>
-                </div>
-                <div className="row">
-                  <p className="newPrice col-2">15.00$</p>
-                  <p className="oldPrice col-1">19.00$</p>
-                </div>
-                <div className="row">
-                  <div>
-                    <span className="minus col-1">
-                      <img src={Minus} alt="minus" />
-                    </span>
-                    <button className="num">1</button>
-                    <span className="plus col-1">
-                      <img src={Plus} alt="plus" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-1">
-                <img
-                  className="removeProduct"
-                  width={30}
-                  height={30}
-                  src={Delete}
-                  alt="remove"
-                />
-              </div>
+            <div className="col-1">
+              <img
+                className="removeProduct"
+                width={30}
+                height={30}
+                src={Delete}
+                alt="remove"
+              />
             </div>
           </div>
+
+          <div className="orderContent col-9">
+            <div className="col-2">
+              <img width={119} height={175} src={Clothes2} alt="" />
+            </div>
+            <div className="col-9">
+              <div className="row text-muted">
+                <h3 className="productName">Double-weave blouse</h3>
+              </div>
+              <div className="row">
+                <p className="col-2">Color: Blue</p>
+                <p className="col-2">Size: M</p>
+                <div className="col-1">
+                  <img height={20} width={20} src={Arrow_down} alt="" />
+                </div>
+              </div>
+              <div className="row">
+                <p className="price col-2">39.00$</p>
+              </div>
+              <div className="row">
+                <div>
+                  <span className="minus col-1">
+                    <img src={Minus} alt="minus" />
+                  </span>
+                  <button className="num">1</button>
+                  <span className="plus col-1">
+                    <img src={Plus} alt="plus" />
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-1">
+              <img
+                className="removeProduct"
+                width={30}
+                height={30}
+                src={Delete}
+                alt="remove"
+              />
+            </div>
+          </div>
+
+          <div className="orderContent col-9">
+            <div className="col-2">
+              <img width={119} height={175} src={Clothes3} alt="" />
+            </div>
+            <div className="col-9">
+              <div className="row text-muted">
+                <h3 className="productName">Oversized T-shirt</h3>
+              </div>
+              <div className="row">
+                <p className="col-3">Color: Dark grey</p>
+                <p className="col-2">Size: M</p>
+                <div className="col-1">
+                  <img height={20} width={20} src={Arrow_down} alt="" />
+                </div>
+              </div>
+              <div className="row">
+                <p className="newPrice col-2">15.00$</p>
+                <p className="oldPrice col-1">19.00$</p>
+              </div>
+              <div className="row">
+                <div>
+                  <span className="minus col-1">
+                    <img src={Minus} alt="minus" />
+                  </span>
+                  <button className="num">1</button>
+                  <span className="plus col-1">
+                    <img src={Plus} alt="plus" />
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-1">
+              <img
+                className="removeProduct"
+                width={30}
+                height={30}
+                src={Delete}
+                alt="remove"
+              />
+            </div>
+          </div>
+          <div />
 
           <div className="total col-4">
             <h1 className="textH1">total</h1>
@@ -201,9 +201,8 @@ const Basket = () => {
             </a>
           </div>
         </div>
+        <Footer />
       </div>
-
-      <Footer />
     </>
   );
 };

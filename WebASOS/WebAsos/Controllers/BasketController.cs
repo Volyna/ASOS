@@ -35,10 +35,11 @@ namespace WebAsos.Controllers
             var result = await _basketService.DeleteAsync(model);
             return result;
         }
-        [HttpGet("getBaskets")]
-        public async Task<ServiceResponse> GetBasketAsync()
+
+        [HttpPost("getBaskets")]
+        public async Task<ServiceResponse> GetBasketAsync([FromBody] int idUser)
         {
-            var result = await _basketService.GetBasketsAsync();
+            var result = await _basketService.GetBasketsAsync(idUser);
             return result;
         }
 

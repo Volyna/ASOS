@@ -48,7 +48,15 @@
     align-items: center;
 
 }
-
+.basket:hover{
+    background-image: url("../../images/basketAccept.png");
+}
+.userLogo:hover{
+    background-image: url("../../images/userAcept.png");
+}
+.favourites:hover{
+    background-image: url("../../images/liked.png");
+}
 .userIcons img{
     color: #3A3A3A;
     margin-left:15px;

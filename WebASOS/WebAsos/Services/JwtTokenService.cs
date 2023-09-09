@@ -41,6 +41,7 @@ namespace WebAsos.Services
            
             List<Claim> claims = new List<Claim>()
             {
+                new Claim("id", user.Id.ToString() ?? ""),
                 new Claim("name", user.FirstName ?? ""),
                 new Claim("surname", user.LastName ?? ""),
                 new Claim("phone", user.PhoneNumber ?? ""),
