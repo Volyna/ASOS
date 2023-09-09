@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./header.css";
 import Logo from "../../images/Logo.svg";
 import user from "../../images/user.svg";
+import selectedUser from "../../images/selected-user.svg";
 import cart from "../../images/cart.svg";
 import like from "../../images/like.svg";
 import search from "../../images/search.svg";
@@ -52,16 +53,16 @@ const Header = () => {
           <div className="userIcons">
             {isAuth == true ? (
               <Link to="/account/contact-information">
-                <img src={user} alt="" className="noneM" />
+                <img src={selectedUser} alt="" />
               </Link>
             ) : (
               <Link to="/login">
-                <img src={user} alt="" className="noneM" />
+                <img src={user} alt="" />
               </Link>
             )}
 
             <Link to="/basket-empty">
-              <img src={cart} alt="" className="noneM" />
+              <img src={cart} alt="" />
             </Link>
             <Link to="/account/favourites">
               <img src={like} alt="" />

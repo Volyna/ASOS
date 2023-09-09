@@ -86,7 +86,7 @@ const Men = () => {
 
         <img src={men3} alt="mainImage" />
 
-        <button className="menbtn buttons" onClick={() => navigate("/men")}>
+        <button className="menbtn buttons" onClick={() => navigate("/ViewAll")}>
           show collection
         </button>
 

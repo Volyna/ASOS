@@ -85,7 +85,10 @@ const Women = () => {
 
         <img src={women3} alt="mainImage" />
 
-        <button className="womenbtn buttons" onClick={() => navigate("/men")}>
+        <button
+          className="womenbtn buttons"
+          onClick={() => navigate("/ViewAll")}
+        >
           show collection
         </button>
 
