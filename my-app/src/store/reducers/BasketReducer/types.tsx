@@ -11,7 +11,7 @@ export interface IItemProduct {
   discount: number;
   description: string;
   color: string;
-  size: number;
+  size: Array<number>;
   brand: string;
   quantity: number;
   isInTheStock: boolean;
@@ -24,11 +24,30 @@ export interface IItemProduct {
 
 export enum BasketActionTypes {
   START_REQUESTS_BASKET = "START_REQUESTS_BASKET",
+  END_REQUESTS_BASKET = "END_REQUESTS_BASKET",
   SUCCEED_REQUEST_GET_BASKETS = "SUCCEED_REQUEST_GET_BASKETS",
   BAG_REQUEST_BASKET = "BAG_REQUEST_BASKET",
+  ADD_PRODUCT_COUNT_BASKET = "ADD_PRODUCT_COUNT_BASKET",
+  MINUS_PRODUCT_COUNT_BASKET = "MINUS_PRODUCT_COUNT_BASKET",
+  REMOVE_PRODUCT_BASKET = "REMOVE_PRODUCT_BASKET",
 }
 interface StartRequestBasketAction {
   type: BasketActionTypes.START_REQUESTS_BASKET;
+}
+interface AddProductCountBasketAction {
+  type: BasketActionTypes.ADD_PRODUCT_COUNT_BASKET;
+  payload: IItemProduct[];
+}
+interface RemoveProductBasketAction {
+  type: BasketActionTypes.REMOVE_PRODUCT_BASKET;
+  payload: IItemProduct[];
+}
+interface MinusProductCountBasketAction {
+  type: BasketActionTypes.MINUS_PRODUCT_COUNT_BASKET;
+  payload: IItemProduct[];
+}
+interface EndRequestBasketAction {
+  type: BasketActionTypes.END_REQUESTS_BASKET;
 }
 interface BadRequestBasketAction {
   type: BasketActionTypes.BAG_REQUEST_BASKET;
@@ -41,4 +60,8 @@ interface SucceedRequestGetBasketsAction {
 export type BasketActions =
   | StartRequestBasketAction
   | SucceedRequestGetBasketsAction
-  | BadRequestBasketAction;
+  | BadRequestBasketAction
+  | EndRequestBasketAction
+  | AddProductCountBasketAction
+  | MinusProductCountBasketAction
+  | RemoveProductBasketAction;

@@ -24,6 +24,33 @@ const BasketReducer = (
         products: action.payload,
       };
     }
+    case BasketActionTypes.END_REQUESTS_BASKET: {
+      return {
+        ...state,
+        isBasketLoading: false,
+      };
+    }
+    case BasketActionTypes.MINUS_PRODUCT_COUNT_BASKET: {
+      return {
+        ...state,
+        isBasketLoading: false,
+        products: action.payload,
+      };
+    }
+    case BasketActionTypes.ADD_PRODUCT_COUNT_BASKET: {
+      return {
+        ...state,
+        isBasketLoading: false,
+        products: action.payload,
+      };
+    }
+    case BasketActionTypes.REMOVE_PRODUCT_BASKET: {
+      return {
+        ...state,
+        isBasketLoading: false,
+        products: action.payload,
+      };
+    }
     case BasketActionTypes.BAG_REQUEST_BASKET: {
       return {
         ...state,

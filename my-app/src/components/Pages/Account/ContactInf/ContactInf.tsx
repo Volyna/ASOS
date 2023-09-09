@@ -13,6 +13,12 @@ import axios from "axios";
 import { Country } from "../../types";
 import { getToken } from "../../../../services/setAuthToken";
 import { useActions } from "../../../../hooks/useActions";
+import Logo from "../../../../images/Logo.svg";
+import userLogo from "../../../../images/userAcept.png";
+import cart from "../../../../images/cart.png";
+import like from "../../../../images/like.svg";
+import search from "../../../../images/search.svg";
+import Menu from "../../../NavBar/menu";
 const ContactInf = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [myState, setMyState] = useState<JSX.Element | null>(null);
@@ -97,7 +103,57 @@ const ContactInf = () => {
     formik;
   return (
     <>
-      <Header_full />
+      <div className="staticnav">
+        <div className="mainblock">
+          <div className="first col-3">
+            <div className="links">
+              <Link className="headerText" to="/customer-service">
+                Customer Service
+              </Link>
+              <Link className="headerText" to="/">
+                Shopping Form
+              </Link>
+            </div>
+            <div className="searchItem ">
+              <img src={search} />
+              <input className="search" />
+            </div>
+            <div className="line" />
+          </div>
+          <div className="second col-6">
+            <Link to="/">
+              <img src={Logo} alt="" />
+            </Link>
+          </div>
+          <div className="third col-3">
+            <div className="links">
+              <Link className="headerText" to="/">
+                Newsletter
+              </Link>
+              <Link className="headerText" to="/customer-care">
+                FAQs
+              </Link>
+              <Link className="headerText" to="/">
+                More
+              </Link>
+            </div>
+
+            <div className="userIcons">
+              <Link to="/account/contact-information">
+                <img src={userLogo} alt="userLogo" className="noneM userLogo" />
+              </Link>
+
+              <Link to="/basket">
+                <img src={cart} alt="basket" className="noneM " />
+              </Link>
+              <Link to="/account/favourites">
+                <img src={like} className="favourites" alt="favourites" />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <Menu />
+      </div>
       <BreadCrumbs />
       <div className="container-fluid">
         <div className="container">

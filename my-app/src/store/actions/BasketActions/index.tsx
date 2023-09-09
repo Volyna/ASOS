@@ -36,3 +36,27 @@ export const GetBasketsByid = (idUser: number) => {
     }
   };
 };
+export const AddCountProductBasket = (array: IItemProduct[]) => {
+  return async (dispatch: Dispatch<BasketActions>) => {
+    dispatch({
+      type: BasketActionTypes.ADD_PRODUCT_COUNT_BASKET,
+      payload: array,
+    });
+  };
+};
+export const MinusCountProductBasket = (array: IItemProduct[]) => {
+  return async (dispatch: Dispatch<BasketActions>) => {
+    dispatch({
+      type: BasketActionTypes.MINUS_PRODUCT_COUNT_BASKET,
+      payload: array,
+    });
+  };
+};
+export const RemoveProductBasket = (array: IItemProduct[]) => {
+  return async (dispatch: Dispatch<BasketActions>) => {
+    dispatch({
+      type: BasketActionTypes.REMOVE_PRODUCT_BASKET,
+      payload: array,
+    });
+  };
+};

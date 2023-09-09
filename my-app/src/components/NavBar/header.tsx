@@ -52,19 +52,19 @@ const Header = () => {
           <div className="userIcons">
             {isAuth == true ? (
               <Link to="/account/contact-information">
-                <img src={user} alt="" className="noneM" />
+                <img src={user} alt="userLogo" className="noneM userLogo" />
               </Link>
             ) : (
               <Link to="/login">
-                <img src={user} alt="" className="noneM" />
+                <img src={user} alt="userLogo" className="noneM userLogo" />
               </Link>
             )}
 
             <Link to="/basket">
-              <img src={cart} alt="" className="noneM" />
+              <img src={cart} alt="basket" className="noneM basket" />
             </Link>
             <Link to="/account/favourites">
-              <img src={like} alt="" />
+              <img src={like} className="favourites" alt="favourites" />
             </Link>
           </div>
         </div>

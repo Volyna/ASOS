@@ -1,12 +1,23 @@
 .mainLink {
     margin-top: 30px;
 }
+.mainInformation p{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
 .focusCom {
     font-family: 'Roboto Flex', sans-serif;
     font-weight: 300;
     font-size: 16px;
     line-height: 16px;
     color: rgba(53, 53, 53, 0.5);
+}
+
+.total .discount {
+    margin-bottom: 30px;
+}
+.total .favorite {
+    margin-bottom: 46px;
 }
 .orderContent{
     display: flex;
@@ -30,9 +41,11 @@ margin-bottom: 10px;
     display: flex;
 }
 .minus{
+    cursor: pointer;
     margin-right: 10px;
 }
 .plus{
+    cursor: pointer;
     margin-left: 10px;
     /* text-align: start; */
 }
@@ -65,15 +78,26 @@ line-height: 16px; /* 100% */
 text-decoration-line: strikethrough;
 text-decoration: line-through;
 }
+.size_select{
+    color: var(--black, #353535);
+font-feature-settings: 'clig' off, 'liga' off;
+
+/* desktop_details */
+font-family: Roboto Flex;
+font-size: 16px;
+font-style: normal;
+font-weight: 300;
+line-height: 16px; /* 100% */
+}
 .productInfoColor{
-    margin-right: -30px;
+    margin-right: -40px;
     margin-bottom: 0;
     padding-bottom: 0;
 }
 .productInfoSize{
-    margin-right: -90px;
-    margin-bottom: 0;
-    padding-bottom: 0;
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
 }
 .productInfoArrow{
     margin-top: -2px;
@@ -113,18 +137,43 @@ font-weight: 500;
 line-height: normal;
 text-transform: uppercase;
 }
+
 .btnProductBasket{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
     background-color: #ffffff;
     width: 120px;
     height: 33px;
-    padding: 6px 84px;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
     border-radius: 30px;
 border: 2px solid var(--black, #353535);
 
 
+}
+.plusImage:hover{
+    background-image: url("../../../images/plusAccept.png");
+    background-repeat: no-repeat;
+}
+.minusImage:hover{
+    background-image: url("../../../images/minusAcept.png");
+    background-repeat: no-repeat;
+}
+.size_select{
+    padding-left: 5px;
+    box-shadow: none;
+    width: 55px;
+    border: none;
+    background-image: url("../../../images/arrow-down-Acept.png");
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 0.2rem top 50%;
+    background-size: 20px;   
+    outline: unset;
+}
+
+.removeProduct{
+    cursor: pointer;
 }
 .btnProductBasketCount{
     background-color: #ffffff;
@@ -134,7 +183,7 @@ font-family: Roboto Flex;
 font-size: 20px;
 font-style: normal;
 font-weight: 300;
-line-height: 16px; /* 80% */
+line-height: 27px; /* 80% */
 text-transform: uppercase;
 }
 
@@ -154,16 +203,22 @@ text-transform: uppercase;
 
 
 .basket_text {
-    font-family: 'Roboto Flex' sans-serif;
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 18px;
+    color: var(--black, #353535);
     text-align: center;
-    color: rgba(53, 53, 53, 1);
-    margin-bottom: 50px;
+    font-feature-settings: 'clig' off, 'liga' off;
+    
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px; /* 100% */
 }
-
+.mainInformation .basketLoader{
+    font-size: 200px;
+}
 .btn_continue{
+    margin-top: 50px;
     width: 332px;
     height: 50px;
     border-radius: 30px;
@@ -186,7 +241,9 @@ text-transform: uppercase;
     background-color:rgba(53, 53, 53, 1);
 
 }
-
+.totalText{
+    margin-bottom: 50px;
+}
 .textH1{
     text-transform: uppercase;
     font-family: 'Roboto Flex', sans-serif;
@@ -195,15 +252,14 @@ text-transform: uppercase;
     line-height: 42.19px;
     color: rgba(53, 53, 53, 1);
     text-align: left;
-    margin-bottom: 50px;
+    margin: 0;
 
 }
 
 .subColumns {
     display: flex;
-    justify-content: left;
     margin-bottom: 30px;
-    /* justify-content: space-between; */
+    justify-content: space-between;
 }
 
 .result {
@@ -259,7 +315,6 @@ text-transform: uppercase;
     height: 50px;
     width: 420px;
     background-color: white;
-    color: rgba(53, 53, 53, 1);
     font-family: 'Roboto Flex', sans-serif;
     font-size: 20px;
     font-weight: 300;
@@ -267,6 +322,8 @@ text-transform: uppercase;
     text-transform: uppercase;
     transition: 0.5s;
     margin-bottom: 100px;
+    border-radius: 30px;
+background: var(--yellow, #FFC818);
     /* margin: 0 15px; */
 
 }
@@ -279,23 +336,31 @@ text-transform: uppercase;
 }
 
 .shipping {
-    text-transform: uppercase;
-    font-family: 'Roboto Flex', sans-serif;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    padding-bottom: 10px;
+    /* desktop_btn */
+    font-family: Roboto Flex;
     font-size: 20px;
+    font-style: normal;
     font-weight: 300;
-    line-height: 23.44px;
-    color: black;
-    margin-bottom: 10px;
+    line-height: normal;
+    text-transform: uppercase;
 
 }
-
+.standard{
+    padding-bottom: 30px;
+}
 .pFaster {
-    font-family: 'Roboto Flex', sans-serif;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    
+    /* desktop_main */
+    font-family: Roboto Flex;
     font-size: 18px;
+    font-style: normal;
     font-weight: 300;
-    line-height: 18px;
-    color: black;
-    margin-bottom: 30px;
+    line-height: 18px; /* 100% */
 }
 
 .end {
