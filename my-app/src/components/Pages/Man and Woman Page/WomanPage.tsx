@@ -88,8 +88,12 @@ const Women = () => {
 
                 <img src={women3} alt="mainImage" />
 
-                <button className="womenbtn buttons"  onClick={()=> navigate('/men')}>show collection</button>
-
+        <button
+          className="womenbtn buttons"
+          onClick={() => navigate("/ViewAll")}
+        >
+          show collection
+        </button>
 
                 <div className="section">
                     <p className="header">don't miss out on the latest news </p>

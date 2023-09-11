@@ -21,9 +21,8 @@ import CategoryCreatePage from "./components/admin/components/categories/create/
 // import CategoryEditPage from "./components/admin/components/categories/edit/CategoryEditPage";
 import FAQs from "./components/Pages/FAQs/FAQs";
 
-import BasketEmpty from "./components/Pages/BasketEmpty/BasketEmpty";
+import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
 import Header from "./components/NavBar/header";
-import Basket from "./components/Pages/Basket/Basket";
 import MainPage from "./components/Pages/Main/MainPage";
 import Register from "./components/auth/register";
 import Men from "./components/Pages/Man and Woman Page/MenPage";
@@ -64,11 +63,6 @@ function App() {
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
-
-
-  
-
-
 
   return (
     <>
@@ -126,7 +120,6 @@ function App() {
           <Route path="customer-care" element={<FAQs />} />
           <Route path="customer-service" element={<CustomerService />} />
 
-          <Route path="basket-empty" element={<BasketEmpty />} />
           <Route path="basket" element={<Basket />} />
 
           <Route path="/account/contact-information" element={<ContactInf />} />

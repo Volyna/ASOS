@@ -5,8 +5,8 @@ namespace WebAsos.Data.Entitties.Catalog
 {
     public class CategoryEntity : BaseEntity<int>
     {
-        //[MaxLength(255)]
-        //public string Image { get; set; }
+        [MaxLength(255)]
+        public string Image { get; set; }
         [ForeignKey("Parent")]
         public int? ParentId { get; set; }
         public CategoryEntity Parent { get; set; }

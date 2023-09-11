@@ -6,12 +6,16 @@
 }
 
 .productName {
-    font-family: 'Roboto Flex', sans-serif;
-    text-transform: uppercase;
-    font-weight: 500;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    
+    /* desktop_btn_bold */
+    font-family: Roboto Flex;
     font-size: 20px;
-    line-height: 23.44px;
-    color: black;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
 }
 
 .content {
@@ -35,7 +39,7 @@
     color: red;
     text-decoration: line-through;
     padding-top: 5px;
-    margin-left: 10px;
+   
 }
 
 .price {

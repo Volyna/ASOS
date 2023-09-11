@@ -90,15 +90,11 @@ const ProductsPage = () => {
             </div>
 
 
-        <div className="prodBlock">
-
-            <div className="prd">
-                {prod}
-                
-                
-                
-            </div>
-        </div>
+      <div className="prodBlock">
+        <Link to="/Prod">
+          <div className="prd">{prod}</div>
+        </Link>
+      </div>
 
         
 

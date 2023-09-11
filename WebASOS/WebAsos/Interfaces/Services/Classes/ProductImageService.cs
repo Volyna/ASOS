@@ -40,6 +40,7 @@ namespace WebAsos.Interfaces.Services.Classes
             try
             {
                 var dir = Path.Combine(Directory.GetCurrentDirectory(), "images", name);
+ 
 
                 var bytesOfImage = File.ReadAllBytes(dir);
 

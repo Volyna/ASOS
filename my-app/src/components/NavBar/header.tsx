@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./header.css";
 import Logo from "../../images/Logo.svg";
 import user from "../../images/user.svg";
+import selectedUser from "../../images/selected-user.svg";
 import cart from "../../images/cart.svg";
 import like from "../../images/like.svg";
 import search from "../../images/search.svg";
@@ -60,11 +61,12 @@ const Header = () => {
               </Link>
             )}
 
-            <Link to="/basket-empty">
-              <img src={cart} alt="" className="noneM" />
+            <Link to="/basket">
+              <img src={cart} alt="basket" className="noneM basket" />
             </Link>
+
             <Link to="/account/favourites">
-              <img src={like} alt="" />
+              <img src={like} className="favourites" alt="favourites" />
             </Link>
           </div>
         </div>
