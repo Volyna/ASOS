@@ -52,8 +52,7 @@ const Header = () => {
 
           <div className="userIcons">
             {isAuth == true ? (
-              <Link to="/account/contact-information">
-
+              <Link className="noneM " to="/account/contact-information">
                 <img src={selectedUser} alt="" />
               </Link>
             ) : (
@@ -64,8 +63,8 @@ const Header = () => {
 
             <Link to="/basket">
               <img src={cart} alt="basket" className="noneM basket" />
+            </Link>
 
-               
             <Link to="/account/favourites">
               <img src={like} className="favourites" alt="favourites" />
             </Link>
