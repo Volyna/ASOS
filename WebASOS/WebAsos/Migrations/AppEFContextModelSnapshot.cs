@@ -172,7 +172,7 @@ namespace WebAsos.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("tblAddresses");
+                    b.ToTable("tblAddresses", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.BasketEntity", b =>
@@ -204,7 +204,7 @@ namespace WebAsos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblBasket");
+                    b.ToTable("tblBasket", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
@@ -237,7 +237,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CreditCardEntity", b =>
@@ -284,7 +284,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tblCreditCard");
+                    b.ToTable("tblCreditCard", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderEntity", b =>
@@ -329,7 +329,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tblOrders");
+                    b.ToTable("tblOrders", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderedProductEntity", b =>
@@ -367,7 +367,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderedProducts");
+                    b.ToTable("OrderedProducts", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>
@@ -426,7 +426,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("tblProducts");
+                    b.ToTable("tblProducts", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductImageEntity", b =>
@@ -461,7 +461,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("tblProductImages");
+                    b.ToTable("tblProductImages", (string)null);
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.IdentityUser.RoleEntity", b =>

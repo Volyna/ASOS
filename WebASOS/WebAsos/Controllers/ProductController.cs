@@ -134,6 +134,14 @@ namespace WebAsos.Controllers
             var isFavorite = _productService.ToggleFavoriteStatus(Id.Id);
             return Ok(new { IsFavorite = isFavorite });
         }
+        [HttpGet]
+        [Route("getProdcutsMan")]
+        public async Task<IActionResult> GetProdcutsManAsync()
+        {
+            //var isFavorite = _productService.ger
+            return null;
+
+        }
     }
     
 }

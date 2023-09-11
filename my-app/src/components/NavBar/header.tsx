@@ -62,7 +62,7 @@ const Header = () => {
               </Link>
             )}
 
-            <Link to="/basket">
+            <Link to="/basket"/>
               <img src={cart} alt="basket" className="noneM basket" />
 
                
