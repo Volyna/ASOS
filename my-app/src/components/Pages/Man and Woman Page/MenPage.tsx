@@ -26,29 +26,6 @@ const Men = () => {
   const navigate = useNavigate();
   const location = useLocation().pathname;
 
-  const disp = useDispatch();
-  const fetchCat = async () => {
-    const response = await axios.get(
-      "https://basos.itstep.click/api/Category/getAllCategories"
-    );
-    disp(showCategory(response.data.payload));
-  };
-
-  useEffect(() => {
-    fetchCat();
-  }, []);
-
-  const cat = useSelector((state: RootState) => state.allCategory.categories);
-
-  const categories = cat.map((category: any) => {
-    const { id, name } = category;
-    return (
-      <Link to={location + "/" + name} key={id}>
-        {name}
-      </Link>
-    );
-  });
-
   return (
     <>
       <div className="staticnav">
@@ -86,27 +63,11 @@ const Men = () => {
 
         <img src={men3} alt="mainImage" />
 
-        <button className="menbtn buttons" onClick={() => navigate("/men")}>
+        <button className="menbtn buttons" onClick={() => navigate("/ViewAll")}>
           show collection
         </button>
 
-        <div className="section">
-          <p className="header">don't miss out on the latest news </p>
-
-          <div className="spam">
-            <p className="text left">
-              Subscribe to our newsletter and be aware of everything, get access
-              to exclusive promotions and even more!
-            </p>
-            <input></input>
-            <button
-              className="menbtn buttons"
-              onClick={() => navigate("/women")}
-            >
-              Subscribe
-            </button>
-          </div>
-        </div>
+    
 
         <div className="items">
           <div className="item">
@@ -132,6 +93,117 @@ const Men = () => {
           <div className="item">
             <img src={menItem5} />
             <p className="itemName">Linen trousers</p>
+            <ul>
+                <Link to="ViewAll">
+                  <span>Dresses</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Shoes</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Accessories</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Face&Body</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Topshop</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Sportswear</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Brands</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Outlet</span>
+                </Link>
+              </ul>
+              <ul>
+                <Link to="ViewAll">
+                  <span>Marketplace</span>
+                </Link>
+              </ul>
+            </div>
+          </div>
+          <div className="col-10">
+            <div className="titleProductInfo">
+              <h5>view all</h5>
+            </div>
+            <div className="FilterProductInfo">
+              <div className="row filterProductRow">
+                <div className="col-10">
+                  <div className="FilterProduct">
+                    <div className="FilterProductSortBy prodcutFlex">
+                      <p>sort by</p>
+                      <select>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                      </select>
+                    </div>
+                    <div className="FilterProductSize prodcutFlex">
+                      <p>size</p>
+                      <select>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                      </select>
+                    </div>
+                    <div className="FilterProductColor prodcutFlex">
+                      <p>color</p>
+                      <select>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                      </select>
+                    </div>
+                    <div className="FilterProductType prodcutFlex">
+                      <p>product type</p>
+                      <select>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                      </select>
+                    </div>
+                    <div className="FilterProductBrand prodcutFlex">
+                      <p>brand</p>
+                      <select>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                      </select>
+                    </div>
+                    <div className="FilterProductOtherFilter prodcutFlex">
+                      <p>other filters</p>
+                      <select>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-2">
+                  <div className="productCountPage">
+                    <div className="prodcuttotaPage">
+                      <p>5|2</p>
+                    </div>
+                    <div className="prodcuttotalItems">
+                      <p>113 items</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
