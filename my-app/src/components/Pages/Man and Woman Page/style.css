@@ -27,65 +27,7 @@
     display: flex;
     justify-content: center;
     margin: 30px 0;
-    /* margin-bottom: -30px; */
-}
-.content .contentProductTypeInfo h1{
-    color: var(--black, #353535);
-font-feature-settings: 'clig' off, 'liga' off;
-
-/* desktop_btn_bold */
-font-family: Roboto Flex;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-text-transform: uppercase;
-}
-.content .contentProductTypeInfo a{
-text-decoration: none;
-text-align: start;
-}
-.content .contentProductTypeInfo ul{
-    text-align: start;
-    padding: 0;
-    margin-bottom: 10px;
-}
-.content .contentProductTypeInfo ul span{
-    color: var(--black, #353535);
-    font-feature-settings: 'clig' off, 'liga' off;
-    
-    /* desktop_main */
-    font-family: Roboto Flex;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 18px; /* 100% */
-}
-.content .contentCategoryTypeInfo ul {
-   padding-left: 0;
-   text-align: start;
-  
-}
-.content .contentCategoryTypeInfo ul a {
-   padding-left: 0;
-   text-align: start;
-   text-decoration: none;
-   
-}
-.content .contentProductTypeInfo{
-    margin-bottom: 30px;
-}
-.content .contentCategoryTypeInfo ul span{
-    color: var(--black, #353535);
-font-feature-settings: 'clig' off, 'liga' off;
-
-/* desktop_btn_bold */
-font-family: Roboto Flex;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-text-transform: uppercase;
+    margin-bottom: -30px;
 }
 
 .title{
@@ -178,39 +120,7 @@ text-transform: uppercase;
 .menBlock .items .item{
     width:18%;
 }
-.content .titleProductInfo{
-    text-align: start;
-}
-.content .titleProductInfo h5{
-    color: var(--black, #353535);
-font-feature-settings: 'clig' off, 'liga' off;
 
-/* desktop_h1 */
-font-family: Roboto Flex;
-font-size: 48px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-text-transform: uppercase;
-padding: 0;
-margin: 0
-}
-.content .FilterProduct{
-    text-align: start;
-    display: flex;
-    justify-content: space-between;
-}
-.content .FilterProductSortBy{
-    display: flex;
-}
-.content .prodcutFlex{
-    display: flex;
-}
-.content .productCountPage{
-    display: flex;
-    justify-content: end;
-}
-.content .filterProductRow{
-    margin-top: 30px;
-}
+
+
 

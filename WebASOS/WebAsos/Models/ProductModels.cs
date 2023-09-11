@@ -53,18 +53,4 @@
     {
         public IFormFile Image { get; set; }
     }
-    public class ProductResponseDTO
-    {
-        public string Name { get; set; }
-        public float Price { get; set; }
-        public int Discount { get; set; }
-        public string Description { get; set; }
-        public string Brand { get; set; }
-        public List<string> Color { get; set; }
-        public List<string> Size { get; set; }
-        public int Quantity { get; set; }
-        public string mainPhoto { get; set; }
-        public bool IsInTheStock { get; set; }
-        public List<string> Images { get; set; }
-    }
 }

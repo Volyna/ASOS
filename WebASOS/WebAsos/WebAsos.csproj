@@ -62,7 +62,6 @@
     <Folder Include="interfaces\JwtTokenInterfaces\" />
     <Folder Include="Data\Validation\User\" />
     <Folder Include="Data\AutoMapper\User\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>

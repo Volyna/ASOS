@@ -8,7 +8,6 @@ using WebAsos.Interfaces.Repository.Interfaces;
 using WebAsos.Interfaces.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using WebAsos.Data;
 
 namespace WebAsos.Interfaces.Services.Classes
 {
@@ -18,13 +17,11 @@ namespace WebAsos.Interfaces.Services.Classes
         private readonly ICategoryService _categoryService;
         private readonly IProductImageService _productImageService;
         private readonly IProductImageRepository _productImageRepository;
-        private readonly AppEFContext _context;
 
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper, ICategoryService categoryService, IProductImageService productImageService, IProductImageRepository productImageRepository, AppEFContext context)
+        public ProductService(IProductRepository productRepository, IMapper mapper, ICategoryService categoryService, IProductImageService productImageService, IProductImageRepository productImageRepository)
         {
-            _context = context;
             _productRepository = productRepository;
             _mapper = mapper;
             _categoryService = categoryService;
@@ -93,48 +90,6 @@ namespace WebAsos.Interfaces.Services.Classes
             toDelete.ForEach(img => _productImageRepository.DeleteAsync(img.Id));
 
             await _productRepository.DeleteAsync(id);
-        }
-
-        public async Task<ServiceResponse> GetAllProductsMan()
-        {
-            try
-            {
-                var resultProduct = await _productRepository.GetAllProdcutsMan();
-                if (resultProduct != null)
-                {
-                    var listResponse = new List<ProductResponseDTO>();
-                    foreach (var product in resultProduct)
-                    {
-                        ProductResponseDTO productResponseDTO = new ProductResponseDTO();
-                        productResponseDTO.Name = product.Name;
-                        productResponseDTO.Description = product.Description;
-                        productResponseDTO.Price =  product.Price;
-                        productResponseDTO.Size = await _context.Products.Where(p => p.Name.ToLower() == product.Name.ToLower() && p.Color.ToLower() == product.Color.ToLower()).Select(i => i.Size).ToListAsync();
-                        productResponseDTO.Quantity = product.Quantity;
-                        productResponseDTO.Discount = product.Discount;
-                        productResponseDTO.Color = await _context.Products.Where(p => p.Name.ToLower() == product.Name.ToLower() && p.Color.ToLower() == product.Color.ToLower()).Select(i => i.Color).ToListAsync();
-                        productResponseDTO.Brand = product.Brand;
-                        productResponseDTO.IsInTheStock =product.IsInTheStock;
-                        productResponseDTO.Images = await _productImageService.GetProductImagesProduct(product.Id);
-                        listResponse.Add(productResponseDTO);
-
-
-                    }
-
-                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request products", Payload = listResponse };
-                }
-                else
-                {
-                    return new ServiceResponse { IsSuccess = false, Message = "Not successfully request products man is null" };
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-
-                return new ServiceResponse { IsSuccess = false, Message = ex.Message };
-            }
         }
 
         public async Task<ServiceResponse> GetProductAsync(string name)
