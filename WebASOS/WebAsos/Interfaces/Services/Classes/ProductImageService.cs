@@ -1,5 +1,6 @@
 ﻿using SixLabors.ImageSharp.Formats.Jpeg;
 using WebAsos.Data.Entitties.Catalog;
+using WebAsos.Interfaces.Repository.Classes;
 using WebAsos.Interfaces.Repository.Interfaces;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Services;
@@ -100,6 +101,25 @@ namespace WebAsos.Interfaces.Services.Classes
             }
 
             return fileName;
+        }
+        public async Task<List<string>> GetProductImagesProduct(int id)
+        {
+            try
+            {
+                var resProductImages = await _productImageRepository.GetListImagesProductByIdProduct(id);
+                var result = new List<string>();
+                foreach (var item in resProductImages)
+                {
+                    var image =  GetBase64ByName(item);
+                    result.Add(image);
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 

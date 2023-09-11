@@ -12,5 +12,7 @@ namespace WebAsos.Interfaces.Services.Interfaces
         public Task<ProductImageEntity> GetMainImageByParentId(int id);
         public Task DeleteAllImagesByProductId(int id);
         public string GetBase64ByName(string name);
+        public Task<List<string>> GetProductImagesProduct(int id);
+
     }
 }

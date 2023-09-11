@@ -111,7 +111,7 @@ const ContactInf = () => {
                 Customer Service
               </Link>
               <Link className="headerText" to="/">
-                Shopping Form
+                Shopping from
               </Link>
             </div>
             <div className="searchItem ">

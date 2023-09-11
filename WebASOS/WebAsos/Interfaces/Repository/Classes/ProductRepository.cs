@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebAsos.Constants.Product;
 using WebAsos.Data;
 using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Interfaces.Repository.Interfaces;
@@ -44,5 +45,23 @@ namespace WebAsos.Interfaces.Repository.Classes
             return _dbContext.Categories.FirstOrDefault(i => i.Name == category)?.Products;
         }
 
+        public async Task<List<ProductEntity>> GetAllProdcutsMan()
+        {
+            try
+            {
+                var idMan = await _dbContext.Categories.Where(c => c.Name.ToLower().Trim() == Product.Man).FirstOrDefaultAsync();
+                if (idMan == null)
+                {
+                    return null;
+                }
+                var productsMan = await _dbContext.Products.Where(p => p.CategoryId == idMan.Id).ToListAsync();
+                return productsMan;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

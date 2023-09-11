@@ -70,8 +70,7 @@
 .first, .third{
     display:flex;
     flex-wrap: wrap;
-    padding-left: 10px;
-    padding-left: 10px;
+
 }
 
 .third{justify-content: flex-end;}

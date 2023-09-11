@@ -135,6 +135,9 @@ export const LoginUserByGoogle = (model: ILoginUserByGoogle) => {
           type: UserActionTypes.BAG_REQUEST,
           payload: "Error Notification !",
         });
+        toast.error("Error Notification !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       }
     } catch (e) {
       dispatch({

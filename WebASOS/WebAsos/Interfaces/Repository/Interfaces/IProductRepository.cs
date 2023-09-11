@@ -8,5 +8,6 @@ namespace WebAsos.Interfaces.Repository.Interfaces
         public Task<ProductEntity> GetByName(string name);
         public ICollection<ProductEntity> GetProductsAsync();
         public ICollection<ProductEntity> GetByCategoryName(string category);
+        public Task<List<ProductEntity>> GetAllProdcutsMan();
     }
 }

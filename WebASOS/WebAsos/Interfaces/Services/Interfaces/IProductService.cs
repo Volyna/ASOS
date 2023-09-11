@@ -13,5 +13,6 @@ namespace WebAsos.Interfaces.Services.Interfaces
         public Task DeleteProductAsync(int id);
         public Task<ServiceResponse> UpdateProductAsync(UpdateProductDTO model);
         public Task<ServiceResponse> ToggleFavoriteStatus(int id);
+        public Task<ServiceResponse> GetAllProductsMan();
     }
 }

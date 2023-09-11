@@ -66,8 +66,6 @@ function RegisterPage() {
   });
   const responseGoogle = (resp: any) => {
     const token = resp;
-    // const token = resp.credential;
-    console.log("token: ", token);
     let response: ILoginUserByGoogle = {
       provider: "Google",
       token: token,
