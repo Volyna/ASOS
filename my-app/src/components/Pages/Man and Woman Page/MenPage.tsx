@@ -35,8 +35,6 @@ const Men = () => {
 
       <BreadCrumbs />
 
-      <div className="categors">{categories}</div>
-
       <p className="title">MEN</p>
 
       <div className="menBlock">
@@ -109,112 +107,112 @@ const Men = () => {
           <div className="item">
             <img src={menItem5} />
             <p className="itemName">Linen trousers</p>
-                <Link to="ViewAll">
-                  <span>Dresses</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Shoes</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Accessories</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Face&Body</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Topshop</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Sportswear</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Brands</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Outlet</span>
-                </Link>
-              </ul>
-              <ul>
-                <Link to="ViewAll">
-                  <span>Marketplace</span>
-                </Link>
-              </ul>
-            </div>
+            <ul>
+              <Link to="ViewAll">
+                <span>Dresses</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Shoes</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Accessories</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Face&Body</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Topshop</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Sportswear</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Brands</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Outlet</span>
+              </Link>
+            </ul>
+            <ul>
+              <Link to="ViewAll">
+                <span>Marketplace</span>
+              </Link>
+            </ul>
           </div>
-          <div className="col-10">
-            <div className="titleProductInfo">
-              <h5>view all</h5>
-            </div>
-            <div className="FilterProductInfo">
-              <div className="row filterProductRow">
-                <div className="col-10">
-                  <div className="FilterProduct">
-                    <div className="FilterProductSortBy prodcutFlex">
-                      <p>sort by</p>
-                      <select>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                      </select>
-                    </div>
-                    <div className="FilterProductSize prodcutFlex">
-                      <p>size</p>
-                      <select>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                      </select>
-                    </div>
-                    <div className="FilterProductColor prodcutFlex">
-                      <p>color</p>
-                      <select>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                      </select>
-                    </div>
-                    <div className="FilterProductType prodcutFlex">
-                      <p>product type</p>
-                      <select>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                      </select>
-                    </div>
-                    <div className="FilterProductBrand prodcutFlex">
-                      <p>brand</p>
-                      <select>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                      </select>
-                    </div>
-                    <div className="FilterProductOtherFilter prodcutFlex">
-                      <p>other filters</p>
-                      <select>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                      </select>
-                    </div>
+        </div>
+        <div className="col-10">
+          <div className="titleProductInfo">
+            <h5>view all</h5>
+          </div>
+          <div className="FilterProductInfo">
+            <div className="row filterProductRow">
+              <div className="col-10">
+                <div className="FilterProduct">
+                  <div className="FilterProductSortBy prodcutFlex">
+                    <p>sort by</p>
+                    <select>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                    </select>
+                  </div>
+                  <div className="FilterProductSize prodcutFlex">
+                    <p>size</p>
+                    <select>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                    </select>
+                  </div>
+                  <div className="FilterProductColor prodcutFlex">
+                    <p>color</p>
+                    <select>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                    </select>
+                  </div>
+                  <div className="FilterProductType prodcutFlex">
+                    <p>product type</p>
+                    <select>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                    </select>
+                  </div>
+                  <div className="FilterProductBrand prodcutFlex">
+                    <p>brand</p>
+                    <select>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                    </select>
+                  </div>
+                  <div className="FilterProductOtherFilter prodcutFlex">
+                    <p>other filters</p>
+                    <select>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                    </select>
                   </div>
                 </div>
-                <div className="col-2">
-                  <div className="productCountPage">
-                    <div className="prodcuttotaPage">
-                      <p>5|2</p>
-                    </div>
-                    <div className="prodcuttotalItems">
-                      <p>113 items</p>
-                    </div>
+              </div>
+              <div className="col-2">
+                <div className="productCountPage">
+                  <div className="prodcuttotaPage">
+                    <p>5|2</p>
+                  </div>
+                  <div className="prodcuttotalItems">
+                    <p>113 items</p>
                   </div>
                 </div>
               </div>
@@ -222,6 +220,7 @@ const Men = () => {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );
