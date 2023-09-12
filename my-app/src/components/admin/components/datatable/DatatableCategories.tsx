@@ -2,7 +2,7 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { categoryColumns, categoryRows } from "../../datatablesource";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../../../modal/delete";
 import { RemoveCategory } from "../../../../store/actions/categoryActions";
@@ -10,14 +10,36 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { showCategory } from "../../../../store/actions/Categories/categoryAction";
 import { RootState } from "../../../../store/reducers/rootReducer";
-const DatatableCategories = () => {
-  const [data, setData] = useState(categoryRows);
-  const location = useLocation().pathname;
+import { ICategoryItem } from "../categories/types";
+import http from "../../../../services/http_common";
+import { APP_ENV } from "../../../../env";
 
+const DatatableCategories = () => {
+  const location = useLocation().pathname;
+  const navigate = useNavigate();
   const disp = useDispatch();
+
+  const [data, setData] = useState(categoryRows);
+  const [categors, setCategories] = useState<Array<ICategoryItem>>([]);
+  useEffect(() => {
+    console.log(`${APP_ENV.REMOTE_HOST_NAME}`);
+    http
+      .get<Array<ICategoryItem>>(
+        `http://localhost:5056/api/Category/getAllCategories`
+      )
+      .then((resp) => {
+        console.log("resp = ", resp);
+        setCategories(resp.data);
+      });
+  }, []);
+
+  const DeleteCategoryHandler = (id: number) => {
+    RemoveCategory(id);
+  };
+
   const fetchCat = async () => {
     const response = await axios.get(
-      "https://basos.itstep.click/api/Category/getAllCategories"
+      "http://localhost:5056/api/Category/getAllCategories"
     );
     disp(showCategory(response.data.payload));
   };
@@ -32,6 +54,7 @@ const DatatableCategories = () => {
     const { id, name } = category;
     return (
       <Link to={location + "/" + name} key={id}>
+        {id}
         {name}
       </Link>
     );
@@ -39,14 +62,8 @@ const DatatableCategories = () => {
 
   console.log("Category: " + categories);
 
-  const DeleteCategoryHandler = (id: number) => {
-    RemoveCategory(id);
-  };
-
-  const navigate = useNavigate();
-
   const handleDelete = (id: number) => {
-    setData(data.filter((item) => item.id !== id));
+    setData(data.filter((item: { id: number }) => item.id !== id));
   };
 
   const actionColumn = [
@@ -57,9 +74,6 @@ const DatatableCategories = () => {
       renderCell: (params: any) => {
         return (
           <div className="cellAction">
-            <Link to="/admin/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
             <Link to="/admin/users/test" style={{ textDecoration: "none" }}>
               <div className="viewButton">Edit</div>
             </Link>

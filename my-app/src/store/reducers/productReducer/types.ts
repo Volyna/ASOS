@@ -18,7 +18,7 @@ interface IItemProduct {
   brand: string,
   quantity: number,
   isInTheStock: boolean,
-  images: Array<File>
+  // images: Array<File>
   category_id: number
 }
 
