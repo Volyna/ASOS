@@ -8,8 +8,8 @@ export interface IProductCreate {
     brand: string,
     quantity: number,
     isInTheStock: boolean,
-    images: Array<File>
-    category_id: number
+    // images: Array<File>
+    // category_id: number
 }
 
 export interface IProductEdit {
@@ -24,8 +24,8 @@ export interface IProductEdit {
     brand: string,
     quantity: number,
     isInTheStock: boolean,
-    images: Array<String>;
-    newImages: Array<File>;
+    // images: Array<String>;
+    // newImages: Array<File>;
     category_id: number
 }
 
@@ -40,8 +40,8 @@ export interface IProductEditPost {
     quantity: number,
     isInTheStock: boolean,
     category_id: number
-    removeImages: Array<String>;
-    images: Array<File>;
+    // removeImages: Array<String>;
+    // images: Array<File>;
 }
 
 export interface IProductItem {
@@ -57,5 +57,5 @@ export interface IProductItem {
     isInTheStock: boolean,
     category_id: number,
     category: string,
-    images: string[],
+    // images: string[],
 }

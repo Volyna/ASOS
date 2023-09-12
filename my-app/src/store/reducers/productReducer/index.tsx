@@ -15,7 +15,7 @@ const initialState: ProductsState = {
     brand: "",
     quantity: 0,
     isInTheStock: false,
-    images: [],
+    // images: [],
     category_id: 0,
   },
 };
@@ -46,7 +46,7 @@ const ProductsReducer = (
           brand: "",
           quantity: 0,
           isInTheStock: false,
-          images: [],
+          // images: [],
           category_id: 0,
         },
         message: "",
@@ -67,7 +67,7 @@ const ProductsReducer = (
           brand: "",
           quantity: 0,
           isInTheStock: false,
-          images: [],
+          // images: [],
           category_id: 0,
         },
         message: action.payload.message,
@@ -110,9 +110,9 @@ const ProductsReducer = (
         ...state,
         productForUpdate: {
           ...productForUpdate,
-          images: productForUpdate.images.filter(
-            (item) => item !== action.payload
-          ),
+          // images: productForUpdate.images.filter(
+          //   (item) => item !== action.payload
+          // ),
         },
       };
     }
