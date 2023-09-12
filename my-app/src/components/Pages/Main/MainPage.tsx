@@ -13,9 +13,15 @@ import woman from "../../../images/woman.png";
 import Footer from "../../Footer/FooterV";
 import { Link, useNavigate } from "react-router-dom";
 import Men from "../Man and Woman Page/MenPage";
+import { useEffect } from "react";
+import { useActions } from "../../../hooks/useActions";
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { GetAllProductMan } = useActions();
+  useEffect(() => {
+    GetAllProductMan();
+  }, []);
   return (
     <>
       <Header />

@@ -1,9 +1,9 @@
-body{
+body {
     padding: 0 4%;
 }
 
-.staticnav{
-    position: fixed;
+.staticnav {
+    position: absolute;
     top: 0;
     width: 92%;
     background-color: white;

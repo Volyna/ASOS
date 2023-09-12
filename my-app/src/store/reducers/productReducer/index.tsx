@@ -1,4 +1,4 @@
-import { ProductActionTypes, ProductsActions, ProductsState } from "./types";
+import { ProductActionTypes, ProductsActions, ProductsState } from "./types"
 
 const initialState: ProductsState = {
   products: [],
@@ -13,6 +13,19 @@ const ProductsReducer = (
       return {
         ...state,
         loading: true,
+      };
+    }
+    case ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS: {
+      return {
+        ...state,
+        loading: false,
+        products: action.payload
+      };
+    }
+    case ProductActionTypes.BAD_REQUEST_PRODUCT: {
+      return {
+        ...state,
+        loading: false,
       };
     }
     default: {

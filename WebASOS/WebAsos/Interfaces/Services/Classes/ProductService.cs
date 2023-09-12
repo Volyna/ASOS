@@ -120,8 +120,8 @@ namespace WebAsos.Interfaces.Services.Classes
                         tempProductDTO.IsInTheStock = item.IsInTheStock;
                         tempProductDTO.IsInTheStock = item.IsInTheStock;
                         tempProductDTO.CategoryId = item.CategoryId;
-                        var productImages = await _productImageRepository.GetAllImagesById(item.Id);
-                        tempProductDTO.Images = await _productImageService.GetAllProductImages(productImages);
+                        //var productImages = await _productImageRepository.GetAllImagesById(item.Id);
+                        //tempProductDTO.Images = await _productImageService.GetAllProductImages(productImages);
                         response.Add(tempProductDTO);
                      
                         

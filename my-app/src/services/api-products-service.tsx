@@ -73,3 +73,17 @@ export async function removeProduct(id: number) {
     });
   return data;
 }
+
+export async function getProductsMan() {
+  const data = await http
+    .get("/api/Product/getProdcutsMan")
+    .then((response) => {
+      return {
+        response,
+      };
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return data;
+}
