@@ -29,7 +29,7 @@ const Men = () => {
   const disp = useDispatch();
   const fetchCat = async () => {
     const response = await axios.get(
-      "https://basos.itstep.click/api/Category/getAllCategories"
+      "http://localhost:5056/api/Category/getAllCategories"
     );
     disp(showCategory(response.data.payload));
   };
