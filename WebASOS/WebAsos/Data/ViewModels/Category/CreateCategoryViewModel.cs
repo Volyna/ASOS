@@ -6,7 +6,5 @@ namespace WebAsos.Data.ViewModels.Category
     {
         [Required]
         public string Name { get; set; }
-        //[Required]
-        //public string ImageBase64 { get; set; }
     }
 }

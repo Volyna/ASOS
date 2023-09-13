@@ -27,7 +27,7 @@ const ProductCreate = () => {
     discount: 0,
     description: "",
     color: "",
-    size: 0,
+    size: "",
     brand: "",
     quantity: 0,
     isInTheStock: false,
@@ -109,7 +109,7 @@ const ProductCreate = () => {
         discount: Number(data.get("discount")),
         description: data.get("description")?.toString()!,
         color: data.get("color")?.toString()!,
-        size: Number(data.get("size")),
+        size: data.get("size")?.toString()!,
         brand: data.get("brand")?.toString()!,
         quantity: Number(data.get("quantity")),
         isInTheStock: Boolean(data.get("isInTheStock")),
@@ -259,11 +259,11 @@ const ProductCreate = () => {
 
                           <Field
                             as="input"
-                            type="number"
+                            type="text"
                             name="size"
                             id="size"
                             className="input"
-                            placeholder="Enter the product size"
+                            placeholder="Enter the product size( XS, S, M, L, XL)"
                             required
                           />
                           {errors.size && touched.size ? (
