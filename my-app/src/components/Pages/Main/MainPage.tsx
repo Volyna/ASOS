@@ -20,7 +20,7 @@ const MainPage = () => {
   const navigate = useNavigate();
   const { GetAllProductMan } = useActions();
   useEffect(() => {
-    GetAllProductMan();
+    // GetAllProductMan();
   }, []);
   return (
     <>

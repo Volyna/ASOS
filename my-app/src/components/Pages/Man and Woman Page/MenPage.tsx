@@ -8,21 +8,39 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Loader from "../../loader";
 import like from "../../../images/like.svg";
-import { IItemProduct } from "../../../store/reducers/BasketReducer/types";
+import { MultiSelect } from 'primereact/multiselect';
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+
+//core
+import "primereact/resources/primereact.min.css";
+
 const Men = () => {
+  const [selectedFilterBy, setSelectedFilterBy] = useState(null);
+  const [selectedFilterSize, setSelectedFilterSize] = useState(null);
+  const [selectedFilterColor, setSelectedFilterColor] = useState(null);
   var [countShowProduct, setCountShowProduct] = useState(20);
-
-
-
-  const { GetAllProductMan } = useActions();
+  const { GetAllProductMan, AddProductLike, DeleteProductLike } = useActions();
   const { loading, products } = useTypedSelector(
     (store) => store.ProductsReducer
   );
-  if (products.length == 0 && loading == false) {
+  useEffect(() => {
     GetAllProductMan();
-  }
+  }, []);
+
   const MoreCountProdcutShow = () => {
     setCountShowProduct(countShowProduct + 20);
+  }
+  const SwitchLike = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, idProduct: number) => {
+    var nameClass = (e.target as Element).className;
+    if (nameClass == "favourites") {
+      (e.target as Element).className = "likeImage";
+      AddProductLike(idProduct);
+    } else {
+      (e.target as Element).className = "favourites";
+      DeleteProductLike(idProduct);
+    }
+    console.log("nameClass: ", nameClass);
   }
   const dataProduct = products.slice(0, countShowProduct).map((item) => {
 
@@ -31,7 +49,7 @@ const Men = () => {
       <li key={item.id} className="ulITem">
         <div className="oneItemProduct">
           <div className="likeProductItem">
-            <img src={like} className="favourites" alt="favourites" />
+            <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
           </div>
           <div key={item.mainImage} className="imageProductItem"> <img
             width={272}
@@ -47,6 +65,38 @@ const Men = () => {
 
     )
   })
+  const dataFilterBy = [
+    { name: "Newest" },
+    { name: "Recommended" },
+    { name: "Lowest price" },
+    { name: "Highest price" },
+  ];
+  const dataFilterSize = [
+    { name: "XS" },
+    { name: "S" },
+    { name: "M" },
+    { name: "L" },
+    { name: "XL" },
+    { name: "XXL" },
+    { name: "XXXL" },
+  ];
+  const dataFilterColor = [
+    { name: "Red" },
+    { name: "Orange" },
+    { name: "Yellow" },
+    { name: "Green" },
+    { name: "Blue" },
+    { name: "Navy" },
+    { name: "Beige" },
+    { name: "Gray" },
+    { name: "Purple" },
+    { name: "Pink" },
+    { name: "Turquoise" },
+    { name: "Brown" },
+    { name: "White" },
+    { name: "black" },
+    { name: "Multicolor" },
+  ];
 
 
   return (
@@ -187,43 +237,37 @@ const Men = () => {
                     <div className="FilterProduct">
                       <div className="FilterProductSortBy prodcutFlex">
                         <p>sort by</p>
-                        <select>
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                        </select>
+                        <MultiSelect value={selectedFilterBy} onChange={(e) => { setSelectedFilterBy(e.value) }} optionLabel="name" options={dataFilterBy}
+                          filter maxSelectedLabels={4} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductSize prodcutFlex">
                         <p>size</p>
-                        <select>
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                        </select>
+                        <MultiSelect value={selectedFilterSize} onChange={(e) => { setSelectedFilterSize(e.value) }} optionLabel="name" options={dataFilterSize}
+                          filter maxSelectedLabels={7} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductColor prodcutFlex">
                         <p>color</p>
-                        <select>
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                        </select>
+                        <MultiSelect value={selectedFilterColor} onChange={(e) => { setSelectedFilterSize(e.value) }} optionLabel="name" options={dataFilterColor}
+                          filter maxSelectedLabels={20} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductType prodcutFlex">
                         <p>product type</p>
-                        <select>
-                          <option value={1}>1</option>
+                        <select className="styleArrowSelect">
+                          <option value={0}>{null}</option>
                           <option value={2}>2</option>
                         </select>
                       </div>
                       <div className="FilterProductBrand prodcutFlex">
                         <p>brand</p>
-                        <select>
-                          <option value={1}>1</option>
+                        <select className="styleArrowSelect">
+                          <option value={0}>{null}</option>
                           <option value={2}>2</option>
                         </select>
                       </div>
                       <div className="FilterProductOtherFilter prodcutFlex">
                         <p>other filters</p>
-                        <select>
-                          <option value={1}>1</option>
+                        <select className="styleArrowSelect">
+                          <option value={0}>{null}</option>
                           <option value={2}>2</option>
                         </select>
                       </div>

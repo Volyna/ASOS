@@ -392,3 +392,79 @@
     padding-bottom: 30px;
 
 }
+
+.content .likeImage {
+    background-image: url("../../../images/liked.png");
+}
+
+.content .styleArrowSelect {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    background-repeat: no-repeat;
+    appearance: none;
+    background-position-y: -3px;
+    width: 50px;
+    background-image: url("../../../images/arrow-down-Acept.png");
+
+}
+
+.content .styleArrowNotSelect {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    background-repeat: no-repeat;
+    appearance: none;
+    background-position-y: -3px;
+    width: 50px;
+    background-image: none;
+
+}
+
+.content .filterProdcutSelect {
+    border: none;
+    height: 25px;
+    margin-left: 10px;
+    align-items: self-start;
+}
+
+.p-multiselect-label-container {
+    display: none;
+    width: 25px;
+    height: 25px;
+}
+
+
+.content .p-multiselect .p-multiselect-trigger {
+    width: 2rem;
+    color: #353535;
+    align-items: center;
+
+
+}
+
+.content .p-multiselect-trigger {
+    align-items: "self-start";
+}
+
+.content .FilterProduct svg {
+    width: 25px;
+
+    cursor: pointer;
+    border: none;
+    background-repeat: no-repeat;
+    appearance: none;
+    background-position-y: -3px;
+    background-image: none;
+    background-image: url("../../../images/arrow-down-Acept.png");
+
+}
+
+.content .FilterProduct svg path {
+    display: none;
+
+}

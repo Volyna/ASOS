@@ -11,6 +11,7 @@ export const GetAllProductMan = () => {
       dispatch({ type: ProductActionTypes.START_REQUEST_PRODUCT });
       const data = await getProductsMan();
       const { response } = data;
+      console.log("response", response)
       if (response.data.isSuccess == true) {
         dispatch({ type: ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS, payload: response.data.payload });
       } else {
