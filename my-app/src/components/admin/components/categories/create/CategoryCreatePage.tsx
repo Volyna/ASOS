@@ -12,7 +12,7 @@ import Navbar from "../../navbar/Navbar";
 
 const CategoryCreate = () => {
   const navigator = useNavigate();
-  const { GetCategories, SetCategoriForUpdate, CreateCategory } = useActions();
+  const { CreateCategory } = useActions();
 
   const { message } = useTypedSelector((store) => store.CategoryReducer);
 
@@ -26,7 +26,6 @@ const CategoryCreate = () => {
     const data = new FormData(e.currentTarget);
     const newCategory: ICategoryCreate = {
       name: data.get("name")?.toString()!,
-      // imageBase64: model.imageBase64,
     };
     console.log("New category", newCategory);
     CreateCategory(newCategory);

@@ -19,9 +19,7 @@ export async function getProductsCategories(idCategory: number) {
 }
 export async function createProduct(model: IProductCreate) {
   const data = await http
-    .post("/api/Product/CreateProduct", model, {
-      headers: { "Content-Type": "multipart/form-data" },
-    })
+    .post("/api/Product/CreateProduct", model)
     .then((response) => {
       return {
         response,
