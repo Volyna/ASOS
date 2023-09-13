@@ -9,7 +9,7 @@ export const CreateProductSchema = Yup.object().shape({
     .max(6000, "A big description!")
     .required(),
 
-  size: Yup.number().required(),
+  size: Yup.string().required(),
 
   brand: Yup.string().required(),
 

@@ -106,7 +106,7 @@ namespace WebAsos.Repositories.Basket
                         newBasket.Description = product.Description;
                         newBasket.Brand = product.Brand;
                         newBasket.Color = product.Color;
-                        newBasket.Size = await _context.Products.Where(p => p.Name.ToLower() == product.Name.ToLower() && p.Color.ToLower() == product.Color.ToLower()).Select(i => i.Size).ToListAsync();
+                        //newBasket.Size = await _context.Products.Where(p => p.Name.ToLower() == product.Name.ToLower() && p.Color.ToLower() == product.Color.ToLower()).Select(i => i.Size).ToListAsync();
                         newBasket.Quantity = product.Quantity;
                         newBasket.IsInTheStock = product.IsInTheStock;
 

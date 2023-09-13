@@ -23,7 +23,7 @@ namespace WebAsos.Data.Entitties.Catalog
 
 
         [Required(ErrorMessage = "The Sizse field is required.")]
-        public int Size { get; set; }
+        public string Size { get; set; }
 
 
         [Required(ErrorMessage = "The Brand field is required.")]
