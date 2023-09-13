@@ -8,8 +8,8 @@ export interface IProductCreate {
     brand: string,
     quantity: number,
     isInTheStock: boolean,
-    // images: Array<File>
-    // category_id: number
+    categoryId: number,
+    images:any,
 }
 
 export interface IProductEdit {

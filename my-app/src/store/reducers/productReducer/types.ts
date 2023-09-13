@@ -18,8 +18,8 @@ interface IItemProduct {
   brand: string,
   quantity: number,
   isInTheStock: boolean,
-  // images: Array<File>
-  category_id: number
+  images: any,
+  categoryId: number
 }
 
 export enum ProductActionTypes {

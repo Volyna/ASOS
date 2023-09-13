@@ -45,6 +45,8 @@ export const CreateProduct = (model: IProductCreate) => {
 
       const data = await createProduct(model);
       const { response } = data;
+      console.log("DATA:", data);
+
       dispatch({
         type: ProductActionTypes.SUCCESSFUL_REQUEST_CREATE_PRODUCTS,
         payload: response.data,
@@ -57,6 +59,7 @@ export const CreateProduct = (model: IProductCreate) => {
         type: ProductActionTypes.SERVER_PRODUCTS_ERROR,
         payload: "Unknown error",
       });
+      return Promise.reject();
     }
   };
 };
