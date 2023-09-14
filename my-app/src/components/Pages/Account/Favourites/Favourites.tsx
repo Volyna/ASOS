@@ -8,15 +8,87 @@ import Card3 from "../../../../images/favourite_card3.png";
 import Card4 from "../../../../images/favourite_card4.png";
 import Card5 from "../../../../images/favourite_card5.png";
 import Card6 from "../../../../images/favourite_card6.png";
+import userLogo from "../../../../images/user.svg";
+import cart from "../../../../images/cart.png";
+import like from "../../../../images/liked.png";
+import search from "../../../../images/search.svg";
+import Logo from "../../../../images/Logo.svg";
+import Menu from "../../../NavBar/menu";
 import { Link } from "react-router-dom";
-import { Card } from "@mui/material";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 
 const Favourites = () => {
+  const { isAuth } = useTypedSelector((store) => store.UserReducer);
   return (
     <>
-      <Header_full />
-      <BreadCrumbs/>
+      <div style={{ zIndex: 1 }} className="staticnav">
+        <div className="mainblock">
+          <div className="first col-3">
+            <div className="links">
+              <Link className="headerText" to="/customer-service">
+                Customer Service
+              </Link>
+              <Link className="headerText" to="/">
+                Shopping Form
+              </Link>
+            </div>
+            <div className="searchItem ">
+              <img src={search} />
+              <input className="search" />
+            </div>
+            <div className="line" />
+          </div>
+          <div className="second col-6">
+            <Link to="/">
+              <img src={Logo} alt="" />
+            </Link>
+          </div>
+          <div className="third col-3">
+            <div className="links">
+              <Link className="headerText" to="/">
+                Newsletter
+              </Link>
+              <Link className="headerText" to="/customer-care">
+                FAQs
+              </Link>
+              <Link className="headerText" to="/">
+                More
+              </Link>
+            </div>
+
+            <div className="userIcons">
+              {isAuth == true ? (
+                <Link to="/account/contact-information">
+                  <img
+                    src={userLogo}
+                    alt="userLogo"
+                    className="noneM userLogo"
+                  />
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <img
+                    src={userLogo}
+                    alt="userLogo"
+                    className="noneM userLogo"
+                  />
+                </Link>
+              )}
+
+              <Link to="/basket">
+                <img src={cart} alt="basket" className="noneM basket" />
+              </Link>
+              <Link to="/account/favourites">
+                <img src={like} className="favourites" alt="favourites" />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <Menu />
+      </div>
+      <BreadCrumbs />
+
       <div className="container-fluid">
         <div className="favourites-cards">
           <div className="favourite-card col-2">
@@ -38,7 +110,6 @@ const Favourites = () => {
               <button className="btn-buy btn-favourites">add to basket</button>
             </div>
           </div>
-
           <div className="favourite-card col-2">
             <div className="liked">
               <img src={Liked} alt="" />
@@ -58,7 +129,6 @@ const Favourites = () => {
               <button className="btn-buy btn-favourites">add to basket</button>
             </div>
           </div>
-
           <div className="favourite-card col-2">
             <div className="liked">
               <img src={Liked} alt="" />
@@ -78,7 +148,6 @@ const Favourites = () => {
               <button className="btn-buy btn-favourites">add to basket</button>
             </div>
           </div>
-
           <div className="favourite-card col-2">
             <div className="liked">
               <img src={Liked} alt="" />
@@ -99,7 +168,6 @@ const Favourites = () => {
               <button className="btn-buy btn-favourites">add to basket</button>
             </div>
           </div>
-
           <div className="favourite-card col-2">
             <div className="liked">
               <img src={Liked} alt="" />
@@ -122,6 +190,26 @@ const Favourites = () => {
             </div>
           </div>
 
+          <div className="favourite-card without-border col-2">
+            <div className="liked">
+              <img src={Liked} alt="" />
+            </div>
+            <div className="favourite-image">
+              <img src={Card6} alt="" />
+            </div>
+            <p className="questions distance favourites-title">
+              Linen-blend cargo trousers
+            </p>
+            <p className="favourite-price distance col-2">35.00$</p>
+            <div className="distance colors ">
+              <div className="ellipse card6_1"></div>
+              <div className="ellipse card6_2"></div>
+              <div className="ellipse card6_3"></div>
+            </div>
+            <div className="add_to_basket">
+              <button className="btn-buy btn-favourites">add to basket</button>
+            </div>
+          </div>
           <div className="favourite-card without-border col-2">
             <div className="liked">
               <img src={Liked} alt="" />

@@ -53,7 +53,7 @@ const Header = () => {
           <div className="userIcons">
             {isAuth == true ? (
               <Link className="noneM" to="/account/contact-information">
-                <img src={selectedUser} alt="" />
+                <img src={user} alt="" />
               </Link>
             ) : (
               <Link to="/login">

@@ -1,5 +1,5 @@
-
 .favourites-cards {
+    margin-top: 100px;
     display: flex;
     border-bottom: 1px solid rgba(154, 154, 154, 1);
 }
@@ -9,12 +9,13 @@
 }
 
 .ellipse {
-    width: 17px; 
+    width: 17px;
     height: 17px;
     border-radius: 50%;
     margin: 0 5px 30px 0;
 }
-.card1{
+
+.card1 {
     background: rgba(29, 29, 29, 1);
 }
 
@@ -40,7 +41,7 @@
 }
 
 .card4_2 {
-    background-color:rgba(216, 182, 232, 1);
+    background-color: rgba(216, 182, 232, 1);
 }
 
 .card4_3 {
@@ -56,7 +57,7 @@
 }
 
 .card5_3 {
-    background-color: rgba(31, 66, 32, 1)         ;
+    background-color: rgba(31, 66, 32, 1);
 }
 
 .card6_1 {
@@ -78,6 +79,7 @@
     line-height: 18px;
     color: black;
 }
+
 .btn-favourites {
     width: 214px;
     height: 50px;
