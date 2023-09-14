@@ -375,6 +375,7 @@ const ProductCreate = () => {
                           type="submit"
                           className="womenbtn buttons"
                           disabled={!(isValid && dirty)}
+                          // onClick={() => navigator("/admin/products")}
                         >
                           Save
                         </button>
