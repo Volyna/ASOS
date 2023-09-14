@@ -1,4 +1,5 @@
 import { colors } from "@mui/material";
+import { number, string } from "yup";
 
 
 export const userColumns = [
@@ -110,12 +111,11 @@ export const productColumns = [
 
 export const categoryColumns = [
   
-  { field: "id", headerName: "ID", width: 100 },
+  { field: "id", headerName: "ID", width: 100},
   {
     field: "name",
-    headerName: "Name",
+    headerName: "NAME",
     width: 430,
-    
   },
  
 ];
