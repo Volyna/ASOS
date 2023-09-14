@@ -23,7 +23,7 @@ namespace WebAsos.Data.Entitties.Catalog
 
 
         [Required(ErrorMessage = "The Sizse field is required.")]
-        public int Size { get; set; }
+        public string Size { get; set; }
 
 
         [Required(ErrorMessage = "The Brand field is required.")]
@@ -46,7 +46,7 @@ namespace WebAsos.Data.Entitties.Catalog
         public CategoryEntity Category { get; set; }
 
         [ForeignKey(nameof(Category))]
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
 
         public virtual ICollection<ProductImageEntity> ProductImages { get; set; }
