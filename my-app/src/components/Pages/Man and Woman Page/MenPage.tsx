@@ -8,7 +8,9 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Loader from "../../loader";
 import like from "../../../images/like.svg";
-import { MultiSelect } from 'primereact/multiselect';
+import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
+//left panel Cat
+import { PanelMenu } from "primereact/panelmenu";
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
@@ -19,6 +21,8 @@ const Men = () => {
   const [selectedFilterBy, setSelectedFilterBy] = useState(null);
   const [selectedFilterSize, setSelectedFilterSize] = useState(null);
   const [selectedFilterColor, setSelectedFilterColor] = useState(null);
+  const [selectedFilterBand, setSelectedFilterBand] = useState(null);
+  const [selectedFilterProductType, setSelectedFilterProductType] = useState(null);
   var [countShowProduct, setCountShowProduct] = useState(20);
   const { GetAllProductMan, AddProductLike, DeleteProductLike } = useActions();
   const { loading, products } = useTypedSelector(
@@ -80,7 +84,34 @@ const Men = () => {
     { name: "XXL" },
     { name: "XXXL" },
   ];
+  const dataFilterProductType = [
+    { name: "Swimwear" },
+    { name: "Tops" },
+    { name: "T-shirts" },
+    { name: "Dresses" },
+    { name: "Skirts" },
+    { name: "Shorts" },
+    { name: "Jeans" },
+    { name: "Trousers" },
+    { name: "Cardigans" },
+    { name: "Jackets" },
+    { name: "Hoodies" },
+    { name: "Sweaters" },
+    { name: "Shoes" },
+  ];
   const dataFilterColor = [
+    { name: "Topshop" },
+    { name: "Nike" },
+    { name: "Adidas" },
+    { name: "Breshka" },
+    { name: "Pull & Bear" },
+    { name: "Stradivalius" },
+    { name: "Monki" },
+    { name: "The North Face" },
+    { name: "Converse" },
+    { name: "River Island" },
+  ];
+  const dataFilterBand = [
     { name: "Red" },
     { name: "Orange" },
     { name: "Yellow" },
@@ -98,6 +129,285 @@ const Men = () => {
     { name: "Multicolor" },
   ];
 
+  const colorsTemplate = (option: any) => {
+    return (<div style={{ display: "flex", alignItems: "center" }}>
+      <span className="colorEllipse"></span>
+      <div>{option.name}</div>
+    </div>);
+  };
+  const items = [
+    {
+      label: "New in",
+      items: [
+        {
+          label: 'View all',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
+          // }
+
+        },
+        {
+          label: 'Clothing',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Shoes',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Accessories',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Face & Body',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+      ]
+    },
+    {
+      label: "sale",
+      items: [
+        { label: "View al" },
+        { label: "Tops & T-shirts" },
+        { label: "Two-piece sets" },
+        { label: "Pants & Leggings" },
+        { label: "Shorts" },
+        { label: "Activewear" },
+        { label: "Coats & Jackets" },
+        { label: "Hoodies & Sweatshirts" },
+        { label: "Jeans $ Trousers" },
+        { label: "Sweaters & Cardigans" },
+        { label: "Sneakers" },
+        { label: "Hats" },
+        { label: "Scarves" },
+
+
+      ]
+    },
+    {
+      label: "clothing",
+      items: [
+        {
+          label: 'View all',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
+          // }
+
+        },
+        {
+          label: 'New in',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Tops & T-shirts',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Two-piece sets',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Shorts',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Swimwear & Beachwear',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Activewear',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Coats & Jackets',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Jeans & Trousers',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Sweaters & Cardigans',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Nightwear & Loungewear',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Multipacks',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Socks',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Suits',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+        {
+          label: 'Plus size',
+          icon: 'dropMenuItemProduct',
+          // command: () => {
+          //     this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+          // }
+        },
+      ]
+    },
+    {
+      label: "shoes",
+      items: [
+        { icon: 'dropMenuItemProduct', label: "View all" },
+        { icon: 'dropMenuItemProduct', label: "New in" },
+        { icon: 'dropMenuItemProduct', label: "Sneakers" },
+        { icon: 'dropMenuItemProduct', label: "Sandals" },
+        { icon: 'dropMenuItemProduct', label: "Boots" },
+        { icon: 'dropMenuItemProduct', label: "Loafers" },
+        { icon: 'dropMenuItemProduct', label: "Mules" },
+      ]
+
+    },
+    {
+      label: "Accessories",
+      items: [
+        { icon: 'dropMenuItemProduct', label: "View all" },
+        { icon: 'dropMenuItemProduct', label: "New in" },
+        { icon: 'dropMenuItemProduct', label: "Synglasses" },
+        { icon: 'dropMenuItemProduct', label: "Belts" },
+        { icon: 'dropMenuItemProduct', label: "Caps" },
+        { icon: 'dropMenuItemProduct', label: "Bucket Hats" },
+        { icon: 'dropMenuItemProduct', label: "Hats" },
+        { icon: 'dropMenuItemProduct', label: "Socks & Tights" },
+        { icon: 'dropMenuItemProduct', label: "Scarves" },
+        { icon: 'dropMenuItemProduct', label: "Gifts" },
+      ]
+    },
+    {
+      label: "Face&Body",
+      items: [
+        { icon: 'dropMenuItemProduct', label: "View all" },
+        { icon: 'dropMenuItemProduct', label: "New in" },
+        { icon: 'dropMenuItemProduct', label: "Makeup" },
+        { icon: 'dropMenuItemProduct', label: "Skin care" },
+        { icon: 'dropMenuItemProduct', label: "Body cate" },
+        { icon: 'dropMenuItemProduct', label: "Hair care" },
+        { icon: 'dropMenuItemProduct', label: "Tools & Accessories" },
+        { icon: 'dropMenuItemProduct', label: "Suncare & Tanning" },
+        { icon: 'dropMenuItemProduct', label: "Gifts" },
+        { icon: 'dropMenuItemProduct', label: "Wellness" },
+        { icon: 'dropMenuItemProduct', label: "Minis" },
+      ]
+    },
+    {
+      label: "BRANDS",
+      items: [
+        { icon: 'dropMenuItemProduct', label: "Topshop" },
+        { icon: 'dropMenuItemProduct', label: "Nike" },
+        { icon: 'dropMenuItemProduct', label: "Adidas" },
+        { icon: 'dropMenuItemProduct', label: "Bershka" },
+        { icon: 'dropMenuItemProduct', label: "Pull & Bear" },
+        { icon: 'dropMenuItemProduct', label: "Stradivarius" },
+        { icon: 'dropMenuItemProduct', label: "Monki" },
+        { icon: 'dropMenuItemProduct', label: "The North Face" },
+        { icon: 'dropMenuItemProduct', label: "Converse" },
+        { icon: 'dropMenuItemProduct', label: "River Island" },
+      ]
+    },
+    {
+      label: "OUTLET",
+      items: [
+        { icon: 'dropMenuItemProduct', label: "View all" },
+        { icon: 'dropMenuItemProduct', label: "Top & T-shirts" },
+        { icon: 'dropMenuItemProduct', label: "Dresses & Skirts" },
+        { icon: 'dropMenuItemProduct', label: "Pants & Leggings" },
+        { icon: 'dropMenuItemProduct', label: "Shorts" },
+        { icon: 'dropMenuItemProduct', label: "Swimwear & Beachwear" },
+        { icon: 'dropMenuItemProduct', label: "Activewear" },
+        { icon: 'dropMenuItemProduct', label: "Coats & Jackets" },
+        { icon: 'dropMenuItemProduct', label: "Hoodies & Sweatshirts" },
+        { icon: 'dropMenuItemProduct', label: "Jeans $ Trousers" },
+        { icon: 'dropMenuItemProduct', label: "Sweaters & Cardigans" },
+        { icon: 'dropMenuItemProduct', label: "Lingerie & Sleepwear" },
+        { icon: 'dropMenuItemProduct', label: "Shirts & Blouses" },
+        { icon: 'dropMenuItemProduct', label: "Socks & Tights" },
+        { icon: 'dropMenuItemProduct', label: "Suits" },
+        { icon: 'dropMenuItemProduct', label: "Accessories" },
+        { icon: 'dropMenuItemProduct', label: "Bags & Purses" },
+        { icon: 'dropMenuItemProduct', label: "Designer brands" },
+        { icon: 'dropMenuItemProduct', label: "Jewelry & Watches" },
+        { icon: 'dropMenuItemProduct', label: "Face + Body" },
+        { icon: 'dropMenuItemProduct', label: "Shoes" },
+        { icon: 'dropMenuItemProduct', label: "Gifts" },
+      ]
+    },
+    {
+      label: "MARKETPLACE",
+      items: [
+        { icon: 'dropMenuItemProduct', label: "View all" },
+        { icon: 'dropMenuItemProduct', label: "Bags" },
+      ]
+    }
+
+  ];
+  const getSortBy = () => {
+    // console.log("value", e.target.name);
+    // setSelectedFilterBy(e.value);
+    // console.log("selectedFilterBy: ", selectedFilterBy);
+  }
 
   return (
     <>
@@ -109,122 +419,10 @@ const Men = () => {
 
           <div className="row">
             <div className="col-2">
-              <div className="contentProductTypeInfo">
-                <Link to={"newIn"} className="newInTypeInfo" >
-                  <span>New in</span>
-                </Link>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>View all</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Clothing</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Dresses</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Shoes</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Activewear</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Tops</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Face + Body</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Accessories</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Skirts</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Shorts</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Lingerie and Nightwear</span>
-                  </Link>
-                </ul>
-              </div>
-              <div className="contentCategoryTypeInfo">
-                <ul>
-                  <Link to="ViewAll">
-                    <span>View all</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Clothing</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Dresses</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Shoes</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Accessories</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Face&Body</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Topshop</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Sportswear</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Brands</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Outlet</span>
-                  </Link>
-                </ul>
-                <ul>
-                  <Link to="ViewAll">
-                    <span>Marketplace</span>
-                  </Link>
-                </ul>
+              <div className="contentProductNavBar">
+                <div className="contentCategoryTypeInfo">
+                  <PanelMenu model={items} />
+                </div>
               </div>
             </div>
             <div className="col-10">
@@ -237,8 +435,13 @@ const Men = () => {
                     <div className="FilterProduct">
                       <div className="FilterProductSortBy prodcutFlex">
                         <p>sort by</p>
-                        <MultiSelect value={selectedFilterBy} onChange={(e) => { setSelectedFilterBy(e.value) }} optionLabel="name" options={dataFilterBy}
-                          filter maxSelectedLabels={4} className="filterProdcutSelect" />
+                        <MultiSelect
+                          value={selectedFilterBy}
+                          onChange={(e) => { setSelectedFilterBy(e.value); }}
+                          optionLabel="name"
+                          options={dataFilterBy}
+
+                          maxSelectedLabels={1} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductSize prodcutFlex">
                         <p>size</p>
@@ -247,28 +450,30 @@ const Men = () => {
                       </div>
                       <div className="FilterProductColor prodcutFlex">
                         <p>color</p>
-                        <MultiSelect value={selectedFilterColor} onChange={(e) => { setSelectedFilterSize(e.value) }} optionLabel="name" options={dataFilterColor}
+                        <MultiSelect value={selectedFilterColor} options={dataFilterColor}
+                          onChange={(e) => { setSelectedFilterProductType(e.value) }}
+                          optionLabel="name"
+                          itemTemplate={colorsTemplate}
                           filter maxSelectedLabels={20} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductType prodcutFlex">
                         <p>product type</p>
-                        <select className="styleArrowSelect">
-                          <option value={0}>{null}</option>
-                          <option value={2}>2</option>
-                        </select>
+                        <MultiSelect value={selectedFilterProductType} options={dataFilterProductType}
+                          onChange={(e) => { setSelectedFilterColor(e.value) }}
+                          optionLabel="name"
+                          filter maxSelectedLabels={20} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductBrand prodcutFlex">
                         <p>brand</p>
-                        <select className="styleArrowSelect">
-                          <option value={0}>{null}</option>
-                          <option value={2}>2</option>
-                        </select>
+                        <MultiSelect value={selectedFilterBand} options={dataFilterBand}
+                          onChange={(e) => { setSelectedFilterBand(e.value) }}
+                          optionLabel="name"
+                          filter maxSelectedLabels={20} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductOtherFilter prodcutFlex">
                         <p>other filters</p>
                         <select className="styleArrowSelect">
-                          <option value={0}>{null}</option>
-                          <option value={2}>2</option>
+
                         </select>
                       </div>
                     </div>
@@ -293,6 +498,7 @@ const Men = () => {
                 </div>
               </div>
               <div className="moreProduct"><button onClick={() => { MoreCountProdcutShow(); }} className="btn">load more</button></div>
+
             </div>
           </div>
 

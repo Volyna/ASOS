@@ -296,6 +296,7 @@
 }
 
 .content .contentProductTypeInfo .newInTypeInfo {
+    flex-flow: column;
     color: var(--black, #353535);
     font-feature-settings: 'clig' off, 'liga' off;
 
@@ -384,13 +385,13 @@
 
 .content .rowItemsProducts .ulITem {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex: 1 0 272px;
     height: auto;
     border-right: 2px solid #9A9A9A;
     border-bottom: 2px solid #9A9A9A;
     padding-bottom: 30px;
-
+    padding-left: 13px;
 }
 
 .content .likeImage {
@@ -467,4 +468,30 @@
 .content .FilterProduct svg path {
     display: none;
 
+}
+
+.colorEllipse {
+    background-color: red;
+    height: 22px;
+    border-radius: 22px;
+    margin-right: 10px;
+    width: 22px;
+}
+
+.content .contentProductNavBar {
+    flex-shrink: 0;
+    width: 200px;
+    overflow: auto;
+    position: sticky;
+    top: 125px;
+
+}
+
+.newInTypeInfoHove2 {
+    display: none;
+    margin-top: 13.5px;
+}
+
+.contentCategoryTypeInfo {
+    cursor: pointer;
 }
