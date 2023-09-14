@@ -7,15 +7,107 @@ import item1 from "../../../images/item2.png";
 import item2 from "../../../images/item1.png";
 import item3 from "../../../images/item3.png";
 import item4 from "../../../images/item4.png";
+import main_1 from "../../../images/main_1.png"
+import main_2 from "../../../images/main_2.png"
+import main_3 from "../../../images/main_3.png"
+import main_4 from "../../../images/main_4.png"
+import main_5 from "../../../images/main_5.png"
 
 import man from "../../../images/man.png";
 import woman from "../../../images/woman.png";
 import Footer from "../../Footer/FooterV";
+import FooterM from "../../Footer/mFooter";
 import { Link, useNavigate } from "react-router-dom";
 import Men from "../Man and Woman Page/MenPage";
+import {isMobile} from "react-device-detect"
 
 const MainPage = () => {
   const navigate = useNavigate();
+
+  if (isMobile){
+    return(
+      <>
+        <Header/>
+        <div className="Mainblock">
+          <img src={main_1}/>
+          <button className="mbutton">Shop now</button>
+        </div>
+        <div className="msection">
+          <p className="headerm">new arrivals</p>
+          <p className="textm">meet this summer stylishly with focus</p>
+          <div className="mbuttons">
+            <button className="womenbtn mbutton" onClick={() => navigate("/women")}>Women</button>
+            <button className="menbtn mbutton" onClick={() => navigate("/men")}>Men</button>
+          </div>
+        </div>
+
+        <div className="MainblockM">
+          <img src={main_2}/>
+          <button className="mbutton">woman</button>
+        </div>
+
+        <div className="MainblockM">
+          <img src={main_3}/>
+          <button className="mbutton">man</button>
+        </div>
+
+        <div className="MainblockM">
+          <p className="headerm">new vintage inspired collection</p>
+          <img src={main_4}/>
+          <button className="mbutton">show more</button>
+        </div>
+
+        <div className="msection black">
+          <p className="headerm">summer sale</p>
+          <p className="textm">up to 50% off!</p>
+          <div className="mbuttons">
+            <button className="womenbtn mbutton" onClick={() => navigate("/women")}>Women</button>
+            <button className="menbtn mbutton" onClick={() => navigate("/men")}>Men</button>
+          </div>
+        </div>
+
+        <div className="MainblockM">
+          <img src={main_5}/>
+          <button className="mbutton">sunglasses</button>
+        </div>
+
+        <div className="msection">
+          <p className="headerm">linen clothes collection</p>
+          <p className="textm">get ready for sun and warmer temperatures with us</p>
+          <div className="mbuttons">
+            <button className="womenbtn mbutton" onClick={() => navigate("/women")}>Women</button>
+            <button className="menbtn mbutton" onClick={() => navigate("/men")}>Men</button>
+          </div>
+        </div>
+
+        <div className="ItemsM">
+          <div className="item">
+            <img src={item1} />
+            <p className="itemName">Summer pajamas</p>
+          </div>
+
+          <div className="item">
+            <img src={item2} />
+            <p className="itemName">Shorts</p>
+          </div>
+
+          <div className="item">
+            <img src={item3} />
+            <p className="itemName">Summer dresses</p>
+          </div>
+
+          <div className="item">
+            <img src={item4} />
+            <p className="itemName">Linen trousers</p>
+          </div>
+        </div>
+
+
+        <FooterM/>
+      </>
+    )
+
+  }else{
   return (
     <>
       <Header />
@@ -122,7 +214,7 @@ const MainPage = () => {
       </div>
       <Footer />
     </>
-  );
+  );}
 };
 
 export default MainPage;

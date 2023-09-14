@@ -8,12 +8,42 @@ import selectedUser from "../../images/selected-user.svg";
 import cart from "../../images/cart.svg";
 import like from "../../images/like.svg";
 import search from "../../images/search.svg";
+import HeaderLogo from "../../images/HeaderLogo.svg"
 import { useSelector } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { isMobile } from "react-device-detect";
 
 const Header = () => {
   const navigate = useNavigate();
   const { isAuth } = useTypedSelector((store) => store.UserReducer);
+
+  if (isMobile){
+    return(
+      <>
+        <div className="mainblockM">
+          <div className="leftbox">
+            <img src={HeaderLogo}/>
+          </div>
+
+          <div className="rightbox">
+            <img src={user}/> 
+            <img src={cart}/> 
+            <img src={like}/>
+          </div>
+        </div>
+        <div className="sticky">
+          <div className="box">
+            <img src={search}/>
+            <input className="search_sticky" placeholder="search"/>
+          </div>
+          <hr className="stick"/>
+          
+        </div>
+      </>
+    )
+  }
+
+  else{
   return (
     <>
       <div className="mainblock">
@@ -72,6 +102,6 @@ const Header = () => {
         </div>
       </div>
     </>
-  );
+  );}
 };
 export default Header;
