@@ -221,6 +221,7 @@
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
+    border: 1px solid black;
 }
 
 .headerm{
@@ -256,7 +257,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 250px;
+    padding: 40px 0 40px 0;
     margin: 30px 0 30px 0;
     border-top: 2px solid black;
     border-bottom: 2px solid black;

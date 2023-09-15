@@ -20,6 +20,7 @@ import FooterM from "../../Footer/mFooter";
 import { Link, useNavigate } from "react-router-dom";
 import Men from "../Man and Woman Page/MenPage";
 import {isMobile} from "react-device-detect"
+import SearchBar from "../../NavBar/searchBar";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const MainPage = () => {
     return(
       <>
         <Header/>
+        <SearchBar/>  
         <div className="Mainblock">
           <img src={main_1}/>
           <button className="mbutton">Shop now</button>

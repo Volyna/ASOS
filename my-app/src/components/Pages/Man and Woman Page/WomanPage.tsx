@@ -18,6 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { showCategory } from "../../../store/actions/Categories/categoryAction";
 import { RootState } from "../../../store/reducers/rootReducer";
+import { isMobile } from "react-device-detect";
+import FooterM from "../../Footer/mFooter";
 
 const Women = () => {
   const navigate = useNavigate();
@@ -45,6 +47,66 @@ const Women = () => {
       </Link>
     );
   });
+
+  if(isMobile){
+    return(
+    <>
+    <Header/>
+      <p className="titlePage">woman  </p>
+      <div className="MainblockM">
+        <img src={women1}/>
+      </div>
+      <div className="msection">
+          <p className="headerm">holiday shop!</p>
+          <p className="textm">swimwear section! incredible clothes for incredible women  </p>
+            <button className="mbutton" onClick={() => navigate("/men")}>view items</button>
+      </div>
+      <div className="MainblockM">
+        <img src={women2}/>
+      </div>
+      <div className="red msection" style={{border:"none"}}>
+          <p className="headerm">summer sale</p>
+          <p className="textm">up to 50% off!</p>
+            <button className="mbutton" style={{border:"2px solid white", backgroundColor:"#F05B53", color:"white"}} onClick={() => navigate("/women")}>show more</button>
+      </div>
+      <div className="Mainblock">
+          <img src={women3}/>
+          <button className="mbutton">show collection</button>
+      </div>
+
+      <div className="msection">
+          <p className="headerm">don't miss out on the latest news</p>
+          <p className="msmall">Subscribe to our newsletter and be aware of everything, get access to exclusive promotions and even more!</p>
+          <input className="minput" placeholder="Enter your e-mail"/>
+          <button className="mbutton subs" onClick={() => navigate("/men")}>Subscribe</button>
+      </div>
+
+      <div className="ItemsM">
+          <div className="item">
+            <img src={womenItem1} />
+            <p className="itemName">Summer pajamas</p>
+          </div>
+
+          <div className="item">
+            <img src={womenItem2} />
+            <p className="itemName">Beachwear</p>
+          </div>
+
+          <div className="item">
+            <img src={womenItem3} />
+            <p className="itemName">Jeans & Trousers</p>
+          </div>
+
+          <div className="item">
+            <img src={womenItem4} />
+            <p className="itemName">swimwear</p>
+          </div>
+        </div>
+
+        <FooterM/>
+    </>
+
+);}else{
 
   return (
     <>
@@ -141,6 +203,7 @@ const Women = () => {
       <Footer />
     </>
   );
+  }
 };
 
 export default Women;

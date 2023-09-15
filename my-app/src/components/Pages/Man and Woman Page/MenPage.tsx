@@ -21,6 +21,8 @@ import { AnyARecord } from "dns";
 import { store } from "../../../store";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { NavigateBefore } from "@mui/icons-material";
+import { isMobile } from "react-device-detect";
+import FooterM from "../../Footer/mFooter";
 
 const Men = () => {
   const navigate = useNavigate();
@@ -49,6 +51,66 @@ const Men = () => {
     );
   });
 
+  if(isMobile){
+    return(
+    <>
+      <Header/>
+      <p className="titlePage">man</p>
+      <div className="MainblockM">
+        <img src={men1}/>
+      </div>
+      <div className="msection">
+          <p className="headerm">must have for this summer!</p>
+          <p className="textm">linen section! best choice for everyday comfort</p>
+            <button className="mbutton" onClick={() => navigate("/men")}>open</button>
+      </div>
+      <div className="MainblockM">
+        <img src={men2}/>
+      </div>
+      <div className="blue msection" style={{border:"none"}}>
+          <p className="headerm">summer sale</p>
+          <p className="textm">up to 50% off!</p>
+            <button className="mbutton" style={{border:"2px solid white"}} onClick={() => navigate("/men")}>show more</button>
+      </div>
+      <div className="Mainblock">
+          <img src={men3}/>
+          <button className="mbutton">show collection</button>
+      </div>
+
+      <div className="msection">
+          <p className="headerm">don't miss out on the latest news</p>
+          <p className="msmall">Subscribe to our newsletter and be aware of everything, get access to exclusive promotions and even more!</p>
+          <input className="minput" placeholder="Enter your e-mail"/>
+          <button className="mbutton subs" onClick={() => navigate("/men")}>Subscribe</button>
+      </div>
+
+      <div className="ItemsM">
+          <div className="item">
+            <img src={menItem1} />
+            <p className="itemName">Shorts</p>
+          </div>
+
+          <div className="item">
+            <img src={menItem2} />
+            <p className="itemName">Cardigans & jackets</p>
+          </div>
+
+          <div className="item">
+            <img src={menItem3} />
+            <p className="itemName">Linen shorts</p>
+          </div>
+
+          <div className="item">
+            <img src={menItem4} />
+            <p className="itemName">T-shirt</p>
+          </div>
+        </div>
+
+        <FooterM/>
+    </>
+    );
+
+  }else{
   return (
     <>
       <div className="staticnav">
@@ -137,7 +199,7 @@ const Men = () => {
       </div>
       <Footer />
     </>
-  );
+  );}
 };
 
 export default Men;

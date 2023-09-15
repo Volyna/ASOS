@@ -31,14 +31,7 @@ const Header = () => {
             <img src={like}/>
           </div>
         </div>
-        <div className="sticky">
-          <div className="box">
-            <img src={search}/>
-            <input className="search_sticky" placeholder="search"/>
-          </div>
-          <hr className="stick"/>
-          
-        </div>
+        
       </>
     )
   }
