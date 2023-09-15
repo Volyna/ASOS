@@ -35,6 +35,25 @@ namespace WebAsos.Interfaces.Services.Classes
             toDelete.ForEach(img => _productImageRepository.DeleteAsync(img.Id));
         }
 
+        public async Task<List<string>> GetAllProductImages(List<string> productsImages)
+        {
+            try
+            {
+                List<string> resultImages = new List<string>(); 
+                foreach (var item in productsImages)
+                {
+                    var bytes = GetBase64ByName(item);
+                    resultImages.Add(bytes);
+                }
+                return resultImages;
+            }
+            catch (Exception ex)
+            {
+
+                return null; 
+            }
+        }
+
         public string GetBase64ByName(string name)
         {
             try

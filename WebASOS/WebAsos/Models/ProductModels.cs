@@ -48,6 +48,22 @@
         public string Image { get; set; }
         public string Category { get; set; }
     }
+    public class ProductProductDTO
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public float Price { get; set; }
+        public int Discount { get; set; }
+        public string Description { get; set; }
+        public List<string> Color { get; set; }
+        public List<string> Size { get; set; }
+        public string Brand { get; set; }
+        public string MainImage { get; set; }
+        public int Quantity { get; set; }
+        public bool IsInTheStock { get; set; }
+        public List<string> Images { get; set; }
+        public int? CategoryId { get; set; }
+    }
 
     public class ProductUploadImageViewModel
     {

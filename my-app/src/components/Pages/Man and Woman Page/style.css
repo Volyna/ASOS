@@ -1,4 +1,4 @@
-.staticnav{
+.staticnav {
     position: fixed;
     top: 0;
     width: 92%;
@@ -9,8 +9,8 @@
 }
 
 
-.crumbComp{
-    color:rgba(53, 53, 53, 0.50);
+.crumbComp {
+    color: rgba(53, 53, 53, 0.50);
     text-decoration: none;
     font-family: Roboto Flex;
     font-size: 16px;
@@ -19,18 +19,19 @@
     margin: 0.1%;
     margin-top: 220px;
 }
-.last{
+
+.last {
     color: black;
 }
 
-.crumbs{
+.crumbs {
     display: flex;
     justify-content: center;
     margin: 30px 0;
     margin-bottom: -30px;
 }
 
-.title{
+.title {
     color: var(--black, #353535);
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Roboto Flex;
@@ -41,7 +42,7 @@
     text-transform: uppercase;
 }
 
-.categors{
+.categors {
     display: flex;
     flex-direction: column;
     width: 200px;
@@ -52,7 +53,7 @@
 
 }
 
-.categors a{
+.categors a {
     color: var(--black, #353535);
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Roboto Flex;
@@ -72,17 +73,17 @@
     justify-content: center;
 }
 
-.menBlock button{
+.menBlock button {
     align-self: center;
 }
 
 
-.spam{
+.spam {
     width: 90%;
 
 }
 
-.spam .left{
+.spam .left {
     width: 50%;
     float: left;
     color: var(--black, #353535);
@@ -96,7 +97,7 @@
     margin: 50px 0;
 }
 
-.spam input{
+.spam input {
     color: var(--black, #353535);
     text-align: center;
     font-feature-settings: 'clig' off, 'liga' off;
@@ -112,13 +113,13 @@
     ;
 }
 
-.spam button{
-    width:45%;
+.spam button {
+    width: 45%;
     margin-top: 20px;
 }
 
-.menBlock .items .item{
-    width:18%;
+.menBlock .items .item {
+    width: 18%;
 }
 
 .titlePage{
@@ -168,4 +169,515 @@
 
 
 
+.content .contentProductTypeInfo a {
+    text-decoration: none;
+    text-align: start;
+}
 
+.content .contentProductTypeInfo ul {
+    text-align: start;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.content .contentProductTypeInfo ul span {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.content .contentCategoryTypeInfo ul {
+    padding-left: 0;
+    text-align: start;
+
+}
+
+.content .contentCategoryTypeInfo ul a {
+    padding-left: 0;
+    text-align: start;
+    text-decoration: none;
+
+}
+
+.content .contentProductTypeInfo {
+    margin-bottom: 30px;
+}
+
+.content .contentCategoryTypeInfo ul span {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_btn_bold */
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.content .titleProductInfo {
+    text-align: start;
+}
+
+.content .titleProductInfo h5 {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_h1 */
+    font-family: Roboto Flex;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0
+}
+
+.content .FilterProduct {
+    text-align: start;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content .FilterProductSortBy {
+    display: flex;
+}
+
+.content .prodcutFlex {
+    display: flex;
+}
+
+.content .productCountPage {
+    display: flex;
+    justify-content: end;
+}
+
+.content .filterProductRow {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.FilterProduct p {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.titleProductInfo h5 {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_h1 */
+    font-family: Roboto Flex;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.oneItemProduct {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+    position: relative;
+}
+
+.content .likeProductItem {
+    position: absolute;
+    right: 10px;
+    top: 43px;
+}
+
+.content .likeProductItem img {
+    cursor: pointer;
+}
+
+.content .productColWindth {
+    width: 272px;
+}
+
+.content .itemsProducts {
+    overflow: hidden;
+}
+
+.content .rowItemsProducts {
+    justify-content: space-between;
+}
+
+.content .favourites :hover {
+    background-color: #FFC818;
+}
+
+.content .contentProductTypeInfo ul a :hover {
+    color: #FFC818;
+}
+
+.content .contentProductTypeInfo .newInTypeInfo :hover {
+    color: #FFC818;
+
+}
+
+.content .contentProductTypeInfo .newInTypeInfo {
+    flex-flow: column;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_btn_bold */
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: start;
+    display: flex;
+    justify-content: start;
+    margin-bottom: 10px;
+}
+
+.content .nameProductItem {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.content .priceProductItem {
+    display: flex;
+    width: 272px;
+    height: 16px;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.content .priceProductItem p {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.content .colorProductItem {
+    display: flex;
+    width: 272px;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.content .lineProductItem {
+    text-align: center;
+}
+
+.content .rowItemsProducts ul {
+    flex-wrap: wrap;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-top: -30px;
+
+}
+
+.content .imageProductItem {
+    padding-top: 30px;
+}
+
+.content .imageProductItem img {
+    cursor: pointer;
+}
+
+.content .lineProductItem .lineProduct {
+
+    height: 2.008px;
+    transform: rotate(-0.058deg);
+
+    background-color: black;
+}
+
+.content .rowItemsProducts .ulITem {
+    display: flex;
+    justify-content: start;
+    flex: 1 0 272px;
+    height: auto;
+    border-right: 2px solid #9A9A9A;
+    border-bottom: 2px solid #9A9A9A;
+    padding-bottom: 30px;
+    padding-left: 13px;
+}
+
+.content .likeImage {
+    background-image: url("../../../images/liked.png");
+}
+
+.content .styleArrowSelect {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    background-repeat: no-repeat;
+    appearance: none;
+    background-position-y: -3px;
+    width: 50px;
+    background-image: url("../../../images/arrow-down-Acept.png");
+
+}
+
+.content .styleArrowNotSelect {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    background-repeat: no-repeat;
+    appearance: none;
+    background-position-y: -3px;
+    width: 50px;
+    background-image: none;
+
+}
+
+.content .filterProdcutSelect {
+    border: none;
+    height: 25px;
+    margin-left: 10px;
+    align-items: self-start;
+}
+
+.p-multiselect-label-container {
+    display: none;
+    width: 25px;
+    height: 25px;
+}
+
+
+.content .p-multiselect .p-multiselect-trigger {
+    width: 2rem;
+    color: #353535;
+    align-items: center;
+
+
+}
+
+.content .p-multiselect-trigger {
+    align-items: "self-start";
+}
+
+.content .FilterProduct svg {
+    width: 25px;
+
+    cursor: pointer;
+    border: none;
+    background-repeat: no-repeat;
+    appearance: none;
+    background-position-y: -3px;
+    background-image: none;
+    background-image: url("../../../images/arrow-down-Acept.png");
+
+}
+
+.content .FilterProduct svg path {
+    display: none;
+
+}
+
+.colorEllipse {
+    background-color: red;
+    height: 22px;
+    border-radius: 22px;
+    margin-right: 10px;
+    width: 22px;
+}
+
+.content .contentProductNavBar {
+    flex-shrink: 0;
+    width: 200px;
+    overflow: auto;
+    position: sticky;
+    top: 125px;
+    margin-bottom: 20px;
+
+}
+
+.newInTypeInfoHove2 {
+    display: none;
+    margin-top: 13.5px;
+}
+
+.contentCategoryTypeInfo {
+    cursor: pointer;
+}
+
+.context .p-multiselect:not(.p-disabled):hover {
+    border: none;
+}
+
+.content .p-multiselect:not(p.disabled).p-focus {
+    border: none;
+    box-shadow: none;
+}
+
+.content .p-panelmenu .p-panelmenu-header>a {
+    padding: 0px;
+    border: none;
+    background: #FFF;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.content .p-panelmenu .p-panelmenu-header>a:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0rem #FFF;
+}
+
+.content .p-panelmenu-header {
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    align-items: center;
+    cursor: default;
+    margin-bottom: 30px;
+}
+
+.content .p-panelmenu-header svg {
+    display: none;
+}
+
+.content .p-component {
+    cursor: default;
+}
+
+.content .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled)>a:hover {
+    background: none;
+    border-color: none;
+    color: var(--yellow, #FFC818);
+}
+
+.content .p-panelmenu .p-panelmenu-header.p-highlight>a {
+    margin-bottom: 13.5px;
+    background: #FFF;
+    border-color: #FFF;
+    color: var(--yellow, #FFC818);
+    cursor: pointer;
+}
+
+.content .p-panelmenu .p-panelmenu-header.p-highlight:not(.p-disabled)>a:hover {
+    border-color: #FFF;
+    background: #FFF;
+    color: var(--yellow, #FFC818);
+    cursor: pointer;
+
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link {
+    padding: 0px;
+    padding-bottom: 10px;
+    border-radius: 0;
+    transition: box-shadow 0s;
+    user-select: none;
+    color: var(--yellow, #FFC818);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.content .p-panelmenu-content {
+    display: flex;
+    justify-content: start;
+}
+
+.content .p-panelmenu .p-panelmenu-content {
+    border: none;
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover {
+    background: none;
+    cursor: default;
+}
+
+.content .p-menuitem-text {
+    cursor: pointer;
+}
+
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-icon {
+    display: none;
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: inset 0 0 0 0rem #FFF;
+}
+
+.content .p-menuitem-link {
+    cursor: default;
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover span {
+    color: var(--yellow, #FFC818);
+}
+
+.content .p-menuitem {
+    display: flex;
+}

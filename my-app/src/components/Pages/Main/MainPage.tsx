@@ -19,19 +19,28 @@ import Footer from "../../Footer/FooterV";
 import FooterM from "../../Footer/mFooter";
 import { Link, useNavigate } from "react-router-dom";
 import Men from "../Man and Woman Page/MenPage";
-import {isMobile} from "react-device-detect"
 import SearchBar from "../../NavBar/searchBar";
+
+import { isMobile } from "react-device-detect"
+import { useEffect } from "react";
+import { useActions } from "../../../hooks/useActions";
+
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { GetAllProductMan } = useActions();
+  useEffect(() => {
+    // GetAllProductMan();
+  }, []);
 
-  if (isMobile){
-    return(
+  if (isMobile) {
+    return (
       <>
         <Header/>
         <SearchBar/>  
+
         <div className="Mainblock">
-          <img src={main_1}/>
+          <img src={main_1} />
           <button className="mbutton">Shop now</button>
         </div>
         <div className="msection">
@@ -44,18 +53,18 @@ const MainPage = () => {
         </div>
 
         <div className="MainblockM">
-          <img src={main_2}/>
+          <img src={main_2} />
           <button className="mbutton">woman</button>
         </div>
 
         <div className="MainblockM">
-          <img src={main_3}/>
+          <img src={main_3} />
           <button className="mbutton">man</button>
         </div>
 
         <div className="MainblockM">
           <p className="headerm">new vintage inspired collection</p>
-          <img src={main_4}/>
+          <img src={main_4} />
           <button className="mbutton">show more</button>
         </div>
 
@@ -69,7 +78,7 @@ const MainPage = () => {
         </div>
 
         <div className="MainblockM">
-          <img src={main_5}/>
+          <img src={main_5} />
           <button className="mbutton">sunglasses</button>
         </div>
 
@@ -105,118 +114,119 @@ const MainPage = () => {
         </div>
 
 
-        <FooterM/>
+        <FooterM />
       </>
     )
 
-  }else{
-  return (
-    <>
-      <Header />
-      <div className="Mainblock">
-        <img src={main1} alt="mainImage" />
-      </div>
-      <div className="section">
-        <p className="header">new arrivals</p>
-        <p className="text">meet this summer stylishly with focus</p>
-        <div className="wbuttons">
-          <button
-            className="womenbtn buttons"
-            onClick={() => navigate("/women")}
-          >
-            Women
-          </button>
-          <button className="menbtn buttons" onClick={() => navigate("/men")}>
-            Men
-          </button>
+  } else {
+    return (
+      <>
+        <Header />
+        <div className="Mainblock">
+          <img src={main1} alt="mainImage" />
         </div>
-      </div>
-      {/* <div className="section">
+        <div className="section">
+          <p className="header">new arrivals</p>
+          <p className="text">meet this summer stylishly with focus</p>
+          <div className="wbuttons">
+            <button
+              className="womenbtn buttons"
+              onClick={() => navigate("/women")}
+            >
+              Women
+            </button>
+            <button className="menbtn buttons" onClick={() => navigate("/men")}>
+              Men
+            </button>
+          </div>
+        </div>
+        {/* <div className="section">
                 <p className="header">HOLIDAY SHOP! </p>
                 <p className="text">Get ready for sun and warmer temperatures with us</p>
                 <button className="buttons">Show more</button>
             </div> */}
-      <div className="genres">
-        <div className="women col-6">
-          <img src={woman} />
-          <button
-            className=" womenbtn buttons"
-            onClick={() => navigate("/women")}
-          >
-            Women
-          </button>
-        </div>
+        <div className="genres">
+          <div className="women col-6">
+            <img src={woman} />
+            <button
+              className=" womenbtn buttons"
+              onClick={() => navigate("/women")}
+            >
+              Women
+            </button>
+          </div>
 
-        <div className="men col-6">
-          <img src={man} />
-          <button className="menbtn buttons" onClick={() => navigate("/men")}>
-            Men
-          </button>
+          <div className="men col-6">
+            <img src={man} />
+            <button className="menbtn buttons" onClick={() => navigate("/men")}>
+              Men
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="Mainblock">
-        <p className="header">New vintage inspired collection</p>
-        <img src={main2} alt="mainImage" />
-        <button className="buttons">Show more</button>
-      </div>
-      <div className=" red section">
-        <p className="header white">summer sale</p>
-        <p className="text white">Up to 50% off!</p>
-        <div className="wbuttons">
-          <button className="buttons trans" onClick={() => navigate("/women")}>
-            Women
-          </button>
-          <button className="buttons trans" onClick={() => navigate("/men")}>
-            Men
-          </button>
+        <div className="Mainblock">
+          <p className="header">New vintage inspired collection</p>
+          <img src={main2} alt="mainImage" />
+          <button className="buttons">Show more</button>
         </div>
-      </div>
-      <div className="Mainblock">
-        <p className="header">complete your look with bright details!</p>
-        <img src={main3} alt="sunglasses" />
-        <button className="buttons">sunglasses</button>
-      </div>
-      <div className="section">
-        <p className="header">Linen clothes collection!</p>
-        <p className="text">
-          Get ready for sun and warmer temperatures with us
-        </p>
-        <div className="wbuttons">
-          <button
-            className="womenbtn buttons"
-            onClick={() => navigate("/women")}
-          >
-            Women
-          </button>
-          <button className="menbtn buttons" onClick={() => navigate("/men")}>
-            Men
-          </button>
+        <div className=" red section">
+          <p className="header white">summer sale</p>
+          <p className="text white">Up to 50% off!</p>
+          <div className="wbuttons">
+            <button className="buttons trans" onClick={() => navigate("/women")}>
+              Women
+            </button>
+            <button className="buttons trans" onClick={() => navigate("/men")}>
+              Men
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="items">
-        <div className="item">
-          <img src={item1} />
-          <p className="itemName">Summer pajamas</p>
+        <div className="Mainblock">
+          <p className="header">complete your look with bright details!</p>
+          <img src={main3} alt="sunglasses" />
+          <button className="buttons">sunglasses</button>
         </div>
+        <div className="section">
+          <p className="header">Linen clothes collection!</p>
+          <p className="text">
+            Get ready for sun and warmer temperatures with us
+          </p>
+          <div className="wbuttons">
+            <button
+              className="womenbtn buttons"
+              onClick={() => navigate("/women")}
+            >
+              Women
+            </button>
+            <button className="menbtn buttons" onClick={() => navigate("/men")}>
+              Men
+            </button>
+          </div>
+        </div>
+        <div className="items">
+          <div className="item">
+            <img src={item1} />
+            <p className="itemName">Summer pajamas</p>
+          </div>
 
-        <div className="item">
-          <img src={item2} />
-          <p className="itemName">Shorts</p>
-        </div>
+          <div className="item">
+            <img src={item2} />
+            <p className="itemName">Shorts</p>
+          </div>
 
-        <div className="item">
-          <img src={item3} />
-          <p className="itemName">Summer dresses</p>
-        </div>
+          <div className="item">
+            <img src={item3} />
+            <p className="itemName">Summer dresses</p>
+          </div>
 
-        <div className="item">
-          <img src={item4} />
-          <p className="itemName">Linen trousers</p>
+          <div className="item">
+            <img src={item4} />
+            <p className="itemName">Linen trousers</p>
+          </div>
         </div>
-      </div>
-      <Footer />
-    </>
-  );}
+        <Footer />
+      </>
+    );
+  }
 };
 
 export default MainPage;

@@ -11,7 +11,6 @@ import axios from "axios";
 import { showCategory } from "../../../store/actions/Categories/categoryAction";
 
 import { useLocation } from "react-router-dom";
-import { showProducts } from "../../../store/actions/Products/productAction";
 import { RootState } from "../../../store/reducers/rootReducer";
 
 const ProductsPage = () => {
@@ -46,7 +45,7 @@ const ProductsPage = () => {
     const response = await axios.get(
       "http://localhost:5056/api/Product/GetProducts"
     );
-    disp(showProducts(response.data.payload));
+    // disp(showProducts(response.data.payload));
   };
 
   useEffect(() => {
@@ -113,3 +112,7 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
+function showProducts(payload: any): any {
+  throw new Error("Function not implemented.");
+}
+

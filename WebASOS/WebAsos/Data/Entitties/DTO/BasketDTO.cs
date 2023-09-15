@@ -46,7 +46,7 @@ namespace WebAsos.Data.Entitties.DTO
         public string Description { get; set; }
         public string Brand { get; set; }
         public string Color { get; set; }
-        public List<int> Size { get; set; }
+        public List<string> Size { get; set; }
         public int Quantity { get; set; }
         public bool IsInTheStock { get; set; }
         public int Category_id { get; set; }

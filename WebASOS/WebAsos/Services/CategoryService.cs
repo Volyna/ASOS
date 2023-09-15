@@ -24,9 +24,8 @@ namespace WebAsos.Services
                 var isExistCategory = await _categoryRepository.GetByName(model.Name);
                 if (isExistCategory == null)
                 {
-                    var newCategory = _mapper.Map<CreateCategoryViewModel,CategoryEntity>(model);
-                    //var pathImage = ImageWorker.SaveImage(model.ImageBase64);
-                    //newCategory.Image = pathImage;
+                    var newCategory = _mapper.Map<CreateCategoryViewModel, CategoryEntity>(model);
+
                     var result = await _categoryRepository.CreateCategory(newCategory);
                     if (result.Succeeded)
                     {
@@ -39,13 +38,13 @@ namespace WebAsos.Services
                 }
                 else
                 {
-                    return new ServiceResponse() { IsSuccess = false,Message = "Category with Name: " + model.Name +" exist" };
-                }            
+                    return new ServiceResponse() { IsSuccess = false, Message = "Category with Name: " + model.Name + " exist" };
+                }
             }
             catch (Exception ex)
             {
 
-                return new ServiceResponse() { IsSuccess = false,Message = ex.Message,Payload = ex.Message };
+                return new ServiceResponse() { IsSuccess = false, Message = ex.Message, Payload = ex.Message };
             }
         }
 
@@ -63,14 +62,14 @@ namespace WebAsos.Services
                     }
                     else
                     {
-                        return new ServiceResponse() { IsSuccess = false,Message= "Something went wrong" };
+                        return new ServiceResponse() { IsSuccess = false, Message = "Something went wrong" };
                     }
                 }
                 else
                 {
                     return new ServiceResponse() { IsSuccess = false, Message = "Category with Id: " + id + "is not exist" };
                 }
-         
+
             }
             catch (Exception ex)
             {
@@ -145,13 +144,11 @@ namespace WebAsos.Services
                 if (oldCategory != null)
                 {
                     var newCategory = _mapper.Map<UpdateCategoryViewModel, CategoryEntity>(model, oldCategory);
-                    //ImageWorker.RemoveImage(oldCategory.Image);
-                    //var pathImage = ImageWorker.SaveImage(model.ImageBase64);
-                    //newCategory.Image = pathImage;
+
                     var result = _categoryRepository.UpdateCategory(newCategory);
                     return new ServiceResponse() { IsSuccess = true };
 
-                
+
                 }
                 else
                 {

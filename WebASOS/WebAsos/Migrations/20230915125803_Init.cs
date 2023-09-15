@@ -73,7 +73,6 @@ namespace WebAsos.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Image = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     ParentId = table.Column<int>(type: "integer", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -87,6 +86,24 @@ namespace WebAsos.Migrations
                         column: x => x.ParentId,
                         principalTable: "Categories",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblBasket",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CountProducts = table.Column<int>(type: "integer", nullable: false),
+                    UserIdOrder = table.Column<int>(type: "integer", nullable: false),
+                    ProductId = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblBasket", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -261,7 +278,7 @@ namespace WebAsos.Migrations
                     Discount = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Color = table.Column<string>(type: "text", nullable: false),
-                    Size = table.Column<int>(type: "integer", nullable: false),
+                    Size = table.Column<string>(type: "text", nullable: false),
                     Brand = table.Column<string>(type: "text", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
                     IsInTheStock = table.Column<bool>(type: "boolean", nullable: false),
@@ -315,6 +332,35 @@ namespace WebAsos.Migrations
                         name: "FK_tblOrders_tblCreditCard_CreditCardId",
                         column: x => x.CreditCardId,
                         principalTable: "tblCreditCard",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblLikeProduct",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    userID = table.Column<int>(type: "integer", nullable: false),
+                    productLikeId = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblLikeProduct", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tblLikeProduct_AspNetUsers_userID",
+                        column: x => x.userID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tblLikeProduct_tblProducts_productLikeId",
+                        column: x => x.productLikeId,
+                        principalTable: "tblProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -437,6 +483,16 @@ namespace WebAsos.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tblLikeProduct_productLikeId",
+                table: "tblLikeProduct",
+                column: "productLikeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tblLikeProduct_userID",
+                table: "tblLikeProduct",
+                column: "userID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tblOrders_AddressId",
                 table: "tblOrders",
                 column: "AddressId");
@@ -482,6 +538,12 @@ namespace WebAsos.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderedProducts");
+
+            migrationBuilder.DropTable(
+                name: "tblBasket");
+
+            migrationBuilder.DropTable(
+                name: "tblLikeProduct");
 
             migrationBuilder.DropTable(
                 name: "tblProductImages");

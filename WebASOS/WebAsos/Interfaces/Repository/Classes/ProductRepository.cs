@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
+using WebAsos.Constants.Product;
 using WebAsos.Data;
 using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Interfaces.Repository.Interfaces;
@@ -44,5 +46,50 @@ namespace WebAsos.Interfaces.Repository.Classes
             return _dbContext.Categories.FirstOrDefault(i => i.Name == category)?.Products;
         }
 
+        public async Task<List<ProductEntity>> GetAllProductsMan()
+        {
+            try
+            {
+                int idCategoryMan = await _dbContext.Categories.Where(c => c.Name.ToLower().Trim() == Product.Men).Select(p => p.Id).FirstOrDefaultAsync();
+                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryMan).ToListAsync();
+                return resultProdcut;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+
+        public async Task<List<string>> GetAllColorProducsByName(string name)
+        {
+            try
+            {
+                var resultProdcut = await _dbContext.Products.Where(p => p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Color).ToListAsync();
+                return resultProdcut;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+
+        public async Task<List<string>> GetAllSizeProducsByName(string name)
+        {
+            try
+            {
+                var resultProdcut = await _dbContext.Products.Where(p => p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Size.ToString()).ToListAsync();
+                return resultProdcut;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
     }
 }

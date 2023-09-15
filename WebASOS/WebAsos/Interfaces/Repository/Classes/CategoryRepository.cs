@@ -44,8 +44,17 @@ namespace WebAsos.Interfaces.Repository.Classes
 
         public async Task<CategoryEntity> GetById(int id)
         {
-            var result = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
-            return result;
+            try
+            {
+                var result = await _context.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
         }
 
         public async Task<CategoryEntity> GetByName(string name)

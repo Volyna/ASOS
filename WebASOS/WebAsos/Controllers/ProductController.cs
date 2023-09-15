@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAsos.Data.Entitties.DTO;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
+using WebAsos.Services;
 
 namespace WebAsos.Controllers
 {
@@ -133,6 +135,15 @@ namespace WebAsos.Controllers
         {
             var isFavorite = _productService.ToggleFavoriteStatus(Id.Id);
             return Ok(new { IsFavorite = isFavorite });
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getProdcutsMan")]
+        public async Task<ServiceResponse> GetProdcutsManAsync()
+        {
+            var result = await _productService.GetAllProductsMenAsync();
+            return result;
+
         }
     }
     

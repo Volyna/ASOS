@@ -41,12 +41,12 @@ namespace WebAsos.Data.Entitties.Catalog
 
 
 
-        //Foreign keys:
+         //Foreign keys:
 
         public CategoryEntity Category { get; set; }
 
         [ForeignKey(nameof(Category))]
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
 
         public virtual ICollection<ProductImageEntity> ProductImages { get; set; }
