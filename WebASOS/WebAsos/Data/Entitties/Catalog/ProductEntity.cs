@@ -41,7 +41,7 @@ namespace WebAsos.Data.Entitties.Catalog
 
 
 
-        //Foreign keys:
+         //Foreign keys:
 
         public CategoryEntity Category { get; set; }
 

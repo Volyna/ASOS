@@ -17,12 +17,14 @@ import Menu from "../../../NavBar/menu";
 import { Link } from "react-router-dom";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useActions } from "../../../../hooks/useActions";
 
 const Favourites = () => {
+  const { LogOut } = useActions();
   const { isAuth } = useTypedSelector((store) => store.UserReducer);
   return (
     <>
-      <div style={{ zIndex: 1 }} className="staticnav">
+      <div className="staticnav">
         <div className="mainblock">
           <div className="first col-3">
             <div className="links">
@@ -58,26 +60,12 @@ const Favourites = () => {
             </div>
 
             <div className="userIcons">
-              {isAuth == true ? (
-                <Link to="/account/contact-information">
-                  <img
-                    src={userLogo}
-                    alt="userLogo"
-                    className="noneM userLogo"
-                  />
-                </Link>
-              ) : (
-                <Link to="/login">
-                  <img
-                    src={userLogo}
-                    alt="userLogo"
-                    className="noneM userLogo"
-                  />
-                </Link>
-              )}
+              <Link to="/account/contact-information">
+                <img src={userLogo} alt="userLogo" className="noneM userLogo" />
+              </Link>
 
               <Link to="/basket">
-                <img src={cart} alt="basket" className="noneM basket" />
+                <img src={cart} alt="basket" className="noneM " />
               </Link>
               <Link to="/account/favourites">
                 <img src={like} className="favourites" alt="favourites" />
@@ -88,9 +76,27 @@ const Favourites = () => {
         <Menu />
       </div>
       <BreadCrumbs />
-
+      <div className="container">
+        <div className="menu_item">
+          <Link className="main_item" to="/account/contact-information">
+            Contact information
+          </Link>
+          <Link className="account_item" to="/account/shopping-history-empty">
+            shopping history
+          </Link>
+          <Link className="account_item" to="/account/returns-empty">
+            returns
+          </Link>
+          <Link className="account_item" to="/account/favourites">
+            favourites
+          </Link>
+          <Link className="log_out" onClick={LogOut} to="/">
+            log out
+          </Link>
+        </div>
+      </div>
       <div className="container-fluid">
-        <div className="favourites-cards">
+        <div className="favourites-cards row">
           <div className="favourite-card col-2">
             <div className="liked">
               <img src={Liked} alt="" />
@@ -189,47 +195,28 @@ const Favourites = () => {
               <button className="btn-buy btn-favourites">add to basket</button>
             </div>
           </div>
+          <div className="favourite-card col-2">
+            <div className="liked">
+              <img src={Liked} alt="" />
+            </div>
+            <div className="favourite-image">
+              <img src={Card5} alt="" />
+            </div>
+            <p className="questions distance favourites-title">
+              Oversized T-shirt
+            </p>
+            <p className="favourite-price distance col-2">19.00$</p>
+            <div className="distance colors ">
+              <div className="ellipse card5_1"></div>
+              <div className="ellipse card5_2"></div>
+              <div className="ellipse card5_3"></div>
+              <div className="more_color">+1</div>
+            </div>
+            <div className="add_to_basket">
+              <button className="btn-buy btn-favourites">add to basket</button>
+            </div>
+          </div>
 
-          <div className="favourite-card without-border col-2">
-            <div className="liked">
-              <img src={Liked} alt="" />
-            </div>
-            <div className="favourite-image">
-              <img src={Card6} alt="" />
-            </div>
-            <p className="questions distance favourites-title">
-              Linen-blend cargo trousers
-            </p>
-            <p className="favourite-price distance col-2">35.00$</p>
-            <div className="distance colors ">
-              <div className="ellipse card6_1"></div>
-              <div className="ellipse card6_2"></div>
-              <div className="ellipse card6_3"></div>
-            </div>
-            <div className="add_to_basket">
-              <button className="btn-buy btn-favourites">add to basket</button>
-            </div>
-          </div>
-          <div className="favourite-card without-border col-2">
-            <div className="liked">
-              <img src={Liked} alt="" />
-            </div>
-            <div className="favourite-image">
-              <img src={Card6} alt="" />
-            </div>
-            <p className="questions distance favourites-title">
-              Linen-blend cargo trousers
-            </p>
-            <p className="favourite-price distance col-2">35.00$</p>
-            <div className="distance colors ">
-              <div className="ellipse card6_1"></div>
-              <div className="ellipse card6_2"></div>
-              <div className="ellipse card6_3"></div>
-            </div>
-            <div className="add_to_basket">
-              <button className="btn-buy btn-favourites">add to basket</button>
-            </div>
-          </div>
         </div>
       </div>
       <Footer />

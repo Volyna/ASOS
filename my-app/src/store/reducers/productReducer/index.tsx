@@ -1,8 +1,10 @@
 import { ProductActionTypes, ProductsActions, ProductsState } from "./types"
 
 const initialState: ProductsState = {
-  products: [],
-  loading: false,
+  productsMan: [],
+  productsWoman: [],
+  loadingProductMan: false,
+  loadingProductWoman: false
 };
 const ProductsReducer = (
   state = initialState,
@@ -12,20 +14,20 @@ const ProductsReducer = (
     case ProductActionTypes.START_REQUEST_PRODUCT: {
       return {
         ...state,
-        loading: true,
+        loadingProductMan: true,
       };
     }
     case ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS: {
       return {
         ...state,
-        loading: false,
-        products: action.payload
+        loadingProductMan: false,
+        productsMan: action.payload
       };
     }
     case ProductActionTypes.BAD_REQUEST_PRODUCT: {
       return {
         ...state,
-        loading: false,
+        loadingProductMan: false,
       };
     }
     default: {

@@ -22,3 +22,18 @@ export const DeleteProductLike = (id: number) => {
         });
     }
 };
+export const GetProductLikes = (array: Array<number>) => {
+    return async (dispatch: Dispatch<LikeActions>) => {
+        try {
+            dispatch({ type: LikeActionTypes.START_REQUESTS_LIKE });
+        } catch (e) {
+            dispatch({ type: LikeActionTypes.BAG_REQUEST_LIKE });
+            toast.error("Something get wrong...", {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+        }
+
+
+
+    }
+};

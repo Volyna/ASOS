@@ -172,7 +172,7 @@ namespace WebAsos.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("tblAddresses", (string)null);
+                    b.ToTable("tblAddresses");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.BasketEntity", b =>
@@ -204,7 +204,7 @@ namespace WebAsos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblBasket", (string)null);
+                    b.ToTable("tblBasket");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CategoryEntity", b =>
@@ -217,11 +217,6 @@ namespace WebAsos.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -237,7 +232,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.CreditCardEntity", b =>
@@ -284,7 +279,40 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tblCreditCard", (string)null);
+                    b.ToTable("tblCreditCard");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.LikeEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("productLikeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("userID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("productLikeId");
+
+                    b.HasIndex("userID");
+
+                    b.ToTable("tblLikeProduct");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderEntity", b =>
@@ -329,7 +357,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tblOrders", (string)null);
+                    b.ToTable("tblOrders");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderedProductEntity", b =>
@@ -367,7 +395,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderedProducts", (string)null);
+                    b.ToTable("OrderedProducts");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>
@@ -382,8 +410,7 @@ namespace WebAsos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("CategoryId")
-                        .IsRequired()
+                    b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Color")
@@ -419,14 +446,15 @@ namespace WebAsos.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Size")
-                        .HasColumnType("integer");
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("tblProducts", (string)null);
+                    b.ToTable("tblProducts");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductImageEntity", b =>
@@ -461,7 +489,7 @@ namespace WebAsos.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("tblProductImages", (string)null);
+                    b.ToTable("tblProductImages");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.IdentityUser.RoleEntity", b =>
@@ -690,6 +718,25 @@ namespace WebAsos.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.LikeEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.ProductEntity", "ProductLike")
+                        .WithMany()
+                        .HasForeignKey("productLikeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAsos.Data.Entitties.IdentityUser.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductLike");
 
                     b.Navigation("User");
                 });

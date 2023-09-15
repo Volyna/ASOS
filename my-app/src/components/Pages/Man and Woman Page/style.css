@@ -484,6 +484,7 @@
     overflow: auto;
     position: sticky;
     top: 125px;
+    margin-bottom: 20px;
 
 }
 
@@ -494,4 +495,144 @@
 
 .contentCategoryTypeInfo {
     cursor: pointer;
+}
+
+.context .p-multiselect:not(.p-disabled):hover {
+    border: none;
+}
+
+.content .p-multiselect:not(p.disabled).p-focus {
+    border: none;
+    box-shadow: none;
+}
+
+.content .p-panelmenu .p-panelmenu-header>a {
+    padding: 0px;
+    border: none;
+    background: #FFF;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.content .p-panelmenu .p-panelmenu-header>a:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0rem #FFF;
+}
+
+.content .p-panelmenu-header {
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    align-items: center;
+    cursor: default;
+    margin-bottom: 30px;
+}
+
+.content .p-panelmenu-header svg {
+    display: none;
+}
+
+.content .p-component {
+    cursor: default;
+}
+
+.content .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled)>a:hover {
+    background: none;
+    border-color: none;
+    color: var(--yellow, #FFC818);
+}
+
+.content .p-panelmenu .p-panelmenu-header.p-highlight>a {
+    margin-bottom: 13.5px;
+    background: #FFF;
+    border-color: #FFF;
+    color: var(--yellow, #FFC818);
+    cursor: pointer;
+}
+
+.content .p-panelmenu .p-panelmenu-header.p-highlight:not(.p-disabled)>a:hover {
+    border-color: #FFF;
+    background: #FFF;
+    color: var(--yellow, #FFC818);
+    cursor: pointer;
+
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link {
+    padding: 0px;
+    padding-bottom: 10px;
+    border-radius: 0;
+    transition: box-shadow 0s;
+    user-select: none;
+    color: var(--yellow, #FFC818);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.content .p-panelmenu-content {
+    display: flex;
+    justify-content: start;
+}
+
+.content .p-panelmenu .p-panelmenu-content {
+    border: none;
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover {
+    background: none;
+    cursor: default;
+}
+
+.content .p-menuitem-text {
+    cursor: pointer;
+}
+
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-icon {
+    display: none;
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: inset 0 0 0 0rem #FFF;
+}
+
+.content .p-menuitem-link {
+    cursor: default;
+}
+
+.content .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover span {
+    color: var(--yellow, #FFC818);
+}
+
+.content .p-menuitem {
+    display: flex;
 }

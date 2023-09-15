@@ -2,7 +2,8 @@ import { LikeActionTypes, LikeActions, LikeState } from "./type";
 
 const initialState: LikeState = {
     likesProductsId: [],
-    loader: false
+    loader: false,
+    likesProducts: []
 };
 const LikeReducer = (state = initialState, action: LikeActions): LikeState => {
     switch (action.type) {
@@ -10,6 +11,13 @@ const LikeReducer = (state = initialState, action: LikeActions): LikeState => {
             return {
                 ...state,
                 loader: true,
+            };
+        }
+        case LikeActionTypes.SUCCESSFUL_GET_PRODUCTS_LIKES: {
+            return {
+                ...state,
+                loader: false,
+                likesProducts: action.payload
             };
         }
         case LikeActionTypes.BAG_REQUEST_LIKE: {

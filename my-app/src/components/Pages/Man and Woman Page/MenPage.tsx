@@ -18,14 +18,14 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 
 const Men = () => {
-  const [selectedFilterBy, setSelectedFilterBy] = useState(null);
+  const [selectedFilterBy, setSelectedFilterBy] = useState([]);
   const [selectedFilterSize, setSelectedFilterSize] = useState(null);
   const [selectedFilterColor, setSelectedFilterColor] = useState(null);
   const [selectedFilterBand, setSelectedFilterBand] = useState(null);
   const [selectedFilterProductType, setSelectedFilterProductType] = useState(null);
   var [countShowProduct, setCountShowProduct] = useState(20);
   const { GetAllProductMan, AddProductLike, DeleteProductLike } = useActions();
-  const { loading, products } = useTypedSelector(
+  const { loadingProductMan, productsMan } = useTypedSelector(
     (store) => store.ProductsReducer
   );
   useEffect(() => {
@@ -46,7 +46,7 @@ const Men = () => {
     }
     console.log("nameClass: ", nameClass);
   }
-  const dataProduct = products.slice(0, countShowProduct).map((item) => {
+  const dataProduct = productsMan.slice(0, countShowProduct).map((item) => {
 
     return (
 
@@ -133,6 +133,11 @@ const Men = () => {
     return (<div style={{ display: "flex", alignItems: "center" }}>
       <span className="colorEllipse"></span>
       <div>{option.name}</div>
+    </div>);
+  };
+  const sortByTemplate = (option: any) => {
+    return (<div onClick={(e) => { console.log("Clik", option.name) }} style={{ display: "flex", alignItems: "center" }}>
+      {option.name}
     </div>);
   };
   const items = [
@@ -404,9 +409,11 @@ const Men = () => {
 
   ];
   const getSortBy = () => {
-    // console.log("value", e.target.name);
-    // setSelectedFilterBy(e.value);
-    // console.log("selectedFilterBy: ", selectedFilterBy);
+    console.log("selectedFilterBy.length: ", selectedFilterBy.length)
+    if (selectedFilterBy.length != 0) {
+      var nameSort = selectedFilterBy[0];
+      console.log("getSortBy: ", nameSort)
+    }
   }
 
   return (
@@ -420,8 +427,10 @@ const Men = () => {
           <div className="row">
             <div className="col-2">
               <div className="contentProductNavBar">
-                <div className="contentCategoryTypeInfo">
-                  <PanelMenu model={items} />
+                <div className="contentProductNavBarSecond">
+                  <div className="contentCategoryTypeInfo">
+                    <PanelMenu model={items} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -436,11 +445,14 @@ const Men = () => {
                       <div className="FilterProductSortBy prodcutFlex">
                         <p>sort by</p>
                         <MultiSelect
+                          selectionLimit={1}
                           value={selectedFilterBy}
-                          onChange={(e) => { setSelectedFilterBy(e.value); }}
+                          onChange={(e) => {
+                            setSelectedFilterBy(e.value);
+                          }}
+                          itemTemplate={sortByTemplate}
                           optionLabel="name"
                           options={dataFilterBy}
-
                           maxSelectedLabels={1} className="filterProdcutSelect" />
                       </div>
                       <div className="FilterProductSize prodcutFlex">
@@ -484,7 +496,7 @@ const Men = () => {
                         <p>5|2 </p>
                       </div>
                       <div className="prodcuttotalItems">
-                        <p> {products.length} items</p>
+                        <p> {productsMan.length} items</p>
                       </div>
                     </div>
                   </div>
@@ -492,12 +504,12 @@ const Men = () => {
               </div>
               <div className="itemsProducts">
                 <div className="row rowItemsProducts">
-                  {loading == true ? <div className="basketLoader">
+                  {loadingProductMan == true ? <div className="basketLoader">
                     <div className="spinner-border" role="status"></div>
-                  </div> : products.length == 0 ? (<>zero</>) : (<ul>{dataProduct}</ul>)}
+                  </div> : productsMan.length == 0 ? (<>zero</>) : (<ul>{dataProduct}</ul>)}
                 </div>
               </div>
-              <div className="moreProduct"><button onClick={() => { MoreCountProdcutShow(); }} className="btn">load more</button></div>
+              {loadingProductMan == true || productsMan == null ? "" : <div className="moreProduct"><button onClick={() => { MoreCountProdcutShow(); }} className="btn">load more</button></div>}
 
             </div>
           </div>

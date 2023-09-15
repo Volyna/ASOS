@@ -1,8 +1,10 @@
 import { type } from "os";
 
 export interface ProductsState {
-  products: Array<IItemProduct>;
-  loading: boolean;
+  productsMan: Array<IItemProduct>;
+  productsWoman: Array<IItemProduct>;
+  loadingProductMan: boolean;
+  loadingProductWoman: boolean;
 }
 
 interface IItemProduct {
