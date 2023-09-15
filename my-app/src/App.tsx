@@ -51,6 +51,9 @@ import Single from "./components/admin/pages/single/SingleUser";
 import ListProducts from "./components/admin/pages/list/ListProducts";
 import ListCategories from "./components/admin/pages/list/ListCategories";
 import ListOrders from "./components/admin/pages/list/ListOrders";
+import CategoryCreate from "./components/admin/components/categories/create/CategoryCreatePage";
+import ProductCreate from "./components/admin/components/products/create/ProductCreatePage";
+import UserCreatePage from "./components/admin/components/user/create/UserCreatePage";
 
 // import ProductCreatePage from "./components/admin/components/products/create/ProductCreatePage";
 // import ProductEditPage from "./components/admin/components/products/edit/ProductEditPage";
@@ -76,28 +79,17 @@ function App() {
             <Route path="users">
               <Route index element={<ListUsers />} />
               <Route path=":userId" element={<SingleUser />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
+              <Route path="new" element={<UserCreatePage />} />
             </Route>
             <Route path="products">
               <Route index element={<ListProducts />} />
               <Route path=":productId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
+              <Route path="new" element={<ProductCreate />} />
             </Route>
             <Route path="categories">
               <Route index element={<ListCategories />} />
               <Route path=":categoryId" element={<Single />} />
-              <Route
-                path="new"
-                element={
-                  <New inputs={categoryInputs} title="Add New Category" />
-                }
-              />
+              <Route path="new" element={<CategoryCreate />} />
             </Route>
 
             <Route path="orders">

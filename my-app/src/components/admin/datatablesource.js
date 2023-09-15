@@ -1,4 +1,5 @@
 import { colors } from "@mui/material";
+import { number, string } from "yup";
 
 
 export const userColumns = [
@@ -48,7 +49,7 @@ export const userColumns = [
 export const productColumns = [
   { field: "id", headerName: "ID", width: 100 },
   {
-    field: "productName",
+    field: "name",
     headerName: "Name",
     width: 180,
     
@@ -90,8 +91,8 @@ export const productColumns = [
     width: 100,
   },
   {
-    field: "images",
-    headerName: "Images",
+    field: "image",
+    headerName: "Image",
     width: 130,
     renderCell: (params) => {
       return (
@@ -102,7 +103,7 @@ export const productColumns = [
     },
   },
   {
-    field: "categoryId",
+    field: "category",
     headerName: "CategoryId",
     width: 100,
   },
@@ -110,12 +111,11 @@ export const productColumns = [
 
 export const categoryColumns = [
   
-  { field: "id", headerName: "ID", width: 100 },
+  { field: "id", headerName: "ID", width: 100},
   {
-    field: "categoryName",
-    headerName: "Name",
+    field: "name",
+    headerName: "NAME",
     width: 430,
-    
   },
  
 ];
@@ -180,7 +180,7 @@ export const productRows = [
     brand: "ASOS",
     quatity: 100,
     isInTheStock: true,
-    images: "https://images.asos-media.com/products/asos-design-knitted-cropped-cardigan-with-double-zip-in-stripe/204889007-4?$n_640w$&wid=513&fit=constrain",
+    image: "https://images.asos-media.com/products/asos-design-knitted-cropped-cardigan-with-double-zip-in-stripe/204889007-4?$n_640w$&wid=513&fit=constrain",
     categoryId: 1
   },
 ];
@@ -188,7 +188,7 @@ export const productRows = [
 export const categoryRows = [
   {
     id: 1,
-    categoryName: "Shoes",
+    name: "Shoes",
   },
 ];
 

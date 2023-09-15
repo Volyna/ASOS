@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { showCategory } from "../../../store/actions/Categories/categoryAction";
 import { RootState } from "../../../store/reducers/rootReducer";
+
 const Women = () => {
   const navigate = useNavigate();
   const location = useLocation().pathname;
@@ -25,7 +26,7 @@ const Women = () => {
   const disp = useDispatch();
   const fetchCat = async () => {
     const response = await axios.get(
-      "https://basos.itstep.click/api/Category/getAllCategories"
+      "http://localhost:5056/api/Category/getAllCategories"
     );
     disp(showCategory(response.data.payload));
   };

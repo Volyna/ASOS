@@ -67,3 +67,31 @@
 .footer_end{
     text-align: center;
 }
+
+.footerm{
+    display: flex;
+    margin-top: 100px;
+    position:absolute;
+    width: 100%;
+    height: 70px;
+    padding-bottom: 0;
+    margin-left: -4%;
+    background-color: #353535;
+    z-index: -10;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5% 0 5% ;
+
+}
+
+.footerm p {
+    font-family: Roboto Flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+    color: white;
+    margin-bottom: 0px;
+
+}
+

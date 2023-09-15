@@ -1,54 +1,60 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { categoryColumns, categoryRows } from "../../datatablesource";
-import { Link, useLocation } from "react-router-dom";
+import { categoryColumns } from "../../datatablesource";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../../../modal/delete";
 import { RemoveCategory } from "../../../../store/actions/categoryActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
-import { showCategory } from "../../../../store/actions/Categories/categoryAction";
-import { RootState } from "../../../../store/reducers/rootReducer";
-const DatatableCategories = () => {
-  const [data, setData] = useState(categoryRows);
-  const location = useLocation().pathname;
+import { ICategoryItem } from "../categories/types";
 
-  const disp = useDispatch();
-  const fetchCat = async () => {
-    const response = await axios.get(
-      "https://basos.itstep.click/api/Category/getAllCategories"
-    );
-    disp(showCategory(response.data.payload));
-  };
+const DatatableCategories = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState<ICategoryItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCat();
+    axios
+      .get("http://localhost:5056/api/Category/getAllCategories")
+      .then((response) => {
+        const responseData = response.data;
+
+        if (
+          responseData &&
+          responseData.payload &&
+          Array.isArray(responseData.payload)
+        ) {
+          const dataArray = responseData.payload.map(
+            (item: { id: number; name: string }) => ({
+              id: item.id,
+              name: item.name,
+            })
+          );
+
+          setData(dataArray);
+          console.log("dataARr", dataArray);
+          setLoading(false);
+        } else {
+          console.error("Response data is not in the expected format");
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
   }, []);
-
-  const cat = useSelector((state: RootState) => state.allCategory.categories);
-
-  const categories = cat.map((category: any) => {
-    const { id, name } = category;
-    return (
-      <Link to={location + "/" + name} key={id}>
-        {name}
-      </Link>
-    );
-  });
-
-  console.log("Category: " + categories);
+  console.log("data", data);
 
   const DeleteCategoryHandler = (id: number) => {
     RemoveCategory(id);
   };
 
-  const navigate = useNavigate();
-
   const handleDelete = (id: number) => {
-    setData(data.filter((item) => item.id !== id));
+    setData(data.filter((item: { id: number }) => item.id !== id));
   };
-
   const actionColumn = [
     {
       field: "action",
@@ -57,9 +63,6 @@ const DatatableCategories = () => {
       renderCell: (params: any) => {
         return (
           <div className="cellAction">
-            <Link to="/admin/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
             <Link to="/admin/users/test" style={{ textDecoration: "none" }}>
               <div className="viewButton">Edit</div>
             </Link>
@@ -88,13 +91,12 @@ const DatatableCategories = () => {
             ADD NEW
           </button>
         </div>
-        <div>{categories}</div>
 
         <DataGrid
-          className="datagrid"
           rows={data}
           columns={categoryColumns.concat(actionColumn)}
           pageSize={9}
+          loading={loading}
           rowsPerPageOptions={[9]}
           checkboxSelection
         />

@@ -134,3 +134,59 @@
     color: black;
     text-decoration: none;
 }
+
+.mainblockM {
+    margin: 15px;
+    height: 70px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+}
+
+.rightbox {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rightbox img {
+    width: 20%;
+}
+
+.box {
+    display: flex;
+    background-color: white;
+    height: 70px;
+    margin-top: 30px;
+    width: 110%;
+    margin-left: -5%;
+    padding: 0 4% 0 4%;
+}
+
+.box img {
+    width: 5%;
+
+}
+
+.stick {
+    size: 1px;
+    color: black;
+    margin-top: 0px;
+}
+
+.search_sticky {
+    border: none;
+    width: 100%;
+    line-height: 100px;
+}
+
+
+.sticky {
+    position: sticky;
+    top: 0;
+    align-items: start;
+    height: 100px;
+
+
+}

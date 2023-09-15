@@ -28,6 +28,17 @@ const Men = () => {
   const { loadingProductMan, productsMan } = useTypedSelector(
     (store) => store.ProductsReducer
   );
+  const navigate = useNavigate();
+  const location = useLocation().pathname;
+
+  const disp = useDispatch();
+  const fetchCat = async () => {
+    const response = await axios.get(
+      "http://localhost:5056/api/Category/getAllCategories"
+    );
+    disp(showCategory(response.data.payload));
+  };
+
   useEffect(() => {
     GetAllProductMan();
   }, []);

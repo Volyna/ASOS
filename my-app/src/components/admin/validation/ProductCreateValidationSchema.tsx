@@ -4,14 +4,12 @@ export const CreateProductSchema = Yup.object().shape({
 
   price: Yup.number().min(1, "A small price").required(),
 
-  discount: Yup.number().required(),
-
   description: Yup.string()
     .min(2, "A small description!")
     .max(6000, "A big description!")
     .required(),
 
-  size: Yup.number().required(),
+  size: Yup.string().required(),
 
   brand: Yup.string().required(),
 

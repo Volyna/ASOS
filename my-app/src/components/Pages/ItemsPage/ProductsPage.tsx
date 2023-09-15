@@ -52,48 +52,48 @@ const ProductsPage = () => {
     fetchProd();
   }, []);
 
-  const pro = useSelector((state: RootState) => state.allCategory.categories);
+  //   const pro = useSelector((state: RootState) => state.allProducts.products);
 
-  const prod = pro.map((products: any) => {
-    const {
-      id,
-      name,
-      price,
-      discount,
-      description,
-      color,
-      size,
-      brand,
-      quantity,
-      inStock,
-      isFavourite,
-      image,
-      categ,
-    } = products;
-    console.log(image);
+  //   const prod = pro.map((products: any) => {
+  //     const {
+  //       id,
+  //       name,
+  //       price,
+  //       discount,
+  //       description,
+  //       color,
+  //       size,
+  //       brand,
+  //       quantity,
+  //       inStock,
+  //       isFavourite,
+  //       image,
+  //       categ,
+  //     } = products;
+  //     console.log(image);
 
-    return (
-      <div className="itemName">
-        <div className="itemImg">
-          <img
-            className="titleImg"
-            src={"data:image/jpeg;base64," + `${image}`}
-          />
-          <img className="like" src={like} />
-        </div>
+  //     return (
+  //       <div className="itemName">
+  //         <div className="itemImg">
+  //           <img
+  //             className="titleImg"
+  //             src={"data:image/jpeg;base64," + `${image}`}
+  //           />
+  //           <img className="like" src={like} />
+  //         </div>
 
-        <div className="info">
-          <p className="headerText" id="name">
-            {name}
-          </p>
-          <p className="headerText" id="price">
-            {price}$
-          </p>
-          <span className="dot" style={{ backgroundColor: color }} />
-        </div>
-      </div>
-    );
-  });
+  //         <div className="info">
+  //           <p className="headerText" id="name">
+  //             {name}
+  //           </p>
+  //           <p className="headerText" id="price">
+  //             {price}$
+  //           </p>
+  //           <span className="dot" style={{ backgroundColor: color }} />
+  //         </div>
+  //       </div>
+  //     );
+  //   });
 
   return (
     <>
@@ -103,9 +103,7 @@ const ProductsPage = () => {
       <div className="categors">{categories}</div>
 
       <div className="prodBlock">
-        <Link to="/Prod">
-          <div className="prd">{prod}</div>
-        </Link>
+        <Link to="/Prod">{/* <div className="prd">{prod}</div> */}</Link>
       </div>
 
       <Footer />
@@ -114,3 +112,7 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
+function showProducts(payload: any): any {
+  throw new Error("Function not implemented.");
+}
+

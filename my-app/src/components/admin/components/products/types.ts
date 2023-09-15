@@ -4,12 +4,12 @@ export interface IProductCreate {
     discount: number,
     description: string,
     color: string,
-    size: number,
+    size: string,
     brand: string,
     quantity: number,
     isInTheStock: boolean,
-    images: Array<File>
-    category_id: number
+    categoryId: number,
+    images:any,
 }
 
 export interface IProductEdit {
@@ -20,12 +20,12 @@ export interface IProductEdit {
     discount: number,
     description: string,
     color: string,
-    size: number,
+    size: string,
     brand: string,
     quantity: number,
     isInTheStock: boolean,
-    images: Array<String>;
-    newImages: Array<File>;
+    // images: Array<String>;
+    // newImages: Array<File>;
     category_id: number
 }
 
@@ -35,13 +35,13 @@ export interface IProductEditPost {
     discount: number,
     description: string,
     color: string,
-    size: number,
+    size: string,
     brand: string,
     quantity: number,
     isInTheStock: boolean,
     category_id: number
-    removeImages: Array<String>;
-    images: Array<File>;
+    // removeImages: Array<String>;
+    // images: Array<File>;
 }
 
 export interface IProductItem {
@@ -51,11 +51,11 @@ export interface IProductItem {
     discount: number,
     description: string,
     color: string,
-    size: number,
+    size: string,
     brand: string,
     quantity: number,
     isInTheStock: boolean,
     category_id: number,
     category: string,
-    images: string[],
+    // images: string[],
 }
