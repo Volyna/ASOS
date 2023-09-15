@@ -10,11 +10,11 @@ using WebAsos.Models;
 
 namespace WebAsos.Repositories.LikesProducts
 {
-    public class likesProducsRepository : ILikeProductRepository
+    public class LikesProducsRepository : ILikeProductRepository
     {
         private readonly AppEFContext _context;
         private readonly IProductImageService _productImageService;
-        public likesProducsRepository(AppEFContext context, IProductImageService productImageService)
+        public LikesProducsRepository(AppEFContext context, IProductImageService productImageService)
         {
             _context = context;
             _productImageService = productImageService;
