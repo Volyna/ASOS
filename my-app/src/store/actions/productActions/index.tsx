@@ -11,10 +11,7 @@ import {
   removeProduct,
   updateProduct,
 } from "../../../services/api-products-service";
-import {
-  ProductActionTypes,
-  ProductsActions,
-} from "../../reducers/ProductReducer/types";
+import { ProductActionTypes, ProductsActions } from "../../reducers/productReducer/types";
 
 export const GetProductsCategories = (idCategory: number) => {
   return async (dispatch: Dispatch<ProductsActions>) => {
