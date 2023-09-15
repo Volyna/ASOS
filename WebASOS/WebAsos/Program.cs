@@ -31,8 +31,6 @@ using WebAsos.Interfaces.CategoryInterfaces;
 using WebAsos.SMTP_Email;
 using WebAsos.interfaces.BasketInterfaces;
 using WebAsos.Repositories.Basket;
-using WebAsos.Interfaces.LikesproductInterfaces;
-using WebAsos.Repositories.LikesProducts;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -43,11 +41,6 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
-
-builder.Services.AddScoped<ILikeProductRepository, LikesProducsRepository>();
-builder.Services.AddScoped<ILikeProductService, LikeService>();
-
 builder.Services.AddAutoMapper(typeof(AutoMapperUserProfile));
 builder.Services.AddAutoMapper(typeof(AutoMapperCategory));
 
