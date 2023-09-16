@@ -122,6 +122,28 @@
     width: 18%;
 }
 
+.minput{
+    width: 100%;
+    border-radius: 30px;
+    padding-left: 20px;
+    height: 40px;
+    font-family: Roboto Flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+}
+
+.titlePage{
+    font-family: Roboto Flex;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 
 
 .content .contentProductTypeInfo a {
