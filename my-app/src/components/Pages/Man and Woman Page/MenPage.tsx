@@ -1,5 +1,6 @@
 import Footer from "../../Footer/FooterV";
 import "./style.css";
+import "./types";
 import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 //core
 import "primereact/resources/primereact.min.css";
+import { IAddLikeProductOrRemove } from "./types";
 
 const Men = () => {
   const [selectedFilterBy, setSelectedFilterBy] = useState([]);
@@ -28,6 +30,9 @@ const Men = () => {
   const { loadingProductMan, productsMan } = useTypedSelector(
     (store) => store.ProductsReducer
   );
+  const { user } = useTypedSelector(
+    (store) => store.UserReducer
+  );
 
   useEffect(() => {
     GetAllProductMan();
@@ -38,12 +43,18 @@ const Men = () => {
   }
   const SwitchLike = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, idProduct: number) => {
     var nameClass = (e.target as Element).className;
+    const initDataLike: IAddLikeProductOrRemove = {
+      idProduct: idProduct,
+      idUser: user.id
+    }
+
     if (nameClass == "favourites") {
       (e.target as Element).className = "likeImage";
-      AddProductLike(idProduct);
+
+      AddProductLike(initDataLike);
     } else {
       (e.target as Element).className = "favourites";
-      DeleteProductLike(idProduct);
+      DeleteProductLike(initDataLike);
     }
     console.log("nameClass: ", nameClass);
   }
