@@ -282,9 +282,7 @@
     justify-content: space-between;
 }
 
-.content .favourites :hover {
-    background-color: #FFC818;
-}
+
 
 .content .contentProductTypeInfo ul a :hover {
     color: #FFC818;

@@ -5,18 +5,19 @@
     justify-content: space-between;
     align-items: center;
     font-family: Roboto Flex;
-    font-size:20px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     text-transform: uppercase;
 }
-.input{
+
+.input {
     padding-top: 9px;
     padding-bottom: 9px;
 }
 
-.menu_item a{
+.menu_item a {
     text-decoration: none;
 }
 
@@ -27,6 +28,7 @@
     line-height: 23.44px;
     color: black;
 }
+
 .account_item {
     color: black;
 }
@@ -83,11 +85,11 @@
 
 .save {
     display: flex;
-  justify-content: center;
-  margin-top: 50px;
+    justify-content: center;
+    margin-top: 50px;
 }
 
-.btn-black{
+.btn-black {
     border-radius: 30px;
     border: 2px solid rgba(53, 53, 53, 1);
     text-align: center;
@@ -105,10 +107,10 @@
 
 }
 
-.btn-black:hover{
+.btn-black:hover {
     transition: 0.5s;
     color: white;
-    background-color:rgba(53, 53, 53, 1);
+    background-color: rgba(53, 53, 53, 1);
 
 }
 
@@ -116,4 +118,8 @@
     background: url(../../../../images/arrow-down.png) no-repeat center right 10px;
     background-size: 25px 25px;
 
-} 
+}
+
+.staticnav .basketLogo {
+    background: url(../../../../images/cart.svg) no-repeat;
+}

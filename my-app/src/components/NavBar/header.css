@@ -43,6 +43,10 @@
     align-self: center;
 }
 
+.IconUser:hover {
+    background-image: url("../../images/userAcept.png");
+}
+
 .userIcons {
     display: flex;
     justify-content: space-between;

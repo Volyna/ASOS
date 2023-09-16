@@ -29,6 +29,7 @@ const LikeReducer = (state = initialState, action: LikeActions): LikeState => {
             return {
                 ...state,
                 loader: false,
+                likesProducts: state.likesProducts.filter(p => p.id !== action.payload)
             };
         }
         case LikeActionTypes.SUCCESSFUL_REQUEST_ADD_LIKE: {
