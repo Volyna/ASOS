@@ -10,7 +10,7 @@ import Navbar from "../../navbar/Navbar";
 import { showCategory } from "../../../../../store/actions/Categories/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store/reducers/rootReducer";
-import { CreateProduct } from "../../../../../store/actions/productActions";
+// import { CreateProduct } from "../../../../../store/actions/productActions";
 import { CreateProductSchema } from "../../../validation/ProductCreateValidationSchema";
 import { useActions } from "../../../../../hooks/useActions";
 
@@ -18,7 +18,7 @@ const ProductCreate = () => {
   const navigator = useNavigate();
   var [imagesToShow, setImagesToShow] = useState([]);
   var [filesToSend, setFilesToSend] = useState([]);
-  const { CreateProduct } = useActions();
+  // const { CreateProduct } = useActions();
   const disp = useDispatch();
 
   const [model, setModel] = useState<IProductCreate>({
@@ -117,7 +117,7 @@ const ProductCreate = () => {
         images: imagesBytes_toSend,
       };
 
-      CreateProduct(newProduct);
+      // CreateProduct(newProduct);
       console.log("new product: ", newProduct);
     });
   };
@@ -143,12 +143,12 @@ const ProductCreate = () => {
       </option>
     );
   });
-  const { loading, message } = useTypedSelector(
-    (store) => store.ProductsReducer
-  );
-  if (message == "Successful request create product") {
-    return <Navigate to={"/admin/products"} />;
-  }
+  // const { loading, message } = useTypedSelector(
+  //   (store) => store.ProductsReducer
+  // );
+  // if (message == "Successful request create product") {
+  //   return <Navigate to={"/admin/products"} />;
+  // }
   return (
     <>
       <ToastContainer draggable={false} autoClose={3000} />
@@ -375,7 +375,7 @@ const ProductCreate = () => {
                           type="submit"
                           className="womenbtn buttons"
                           disabled={!(isValid && dirty)}
-                          // onClick={() => navigator("/admin/products")}
+                        // onClick={() => navigator("/admin/products")}
                         >
                           Save
                         </button>

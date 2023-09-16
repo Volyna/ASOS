@@ -28,16 +28,6 @@ const Men = () => {
   const { loadingProductMan, productsMan } = useTypedSelector(
     (store) => store.ProductsReducer
   );
-  const navigate = useNavigate();
-  const location = useLocation().pathname;
-
-  const disp = useDispatch();
-  const fetchCat = async () => {
-    const response = await axios.get(
-      "http://localhost:5056/api/Category/getAllCategories"
-    );
-    disp(showCategory(response.data.payload));
-  };
 
   useEffect(() => {
     GetAllProductMan();
@@ -517,10 +507,10 @@ const Men = () => {
                 <div className="row rowItemsProducts">
                   {loadingProductMan == true ? <div className="basketLoader">
                     <div className="spinner-border" role="status"></div>
-                  </div> : productsMan.length == 0 ? (<>zero</>) : (<ul>{dataProduct}</ul>)}
+                  </div> : productsMan.length == 0 ? null : (<ul>{dataProduct}</ul>)}
                 </div>
               </div>
-              {loadingProductMan == true || productsMan == null ? "" : <div className="moreProduct"><button onClick={() => { MoreCountProdcutShow(); }} className="btn">load more</button></div>}
+              {loadingProductMan == true || productsMan.length == 0 ? null : <div className="moreProduct"><button onClick={() => { MoreCountProdcutShow(); }} className="btn">load more</button></div>}
 
             </div>
           </div>
