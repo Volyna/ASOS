@@ -62,20 +62,22 @@ const Men = () => {
 
     return (
 
-      <li key={item.id} className="ulITem">
-        <div className="oneItemProduct">
-          <div className="likeProductItem">
-            <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
+      <li key={item.id} >
+        <div className="">
+          <div className="oneItemProduct">
+            <div className="likeProductItem">
+              <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
+            </div>
+            <div key={item.mainImage} className="imageProductItem"> <img
+              width={272}
+              height={402}
+              src={`data:image/png;base64,${item.mainImage}`}
+              alt=""
+            /></div>
+            <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
+            <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
+            <div className="colorProductItem"><span className="red">red</span></div>
           </div>
-          <div key={item.mainImage} className="imageProductItem"> <img
-            width={272}
-            height={402}
-            src={`data:image/png;base64,${item.mainImage}`}
-            alt=""
-          /></div>
-          <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
-          <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
-          <div className="colorProductItem"><span className="red">red</span></div>
         </div>
       </li>
 
@@ -515,7 +517,7 @@ const Men = () => {
                 </div>
               </div>
               <div className="itemsProducts">
-                <div className="row rowItemsProducts">
+                <div className="rowItemsProducts">
                   {loadingProductMan == true ? <div className="basketLoader">
                     <div className="spinner-border" role="status"></div>
                   </div> : productsMan.length == 0 ? null : (<ul>{dataProduct}</ul>)}
