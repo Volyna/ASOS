@@ -50,7 +50,7 @@ export async function createCategory(model: ICategoryCreate) {
 }
 export async function removeCategory(id: number) {
   const data = await http
-    .delete("/api/Category/delete" + id)
+    .delete(`http://localhost:5056/api/Category/delete?id=${id}`)
     .then((response) => {
       return {
         response,

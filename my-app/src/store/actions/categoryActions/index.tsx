@@ -93,6 +93,9 @@ export const CreateCategory = (model: ICategoryCreate) => {
         type: CategoryActionTypes.SUCCESSFUL_REQUEST_CREATE_CATEGORY,
         payload: response.data,
       });
+      toast.success("Category created successfully", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } catch (e) {
       toast.error("Something get wrong...", {
         position: toast.POSITION.TOP_RIGHT,
@@ -121,6 +124,9 @@ export const UpdateCategory = (model: ICategoryUpdate) => {
         type: CategoryActionTypes.SUCCESSFUL_REQUEST_UPDATE_CATEGORY,
         payload: response.data,
       });
+      toast.success("Category edited successfully", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } catch (e) {
       toast.error("Some problems!!!", {
         position: toast.POSITION.TOP_RIGHT,
@@ -145,6 +151,9 @@ export const RemoveCategory = (id: number) => {
       dispatch({
         type: CategoryActionTypes.SUCCESSFUL_REMOVE_CATEGORY,
         payload: id,
+      });
+      toast.success("Category removed successfully", {
+        position: toast.POSITION.TOP_RIGHT,
       });
     } catch (e) {
       toast.error("Some problems!!!", {

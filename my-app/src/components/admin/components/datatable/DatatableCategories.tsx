@@ -2,18 +2,25 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { categoryColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../../../modal/delete";
 import { RemoveCategory } from "../../../../store/actions/categoryActions";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { ICategoryItem } from "../categories/types";
+import {
+  CategoryActionTypes,
+  CategoryesActions,
+} from "../../../../store/reducers/CategoryReducer/types";
+import { removeCategory } from "../../../../services/api-categories-service";
+import { toast } from "react-toastify";
 
 const DatatableCategories = () => {
   const navigate = useNavigate();
   const [data, setData] = useState<ICategoryItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -49,7 +56,38 @@ const DatatableCategories = () => {
   console.log("data", data);
 
   const DeleteCategoryHandler = (id: number) => {
-    RemoveCategory(id);
+    const removeCategoryAsync = async (
+      dispatch: Dispatch<CategoryesActions>
+    ) => {
+      try {
+        const data = await removeCategory(id);
+
+        const { response } = data;
+
+        console.log(response.data);
+
+        dispatch({
+          type: CategoryActionTypes.SUCCESSFUL_REMOVE_CATEGORY,
+          payload: id,
+        });
+
+        toast.success("Category removed successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        handleDelete(id);
+      } catch (e) {
+        toast.error("Some problems!!!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        dispatch({
+          type: CategoryActionTypes.SERVER_CATEGORY_ERROR,
+          payload: "Unknown error",
+        });
+      }
+    };
+
+    removeCategoryAsync(dispatch);
   };
 
   const handleDelete = (id: number) => {
@@ -72,7 +110,7 @@ const DatatableCategories = () => {
 
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => DeleteCategoryHandler(params.row.id)}
             >
               Delete
             </div>

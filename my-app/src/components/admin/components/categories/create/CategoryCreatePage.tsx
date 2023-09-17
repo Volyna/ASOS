@@ -81,7 +81,6 @@ const CategoryCreate = () => {
                           type="submit"
                           className="womenbtn buttons"
                           disabled={!(isValid && dirty)}
-                          onClick={() => navigator("/admin/categories")}
                         >
                           Save
                         </button>
