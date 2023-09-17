@@ -2,15 +2,23 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { productRows, productColumns } from "../../datatablesource";
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IProductItem } from "../products/types";
 import axios from "axios";
+import {
+  ProductActionTypes,
+  ProductsActions,
+} from "../../../../store/reducers/ProductReducer/types";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { removeProduct } from "../../../../services/api-products-service";
 
 const DatatableProducts = () => {
   const navigate = useNavigate();
   const [data, setData] = useState<IProductItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -69,6 +77,39 @@ const DatatableProducts = () => {
   }, []);
   console.log("data", data);
 
+  const DeleteProductHandler = (id: number) => {
+    const removeCategoryAsync = async (dispatch: Dispatch<ProductsActions>) => {
+      try {
+        const data = await removeProduct(id);
+
+        const { response } = data;
+
+        console.log(response.data);
+
+        dispatch({
+          type: ProductActionTypes.REMOVE_PRODUCT_SUCCESSFUL,
+          payload: id,
+        });
+
+        toast.success("Product removed successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        handleDelete(id);
+      } catch (e) {
+        toast.error("Some problems!!!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        dispatch({
+          type: ProductActionTypes.SERVER_PRODUCTS_ERROR,
+          payload: "Unknown error",
+        });
+      }
+    };
+
+    removeCategoryAsync(dispatch);
+  };
+
   const handleDelete = (id: number) => {
     setData(data.filter((item) => item.id !== id));
   };
@@ -86,7 +127,7 @@ const DatatableProducts = () => {
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => DeleteProductHandler(params.row.id)}
             >
               Delete
             </div>

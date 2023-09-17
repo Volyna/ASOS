@@ -32,7 +32,7 @@ export async function createProduct(model: IProductCreate) {
 }
 export async function getByIdProduct(id: number) {
   const data = await http
-    .get("/api/Product/GetProductById/" + id)
+    .get(`http://localhost:5056/api/Product/GetProductById?id=${id}`)
     .then((response) => {
       return {
         response,
@@ -60,7 +60,14 @@ export async function updateProduct(id: number, model: IProductEditPost) {
 }
 export async function removeProduct(id: number) {
   const data = await http
-    .delete("/api/Product/DeleteProduct/" + id)
+    .delete("/api/Product/DeleteProduct", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        id: id,
+      },
+    })
     .then((response) => {
       return {
         response,

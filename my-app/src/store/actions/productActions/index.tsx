@@ -79,6 +79,9 @@ export const CreateProduct = (model: IProductCreate) => {
         type: ProductActionTypes.SUCCESSFUL_REQUEST_CREATE_PRODUCTS,
         payload: response.data,
       });
+      toast.success("Product created successfully", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } catch (e) {
       toast.error("Something get wrong...", {
         position: toast.POSITION.TOP_RIGHT,
@@ -143,6 +146,9 @@ export const UpdateProduct = (id: number, model: IProductEditPost) => {
         type: ProductActionTypes.SUCCESSFUL_UPDATE_PRODUCT,
         payload: response.data,
       });
+      toast.success("Product updated successfully", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } catch (e) {
       toast.error("Some problems", {
         position: toast.POSITION.TOP_RIGHT,
@@ -166,6 +172,9 @@ export const RemoveProduct = (id: number) => {
       dispatch({
         type: ProductActionTypes.REMOVE_PRODUCT_SUCCESSFUL,
         payload: id,
+      });
+      toast.success("Product removed successfully", {
+        position: toast.POSITION.TOP_RIGHT,
       });
     } catch (e) {
       toast.error("Some problems", {

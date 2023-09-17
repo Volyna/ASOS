@@ -85,12 +85,21 @@ namespace WebAsos.Interfaces.Services.Classes
             };
         }
 
+        
+
         public async Task DeleteProductAsync(int id)
         {
-            var toDelete = _productImageRepository.GetAll().Where(img => img.ProductId == id).ToList();
-            toDelete.ForEach(img => _productImageRepository.DeleteAsync(img.Id));
+            //    var toDelete = _productImageRepository.GetAll().Where(img => img.ProductId == id).ToList();
+            //    toDelete.ForEach(img => _productImageRepository.DeleteAsync(img.Id));
+
+            //    await _productRepository.DeleteAsync(id);
+
+            var toDelete = _productRepository.GetAll().Where(prod => prod.Id == id).FirstOrDefault();
 
             await _productRepository.DeleteAsync(id);
+
+           
+
         }
 
         public async Task<ServiceResponse> GetAllProductsMenAsync()
