@@ -18,9 +18,10 @@ export async function getCategories() {
   return data;
 }
 
-export async function getCategoriesById(idCategory: number) {
+export async function getCategoriesById(id: number) {
+  // const categoryId = 3;
   const data = await http
-    .get("/api/Category/getById" + idCategory)
+    .get(`http://localhost:5056/api/Category/getById?id=${id}`)
     .then((response) => {
       return {
         response,
@@ -29,6 +30,8 @@ export async function getCategoriesById(idCategory: number) {
     .catch((error) => {
       return error.response;
     });
+  console.log("id", id);
+  console.log("data", data);
   return data;
 }
 
@@ -47,7 +50,7 @@ export async function createCategory(model: ICategoryCreate) {
 }
 export async function removeCategory(id: number) {
   const data = await http
-    .delete("/api/Category/delete" + id)
+    .delete(`http://localhost:5056/api/Category/delete?id=${id}`)
     .then((response) => {
       return {
         response,
@@ -69,5 +72,7 @@ export async function updateCategory(model: ICategoryUpdate) {
     .catch((error) => {
       return error.response;
     });
+  console.log("UpdModel", model);
+  console.log("UpdData", data);
   return data;
 }

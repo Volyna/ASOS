@@ -10,7 +10,7 @@ import Navbar from "../../navbar/Navbar";
 import { showCategory } from "../../../../../store/actions/Categories/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store/reducers/rootReducer";
-// import { CreateProduct } from "../../../../../store/actions/productActions";
+import { CreateProduct } from "../../../../../store/actions/productActions";
 import { CreateProductSchema } from "../../../validation/ProductCreateValidationSchema";
 import { useActions } from "../../../../../hooks/useActions";
 
@@ -18,7 +18,7 @@ const ProductCreate = () => {
   const navigator = useNavigate();
   var [imagesToShow, setImagesToShow] = useState([]);
   var [filesToSend, setFilesToSend] = useState([]);
-  // const { CreateProduct } = useActions();
+  const { CreateProduct } = useActions();
   const disp = useDispatch();
 
   const [model, setModel] = useState<IProductCreate>({
@@ -117,7 +117,7 @@ const ProductCreate = () => {
         images: imagesBytes_toSend,
       };
 
-      // CreateProduct(newProduct);
+      CreateProduct(newProduct);
       console.log("new product: ", newProduct);
     });
   };
@@ -143,12 +143,28 @@ const ProductCreate = () => {
       </option>
     );
   });
-  // const { loading, message } = useTypedSelector(
-  //   (store) => store.ProductsReducer
-  // );
-  // if (message == "Successful request create product") {
-  //   return <Navigate to={"/admin/products"} />;
-  // }
+  const { loading, message } = useTypedSelector(
+    (store) => store.ProductsReducer
+  );
+  if (message == "Successful request create product") {
+    return <Navigate to={"/admin/products"} />;
+  }
+  const productType = [
+    { name: "Swimwear" },
+    { name: "Tops" },
+    { name: "T-shirts" },
+    { name: "Dresses" },
+    { name: "Skirts" },
+    { name: "Shorts" },
+    { name: "Jeans" },
+    { name: "Trousers" },
+    { name: "Cardigans" },
+    { name: "Jackets" },
+    { name: "Hoodies" },
+    { name: "Sweaters" },
+    { name: "Shoes" },
+  ];
+
   return (
     <>
       <ToastContainer draggable={false} autoClose={3000} />
@@ -241,15 +257,29 @@ const ProductCreate = () => {
                         <div>
                           <label className="label">Color</label>
 
-                          <Field
-                            className="input"
-                            type="text"
-                            name="color"
-                            required
+                          <select
+                            onChange={onChangeSelectHandler}
                             id="color"
-                            placeholder="Enter the product color"
-                          />
-
+                            name="color"
+                            className="input"
+                          >
+                            <option selected>Select color</option>
+                            <option value="size">Red</option>
+                            <option value="size">Orange</option>
+                            <option value="size">Yellow</option>
+                            <option value="size">Green</option>
+                            <option value="size">Blue</option>
+                            <option value="size">Navy</option>
+                            <option value="size">Beige</option>
+                            <option value="size">Gray</option>
+                            <option value="size">Purple</option>
+                            <option value="size">Pink</option>
+                            <option value="size">Turquoise</option>
+                            <option value="size">Brown</option>
+                            <option value="size">White</option>
+                            <option value="size">Black</option>
+                            <option value="size">Multicolor</option>
+                          </select>
                           {errors.color && touched.color ? (
                             <div style={{ color: "red" }}>{errors.color}</div>
                           ) : null}
@@ -257,15 +287,21 @@ const ProductCreate = () => {
                         <div>
                           <label className="label">Size</label>
 
-                          <Field
-                            as="input"
-                            type="text"
-                            name="size"
+                          <select
+                            onChange={onChangeSelectHandler}
                             id="size"
+                            name="size"
                             className="input"
-                            placeholder="Enter the product size( XS, S, M, L, XL)"
-                            required
-                          />
+                          >
+                            <option selected>Select size</option>
+                            <option value="size">XS</option>
+                            <option value="size">S</option>
+                            <option value="size">M</option>
+                            <option value="size">L</option>
+                            <option value="size">XL</option>
+                            <option value="size">XXL</option>
+                            <option value="size">XXXL</option>
+                          </select>
                           {errors.size && touched.size ? (
                             <div style={{ color: "red" }}>{errors.size}</div>
                           ) : null}
@@ -273,14 +309,24 @@ const ProductCreate = () => {
                         <div>
                           <label className="label">Brand</label>
 
-                          <Field
-                            className="input"
-                            type="text"
-                            name="brand"
-                            required
+                          <select
+                            onChange={onChangeSelectHandler}
                             id="brand"
-                            placeholder="Enter the product brand"
-                          />
+                            name="brand"
+                            className="input"
+                          >
+                            <option selected>Select brand</option>
+                            <option value="size">Topshop</option>
+                            <option value="size">Nike</option>
+                            <option value="size">Adidas</option>
+                            <option value="size">Bershka</option>
+                            <option value="size">Pull & Bear</option>
+                            <option value="size">Stradivarius</option>
+                            <option value="size">Monki</option>
+                            <option value="size">The North Face</option>
+                            <option value="size">Converse</option>
+                            <option value="size">River Island</option>
+                          </select>
 
                           {errors.brand && touched.brand ? (
                             <div style={{ color: "red" }}>{errors.brand}</div>
@@ -375,7 +421,7 @@ const ProductCreate = () => {
                           type="submit"
                           className="womenbtn buttons"
                           disabled={!(isValid && dirty)}
-                        // onClick={() => navigator("/admin/products")}
+                          // onClick={() => navigator("/admin/products")}
                         >
                           Save
                         </button>

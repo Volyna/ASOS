@@ -3,12 +3,7 @@ import ListUsers from "./components/admin/pages/list/ListUsers";
 import SingleUser from "./components/admin/pages/single/SingleUser";
 import New from "./components/admin/pages/new/New";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import {
-  categoryInputs,
-  orderInputs,
-  productInputs,
-  userInputs,
-} from "./components/admin/formSource";
+import { orderInputs } from "./components/admin/formSource";
 import "./components/admin/style/dark.scss";
 import { useContext, useEffect, useLayoutEffect } from "react";
 import { DarkModeContext } from "./components/admin/context/darkModeContext";
@@ -18,7 +13,6 @@ import RegisterPage from "./components/auth/register";
 import DefaultLayout from "./components/containers/default";
 import AdminLayout from "./components/containers/admin/AdminLayout";
 import CategoryCreatePage from "./components/admin/components/categories/create/CategoryCreatePage";
-// import CategoryEditPage from "./components/admin/components/categories/edit/CategoryEditPage";
 import FAQs from "./components/Pages/FAQs/FAQs";
 
 import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
@@ -54,8 +48,8 @@ import ListOrders from "./components/admin/pages/list/ListOrders";
 import CategoryCreate from "./components/admin/components/categories/create/CategoryCreatePage";
 import ProductCreate from "./components/admin/components/products/create/ProductCreatePage";
 import UserCreatePage from "./components/admin/components/user/create/UserCreatePage";
+import CategoryEdit from "./components/admin/components/categories/edit/CategoryEditPage";
 
-// import ProductCreatePage from "./components/admin/components/products/create/ProductCreatePage";
 // import ProductEditPage from "./components/admin/components/products/edit/ProductEditPage";
 
 function App() {
@@ -88,7 +82,7 @@ function App() {
             </Route>
             <Route path="categories">
               <Route index element={<ListCategories />} />
-              <Route path=":categoryId" element={<Single />} />
+              <Route path=":id" element={<CategoryEdit />} />
               <Route path="new" element={<CategoryCreate />} />
             </Route>
 
