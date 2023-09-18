@@ -6,13 +6,10 @@ import { Dispatch, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IProductItem } from "../products/types";
 import axios from "axios";
-import {
-  ProductActionTypes,
-  ProductsActions,
-} from "../../../../store/reducers/ProductReducer/types";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { removeProduct } from "../../../../services/api-products-service";
+import { ProductActionTypes, ProductsActions } from "../../../../store/reducers/ProductReducer/types";
 
 const DatatableProducts = () => {
   const navigate = useNavigate();

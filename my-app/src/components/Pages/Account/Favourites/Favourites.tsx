@@ -14,8 +14,8 @@ import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
 import { useEffect } from "react";
-import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../Man and Woman Page/types";
-import { IItemProduct } from "../../../../store/reducers/likeReducer/type";
+import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../ManAndWomanPage/types";
+import { IItemProduct } from "../../../../store/reducers/LikeReducer/type";
 import { group } from "console";
 
 const Favourites = () => {

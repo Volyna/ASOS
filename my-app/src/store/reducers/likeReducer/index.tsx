@@ -1,5 +1,6 @@
 import { LikeActionTypes, LikeActions, LikeState } from "./type";
 
+
 const initialState: LikeState = {
     loader: false,
     likesProducts: []

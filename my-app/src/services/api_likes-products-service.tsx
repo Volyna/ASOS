@@ -1,4 +1,4 @@
-import { IAddLikeProductOrRemove, IGetLikesProducts } from "../components/Pages/Man and Woman Page/types";
+import { IAddLikeProductOrRemove, IGetLikesProducts } from "../components/Pages/ManAndWomanPage/types";
 import http from "./http_common";
 
 export async function addLikeProduct(model: IAddLikeProductOrRemove) {

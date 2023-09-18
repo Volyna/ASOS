@@ -4,7 +4,7 @@ import CategoryReducer from "./CategoryReducer";
 import { categoryReducer } from "./CategoryReducer/categoryReducer";
 import BasketReducer from "./BasketReducer";
 import { IsLoadingReducer } from "./isLoadingReducer";
-import LikeReducer from "./likeReducer";
+import LikeReducer from "./LikeReducer";
 import ProductsReducer from "./ProductReducer";
 export const rootReducer = combineReducers({
   UserReducer,

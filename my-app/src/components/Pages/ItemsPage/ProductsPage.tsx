@@ -16,6 +16,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 //core
 import "primereact/resources/primereact.min.css";
+import { IAddLikeProductOrRemove } from "../ManAndWomanPage/types";
 
 
 const ProductsPage = () => {
@@ -29,6 +30,9 @@ const ProductsPage = () => {
   const { loadingProductMan, productsMan } = useTypedSelector(
     (store) => store.ProductsReducer
   );
+  const { user } = useTypedSelector(
+    (store) => store.UserReducer
+  );
 
   useEffect(() => {
     GetAllProductMan();
@@ -39,12 +43,18 @@ const ProductsPage = () => {
   }
   const SwitchLike = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, idProduct: number) => {
     var nameClass = (e.target as Element).className;
+    const initDataLike: IAddLikeProductOrRemove = {
+      idProduct: idProduct,
+      idUser: user.id
+    }
+
     if (nameClass == "favourites") {
       (e.target as Element).className = "likeImage";
-      AddProductLike(idProduct);
+
+      AddProductLike(initDataLike);
     } else {
       (e.target as Element).className = "favourites";
-      DeleteProductLike(idProduct);
+      DeleteProductLike(initDataLike);
     }
     console.log("nameClass: ", nameClass);
   }
@@ -133,7 +143,7 @@ const ProductsPage = () => {
 
   const colorsTemplate = (option: any) => {
     return (<div style={{ display: "flex", alignItems: "center" }}>
-      <span className="colorEllipse" style={{backgroundColor:option.name}}></span>
+      <span className="colorEllipse" style={{ backgroundColor: option.name }}></span>
       <div>{option.name}</div>
     </div>);
   };
