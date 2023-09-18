@@ -10,7 +10,7 @@ import Navbar from "../../navbar/Navbar";
 import { showCategory } from "../../../../../store/actions/Categories/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store/reducers/rootReducer";
-import { CreateProduct } from "../../../../../store/actions/productActions";
+import { CreateProduct } from "../../../../../store/actions/ProductActions";
 import { CreateProductSchema } from "../../../validation/ProductCreateValidationSchema";
 import { useActions } from "../../../../../hooks/useActions";
 
@@ -421,7 +421,7 @@ const ProductCreate = () => {
                           type="submit"
                           className="womenbtn buttons"
                           disabled={!(isValid && dirty)}
-                          // onClick={() => navigator("/admin/products")}
+                        // onClick={() => navigator("/admin/products")}
                         >
                           Save
                         </button>

@@ -1,9 +1,8 @@
 export interface LikeState {
-    likesProductsId: Array<number>;
     likesProducts: Array<IItemProduct>;
     loader: boolean;
 }
-interface IItemProduct {
+export interface IItemProduct {
     id: number;
     name: string,
     price: number,
@@ -35,7 +34,6 @@ interface SuccessfulRequestGetProductLikesAction {
 }
 interface SuccessfulRequestAddLikeAction {
     type: LikeActionTypes.SUCCESSFUL_REQUEST_ADD_LIKE;
-    payload: number;
 }
 interface SuccessfulRequestDeleteLikeAction {
     type: LikeActionTypes.SUCCESSFUL_REQUEST_DELETE_LIKE;

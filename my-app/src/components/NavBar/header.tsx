@@ -3,7 +3,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "react-toastify/dist/ReactToastify.css";
 import "./header.css";
 import Logo from "../../images/Logo.svg";
-import user from "../../images/user.svg";
+import user from "../../images/user.png";
 import selectedUser from "../../images/selected-user.svg";
 import cart from "../../images/cart.svg";
 import like from "../../images/like.svg";
@@ -85,11 +85,11 @@ const Header = () => {
             <div className="userIcons">
               {isAuth == true ? (
                 <Link className="noneM" to="/account/contact-information">
-                  <img src={user} alt="" />
+                  <img className="IconUser" src={user} alt="" />
                 </Link>
               ) : (
                 <Link to="/login">
-                  <img src={user} alt="" />
+                  <img className="IconUser" src={user} alt="" />
                 </Link>
               )}
 

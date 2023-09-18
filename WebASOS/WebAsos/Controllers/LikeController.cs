@@ -26,7 +26,7 @@ namespace WebAsos.Controllers
             var result = await _likeProductService.AddLikeAsync(model);
             return result;
         }
-        [HttpDelete("removeLike")]
+        [HttpPost("removeLike")]
         public async Task<ServiceResponse> RemoveLikeAsync([FromBody] RemoveLikeProductViewModel model)
         {
             var result = await _likeProductService.RemoveLikeAsync(model);

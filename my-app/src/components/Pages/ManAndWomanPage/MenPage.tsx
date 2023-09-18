@@ -1,13 +1,22 @@
-import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 import Footer from "../../Footer/FooterV";
-import Header_full from "../../Header_full/Header_full";
-import "./ProductsPage.css";
-import like from "../../../images/like.svg";
-import { Link } from "react-router-dom";
+import "./style.css";
+import "./types";
+import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Header_full from "../../Header_full/Header_full";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Loader from "../../loader";
+import like from "../../../images/like.svg";
+import men1 from "../../../images/men1.png";
+import men2 from "../../../images/men2.png";
+import men3 from "../../../images/men3.png";
+import menItem1 from "../../../images/menItem1.png";
+import menItem2 from "../../../images/menItem2.png";
+import menItem3 from "../../../images/menItem3.png";
+import menItem4 from "../../../images/menItem4.png";
+import menItem5 from "../../../images/menItem5.png";
 import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 //left panel Cat
 import { PanelMenu } from "primereact/panelmenu";
@@ -16,10 +25,14 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 //core
 import "primereact/resources/primereact.min.css";
-import { IAddLikeProductOrRemove } from "../ManAndWomanPage/types";
-
-
-const ProductsPage = () => {
+import { IAddLikeProductOrRemove } from "./types";
+import { isMobile } from "react-device-detect";
+import FooterM from "../../Footer/mFooter";
+import Menu from "../../NavBar/menu";
+import Header from "../../NavBar/header";
+const Men = () => {
+  const navigate = useNavigate();
+  const location = useLocation().pathname;
   const [selectedFilterBy, setSelectedFilterBy] = useState([]);
   const [selectedFilterSize, setSelectedFilterSize] = useState(null);
   const [selectedFilterColor, setSelectedFilterColor] = useState(null);
@@ -37,6 +50,65 @@ const ProductsPage = () => {
   useEffect(() => {
     GetAllProductMan();
   }, []);
+  if (isMobile) {
+    return (
+      <>
+        <Header />
+        <p className="titlePage">man</p>
+        <div className="MainblockM">
+          <img src={men1} />
+        </div>
+        <div className="msection">
+          <p className="headerm">must have for this summer!</p>
+          <p className="textm">linen section! best choice for everyday comfort</p>
+          <button className="mbutton" onClick={() => navigate("/men")}>open</button>
+        </div>
+        <div className="MainblockM">
+          <img src={men2} />
+        </div>
+        <div className="blue msection" style={{ border: "none" }}>
+          <p className="headerm">summer sale</p>
+          <p className="textm">up to 50% off!</p>
+          <button className="mbutton" style={{ border: "2px solid white" }} onClick={() => navigate("/men")}>show more</button>
+        </div>
+        <div className="Mainblock">
+          <img src={men3} />
+          <button className="mbutton">show collection</button>
+        </div>
+
+        <div className="msection">
+          <p className="headerm">don't miss out on the latest news</p>
+          <p className="msmall">Subscribe to our newsletter and be aware of everything, get access to exclusive promotions and even more!</p>
+          <input className="minput" placeholder="Enter your e-mail" />
+          <button className="mbutton subs" onClick={() => navigate("/men")}>Subscribe</button>
+        </div>
+
+        <div className="ItemsM">
+          <div className="item">
+            <img src={menItem1} />
+            <p className="itemName">Shorts</p>
+          </div>
+
+          <div className="item">
+            <img src={menItem2} />
+            <p className="itemName">Cardigans & jackets</p>
+          </div>
+
+          <div className="item">
+            <img src={menItem3} />
+            <p className="itemName">Linen shorts</p>
+          </div>
+
+          <div className="item">
+            <img src={menItem4} />
+            <p className="itemName">T-shirt</p>
+          </div>
+        </div>
+
+        <FooterM />
+      </>
+    );
+  }
 
   const MoreCountProdcutShow = () => {
     setCountShowProduct(countShowProduct + 20);
@@ -62,20 +134,22 @@ const ProductsPage = () => {
 
     return (
 
-      <li key={item.id} className="ulITem">
-        <div className="oneItemProduct">
-          <div className="likeProductItem">
-            <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
+      <li key={item.id} >
+        <div className="">
+          <div className="oneItemProduct">
+            <div className="likeProductItem">
+              <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
+            </div>
+            <div key={item.mainImage} className="imageProductItem"> <img
+              width={272}
+              height={402}
+              src={`data:image/png;base64,${item.mainImage}`}
+              alt=""
+            /></div>
+            <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
+            <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
+            <div className="colorProductItem"><span className="red">red</span></div>
           </div>
-          <div key={item.mainImage} className="imageProductItem"> <img
-            width={272}
-            height={402}
-            src={`data:image/png;base64,${item.mainImage}`}
-            alt=""
-          /></div>
-          <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
-          <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
-          <div className="colorProductItem"><span className="red">red</span></div>
         </div>
       </li>
 
@@ -112,6 +186,18 @@ const ProductsPage = () => {
     { name: "Shoes" },
   ];
   const dataFilterColor = [
+    { name: "Topshop" },
+    { name: "Nike" },
+    { name: "Adidas" },
+    { name: "Breshka" },
+    { name: "Pull & Bear" },
+    { name: "Stradivalius" },
+    { name: "Monki" },
+    { name: "The North Face" },
+    { name: "Converse" },
+    { name: "River Island" },
+  ];
+  const dataFilterBand = [
     { name: "Red" },
     { name: "Orange" },
     { name: "Yellow" },
@@ -128,22 +214,10 @@ const ProductsPage = () => {
     { name: "black" },
     { name: "Multicolor" },
   ];
-  const dataFilterBand = [
-    { name: "Topshop" },
-    { name: "Nike" },
-    { name: "Adidas" },
-    { name: "Breshka" },
-    { name: "Pull & Bear" },
-    { name: "Stradivalius" },
-    { name: "Monki" },
-    { name: "The North Face" },
-    { name: "Converse" },
-    { name: "River Island" },
-  ];
 
   const colorsTemplate = (option: any) => {
     return (<div style={{ display: "flex", alignItems: "center" }}>
-      <span className="colorEllipse" style={{ backgroundColor: option.name }}></span>
+      <span className="colorEllipse"></span>
       <div>{option.name}</div>
     </div>);
   };
@@ -515,7 +589,7 @@ const ProductsPage = () => {
                 </div>
               </div>
               <div className="itemsProducts">
-                <div className="row rowItemsProducts">
+                <div className="rowItemsProducts">
                   {loadingProductMan == true ? <div className="basketLoader">
                     <div className="spinner-border" role="status"></div>
                   </div> : productsMan.length == 0 ? null : (<ul>{dataProduct}</ul>)}
@@ -537,8 +611,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
-function showProducts(payload: any): any {
-  throw new Error("Function not implemented.");
-}
-
+export default Men;
