@@ -18,7 +18,6 @@ import woman from "../../../images/woman.png";
 import Footer from "../../Footer/FooterV";
 import FooterM from "../../Footer/mFooter";
 import { Link, useNavigate } from "react-router-dom";
-import Men from "../ManAndWomanPage/MenPage";
 import { isMobile } from "react-device-detect"
 import { useEffect } from "react";
 import { useActions } from "../../../hooks/useActions";

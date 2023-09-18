@@ -1,8 +1,8 @@
 import { Dispatch } from "react";
 import { LikeActionTypes, LikeActions } from "../../reducers/LikeReducer/type";
 import { toast } from "react-toastify";
-import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../../components/Pages/ManAndWomanPage/types";
 import { addLikeProduct, getLikesProducts, removeLikeProduct } from "../../../services/api_likes-products-service";
+import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../../components/Pages/ManAndWomanPage/types";
 
 export const AddProductLike = (model: IAddLikeProductOrRemove) => {
     return async (dispatch: Dispatch<LikeActions>) => {
