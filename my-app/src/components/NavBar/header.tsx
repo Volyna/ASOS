@@ -22,7 +22,9 @@ const Header = () => {
       <>
         <div className="mainblockM">
           <div className="leftbox">
-            <img src={HeaderLogo} />
+            <Link to='/'>
+              <img src={HeaderLogo} />
+            </Link>
           </div>
 
           <div className="rightbox">

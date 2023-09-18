@@ -25,11 +25,7 @@ const ModalDelete: React.FC<Props> = ({ id, title, text, deleteFunc }) => {
 
   return (
     <>
-      <button
-        onClick={() => showModal()}
-        type="button"
-        className="ml-2 text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
+      <button onClick={() => showModal()} type="button" className="delete">
         Delete
       </button>
       <Transition.Root show={open} as={Fragment}>
