@@ -148,7 +148,14 @@ const Men = () => {
             /></div>
             <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
             <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
-            <div className="colorProductItem"><span className="red">red</span></div>
+            <div className="colorProductItem">
+
+              {item.color.length > 3 ?
+                item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
+                : null}
+              {item.color.length > 3 ? "+" + item.color.length : null}
+
+            </div>
           </div>
         </div>
       </li>
@@ -526,7 +533,7 @@ const Men = () => {
               </div>
               <div className="FilterProductInfo">
                 <div className="row filterProductRow">
-                  <div className="col-10">
+                  <div className="col-8">
                     <div className="FilterProduct">
                       <div className="FilterProductSortBy prodcutFlex">
                         <p>sort by</p>
@@ -576,13 +583,13 @@ const Men = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-2">
+                  <div className="col-1">
                     <div className="productCountPage">
                       <div className="prodcuttotaPage">
                         <p>5|2 </p>
                       </div>
                       <div className="prodcuttotalItems">
-                        <p> {productsMan.length} items</p>
+                        <p>{productsMan.length} items</p>
                       </div>
                     </div>
                   </div>
