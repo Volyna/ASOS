@@ -27,13 +27,22 @@ namespace WebAsos.Repositories.LikesProducts
                 var product = await _context.Products.Where(p => p.Id == model.idProduct).FirstOrDefaultAsync();
                 if (product != null)
                 {
-                    LikeEntity likeEntity = new LikeEntity();
-                    likeEntity.Name = "Like";
-                    likeEntity.userID = model.idUser;
-                    likeEntity.productLikeId = product.Id;
-                    var result = await _context.LikesProducts.AddAsync(likeEntity);
-                    await _context.SaveChangesAsync();
-                    return IdentityResult.Success;
+                    var ifLikeExist = await _context.LikesProducts.Where(l => l.productLikeId == product.Id).FirstOrDefaultAsync();
+                    if (ifLikeExist == null)
+                    {
+                        LikeEntity likeEntity = new LikeEntity();
+                        likeEntity.Name = "Like";
+                        likeEntity.userID = model.idUser;
+                        likeEntity.productLikeId = product.Id;
+                        var result = await _context.LikesProducts.AddAsync(likeEntity);
+                        await _context.SaveChangesAsync();
+                        return IdentityResult.Success;
+                    }
+                    else
+                    {
+                        return IdentityResult.Success;
+                    }
+                   
                 }
                 else
                 {
@@ -59,6 +68,18 @@ namespace WebAsos.Repositories.LikesProducts
             }
         }
 
+        public async Task<List<LikeEntity>> GetAllLikesUser(int idUser)
+        {
+            try
+            {
+                return await _context.LikesProducts.Where(l => l.userID == idUser).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<List<LikesProductsResponseDTO>> GetAllProductsLikesAsync(List<LikeEntity> model)
         {
             try
@@ -75,6 +96,9 @@ namespace WebAsos.Repositories.LikesProducts
                         productLikeTemp.Price = product.Price;
                         productLikeTemp.Discount = product.Discount;
                         productLikeTemp.Description = product.Description;
+                        var TempIsOnBasket = await _context.Basket.Where(b => b.ProductId == product.Id && b.UserIdOrder == item.userID).FirstOrDefaultAsync();
+                        productLikeTemp.IsOnBasket = TempIsOnBasket != null ? true : false;
+
                         //productLikeTemp.Color = await _context.Products.Where()
                         //productLikeTemp.Size = await _context.Products.Where()
                         productLikeTemp.Brand = product.Brand;

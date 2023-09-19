@@ -17,6 +17,18 @@ const BasketReducer = (
         isBasketLoading: true,
       };
     }
+    case BasketActionTypes.SUCCED_REMOVE_FROM_LIKE_BASKET: {
+      return {
+        ...state,
+        isBasketLoading: false,
+      };
+    }
+    case BasketActionTypes.CREATE_BASKET: {
+      return {
+        ...state,
+        isBasketLoading: true,
+      };
+    }
     case BasketActionTypes.SUCCEED_REQUEST_GET_BASKETS: {
       return {
         ...state,

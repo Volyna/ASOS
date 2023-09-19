@@ -12,6 +12,7 @@ namespace WebAsos.Interfaces.LikesproductInterfaces
         public Task<IdentityResult> AddLikeAsync(AddLikeProductViewModel model);
         public Task<List<LikeEntity>> GetAllLikesAsync(GetAllLikesProductsViewModel model);
         public Task<List<LikesProductsResponseDTO>> GetAllProductsLikesAsync(List<LikeEntity> model);
+        public Task<List<LikeEntity>> GetAllLikesUser(int idUser);
     }
 }
 

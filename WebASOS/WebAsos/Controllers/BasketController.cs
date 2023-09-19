@@ -29,7 +29,7 @@ namespace WebAsos.Controllers
             var result = await _basketService.UpdateAsync(model);
             return result;
         }
-        [HttpDelete("delete")]
+        [HttpPost("delete")]
         public async Task<ServiceResponse> DeleteBasketAsync([FromBody] DeleteBasketDTO model)
         {
             var result = await _basketService.DeleteAsync(model);

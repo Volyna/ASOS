@@ -137,11 +137,11 @@ namespace WebAsos.Controllers
             return Ok(new { IsFavorite = isFavorite });
         }
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         [Route("getProdcutsMan")]
-        public async Task<ServiceResponse> GetProdcutsManAsync()
+        public async Task<ServiceResponse> GetProdcutsManAsync([FromBody] int idUser)
         {
-            var result = await _productService.GetAllProductsMenAsync();
+            var result = await _productService.GetAllProductsMenAsync(idUser);
             return result;
 
         }

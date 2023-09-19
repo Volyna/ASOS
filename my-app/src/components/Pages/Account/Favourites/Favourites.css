@@ -37,9 +37,15 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 300;
-    line-height: 16px;
+    line-height: 20px;
+    background-color: #FFFF;
     /* 80% */
     text-transform: uppercase;
+}
+
+.favouritesContent .basketBtnFavourite :hover {
+    background-color: var(--yellow, #FFC818);
+    ;
 }
 
 
@@ -85,4 +91,40 @@
 .favouritesContent .likesLi {
     display: flex;
     justify-content: center;
+}
+
+.favouritesContent .likesLi p {
+    padding: 0;
+    margin: 0;
+}
+
+.favouritesContent .imageFavourite {
+    margin-bottom: 10px;
+}
+
+.favouritesContent .nameFavourite {
+    margin-bottom: 10px;
+}
+
+.favouritesContent .priceFavourite {
+    margin-bottom: 10px;
+}
+
+.favouritesContent .priceFavouriteCol {
+    display: flex;
+    justify-content: space-between;
+}
+
+.favouritesContent .likeFavourite {
+    cursor: pointer;
+}
+
+.favouritesContent .favouritesContentIsEmpty {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-flow: column;
+    align-items: center;
+    border-top: 1px solid #9A9A9A;
+    padding-top: 50px;
 }

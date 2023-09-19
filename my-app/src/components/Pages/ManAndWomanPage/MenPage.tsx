@@ -48,7 +48,7 @@ const Men = () => {
   );
 
   useEffect(() => {
-    GetAllProductMan();
+    GetAllProductMan(user.id);
   }, []);
   if (isMobile) {
     return (
@@ -138,7 +138,7 @@ const Men = () => {
         <div className="">
           <div className="oneItemProduct">
             <div className="likeProductItem">
-              <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
+              <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
             </div>
             <div key={item.mainImage} className="imageProductItem"> <img
               width={272}
