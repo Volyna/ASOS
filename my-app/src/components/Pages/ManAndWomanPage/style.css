@@ -151,10 +151,35 @@
     text-align: start;
 }
 
+.content .itemsProducts li {
+    border: 1px solid #9A9A9A;
+    float: left;
+    margin-left: -1px;
+    padding-bottom: 30px;
+    margin-top: -1px;
+    border-right: none;
+    padding-top: 30px;
+}
+
+.content .itemsProducts ul li:nth-child(-n+5) {
+    padding-top: 0px;
+}
+
 .content .contentProductTypeInfo ul {
     text-align: start;
     padding: 0;
     margin-bottom: 10px;
+}
+
+.content .itemsProducts li {
+    min-width: 291.3px;
+    margin-right: 1px;
+}
+
+.content .itemsProducts ul {
+    list-style: none;
+    overflow: hidden;
+    padding: 0;
 }
 
 .content .contentProductTypeInfo ul span {
@@ -274,18 +299,14 @@
 }
 
 .oneItemProduct {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    gap: 10px;
+
     position: relative;
 }
 
 .content .likeProductItem {
     position: absolute;
     right: 10px;
-    top: 43px;
+    top: 13px;
 }
 
 .content .likeProductItem img {
@@ -294,18 +315,6 @@
 
 .content .productColWindth {
     width: 272px;
-}
-
-.content .itemsProducts {
-    overflow: hidden;
-}
-
-.content .rowItemsProducts {
-    justify-content: space-between;
-}
-
-.content .favourites :hover {
-    background-color: #FFC818;
 }
 
 .content .contentProductTypeInfo ul a :hover {
@@ -380,18 +389,15 @@
     text-align: center;
 }
 
-.content .rowItemsProducts ul {
+.content .itemsProducts ul {
     flex-wrap: wrap;
     display: flex;
     list-style: none;
     padding: 0;
-    margin-top: -30px;
+
 
 }
 
-.content .imageProductItem {
-    padding-top: 30px;
-}
 
 .content .imageProductItem img {
     cursor: pointer;
@@ -405,16 +411,6 @@
     background-color: black;
 }
 
-.content .rowItemsProducts .ulITem {
-    display: flex;
-    justify-content: start;
-    flex: 1 0 272px;
-    height: auto;
-    border-right: 2px solid #9A9A9A;
-    border-bottom: 2px solid #9A9A9A;
-    padding-bottom: 30px;
-    padding-left: 13px;
-}
 
 .content .likeImage {
     background-image: url("../../../images/liked.png");

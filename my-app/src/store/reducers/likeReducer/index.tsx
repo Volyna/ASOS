@@ -1,7 +1,7 @@
 import { LikeActionTypes, LikeActions, LikeState } from "./type";
 
+
 const initialState: LikeState = {
-    likesProductsId: [],
     loader: false,
     likesProducts: []
 };
@@ -30,14 +30,13 @@ const LikeReducer = (state = initialState, action: LikeActions): LikeState => {
             return {
                 ...state,
                 loader: false,
-                likesProductsId: state.likesProductsId.filter(item => action.payload !== item),
+                likesProducts: state.likesProducts.filter(p => p.id !== action.payload)
             };
         }
         case LikeActionTypes.SUCCESSFUL_REQUEST_ADD_LIKE: {
             return {
                 ...state,
                 loader: false,
-                likesProductsId: [...state.likesProductsId, action.payload]
             };
         }
         default: {

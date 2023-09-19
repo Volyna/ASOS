@@ -12,7 +12,7 @@ import { useTypedSelector } from "../../../../../hooks/useTypedSelector";
 import { ToastContainer } from "react-toastify";
 import Sidebar from "../../sidebar/Sidebar";
 import Navbar from "../../navbar/Navbar";
-import { GetCategoriesById } from "../../../../../store/actions/categoryActions";
+import { GetCategoriesById } from "../../../../../store/actions/CategoryActions";
 import Loader from "../../../../loader";
 
 const CategoryEdit = () => {
@@ -111,7 +111,7 @@ const CategoryEdit = () => {
                           type="submit"
                           className="womenbtn buttons"
                           disabled={!(isValid && dirty)}
-                          // onClick={() => navigator("/admin/categories")}
+                        // onClick={() => navigator("/admin/categories")}
                         >
                           Edit
                         </button>

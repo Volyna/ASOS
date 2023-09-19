@@ -1,4 +1,4 @@
-import { IUser } from "../../actions/userActions/types";
+import { IUser } from "../../actions/UserActions/types";
 import { UserActionTypes, UserActions, UserState } from "./types";
 const userTemp: IUser = {
   id: 0,

@@ -19,8 +19,8 @@ import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
 import Header from "./components/NavBar/header";
 import MainPage from "./components/Pages/Main/MainPage";
 import Register from "./components/auth/register";
-import Men from "./components/Pages/Man and Woman Page/MenPage";
-import Women from "./components/Pages/Man and Woman Page/WomanPage";
+import Men from "./components/Pages/ManAndWomanPage/MenPage";
+import Women from "./components/Pages/ManAndWomanPage/WomanPage";
 
 import ContactInf from "./components/Pages/Account/ContactInf/ContactInf";
 

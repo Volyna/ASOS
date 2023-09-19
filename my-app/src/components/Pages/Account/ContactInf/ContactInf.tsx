@@ -144,7 +144,7 @@ const ContactInf = () => {
               </Link>
 
               <Link to="/basket">
-                <img src={cart} alt="basket" className="noneM " />
+                <img src={cart} alt="basket" className="noneM basketLogo" />
               </Link>
               <Link to="/account/favourites">
                 <img src={like} className="favourites" alt="favourites" />

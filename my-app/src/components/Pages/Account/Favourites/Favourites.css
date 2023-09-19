@@ -1,146 +1,88 @@
-.container {
-    margin-top: 100px;
+.favouritesContent .favouriteCard {
+    position: relative;
 }
 
-.favourites-cards {
-    margin-top: 100px;
-    display: flex;
-    border-bottom: 1px solid rgba(154, 154, 154, 1);
+.favouritesContent .likeFavourite {
+    position: absolute;
+    right: 9px;
+    top: 13px;
 }
 
-.favourite-card {
-    border-right: 1px solid rgba(154, 154, 154, 1);
-}
+.favouritesContent .nameFavourite p {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
 
-.ellipse {
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    margin: 0 5px 30px 0;
-}
-
-.card1 {
-    background: rgba(29, 29, 29, 1);
-}
-
-.card2_1 {
-    background-color: rgba(144, 155, 117, 1);
-}
-
-.card2_2 {
-    border: 1px solid rgba(154, 154, 154, 1);
-    background-color: rgba(255, 255, 255, 1)
-}
-
-.card3_1 {
-    background-color: rgba(41, 55, 85, 1)
-}
-
-.card3_2 {
-    background-color: rgba(174, 191, 214, 1)
-}
-
-.card4_1 {
-    background-color: rgba(15, 15, 17, 1);
-}
-
-.card4_2 {
-    background-color: rgba(216, 182, 232, 1);
-}
-
-.card4_3 {
-    background-color: rgba(210, 239, 213, 1);
-}
-
-.card5_1 {
-    background-color: rgba(17, 15, 13, 1);
-}
-
-.card5_2 {
-    background-color: rgba(216, 182, 232, 1);
-}
-
-.card5_3 {
-    background-color: rgba(31, 66, 32, 1);
-}
-
-.card6_1 {
-    background-color: rgba(75, 77, 63, 1);
-}
-
-.card6_2 {
-    background-color: rgba(66, 66, 66, 1);
-}
-
-.card6_3 {
-    background-color: rgba(165, 182, 142, 1);
-}
-
-.more_color {
-    font-family: 'Roboto Flex', sans-serif;
-    font-weight: 300;
+    /* desktop_main */
+    font-family: Roboto Flex;
     font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
     line-height: 18px;
-    color: black;
+    /* 100% */
 }
 
-.btn-favourites {
+.favouritesContent .basketBtnFavourite {
+    display: flex;
+    justify-content: center;
+}
+
+.favouritesContent .btnFavourite {
     width: 214px;
     height: 50px;
-    margin-bottom: 31px;
+    border-radius: 30px;
+    border: 2px solid var(--black, #353535);
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+    /* 80% */
+    text-transform: uppercase;
 }
 
-.liked {
-    display: flex;
-    justify-content: right;
-    margin-right: 25px;
-}
 
-.add_to_basket {
+
+.favouritesContent .loaderLike {
     display: flex;
     justify-content: center;
+    padding-top: 150px;
+    padding-bottom: 150px;
 }
 
-.favourites-title {
-    margin-bottom: 10px;
+.favouritesContent ul {
+    list-style: none;
+    overflow: hidden;
+    padding: 0;
 }
 
-.card-old-price {
-    color: black;
-    margin-bottom: 10px;
+.favouritesContent li {
+    border: 1px solid #9A9A9A;
+    float: left;
+    margin-left: -1px;
+    padding-bottom: 30px;
+    margin-top: -1px;
+    border-right: none;
+    padding-top: 30px;
+
 }
 
-.card-new-price {
-    font-family: 'Roboto Flex', sans-serif;
-    margin-bottom: 10px;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 18px;
-    color: red;
+.favouritesContent ul li:nth-child(-n+6) {
+    padding-top: 0px;
 }
 
-.favourite-image {
+
+
+/* .favouritesContent .favouriteBorder{
+    border: 1px solid #9A9A9A;
+    float: left;
+    margin-left: -1px;
+    margin-top: -1px;
+    border-right: none;
+} */
+
+.favouritesContent .likesLi {
     display: flex;
     justify-content: center;
-}
-
-.favourite-price {
-    font-family: 'Roboto Flex', sans-serif;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 18px;
-    color: black;
-    margin-bottom: 10px;
-}
-
-.colors {
-    display: flex;
-}
-
-.distance {
-    margin-left: 18px;
-}
-
-.without-border {
-    border: none;
 }

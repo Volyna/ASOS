@@ -6,7 +6,7 @@ import {
   IRegisterUser,
 } from "../components/auth/types";
 import { IRecoveryPasswordUpdate } from "../components/Pages/types";
-import { ServiceResponse } from "../store/actions/userActions/types";
+import { ServiceResponse } from "../store/actions/UserActions/types";
 import http from "./http_common";
 
 export async function isUserExist(email: IBeforeLoginUser) {
