@@ -9,7 +9,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { removeProduct } from "../../../../services/api-products-service";
-import { ProductActionTypes, ProductsActions } from "../../../../store/reducers/ProductReducer/types";
+import {
+  ProductActionTypes,
+  ProductsActions,
+} from "../../../../store/reducers/ProductReducer/types";
 
 const DatatableProducts = () => {
   const navigate = useNavigate();
@@ -120,7 +123,7 @@ const DatatableProducts = () => {
         return (
           <div className="cellAction">
             <Link to="/admin/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
+              <div className="viewButton">Edit</div>
             </Link>
             <div
               className="deleteButton"

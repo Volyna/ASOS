@@ -81,7 +81,7 @@ export const productColumns = [
     width: 100,
   },
   {
-    field: "quatity",
+    field: "quantity",
     headerName: "Quantity",
     width: 100,
   },

@@ -55,7 +55,6 @@ const CategoryReducer = (
         categoryForUpdate: {
           id: 0,
           name: "",
-          // imageBase64: "",
         },
         message: action.payload.message,
       };
