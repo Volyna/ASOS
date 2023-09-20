@@ -1,6 +1,6 @@
 import {
   IProductCreate,
-  IProductEditPost,
+  IProductEdit,
 } from "../components/admin/components/products/types";
 import http from "./http_common";
 
@@ -32,7 +32,7 @@ export async function createProduct(model: IProductCreate) {
 }
 export async function getByIdProduct(id: number) {
   const data = await http
-    .get(`http://localhost:5056/api/Product/GetProductById?id=${id}`)
+    .get(`/api/Product/GetProductById?id=${id}`)
     .then((response) => {
       return {
         response,
@@ -43,10 +43,11 @@ export async function getByIdProduct(id: number) {
     });
   return data;
 }
-export async function updateProduct(id: number, model: IProductEditPost) {
+
+export async function updateProduct(model: IProductEdit) {
   const data = await http
-    .put("/api/Product/UpdateProduct/" + id, model, {
-      headers: { "Content-Type": "multipart/form-data" },
+    .put("/api/Product/UpdateProduct", model, {
+      headers: { "Content-Type": "application/json" },
     })
     .then((response) => {
       return {

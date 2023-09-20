@@ -19,7 +19,6 @@ export async function getCategories() {
 }
 
 export async function getCategoriesById(id: number) {
-  // const categoryId = 3;
   const data = await http
     .get(`http://localhost:5056/api/Category/getById?id=${id}`)
     .then((response) => {

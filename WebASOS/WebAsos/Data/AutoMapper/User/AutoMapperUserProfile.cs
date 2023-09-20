@@ -22,7 +22,10 @@ namespace WebAsos.Data.AutoMapper.User
             CreateMap<CategoryEntity, CategoryViewModel>();
             CreateMap<ProductEntity, ProductViewModel>();
 
+
             CreateMap<ProductEntity, CreateProductDTO>();
+
+            CreateMap<UpdateProductDTO, ProductEntity>();
             CreateMap<CreateProductDTO, ProductEntity>();
 
             CreateMap<ProductImageViewModel, ProductImageEntity>();

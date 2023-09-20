@@ -14,9 +14,8 @@ import {
 } from "../../reducers/ProductReducer/types";
 import {
   IProductCreate,
-  IProductEditPost,
+  IProductEdit,
 } from "../../../components/admin/components/products/types";
-
 
 export const GetAllProductMan = () => {
   return async (dispatch: Dispatch<ProductsActions>) => {
@@ -135,12 +134,12 @@ export const GetByIdProduct = (id: number) => {
     }
   };
 };
-export const UpdateProduct = (id: number, model: IProductEditPost) => {
+export const UpdateProduct = (model: IProductEdit) => {
   return async (dispatch: Dispatch<ProductsActions>) => {
     try {
       dispatch({ type: ProductActionTypes.START_REQUEST_PRODUCT });
       console.log("UpdateProduct before");
-      const data = await updateProduct(id, model);
+      const data = await updateProduct(model);
       console.log("UpdateProduct after: ", data.response);
       const { response } = data;
       dispatch({

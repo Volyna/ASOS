@@ -132,7 +132,10 @@ const DatatableProducts = () => {
       renderCell: (params: any) => {
         return (
           <div className="cellAction">
-            <Link to="/admin/users/test" style={{ textDecoration: "none" }}>
+            <Link
+              to={`/admin/products/${params.row.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="viewButton">Edit</div>
             </Link>
             <div
