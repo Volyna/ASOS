@@ -1,5 +1,10 @@
 export interface IProductCreate {
     name: string,
+    productType: string,
+    material: string,
+    pattern: string,
+    fit: string,
+    shop: string,
     price: number,
     discount: number,
     description: string,

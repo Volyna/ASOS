@@ -3,6 +3,11 @@
     public class CreateProductDTO
     {
         public string Name { get; set; }
+        public string ProductType { get; set; }
+        public string Material { get; set; }
+        public string Pattern { get; set; }
+        public string Fit { get; set; }
+        public string Shop { get; set; }
         public float Price { get; set; }
         public int Discount { get; set; }
         public string Description { get; set; }
