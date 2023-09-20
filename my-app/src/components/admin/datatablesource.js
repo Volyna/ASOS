@@ -71,6 +71,31 @@ export const productColumns = [
     width: 100,
   },
   {
+    field: "productType",
+    headerName: "Product type",
+    width: 100,
+  },
+  {
+    field: "material",
+    headerName: "Material",
+    width: 100,
+  },
+  {
+    field: "pattern",
+    headerName: "Pattern",
+    width: 100,
+  },
+  {
+    field: "fit",
+    headerName: "Fit",
+    width: 100,
+  },
+  {
+    field: "shop",
+    headerName: "Shop",
+    width: 100,
+  },
+  {
     field: "size",
     headerName: "Size",
     width: 100,
