@@ -20,6 +20,9 @@ const ProductCreate = () => {
   var [filesToSend, setFilesToSend] = useState([]);
   const { CreateProduct } = useActions();
   const disp = useDispatch();
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
 
   const [model, setModel] = useState<IProductCreate>({
     name: "",
@@ -81,8 +84,32 @@ const ProductCreate = () => {
     }
   };
 
-  const onChangeSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+  const onChangeCategorySelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setModel({ ...model, [e.target.name]: e.target.value });
+  };
+  const onChangeSizeSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "size") {
+      setSelectedSize(value);
+    }
+  };
+  const onChangeBrandSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "brand") {
+      setSelectedBrand(value);
+    }
+  };
+  const onChangeColorSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "color") {
+      setSelectedColor(value);
+    }
   };
 
   const promises = filesToSend.map((img: any) => {
@@ -99,7 +126,7 @@ const ProductCreate = () => {
     });
   });
 
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     Promise.all(promises).then((imagesBytes_toSend) => {
@@ -116,9 +143,8 @@ const ProductCreate = () => {
         categoryId: Number(data.get("categoryId")),
         images: imagesBytes_toSend,
       };
-
-      CreateProduct(newProduct);
       console.log("new product: ", newProduct);
+      CreateProduct(newProduct);
     });
   };
 
@@ -258,27 +284,30 @@ const ProductCreate = () => {
                           <label className="label">Color</label>
 
                           <select
-                            onChange={onChangeSelectHandler}
+                            onChange={onChangeColorSelectHandler}
                             id="color"
                             name="color"
                             className="input"
+                            value={selectedColor}
                           >
-                            <option selected>Select color</option>
-                            <option value="size">Red</option>
-                            <option value="size">Orange</option>
-                            <option value="size">Yellow</option>
-                            <option value="size">Green</option>
-                            <option value="size">Blue</option>
-                            <option value="size">Navy</option>
-                            <option value="size">Beige</option>
-                            <option value="size">Gray</option>
-                            <option value="size">Purple</option>
-                            <option value="size">Pink</option>
-                            <option value="size">Turquoise</option>
-                            <option value="size">Brown</option>
-                            <option value="size">White</option>
-                            <option value="size">Black</option>
-                            <option value="size">Multicolor</option>
+                            <option value="" disabled>
+                              Select color
+                            </option>
+                            <option value="Red">Red</option>
+                            <option value="Orange">Orange</option>
+                            <option value="Yellow">Yellow</option>
+                            <option value="Green">Green</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Navy">Navy</option>
+                            <option value="Beige">Beige</option>
+                            <option value="Gray">Gray</option>
+                            <option value="Purple">Purple</option>
+                            <option value="Pink">Pink</option>
+                            <option value="Turquoise">Turquoise</option>
+                            <option value="Brown">Brown</option>
+                            <option value="White">White</option>
+                            <option value="Black">Black</option>
+                            <option value="Multicolor">Multicolor</option>
                           </select>
                           {errors.color && touched.color ? (
                             <div style={{ color: "red" }}>{errors.color}</div>
@@ -288,19 +317,22 @@ const ProductCreate = () => {
                           <label className="label">Size</label>
 
                           <select
-                            onChange={onChangeSelectHandler}
+                            onChange={onChangeSizeSelectHandler}
                             id="size"
                             name="size"
                             className="input"
+                            value={selectedSize}
                           >
-                            <option selected>Select size</option>
-                            <option value="size">XS</option>
-                            <option value="size">S</option>
-                            <option value="size">M</option>
-                            <option value="size">L</option>
-                            <option value="size">XL</option>
-                            <option value="size">XXL</option>
-                            <option value="size">XXXL</option>
+                            <option value="" disabled>
+                              Select size
+                            </option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="XXXL">XXXL</option>
                           </select>
                           {errors.size && touched.size ? (
                             <div style={{ color: "red" }}>{errors.size}</div>
@@ -310,22 +342,27 @@ const ProductCreate = () => {
                           <label className="label">Brand</label>
 
                           <select
-                            onChange={onChangeSelectHandler}
+                            onChange={onChangeBrandSelectHandler}
                             id="brand"
                             name="brand"
                             className="input"
+                            value={selectedBrand}
                           >
-                            <option selected>Select brand</option>
-                            <option value="size">Topshop</option>
-                            <option value="size">Nike</option>
-                            <option value="size">Adidas</option>
-                            <option value="size">Bershka</option>
-                            <option value="size">Pull & Bear</option>
-                            <option value="size">Stradivarius</option>
-                            <option value="size">Monki</option>
-                            <option value="size">The North Face</option>
-                            <option value="size">Converse</option>
-                            <option value="size">River Island</option>
+                            <option value="" disabled>
+                              Select brand
+                            </option>
+                            <option value="Topshop">Topshop</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Adidas">Adidas</option>
+                            <option value="Bershka">Bershka</option>
+                            <option value="Pull & Bear">Pull & Bear</option>
+                            <option value="Stradivarius">Stradivarius</option>
+                            <option value="Monki">Monki</option>
+                            <option value="The North Face">
+                              The North Face
+                            </option>
+                            <option value="Converse">Converse</option>
+                            <option value="River Island">River Island</option>
                           </select>
 
                           {errors.brand && touched.brand ? (
@@ -353,7 +390,7 @@ const ProductCreate = () => {
                         <div>
                           <label className="label">Select category</label>
                           <select
-                            onChange={onChangeSelectHandler}
+                            onChange={onChangeCategorySelectHandler}
                             id="categoryId"
                             name="categoryId"
                             className="input"
@@ -420,8 +457,8 @@ const ProductCreate = () => {
                         <button
                           type="submit"
                           className="womenbtn buttons"
-                          disabled={!(isValid && dirty)}
-                        // onClick={() => navigator("/admin/products")}
+                          // disabled={!(isValid && dirty)}
+                          // onClick={() => navigator("/admin/products")}
                         >
                           Save
                         </button>

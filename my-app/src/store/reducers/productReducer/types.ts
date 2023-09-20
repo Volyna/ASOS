@@ -1,3 +1,4 @@
+import { colors } from '@mui/material';
 import { type } from "os";
 
 export interface ProductsState {
@@ -19,6 +20,8 @@ interface IItemProduct {
   price: number,
   discount: number,
   description: string,
+  // color: string,
+  // size: string,
   color: Array<string>,
   size: Array<string>,
   brand: string,
