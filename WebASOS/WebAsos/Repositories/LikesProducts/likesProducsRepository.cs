@@ -34,7 +34,7 @@ namespace WebAsos.Repositories.LikesProducts
                         likeEntity.Name = "Like";
                         likeEntity.userID = model.idUser;
                         likeEntity.productLikeId = product.Id;
-                        var result = await _context.LikesProducts.AddAsync(likeEntity);
+                        await _context.LikesProducts.AddAsync(likeEntity);
                         await _context.SaveChangesAsync();
                         return IdentityResult.Success;
                     }

@@ -88,7 +88,7 @@ const Header = () => {
                   <img className="IconUser" src={user} alt="" />
                 </Link>
               ) : (
-                <Link to="/login">
+                <Link className="noneM" to="/login">
                   <img className="IconUser" src={user} alt="" />
                 </Link>
               )}

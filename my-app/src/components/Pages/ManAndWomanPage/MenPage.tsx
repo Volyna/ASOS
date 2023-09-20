@@ -120,15 +120,16 @@ const Men = () => {
       idUser: user.id
     }
 
+    console.log("nameClass: ", nameClass);
+    console.log("initDataLike: ", initDataLike);
     if (nameClass == "favourites") {
       (e.target as Element).className = "likeImage";
-
+      console.log("like");
       AddProductLike(initDataLike);
     } else {
       (e.target as Element).className = "favourites";
       DeleteProductLike(initDataLike);
     }
-    console.log("nameClass: ", nameClass);
   }
   const dataProduct = productsMan.slice(0, countShowProduct).map((item) => {
 
@@ -150,9 +151,8 @@ const Men = () => {
             <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
             <div className="colorProductItem">
 
-              {item.color.length > 3 ?
-                item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
-                : null}
+              {item.color.length > 3 ? item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
+                : item.color.map(item => <span style={{ background: item }} className="circleProduct" />)}
               {item.color.length > 3 ? "+" + item.color.length : null}
 
             </div>
@@ -193,18 +193,6 @@ const Men = () => {
     { name: "Shoes" },
   ];
   const dataFilterColor = [
-    { name: "Topshop" },
-    { name: "Nike" },
-    { name: "Adidas" },
-    { name: "Breshka" },
-    { name: "Pull & Bear" },
-    { name: "Stradivalius" },
-    { name: "Monki" },
-    { name: "The North Face" },
-    { name: "Converse" },
-    { name: "River Island" },
-  ];
-  const dataFilterBand = [
     { name: "Red" },
     { name: "Orange" },
     { name: "Yellow" },
@@ -220,6 +208,18 @@ const Men = () => {
     { name: "White" },
     { name: "black" },
     { name: "Multicolor" },
+  ];
+  const dataFilterBand = [
+    { name: "Topshop" },
+    { name: "Nike" },
+    { name: "Adidas" },
+    { name: "Breshka" },
+    { name: "Pull & Bear" },
+    { name: "Stradivalius" },
+    { name: "Monki" },
+    { name: "The North Face" },
+    { name: "Converse" },
+    { name: "River Island" },
   ];
 
   const colorsTemplate = (option: any) => {

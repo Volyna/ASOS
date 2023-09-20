@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -141,7 +142,17 @@ namespace WebAsos.Controllers
         [Route("getProdcutsMan")]
         public async Task<ServiceResponse> GetProdcutsManAsync([FromBody] int idUser)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             var result = await _productService.GetAllProductsMenAsync(idUser);
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
             return result;
 
         }
