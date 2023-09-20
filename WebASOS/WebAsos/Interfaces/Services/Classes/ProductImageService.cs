@@ -1,4 +1,5 @@
 ﻿using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Formats.Webp;
 using WebAsos.Data.Entitties.Catalog;
 using WebAsos.Interfaces.Repository.Interfaces;
 using WebAsos.Interfaces.Services.Interfaces;
@@ -96,7 +97,7 @@ namespace WebAsos.Interfaces.Services.Classes
             {
                 if (imgName != null)
                 {
-                    var fileExp = ".jpg";
+                    var fileExp = ".webp";
                     var dir = Path.Combine(Directory.GetCurrentDirectory(), "images");
                     fileName = string.Format(@"{0}" + fileExp, Guid.NewGuid());
 
@@ -106,7 +107,7 @@ namespace WebAsos.Interfaces.Services.Classes
                     {
                         image.Mutate(x => x.Resize(new ResizeOptions { Size = new Size(250, 250), Mode = ResizeMode.Max }));
 
-                        var encoder = new JpegEncoder { Quality = quality };
+                        var encoder = new WebpEncoder { };
                         image.Save(Path.Combine(dir, fileName), encoder);
                     }
 

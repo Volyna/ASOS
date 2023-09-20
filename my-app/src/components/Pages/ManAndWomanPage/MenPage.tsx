@@ -48,7 +48,7 @@ const Men = () => {
   );
 
   useEffect(() => {
-    GetAllProductMan();
+    GetAllProductMan(user.id);
   }, []);
   if (isMobile) {
     return (
@@ -120,15 +120,16 @@ const Men = () => {
       idUser: user.id
     }
 
+    console.log("nameClass: ", nameClass);
+    console.log("initDataLike: ", initDataLike);
     if (nameClass == "favourites") {
       (e.target as Element).className = "likeImage";
-
+      console.log("like");
       AddProductLike(initDataLike);
     } else {
       (e.target as Element).className = "favourites";
       DeleteProductLike(initDataLike);
     }
-    console.log("nameClass: ", nameClass);
   }
   const dataProduct = productsMan.slice(0, countShowProduct).map((item) => {
 
@@ -138,7 +139,7 @@ const Men = () => {
         <div className="">
           <div className="oneItemProduct">
             <div className="likeProductItem">
-              <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
+              <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
             </div>
             <div key={item.mainImage} className="imageProductItem"> <img
               width={272}
@@ -148,7 +149,13 @@ const Men = () => {
             /></div>
             <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
             <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
-            <div className="colorProductItem"><span className="red">red</span></div>
+            <div className="colorProductItem">
+
+              {item.color.length > 3 ? item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
+                : item.color.map(item => <span style={{ background: item }} className="circleProduct" />)}
+              {item.color.length > 3 ? "+" + item.color.length : null}
+
+            </div>
           </div>
         </div>
       </li>
@@ -186,18 +193,6 @@ const Men = () => {
     { name: "Shoes" },
   ];
   const dataFilterColor = [
-    { name: "Topshop" },
-    { name: "Nike" },
-    { name: "Adidas" },
-    { name: "Breshka" },
-    { name: "Pull & Bear" },
-    { name: "Stradivalius" },
-    { name: "Monki" },
-    { name: "The North Face" },
-    { name: "Converse" },
-    { name: "River Island" },
-  ];
-  const dataFilterBand = [
     { name: "Red" },
     { name: "Orange" },
     { name: "Yellow" },
@@ -213,6 +208,18 @@ const Men = () => {
     { name: "White" },
     { name: "black" },
     { name: "Multicolor" },
+  ];
+  const dataFilterBand = [
+    { name: "Topshop" },
+    { name: "Nike" },
+    { name: "Adidas" },
+    { name: "Breshka" },
+    { name: "Pull & Bear" },
+    { name: "Stradivalius" },
+    { name: "Monki" },
+    { name: "The North Face" },
+    { name: "Converse" },
+    { name: "River Island" },
   ];
 
   const colorsTemplate = (option: any) => {
@@ -526,7 +533,7 @@ const Men = () => {
               </div>
               <div className="FilterProductInfo">
                 <div className="row filterProductRow">
-                  <div className="col-10">
+                  <div className="col-8">
                     <div className="FilterProduct">
                       <div className="FilterProductSortBy prodcutFlex">
                         <p>sort by</p>
@@ -576,13 +583,13 @@ const Men = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-2">
+                  <div className="col-1">
                     <div className="productCountPage">
                       <div className="prodcuttotaPage">
                         <p>5|2 </p>
                       </div>
                       <div className="prodcuttotalItems">
-                        <p> {productsMan.length} items</p>
+                        <p>{productsMan.length} items</p>
                       </div>
                     </div>
                   </div>

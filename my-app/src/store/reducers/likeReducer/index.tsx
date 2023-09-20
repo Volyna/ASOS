@@ -13,6 +13,13 @@ const LikeReducer = (state = initialState, action: LikeActions): LikeState => {
                 loader: true,
             };
         }
+        case LikeActionTypes.CHANGE_IS_ON_BASKET_LIKE: {
+            return {
+                ...state,
+                loader: false,
+                likesProducts: action.payload
+            };
+        }
         case LikeActionTypes.SUCCESSFUL_GET_PRODUCTS_LIKES: {
             return {
                 ...state,

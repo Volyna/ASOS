@@ -67,7 +67,8 @@ namespace WebAsos.Interfaces.Repository.Classes
             try
             {
                 var resultProdcut = await _dbContext.Products.Where(p => p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Color).ToListAsync();
-                return resultProdcut;
+                var newListWithoutDublicate = resultProdcut.Distinct().ToList();
+                return newListWithoutDublicate;
 
             }
             catch (Exception ex)

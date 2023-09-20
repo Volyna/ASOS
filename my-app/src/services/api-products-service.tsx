@@ -79,9 +79,9 @@ export async function removeProduct(id: number) {
   return data;
 }
 
-export async function getProductsMan() {
+export async function getProductsMan(iduser: number) {
   const data = await http
-    .get("/api/Product/getProdcutsMan")
+    .post("/api/Product/getProdcutsMan", iduser)
     .then((response) => {
       return {
         response,

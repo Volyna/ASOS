@@ -13,5 +13,6 @@ namespace WebAsos.interfaces.BasketInterfaces
         public Task<List<BasketEntity>> GetBasketsByIdAsync(int idUser);
         public Task<BasketEntity> GetBasketAsync(int idUser, int countProduct, int idProduct);
         public Task<List<BasketsResponseDTO>> GetProductsForBasket(List<BasketEntity> basketEntities);
+        public Task<bool> IfBasketExistBeforeCreateAsync(CreaterBasketDTO model);
     }
 }

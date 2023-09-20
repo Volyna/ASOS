@@ -29,6 +29,7 @@ namespace WebAsos.Models
         public bool IsInTheStock { get; set; }
         public string MainImage { get; set; }
         public int Category_id { get; set; }
+        public bool IsOnBasket { get; set; }
     }
 }
 

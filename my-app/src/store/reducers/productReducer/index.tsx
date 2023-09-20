@@ -22,6 +22,7 @@ const initialState: ProductsState = {
     mainImage: "",
     images: "",
     categoryId: 0,
+    isLikeUser: false
   },
 };
 const ProductsReducer = (
@@ -73,6 +74,7 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
+          isLikeUser: false
         },
         message: "",
         loading: true,
@@ -95,6 +97,7 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
+          isLikeUser: false
         },
         message: action.payload.message,
         loading: false,

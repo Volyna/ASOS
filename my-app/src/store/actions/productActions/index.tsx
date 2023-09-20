@@ -18,11 +18,11 @@ import {
 } from "../../../components/admin/components/products/types";
 
 
-export const GetAllProductMan = () => {
+export const GetAllProductMan = (iduser: number) => {
   return async (dispatch: Dispatch<ProductsActions>) => {
     try {
       dispatch({ type: ProductActionTypes.START_REQUEST_PRODUCT });
-      const data = await getProductsMan();
+      const data = await getProductsMan(iduser);
       const { response } = data;
       console.log("response", response);
       if (response.data.isSuccess == true) {

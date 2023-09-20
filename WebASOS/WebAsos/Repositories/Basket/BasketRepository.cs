@@ -49,7 +49,7 @@ namespace WebAsos.Repositories.Basket
         {
             try
             {
-                var result = await _context.Basket.Where(b => b.ProductId == idProduct && b.UserIdOrder == idUser && b.CountProducts == countProduct).FirstOrDefaultAsync();
+                var result = await _context.Basket.Where(b => b.ProductId == idProduct && b.UserIdOrder == idUser).FirstOrDefaultAsync();
                 return result;
             }
             catch (Exception)
@@ -106,7 +106,7 @@ namespace WebAsos.Repositories.Basket
                         newBasket.Description = product.Description;
                         newBasket.Brand = product.Brand;
                         newBasket.Color = product.Color;
-                        //newBasket.Size = await _context.Products.Where(p => p.Name.ToLower() == product.Name.ToLower() && p.Color.ToLower() == product.Color.ToLower()).Select(i => i.Size).ToListAsync();
+                        newBasket.Size = await _context.Products.Where(p => p.Name.ToLower() == product.Name.ToLower() && p.Color.ToLower() == product.Color.ToLower()).Select(i => i.Size).ToListAsync();
                         newBasket.Quantity = product.Quantity;
                         newBasket.IsInTheStock = product.IsInTheStock;
 
@@ -128,6 +128,26 @@ namespace WebAsos.Repositories.Basket
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public async Task<bool> IfBasketExistBeforeCreateAsync(CreaterBasketDTO model)
+        {
+            try
+            {
+                var basketResult = await _context.Basket.Where(b => b.ProductId == model.ProductId && b.UserIdOrder == model.UserIdOrder).FirstOrDefaultAsync(); 
+                if (basketResult != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
