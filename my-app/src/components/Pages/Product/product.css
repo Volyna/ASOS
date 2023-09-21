@@ -208,3 +208,9 @@
     display: block;
     width: 100%;
 }
+
+.prodLoad{
+    margin-top: 300px;
+    align-self: center;
+    margin-left: 50%;
+}

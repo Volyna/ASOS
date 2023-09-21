@@ -50,6 +50,7 @@ const ProductsReducer = (
       return {
         ...state,
         loadingProductMan: true,
+        loading: true
       };
     }
     case ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS: {
@@ -165,6 +166,7 @@ const ProductsReducer = (
       return {
         ...state,
         productCurrent: action.payload,
+        loading:false
       };
     }
 
