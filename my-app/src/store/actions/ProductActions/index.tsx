@@ -11,7 +11,7 @@ import {
 import {
   ProductActionTypes,
   ProductsActions,
-} from "../../reducers/productReducer/types";
+} from "../../reducers/ProductReducer/types";
 import {
   IProductCreate,
   IProductEditPost,

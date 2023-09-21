@@ -12,7 +12,7 @@ import { useTypedSelector } from "../../../../../hooks/useTypedSelector";
 import { ToastContainer } from "react-toastify";
 import Sidebar from "../../sidebar/Sidebar";
 import Navbar from "../../navbar/Navbar";
-import { GetCategoriesById } from "../../../../../store/actions/categoryActions";
+import { GetCategoriesById } from "../../../../../store/actions/CategoryActions";
 import Loader from "../../../../loader";
 
 const CategoryEdit = () => {

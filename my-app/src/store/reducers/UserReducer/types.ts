@@ -1,4 +1,4 @@
-import { IUser, ServiceResponse } from "../../actions/userActions/types";
+import { IUser, ServiceResponse } from "../../actions/UserActions/types";
 
 export interface UserState {
   email: string;

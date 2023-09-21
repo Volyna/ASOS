@@ -12,7 +12,7 @@ import { removeProduct } from "../../../../services/api-products-service";
 import {
   ProductActionTypes,
   ProductsActions,
-} from "../../../../store/reducers/productReducer/types";
+} from "../../../../store/reducers/ProductReducer/types";
 
 const DatatableProducts = () => {
   const navigate = useNavigate();

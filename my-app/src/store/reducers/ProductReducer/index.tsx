@@ -17,6 +17,7 @@ const initialState: ProductsState = {
     mainImage: "",
     images: "",
     categoryId: 0,
+    isLikeUser: false,
   },
   loadingProductMan: false,
   loadingProductWoman: false,
