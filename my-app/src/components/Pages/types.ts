@@ -9,4 +9,4 @@ export interface IRecoveryPasswordUpdate {
   confirmPassword:string,
   userId:string | null,
   token:string | null,
-  }
+  } 

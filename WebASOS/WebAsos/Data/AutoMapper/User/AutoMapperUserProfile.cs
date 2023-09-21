@@ -65,6 +65,9 @@ namespace WebAsos.Data.AutoMapper.User
 
             CreateMap<OrderWithUpdateProductsDTO, OrderEntity>();
             CreateMap<OrderEntity, OrderWithUpdateProductsDTO>();
+
+            CreateMap<UserEntity, AllUsersVM>();
+            CreateMap<AllUsersVM, UserEntity>();
         }
 	}
 }
