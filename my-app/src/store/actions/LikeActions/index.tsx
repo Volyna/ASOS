@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { LikeActionTypes, LikeActions } from "../../reducers/likeReducer/type";
+import { IItemProductLike, LikeActionTypes, LikeActions } from "../../reducers/LikeReducer/type";
 import { toast } from "react-toastify";
 import { addLikeProduct, getLikesProducts, removeLikeProduct } from "../../../services/api_likes-products-service";
 import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../../components/Pages/ManAndWomanPage/types";
@@ -80,5 +80,11 @@ export const GetProductLikes = (model: IGetLikesProducts) => {
             });
         }
 
+    }
+};
+export const ChangeIsOnBasketLikes = (model: IItemProductLike[]) => {
+    return async (dispatch: Dispatch<LikeActions>) => {
+
+        dispatch({ type: LikeActionTypes.CHANGE_IS_ON_BASKET_LIKE, payload: model });
     }
 };

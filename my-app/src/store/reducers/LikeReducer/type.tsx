@@ -1,8 +1,8 @@
 export interface LikeState {
-    likesProducts: Array<IItemProduct>;
+    likesProducts: Array<IItemProductLike>;
     loader: boolean;
 }
-export interface IItemProduct {
+export interface IItemProductLike {
     id: number;
     name: string,
     price: number,
@@ -14,7 +14,8 @@ export interface IItemProduct {
     quantity: number,
     isInTheStock: boolean,
     mainImage: string,
-    category_id: number
+    category_id: number,
+    isOnBasket: boolean
 }
 export enum LikeActionTypes {
     START_REQUESTS_LIKE = "START_REQUESTS_LIKE",
@@ -22,15 +23,20 @@ export enum LikeActionTypes {
     SUCCESSFUL_REQUEST_DELETE_LIKE = "SUCCESSFUL_REQUEST_DELETE_LIKE",
     SUCCESSFUL_GET_PRODUCTS_LIKES = "SUCCESSFUL_GET_PRODUCTS_LIKES",
     BAG_REQUEST_LIKE = "BAG_REQUEST_LIKE",
+    CHANGE_IS_ON_BASKET_LIKE = "CHANGE_IS_ON_BASKET_LIKE",
 }
 
 
 interface StartAction {
     type: LikeActionTypes.START_REQUESTS_LIKE;
 }
+interface ChangeIsOnBasketAction {
+    type: LikeActionTypes.CHANGE_IS_ON_BASKET_LIKE;
+    payload: IItemProductLike[]
+}
 interface SuccessfulRequestGetProductLikesAction {
     type: LikeActionTypes.SUCCESSFUL_GET_PRODUCTS_LIKES;
-    payload: Array<IItemProduct>;
+    payload: Array<IItemProductLike>;
 }
 interface SuccessfulRequestAddLikeAction {
     type: LikeActionTypes.SUCCESSFUL_REQUEST_ADD_LIKE;
@@ -44,4 +50,4 @@ interface BadrequestAction {
 }
 
 export type LikeActions =
-    StartAction | SuccessfulRequestAddLikeAction | BadrequestAction | SuccessfulRequestDeleteLikeAction | SuccessfulRequestGetProductLikesAction;
+    StartAction | SuccessfulRequestAddLikeAction | BadrequestAction | SuccessfulRequestDeleteLikeAction | SuccessfulRequestGetProductLikesAction | ChangeIsOnBasketAction;

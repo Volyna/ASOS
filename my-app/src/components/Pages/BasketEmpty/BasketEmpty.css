@@ -1,10 +1,12 @@
 .mainLink {
     margin-top: 30px;
 }
-.mainInformation p{
+
+.mainInformation p {
     margin-bottom: 0;
     padding-bottom: 0;
 }
+
 .focusCom {
     font-family: 'Roboto Flex', sans-serif;
     font-weight: 300;
@@ -16,129 +18,148 @@
 .total .discount {
     margin-bottom: 30px;
 }
+
 .total .favorite {
     margin-bottom: 46px;
 }
-.orderContent{
+
+.orderContent {
     display: flex;
 }
+
 .productName {
     color: var(--black, #353535);
-font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings: 'clig' off, 'liga' off;
 
-/* desktop_btn_bold */
-font-family: Roboto Flex;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-text-transform: uppercase;
-text-align: start;
-margin-bottom: 10px;
+    /* desktop_btn_bold */
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: start;
+    margin-bottom: 10px;
 }
-.btnBasketProduct{
+
+.btnBasketProduct {
     text-align: start;
     display: flex;
 }
-.minus{
+
+.minus {
     cursor: pointer;
     margin-right: 10px;
 }
-.plus{
+
+.plus {
     cursor: pointer;
     margin-left: 10px;
     /* text-align: start; */
 }
-.flexDisplay{
-display: flex;
+
+.flexDisplay {
+    display: flex;
 }
-.productInfo{
+
+.productInfo {
     margin-bottom: 10px;
     text-align: start;
     color: var(--black, #353535);
-font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings: 'clig' off, 'liga' off;
 
-/* desktop_details */
-font-family: Roboto Flex;
-font-size: 16px;
-font-style: normal;
-font-weight: 300;
-line-height: 16px; /* 100% */
+    /* desktop_details */
+    font-family: Roboto Flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+    /* 100% */
 }
-.productPriceDiscount{
+
+.productPriceDiscount {
     color: var(--red, #F05B53);
-font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings: 'clig' off, 'liga' off;
 
-/* desktop_sale */
-font-family: Roboto Flex;
-font-size: 16px;
-font-style: normal;
-font-weight: 300;
-line-height: 16px; /* 100% */
-text-decoration-line: strikethrough;
-text-decoration: line-through;
+    /* desktop_sale */
+    font-family: Roboto Flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+    /* 100% */
+    text-decoration-line: strikethrough;
+    text-decoration: line-through;
 }
-.size_select{
+
+.size_select {
     color: var(--black, #353535);
-font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings: 'clig' off, 'liga' off;
 
-/* desktop_details */
-font-family: Roboto Flex;
-font-size: 16px;
-font-style: normal;
-font-weight: 300;
-line-height: 16px; /* 100% */
+    /* desktop_details */
+    font-family: Roboto Flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+    /* 100% */
 }
-.productInfoColor{
+
+.productInfoColor {
     margin-right: -40px;
     margin-bottom: 0;
     padding-bottom: 0;
 }
-.productInfoSize{
+
+.productInfoSize {
     display: flex;
     justify-content: start;
     align-items: baseline;
 }
-.productInfoArrow{
+
+.productInfoArrow {
     margin-top: -2px;
     top: -2px;
 }
-.productPrice{
+
+.productPrice {
     margin-bottom: 62px;
     display: flex;
     /* width: 97%; */
-height: 16px;
-align-items: center;
-gap: 10px;
+    height: 16px;
+    align-items: center;
+    gap: 10px;
     text-align: start;
 }
-.lineBasket{
+
+.lineBasket {
     margin-top: 30px;
     margin-bottom: 30px;
     height: 1px;
     width: 97%;
     background-color: #353535;
 }
-.newPrice{
- 
-    display: flex;
-width: 272px;
-height: 16px;
-align-items: center;
-gap: 10px;
-    color: var(--red, #F05B53);
-font-feature-settings: 'clig' off, 'liga' off;
 
-/* desktop_btn_bold */
-font-family: Roboto Flex;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-text-transform: uppercase;
+.newPrice {
+
+    display: flex;
+    width: 272px;
+    height: 16px;
+    align-items: center;
+    gap: 10px;
+    color: var(--red, #F05B53);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_btn_bold */
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
 }
 
-.btnProductBasket{
+.btnProductBasket {
     display: flex;
     justify-content: center;
     align-items: baseline;
@@ -147,19 +168,22 @@ text-transform: uppercase;
     height: 33px;
     gap: 10px;
     border-radius: 30px;
-border: 2px solid var(--black, #353535);
+    border: 2px solid var(--black, #353535);
 
 
 }
-.plusImage:hover{
+
+.plusImage:hover {
     background-image: url("../../../images/plusAccept.png");
     background-repeat: no-repeat;
 }
-.minusImage:hover{
+
+.minusImage:hover {
     background-image: url("../../../images/minusAcept.png");
     background-repeat: no-repeat;
 }
-.size_select{
+
+.size_select {
     padding-left: 5px;
     box-shadow: none;
     width: 55px;
@@ -168,27 +192,29 @@ border: 2px solid var(--black, #353535);
     appearance: none;
     background-repeat: no-repeat;
     background-position: right 0.2rem top 50%;
-    background-size: 20px;   
+    background-size: 20px;
     outline: unset;
 }
 
-.removeProduct{
+.removeProduct {
     cursor: pointer;
 }
-.btnProductBasketCount{
+
+.btnProductBasketCount {
     background-color: #ffffff;
     color: var(--black, #353535);
-font-feature-settings: 'clig' off, 'liga' off;
-font-family: Roboto Flex;
-font-size: 20px;
-font-style: normal;
-font-weight: 300;
-line-height: 27px; /* 80% */
-text-transform: uppercase;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 27px;
+    /* 80% */
+    text-transform: uppercase;
 }
 
 .basket {
-    
+
     color: rgba(53, 53, 53, 1);
 }
 
@@ -203,22 +229,25 @@ text-transform: uppercase;
 
 
 .basket_text {
+    margin: 0;
     color: var(--black, #353535);
     text-align: center;
     font-feature-settings: 'clig' off, 'liga' off;
-    
+
     /* desktop_main */
     font-family: Roboto Flex;
     font-size: 18px;
     font-style: normal;
     font-weight: 300;
-    line-height: 18px; /* 100% */
+    line-height: 18px;
+    /* 100% */
 }
-.mainInformation .basketLoader{
+
+.mainInformation .basketLoader {
     font-size: 200px;
 }
-.btn_continue{
-    margin-top: 50px;
+
+.btn_continue {
     width: 332px;
     height: 50px;
     border-radius: 30px;
@@ -233,18 +262,21 @@ text-transform: uppercase;
     /* margin: 50px 0px 0px 110px; */
     text-transform: uppercase;
     transition: 0.5s;
-    
-}
-.btn_continue:hover{
-    transition: 0.5s;
-    color: rgba(255, 200, 24, 1);
-    background-color:rgba(53, 53, 53, 1);
 
 }
-.totalText{
+
+.btn_continue:hover {
+    transition: 0.5s;
+    color: rgba(255, 200, 24, 1);
+    background-color: rgba(53, 53, 53, 1);
+
+}
+
+.totalText {
     margin-bottom: 50px;
 }
-.textH1{
+
+.textH1 {
     text-transform: uppercase;
     font-family: 'Roboto Flex', sans-serif;
     font-weight: 600;
@@ -308,7 +340,7 @@ text-transform: uppercase;
     margin-bottom: 46px;
 }
 
-.btn-buy{
+.btn-buy {
     border-radius: 30px;
     border: 2px solid rgba(53, 53, 53, 1);
     text-align: center;
@@ -323,15 +355,15 @@ text-transform: uppercase;
     transition: 0.5s;
     margin-bottom: 100px;
     border-radius: 30px;
-background: var(--yellow, #FFC818);
+    background: var(--yellow, #FFC818);
     /* margin: 0 15px; */
 
 }
 
-.btn-buy:hover{
+.btn-buy:hover {
     transition: 0.5s;
     color: white;
-    background-color:rgba(53, 53, 53, 1);
+    background-color: rgba(53, 53, 53, 1);
 
 }
 
@@ -348,21 +380,28 @@ background: var(--yellow, #FFC818);
     text-transform: uppercase;
 
 }
-.standard{
+
+.standard {
     padding-bottom: 30px;
 }
+
 .pFaster {
     color: var(--black, #353535);
     font-feature-settings: 'clig' off, 'liga' off;
-    
+
     /* desktop_main */
     font-family: Roboto Flex;
     font-size: 18px;
     font-style: normal;
     font-weight: 300;
-    line-height: 18px; /* 100% */
+    line-height: 18px;
+    /* 100% */
 }
 
 .end {
     margin-bottom: 98px;
+}
+
+.mainInformation .content {
+    margin: 0;
 }

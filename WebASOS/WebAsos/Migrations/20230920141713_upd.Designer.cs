@@ -12,8 +12,8 @@ using WebAsos.Data;
 namespace WebAsos.Migrations
 {
     [DbContext(typeof(AppEFContext))]
-    [Migration("20230913183033_update tblProducts")]
-    partial class updatetblProducts
+    [Migration("20230920141713_upd")]
+    partial class upd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -285,6 +285,39 @@ namespace WebAsos.Migrations
                     b.ToTable("tblCreditCard");
                 });
 
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.LikeEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("productLikeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("userID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("productLikeId");
+
+                    b.HasIndex("userID");
+
+                    b.ToTable("tblLikeProduct");
+                });
+
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -380,8 +413,7 @@ namespace WebAsos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("CategoryId")
-                        .IsRequired()
+                    b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Color")
@@ -398,6 +430,10 @@ namespace WebAsos.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Fit")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -407,15 +443,31 @@ namespace WebAsos.Migrations
                     b.Property<bool>("IsInTheStock")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Material")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Pattern")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Shop")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Size")
                         .IsRequired()
@@ -689,6 +741,25 @@ namespace WebAsos.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.LikeEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.ProductEntity", "ProductLike")
+                        .WithMany()
+                        .HasForeignKey("productLikeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAsos.Data.Entitties.IdentityUser.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductLike");
 
                     b.Navigation("User");
                 });

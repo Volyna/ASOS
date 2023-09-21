@@ -35,7 +35,7 @@ const ProductsPage = () => {
   );
 
   useEffect(() => {
-    GetAllProductMan();
+    GetAllProductMan(user.id);
   }, []);
 
   const MoreCountProdcutShow = () => {

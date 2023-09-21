@@ -122,7 +122,7 @@
     width: 18%;
 }
 
-.minput{
+.minput {
     width: 100%;
     border-radius: 30px;
     padding-left: 20px;
@@ -134,7 +134,7 @@
     line-height: 16px;
 }
 
-.titlePage{
+.titlePage {
     font-family: Roboto Flex;
     font-size: 40px;
     font-style: normal;
@@ -264,10 +264,11 @@
 
 .content .productCountPage {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
 }
 
 .content .filterProductRow {
+    justify-content: space-between;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -306,7 +307,7 @@
 .content .likeProductItem {
     position: absolute;
     right: 10px;
-    top: 13px;
+    top: 23px;
 }
 
 .content .likeProductItem img {
@@ -345,6 +346,7 @@
 }
 
 .content .nameProductItem {
+    text-align: start;
     color: var(--black, #353535);
     font-feature-settings: 'clig' off, 'liga' off;
 
@@ -653,4 +655,53 @@
 
 .content .p-menuitem {
     display: flex;
+}
+
+.content .nameProductItem p {
+    margin: 0;
+    padding: 0;
+}
+
+.content .imageProductItem {
+    margin-bottom: 10px;
+}
+
+.content .nameProductItem {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content .priceProductItem {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content .colorProductItem {
+
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+}
+
+.content .colorProductItem .circleProduct {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    background: black;
+    border-radius: 30px;
+}
+
+.content .productCountPage p {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
 }

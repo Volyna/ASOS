@@ -9,6 +9,7 @@ using WebAsos.Interfaces.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using WebAsos.Constants.Product;
+using WebAsos.Interfaces.LikesproductInterfaces;
 
 namespace WebAsos.Interfaces.Services.Classes
 {
@@ -18,11 +19,13 @@ namespace WebAsos.Interfaces.Services.Classes
         private readonly ICategoryService _categoryService;
         private readonly IProductImageService _productImageService;
         private readonly IProductImageRepository _productImageRepository;
+        private readonly ILikeProductRepository _likeProductRepository;
 
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper, ICategoryService categoryService, IProductImageService productImageService, IProductImageRepository productImageRepository)
+        public ProductService(IProductRepository productRepository, IMapper mapper, ICategoryService categoryService, IProductImageService productImageService, IProductImageRepository productImageRepository, ILikeProductRepository likeProductRepository)
         {
+            _likeProductRepository = likeProductRepository;
             _productRepository = productRepository;
             _mapper = mapper;
             _categoryService = categoryService;
@@ -102,11 +105,12 @@ namespace WebAsos.Interfaces.Services.Classes
 
         }
 
-        public async Task<ServiceResponse> GetAllProductsMenAsync()
+        public async Task<ServiceResponse> GetAllProductsMenAsync(int idUser)
         {
             try
             {
                 var products = await _productRepository.GetAllProductsMan();
+                var userLikesProducts = await _likeProductRepository.GetAllLikesUser(idUser);
                 if (products != null)
                 {
                     List<ProductProductDTO> response = new List<ProductProductDTO>();
@@ -121,7 +125,8 @@ namespace WebAsos.Interfaces.Services.Classes
                         tempProductDTO.Color = await _productRepository.GetAllColorProducsByName(item.Name);
                         tempProductDTO.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
                         tempProductDTO.Brand = item.Brand;
-
+                        var ifLikeExist = userLikesProducts.Where(l => l.userID == idUser && l.productLikeId == item.Id).FirstOrDefault();
+                        tempProductDTO.isLikeUser = ifLikeExist != null ? true : false;
                         var mainImage = await _productImageService.GetMainImageByIdAsync(item.Id);
                         if (mainImage != null)
                             tempProductDTO.MainImage = _productImageService.GetBase64ByName(mainImage.Name);

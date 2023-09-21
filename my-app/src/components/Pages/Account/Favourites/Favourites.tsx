@@ -9,17 +9,19 @@ import like from "../../../../images/liked.png";
 import search from "../../../../images/search.svg";
 import Logo from "../../../../images/Logo.svg";
 import Menu from "../../../NavBar/menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
 import { useEffect } from "react";
 import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../ManAndWomanPage/types";
+import { IItemProductLike } from "../../../../store/reducers/LikeReducer/type";
 import { group } from "console";
+import { IBasketCreate, IBasketRemove } from "./types";
 
 const Favourites = () => {
-  const { LogOut, GetProductLikes, AddProductLike, DeleteProductLike } = useActions();
-
+  const { LogOut, GetProductLikes, DeleteProductLike, CreateBasket, RemoveBasketFromLike, ChangeIsOnBasketLikes } = useActions();
+  const navigate = useNavigate();
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
   const { loader, likesProducts } = useTypedSelector((store) => store.LikeReducer);
   const initLikeGetProduct: IGetLikesProducts = {
@@ -38,6 +40,24 @@ const Favourites = () => {
     DeleteProductLike(initDataLike);
 
   }
+  const AddTobasketProduct = (idProduct: number) => {
+    const initDataCreateBasket: IBasketCreate = {
+      countProducts: 1,
+      userIdOrder: user.id,
+      productId: idProduct
+    };
+    CreateBasket(initDataCreateBasket);
+    ChangeIsOnBasketLikes(likesProducts);
+  }
+  const RemoveFromBasketProduct = (idProduct: number) => {
+    const initDataCreateBasket: IBasketRemove = {
+      countProducts: 1,
+      userIdOrder: user.id,
+      productId: idProduct
+    };
+    RemoveBasketFromLike(initDataCreateBasket);
+    ChangeIsOnBasketLikes(likesProducts);
+  }
   var dataLikesProduct = likesProducts.map((item, index) => {
     return (
       <li className="col-2 " key={index}>
@@ -55,11 +75,15 @@ const Favourites = () => {
               /></div>
               <div className="nameFavourite"><p>{item.name}</p></div>
               <div className="row priceFavourite">
-                <div className="col-6"><div className="newPriceFavourite"><p>{item.price - item.discount} $</p></div></div>
-                <div className="col-6"><div className="oldPriceFavourite"><p>{item.price} $</p></div></div>
+                <div className="col-5 priceFavouriteCol"><div className="newPriceFavourite"><p>{item.price - item.discount} $</p></div>
+                  <div className="oldPriceFavourite"><p>{item.price} $</p></div></div>
+
               </div>
               <div className="colorsFavourite">  </div>
-              <div className="basketBtnFavourite"><button className="btn btnFavourite">Add to basket</button></div>
+              <div className="basketBtnFavourite"><button
+                onClick={(e) => { if (item.isOnBasket == true) { item.isOnBasket = false; RemoveFromBasketProduct(item.id); } else { item.isOnBasket = true; AddTobasketProduct(item.id) } }}
+                className="btnFavourite">
+                {item.isOnBasket == true ? "Remove from basket" : "Add to basket"}</button></div>
             </div>
           </div>
         </div>
@@ -146,9 +170,15 @@ const Favourites = () => {
         <div className="favouritesCards ">
           <div className="row">
 
-            {loader == true && likesProducts == null ? <div className="loaderLike">
+            {loader == true ? <div className="loaderLike">
               <div className="spinner-border" role="status"></div>
-            </div> : likesProducts.length == 0 || likesProducts == null ? "Zero" : <ul>{dataLikesProduct}</ul>}
+            </div> : likesProducts.length == 0 || likesProducts == null ? <div className="favouritesContentIsEmpty"> <p className="basket_text">No items added to favorites.</p>
+              <button
+                onClick={() => navigate("/")}
+                className="btn_continue"
+              >
+                continue shopping
+              </button></div> : <ul>{dataLikesProduct}</ul>}
           </div>
         </div>
       </div >

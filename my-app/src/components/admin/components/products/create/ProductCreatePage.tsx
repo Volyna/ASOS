@@ -22,10 +22,20 @@ const ProductCreate = () => {
   const disp = useDispatch();
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedProductType, setSelectedProductType] = useState("");
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+  const [selectedPattern, setSelectedPattern] = useState("");
+  const [selectedFit, setSelectedFit] = useState("");
+  const [selectedShop, setSelectedShop] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
 
   const [model, setModel] = useState<IProductCreate>({
     name: "",
+    productType: "",
+    material: "",
+    pattern: "",
+    fit: "",
+    shop: "",
     price: 0,
     discount: 0,
     description: "",
@@ -112,6 +122,53 @@ const ProductCreate = () => {
     }
   };
 
+  const onChangeProductTypeSelectHandler = (
+    e: ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "productType") {
+      setSelectedProductType(value);
+    }
+  };
+
+  const onChangeMaterialSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "material") {
+      setSelectedMaterial(value);
+    }
+  };
+
+  const onChangePatternSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "pattern") {
+      setSelectedPattern(value);
+    }
+  };
+
+  const onChangeFitSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "fit") {
+      setSelectedFit(value);
+    }
+  };
+
+  const onChangeShopSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setModel({ ...model, [name]: value });
+
+    if (name === "shop") {
+      setSelectedShop(value);
+    }
+  };
+
   const promises = filesToSend.map((img: any) => {
     return new Promise((resolve) => {
       let byte_img = toBase64(img);
@@ -132,6 +189,11 @@ const ProductCreate = () => {
     Promise.all(promises).then((imagesBytes_toSend) => {
       const newProduct: IProductCreate = {
         name: data.get("name")?.toString()!,
+        productType: data.get("productType")?.toString()!,
+        material: data.get("material")?.toString()!,
+        pattern: data.get("pattern")?.toString()!,
+        fit: data.get("fit")?.toString()!,
+        shop: data.get("shop")?.toString()!,
         price: Number(data.get("price")),
         discount: Number(data.get("discount")),
         description: data.get("description")?.toString()!,
@@ -175,21 +237,6 @@ const ProductCreate = () => {
   if (message == "Successful request create product") {
     return <Navigate to={"/admin/products"} />;
   }
-  const productType = [
-    { name: "Swimwear" },
-    { name: "Tops" },
-    { name: "T-shirts" },
-    { name: "Dresses" },
-    { name: "Skirts" },
-    { name: "Shorts" },
-    { name: "Jeans" },
-    { name: "Trousers" },
-    { name: "Cardigans" },
-    { name: "Jackets" },
-    { name: "Hoodies" },
-    { name: "Sweaters" },
-    { name: "Shoes" },
-  ];
 
   return (
     <>
@@ -312,6 +359,133 @@ const ProductCreate = () => {
                           {errors.color && touched.color ? (
                             <div style={{ color: "red" }}>{errors.color}</div>
                           ) : null}
+                        </div>
+                        <div>
+                          <label className="label">Product type</label>
+
+                          <select
+                            onChange={onChangeProductTypeSelectHandler}
+                            id="productType"
+                            name="productType"
+                            className="input"
+                            value={selectedProductType}
+                          >
+                            <option value="" disabled>
+                              Select product type
+                            </option>
+                            <option value="Swimwear">Swimwear</option>
+                            <option value="Tops">Tops</option>
+                            <option value="T-shirts">T-shirts</option>
+                            <option value="Dresses">Dresses</option>
+                            <option value="Skirts">Skirts</option>
+                            <option value="Shorts">Shorts</option>
+                            <option value="Jeans">Jeans</option>
+                            <option value="Trousers">Trousers</option>
+                            <option value="Cardigans">Cardigans</option>
+                            <option value="Jackets">Jackets</option>
+                            <option value="Hoodies">Hoodies</option>
+                            <option value="Sweaters">Sweaters</option>
+                            <option value="Shoes">Shoes</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="label">Material</label>
+
+                          <select
+                            onChange={onChangeMaterialSelectHandler}
+                            id="material"
+                            name="material"
+                            className="input"
+                            value={selectedMaterial}
+                          >
+                            <option value="" disabled>
+                              Select material
+                            </option>
+                            <option value="Cashmere">Cashmere</option>
+                            <option value="Chiffon">Chiffon</option>
+                            <option value="Cotton">Cotton</option>
+                            <option value="Denim">Denim</option>
+                            <option value="Fleece">Fleece</option>
+                            <option value="French Terry">French Terry</option>
+                            <option value="Jersey">Jersey</option>
+                            <option value="Lace">Lace</option>
+                            <option value="Linen">Linen</option>
+                            <option value="Muslin">Muslin</option>
+                            <option value="Satin">Satin</option>
+                            <option value="Silk">Silk</option>
+                            <option value="Wool">Wool</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="label">Pattern</label>
+
+                          <select
+                            onChange={onChangePatternSelectHandler}
+                            id="pattern"
+                            name="pattern"
+                            className="input"
+                            value={selectedPattern}
+                          >
+                            <option value="" disabled>
+                              Select pattern
+                            </option>
+                            <option value="No pattern">No pattern</option>
+                            <option value="Spotted">Spotted</option>
+                            <option value="Stripped">Stripped</option>
+                            <option value="Checked">Checked</option>
+                            <option value="Floral">Floral</option>
+                            <option value="Animalistic">Animalistic</option>
+                            <option value="Patterned">Patterned</option>
+                            <option value="Printed">Printed</option>
+                          </select>
+                          {errors.color && touched.color ? (
+                            <div style={{ color: "red" }}>{errors.color}</div>
+                          ) : null}
+                        </div>
+                        <div>
+                          <label className="label">Fit</label>
+
+                          <select
+                            onChange={onChangeFitSelectHandler}
+                            id="fit"
+                            name="fit"
+                            className="input"
+                            value={selectedFit}
+                          >
+                            <option value="" disabled>
+                              Select fit
+                            </option>
+                            <option value="Filled">Filled</option>
+                            <option value="Oversized">Oversized</option>
+                            <option value="Slim">Slim</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Wide">Wide</option>
+                          </select>
+                          {errors.color && touched.color ? (
+                            <div style={{ color: "red" }}>{errors.color}</div>
+                          ) : null}
+                        </div>
+                        <div>
+                          <label className="label">Shop</label>
+
+                          <select
+                            onChange={onChangeShopSelectHandler}
+                            id="shop"
+                            name="shop"
+                            className="input"
+                            value={selectedShop}
+                          >
+                            <option value="" disabled>
+                              Select shop
+                            </option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Shoes">Shoes</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Face & Body">Face & Body</option>
+                            <option value="Brands">Brands</option>
+                            <option value="Outlet">Outlet</option>
+                            <option value="Marketplace">Marketplace</option>
+                          </select>
                         </div>
                         <div>
                           <label className="label">Size</label>

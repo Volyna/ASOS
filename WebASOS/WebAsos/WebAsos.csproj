@@ -13,7 +13,6 @@
     <Content Remove="interfaces\JwtTokenService\**" />
     <EmbeddedResource Remove="interfaces\JwtTokenService\**" />
     <None Remove="interfaces\JwtTokenService\**" />
-    <None Remove="Migrations\" />
     <None Remove="Interfaces\LikesproductInterfaces\" />
     <None Remove="Repositories\LikesProducts\" />
   </ItemGroup>
@@ -66,7 +65,6 @@
     <Folder Include="Data\Validation\User\" />
     <Folder Include="Data\AutoMapper\User\" />
     <Folder Include="Repositories\User\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Interfaces\LikesproductInterfaces\" />
     <Folder Include="Repositories\LikesProducts\" />
   </ItemGroup>

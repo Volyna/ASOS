@@ -31,6 +31,7 @@ interface IItemProduct {
   images: any,
   mainImage: string,
   categoryId: number
+  isLikeUser: boolean
 }
 
 export enum ProductActionTypes {

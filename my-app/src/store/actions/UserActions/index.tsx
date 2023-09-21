@@ -7,7 +7,7 @@ import {
   IRegisterUser,
 } from "../../../components/auth/types";
 import { IRecoveryPasswordUpdate } from "../../../components/Pages/types";
-import { UserActionTypes, UserActions } from "../../reducers/userReducer/types";
+import { UserActionTypes, UserActions } from "../../reducers/UserReducer/types";
 import {
   isUserExist,
   login,

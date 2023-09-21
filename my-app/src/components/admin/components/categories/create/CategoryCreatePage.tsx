@@ -30,7 +30,7 @@ const CategoryCreate = () => {
     console.log("New category", newCategory);
     CreateCategory(newCategory);
   };
-  if (message == "Successful request") {
+  if (message == "Category created successfully") {
     navigator("/admin");
   }
   return (

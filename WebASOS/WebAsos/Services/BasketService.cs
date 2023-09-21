@@ -18,6 +18,11 @@ namespace WebAsos.Services
                 {
                     return new ServiceResponse { IsSuccess = false,Message="Some data is null !!!" };
                 }
+                var ifBasketExist = await _basketRepository.IfBasketExistBeforeCreateAsync(model);
+                if (ifBasketExist == true)
+                {
+                    return new ServiceResponse { IsSuccess = true, Message = "Basket Exist" };
+                }
                 BasketEntity newBasket = new BasketEntity();
                 newBasket.ProductId = model.ProductId;
                 newBasket.CountProducts = model.CountProducts;
@@ -133,5 +138,6 @@ namespace WebAsos.Services
                 return new ServiceResponse { IsSuccess = false, Message = "Some problem!!!" };
             }
         }
+        
     }
 }

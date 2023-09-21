@@ -427,6 +427,10 @@ namespace WebAsos.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Fit")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -436,15 +440,31 @@ namespace WebAsos.Migrations
                     b.Property<bool>("IsInTheStock")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Material")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Pattern")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Shop")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Size")
                         .IsRequired()
