@@ -45,3 +45,17 @@ export interface IRegisterUser {
     asosPartners:boolean;
     RecaptchaToken:string;
 }
+
+export interface IGetAllUsers{
+    id: number
+    email: string;
+    phone : string;
+    firstName : string;
+    lastName: string;
+    country: string;
+    state : string;
+    street: string;
+    zipCode : string;
+    city : string;
+    homePhone: string;
+}

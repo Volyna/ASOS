@@ -9,6 +9,7 @@ import {
 import { IRecoveryPasswordUpdate } from "../../../components/Pages/types";
 import { UserActionTypes, UserActions } from "../../reducers/UserReducer/types";
 import {
+  getAllUsers,
   isUserExist,
   login,
   loginByGoogle,
@@ -257,6 +258,29 @@ export const RecoveryPasswordUpdate = (model: IRecoveryPasswordUpdate) => {
       });
       toast.error("Error Notification !", {
         position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+};
+
+export const GetAllUsers = () => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      dispatch({ type: UserActionTypes.START_REQUESTS_USER });
+      const data = await getAllUsers();
+      const { response } = data;
+
+      dispatch({
+        type: UserActionTypes.LIST_USERS,
+        payload: response.data,
+      });
+    } catch (e) {
+      toast.error("Something get wrong...", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      dispatch({
+        type: UserActionTypes.BAG_REQUEST,
+        payload: "Unknown error",
       });
     }
   };

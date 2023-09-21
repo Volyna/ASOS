@@ -472,6 +472,26 @@ namespace WebAsos.Services
                 return new ServiceResponse { IsSuccess = false, Message = ex.Message.ToString() };
             }
         }
+        public async Task<ServiceResponse> GetAllUsersAsync()
+        {
+            var users = await _userRepository.GetAllUsersAsync();
+            var usersVM = new List<AllUsersVM>();
+            Console.WriteLine("Count Users = " + users.Count());
+            foreach (var user in users)
+            {
+                var userVM = _mapper.Map<AllUsersVM>(user);
+                usersVM.Add(userVM);
+            }
+
+            return new ServiceResponse
+            {
+                Message = "All users successfully loaded.",
+                IsSuccess = true,
+                Payload = usersVM
+            };
+
+        }
+
     }
 }
 

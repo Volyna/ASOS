@@ -22,6 +22,7 @@ const initialState: UserState = {
   isAuth: false,
   email: "",
   user: userTemp,
+  users: [],
 };
 
 const UserReducer = (state = initialState, action: UserActions): UserState => {
@@ -31,6 +32,7 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
         ...state,
         loading: true,
         message: null,
+        users: [],
       };
     }
     case UserActionTypes.SET_USER_EMAIL: {
@@ -71,6 +73,10 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
         ...state,
         loading: false,
       };
+    }
+
+    case UserActionTypes.LIST_USERS: {
+      return { ...state, loading: false, users: action.payload };
     }
     case UserActionTypes.BAG_REQUEST: {
       return {
