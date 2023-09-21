@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Dispatch, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../../../modal/delete";
-import { RemoveCategory } from "../../../../store/actions/CategoryActions";
+import { RemoveCategory } from "../../../../store/actions/categoryActions";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { ICategoryItem } from "../categories/types";

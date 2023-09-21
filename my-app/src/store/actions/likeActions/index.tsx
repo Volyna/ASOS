@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { LikeActionTypes, LikeActions } from "../../reducers/LikeReducer/type";
+import { LikeActionTypes, LikeActions } from "../../reducers/likeReducer/type";
 import { toast } from "react-toastify";
 import { addLikeProduct, getLikesProducts, removeLikeProduct } from "../../../services/api_likes-products-service";
 import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../../components/Pages/ManAndWomanPage/types";

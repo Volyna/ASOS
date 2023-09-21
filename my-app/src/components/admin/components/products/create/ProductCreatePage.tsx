@@ -10,7 +10,7 @@ import Navbar from "../../navbar/Navbar";
 import { showCategory } from "../../../../../store/actions/Categories/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store/reducers/rootReducer";
-import { CreateProduct } from "../../../../../store/actions/ProductActions";
+import { CreateProduct } from "../../../../../store/actions/productActions";
 import { CreateProductSchema } from "../../../validation/ProductCreateValidationSchema";
 import { useActions } from "../../../../../hooks/useActions";
 

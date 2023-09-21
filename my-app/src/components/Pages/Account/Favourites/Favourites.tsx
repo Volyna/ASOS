@@ -15,7 +15,6 @@ import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
 import { useEffect } from "react";
 import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../ManAndWomanPage/types";
-import { IItemProduct } from "../../../../store/reducers/LikeReducer/type";
 import { group } from "console";
 
 const Favourites = () => {
