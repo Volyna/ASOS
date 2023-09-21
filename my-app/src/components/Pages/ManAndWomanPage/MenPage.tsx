@@ -134,7 +134,7 @@ const Men = () => {
   const dataProduct = productsMan.slice(0, countShowProduct).map((item) => {
 
     return (
-
+      <Link to={location + "/" + item.id}>
       <li key={item.id} >
         <div className="">
           <div className="oneItemProduct">
@@ -159,6 +159,7 @@ const Men = () => {
           </div>
         </div>
       </li>
+      </Link>
 
     )
   })

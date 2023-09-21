@@ -25,6 +25,12 @@ namespace WebAsos.Interfaces.Repository.Classes
             .AsNoTracking().FirstOrDefaultAsync(e => e.Name == name);
         }
 
+        public async Task<ProductEntity> GetByIdAync(int id)
+        {
+            return await _dbContext.Products.Where(p => p.Id == id).FirstAsync();
+        }
+
+
         public ICollection<ProductEntity> GetProductsAsync()
         {
             return GetAll().Include(i => i.Category).ToList();

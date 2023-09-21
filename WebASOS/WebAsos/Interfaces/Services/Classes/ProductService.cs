@@ -191,12 +191,31 @@ namespace WebAsos.Interfaces.Services.Classes
         {
             var res = await _productRepository.GetByIdAsync(id);
             var item = _mapper.Map<ProductEntity, ProductViewModel>(res);
+            var img = await _productImageService.GetMainImageByParentId(item.Id);
+            item.Image = _productImageService.GetBase64ByName(img.Name);
+
+            ProductProductDTO result = new();
+            result.Id = item.Id;
+            result.Name = item.Name;
+            result.Price = item.Price;
+            result.Discount = item.Discount;
+            result.Description = item.Description;
+            result.Color = await _productRepository.GetAllColorProducsByName(item.Name);
+            result.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
+            result.Brand = item.Brand;
+
+            var mainImage = await _productImageService.GetMainImageByIdAsync(item.Id);
+            if (mainImage != null)
+                result.MainImage = _productImageService.GetBase64ByName(mainImage.Name);
+            result.Quantity = item.Quantity;
+            result.IsInTheStock = item.IsInTheStock;
+            result.IsInTheStock = item.IsInTheStock;
 
             return new ServiceResponse
             {
                 Message = "Get product",
                 IsSuccess = true,
-                Payload = item
+                Payload = result
             };
         }
 

@@ -70,10 +70,10 @@ namespace WebAsos.Controllers
             return Ok(model);
         }
 
-        [HttpPost("GetProductById")]
-        public async Task<IActionResult> GetProductByIdAsync([FromBody] FindByIdViewModel Id)
+        [HttpGet("GetProductById")]
+        public async Task<IActionResult> GetProductByIdAsync(int id)
         {
-            var res = await _productService.GetProductByIdAsync(Id.Id);
+            var res = await _productService.GetProductByIdAsync(id);
             if (res.IsSuccess)
             {
                 return Ok(res);
