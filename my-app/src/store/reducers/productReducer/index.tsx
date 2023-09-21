@@ -3,6 +3,21 @@ import { ProductActionTypes, ProductsActions, ProductsState } from "./types";
 const initialState: ProductsState = {
   productsMan: [],
   productsWoman: [],
+  productCurrent:{
+    id: 0,
+    name: "",
+    price: 0,
+    discount: 0,
+    description: "",
+    color: [],
+    size: [],
+    brand: "",
+    quantity: 0,
+    isInTheStock: false,
+    mainImage: "",
+    images: "",
+    categoryId: 0,
+  },
   loadingProductMan: false,
   loadingProductWoman: false,
   products: [],
@@ -142,6 +157,13 @@ const ProductsReducer = (
         },
       };
     }
+    case ProductActionTypes.SUCCESSFUL_REQUEST_CURRENT_PRODUCT: {
+      return {
+        ...state,
+        productCurrent: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

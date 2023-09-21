@@ -32,7 +32,7 @@ export async function createProduct(model: IProductCreate) {
 }
 export async function getByIdProduct(id: number) {
   const data = await http
-    .get(`http://localhost:5056/api/Product/GetProductById?id=${id}`)
+    .get(`/api/Product/GetProductById?id=${id}`,)
     .then((response) => {
       return {
         response,
