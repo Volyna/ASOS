@@ -1,18 +1,14 @@
-import axios, { Axios } from "axios";
-import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ICategoryUpdate } from "../types";
 import { Field, Formik } from "formik";
-import {
-  CreateCategorySchema,
-  UpdateCategorySchema,
-} from "../../../validation/CategoryCreateValidationSchema";
+import { UpdateCategorySchema } from "../../../validation/CategoryCreateValidationSchema";
 import { useActions } from "../../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../../hooks/useTypedSelector";
 import { ToastContainer } from "react-toastify";
 import Sidebar from "../../sidebar/Sidebar";
 import Navbar from "../../navbar/Navbar";
-import { GetCategoriesById } from "../../../../../store/actions/categoryActions";
+import { GetCategoriesById } from "../../../../../store/actions/CategoryActions";
 import Loader from "../../../../loader";
 
 const CategoryEdit = () => {

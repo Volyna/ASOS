@@ -79,6 +79,7 @@ namespace WebAsos.Controllers
             if (res.IsSuccess)
             {
                 return Ok(res);
+            }
             return BadRequest(res);
         }
 
@@ -140,7 +141,7 @@ namespace WebAsos.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("getProdcutsMan")]
-        public async Task<ServiceResponse> GetProdcutsManAsync([FromBody] int idUser[FromBody] int idUser)
+        public async Task<ServiceResponse> GetProdcutsManAsync([FromBody] int idUser)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
