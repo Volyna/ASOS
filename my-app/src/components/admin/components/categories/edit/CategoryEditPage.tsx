@@ -24,13 +24,8 @@ const CategoryEdit = () => {
 
   const { id } = useParams();
 
-  // useEffect(() => {
-  //   GetCategoriesById(parseInt(id!));
-  //   console.log("ID", id);
-  // }, []);
-
   useEffect(() => {
-    console.log("Received id:", id); // Добавьте эту строку для отладки
+    console.log("Received id:", id);
     const numericId = parseInt(id!);
     if (!isNaN(numericId)) {
       GetCategoriesById(numericId);
@@ -111,7 +106,7 @@ const CategoryEdit = () => {
                           type="submit"
                           className="womenbtn buttons"
                           disabled={!(isValid && dirty)}
-                        // onClick={() => navigator("/admin/categories")}
+                          // onClick={() => navigator("/admin/categories")}
                         >
                           Edit
                         </button>

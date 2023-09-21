@@ -18,11 +18,14 @@ export interface ProductsState {
 interface IItemProduct {
   id: number;
   name: string,
+  productType: string,
+  material: string,
+  pattern: string,
+  fit: string,
+  shop: string,
   price: number,
   discount: number,
   description: string,
-  // color: string,
-  // size: string,
   color: Array<string>,
   size: Array<string>,
   brand: string,

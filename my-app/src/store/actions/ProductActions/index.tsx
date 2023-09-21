@@ -14,7 +14,7 @@ import {
 } from "../../reducers/productReducer/types";
 import {
   IProductCreate,
-  IProductEditPost,
+  IProductEdit,
 } from "../../../components/admin/components/products/types";
 
 
@@ -119,7 +119,7 @@ export const GetByIdProduct = (id: number) => {
       dispatch({ type: ProductActionTypes.START_REQUEST_PRODUCT });
       const data = await getByIdProduct(id);
       const { response } = data;
-      console.log("product:", response.data.payload)
+      console.log("product:", response.data.payload);
       dispatch({
         type: ProductActionTypes.SUCCESSFUL_REQUEST_CURRENT_PRODUCT,
         payload: response.data.payload,
@@ -135,12 +135,12 @@ export const GetByIdProduct = (id: number) => {
     }
   };
 };
-export const UpdateProduct = (id: number, model: IProductEditPost) => {
+export const UpdateProduct = (model: IProductEdit) => {
   return async (dispatch: Dispatch<ProductsActions>) => {
     try {
       dispatch({ type: ProductActionTypes.START_REQUEST_PRODUCT });
       console.log("UpdateProduct before");
-      const data = await updateProduct(id, model);
+      const data = await updateProduct(model);
       console.log("UpdateProduct after: ", data.response);
       const { response } = data;
       dispatch({

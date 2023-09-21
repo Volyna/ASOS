@@ -3,7 +3,7 @@ import { ProductActionTypes, ProductsActions, ProductsState } from "./types";
 const initialState: ProductsState = {
   productsMan: [],
   productsWoman: [],
-  productCurrent:{
+  productCurrent: {
     id: 0,
     name: "",
     price: 0,
@@ -17,6 +17,12 @@ const initialState: ProductsState = {
     mainImage: "",
     images: "",
     categoryId: 0,
+    productType: "",
+    material: "",
+    pattern: "",
+    fit: "",
+    shop: "",
+    isLikeUser: false,
   },
   loadingProductMan: false,
   loadingProductWoman: false,
@@ -26,6 +32,11 @@ const initialState: ProductsState = {
   productForUpdate: {
     id: 0,
     name: "",
+    productType: "",
+    material: "",
+    pattern: "",
+    fit: "",
+    shop: "",
     price: 0,
     discount: 0,
     description: "",
@@ -37,7 +48,7 @@ const initialState: ProductsState = {
     mainImage: "",
     images: "",
     categoryId: 0,
-    isLikeUser: false
+    isLikeUser: false,
   },
 };
 const ProductsReducer = (
@@ -78,6 +89,11 @@ const ProductsReducer = (
         productForUpdate: {
           id: 0,
           name: "",
+          productType: "",
+          material: "",
+          pattern: "",
+          fit: "",
+          shop: "",
           price: 0,
           discount: 0,
           description: "",
@@ -89,7 +105,7 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
-          isLikeUser: false
+          isLikeUser: false,
         },
         message: "",
         loading: true,
@@ -101,6 +117,11 @@ const ProductsReducer = (
         productForUpdate: {
           id: 0,
           name: "",
+          productType: "",
+          material: "",
+          pattern: "",
+          fit: "",
+          shop: "",
           price: 0,
           discount: 0,
           description: "",
@@ -112,7 +133,7 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
-          isLikeUser: false
+          isLikeUser: false,
         },
         message: action.payload.message,
         loading: false,

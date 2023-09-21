@@ -49,8 +49,7 @@ import CategoryCreate from "./components/admin/components/categories/create/Cate
 import ProductCreate from "./components/admin/components/products/create/ProductCreatePage";
 import UserCreatePage from "./components/admin/components/user/create/UserCreatePage";
 import CategoryEdit from "./components/admin/components/categories/edit/CategoryEditPage";
-
-// import ProductEditPage from "./components/admin/components/products/edit/ProductEditPage";
+import ProductEdit from "./components/admin/components/products/edit/ProductEditPage";
 
 function App() {
   const { loading } = useTypedSelector((store) => store.UserReducer);
@@ -77,7 +76,7 @@ function App() {
             </Route>
             <Route path="products">
               <Route index element={<ListProducts />} />
-              <Route path=":productId" element={<Single />} />
+              <Route path=":id" element={<ProductEdit />} />
               <Route path="new" element={<ProductCreate />} />
             </Route>
             <Route path="categories">

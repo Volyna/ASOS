@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAsos.Data.Entitties.DTO;
+using WebAsos.Data.ViewModels.Category;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
 using WebAsos.Services;
@@ -77,8 +79,6 @@ namespace WebAsos.Controllers
             if (res.IsSuccess)
             {
                 return Ok(res);
-            }
-
             return BadRequest(res);
         }
 
@@ -93,7 +93,7 @@ namespace WebAsos.Controllers
 
             return BadRequest(res);
         }
-
+       
         [HttpPut]
         [Route("UpdateProduct")]
         public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProductDTO model)
@@ -140,7 +140,7 @@ namespace WebAsos.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("getProdcutsMan")]
-        public async Task<ServiceResponse> GetProdcutsManAsync([FromBody] int idUser)
+        public async Task<ServiceResponse> GetProdcutsManAsync([FromBody] int idUser[FromBody] int idUser)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
