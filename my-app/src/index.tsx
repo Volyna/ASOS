@@ -12,7 +12,7 @@ import "./index.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 import { getToken } from "./services/setAuthToken";
-import { AuthUserToken } from "./store/actions/UserActions";
+import { AuthUserToken } from "./store/actions/userActions";
 import Loader from "./components/loader";
 const token = getToken();
 if (token) {

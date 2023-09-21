@@ -24,10 +24,11 @@ import {
 } from "../../../store/reducers/BasketReducer/types";
 import { getBasketsById } from "../../../services/api-basket-service";
 import http from "../../../services/http_common";
+import { IBasketRemove } from "../Account/Favourites/types";
 const BasketEmpty = () => {
   const { isAuth } = useTypedSelector((store) => store.UserReducer);
   const navigate = useNavigate();
-  const { GetBasketsByid, AddCountProductBasket, MinusCountProductBasket } =
+  const { GetBasketsByid, AddCountProductBasket, RemoveProductBasket, MinusCountProductBasket } =
     useActions();
   const { isBasketLoading, products } = useTypedSelector(
     (store) => store.BasketReducer
@@ -67,8 +68,116 @@ const BasketEmpty = () => {
   var removeProduct = (idProduct: number) => {
     console.log("removeProduct");
     var result = products.filter((i) => i.productId != idProduct);
-    MinusCountProductBasket(result);
+    const initDataRemove: IBasketRemove = {
+      countProducts: 1,
+      userIdOrder: user.id,
+      productId: idProduct
+    }
+    RemoveProductBasket(result, initDataRemove);
   };
+  var dataBasket = products.map((item, index) => {
+    return (
+      <div key={item.productId}>
+        <div className="row orderContent">
+          <div className="col-2">
+            <img
+              width={119}
+              height={175}
+              src={`data:image/png;base64,${item.images}`}
+              alt=""
+            />
+          </div>
+
+          <div className="col-9">
+            <div className="row">
+              <h3 className="productName">{item.name}</h3>
+            </div>
+            <div className="row productInfo">
+              <div className="col-2 productInfoColor">
+                <p>Color: {item.color}</p>
+              </div>
+
+              <div className="col-2 productInfoSize">
+                <p style={{ marginRight: "3px" }}> Size:</p>
+
+                <select
+                  name="size"
+                  id="size_select"
+                  className="size_select"
+                >
+                  {item.size.filter((element, index) => element.indexOf(element) === index).map(size => <option key={size} value={size}>{size}</option>)}
+
+                  {/* <option key={index} value={i}>
+                        {i}
+                      </option> */}
+
+
+                </select>
+              </div>
+              {/* <div className="col-1 productInfoArrow">
+            <img
+              height={20}
+              width={20}
+              src={Arrow_down}
+              alt="arrow"
+            />
+          </div> */}
+            </div>
+            <div className="row productPrice">
+              <p className="newPrice col-1">
+                {(item.price - item.discount) *
+                  item.countProducts}
+                $
+              </p>
+
+              <p className="oldPrice productPriceDiscount col-1">
+                {item.price * item.countProducts}$
+              </p>
+            </div>
+            <div className="row btnBasketProduct">
+              <div className="flexDisplay">
+                <span
+                  className="minus minusImage"
+                  onClick={(e) => {
+                    minusProduct(item.productId);
+                  }}
+                >
+                  <img src={Minus} alt="minus" />
+                </span>
+                <button className="btnProductBasket ">
+                  <p className="btnProductBasketCount">
+                    {item.countProducts}
+                  </p>
+                </button>
+                <span
+                  onClick={(e) => {
+                    plusProduct(item.productId);
+                  }}
+                  className="plus plusImage"
+                >
+                  <img src={Plus} alt="plus" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-1">
+            <img
+              onClick={(e) => {
+                removeProduct(item.productId);
+              }}
+              className="removeProduct"
+              width={30}
+              height={30}
+              src={Delete}
+              alt="remove"
+            />
+          </div>
+        </div>
+        <div className="lineBasket" key={index}></div>
+      </div>
+    );
+  });
 
   return (
     <>
@@ -148,121 +257,18 @@ const BasketEmpty = () => {
               </div>
             ) : (
               <>
-                {products.length == 0 ? (
-                  <>
-                    {" "}
-                    <p className="basket_text">Ops, your basket is empty(((</p>
+                {products.length == 0 || products == null ? (
+
+                  <div className="basketContentIsEmpty"> <p className="basket_text">Ops, your basket is empty(((</p>
                     <button
                       onClick={() => navigate("/")}
                       className="btn_continue"
                     >
                       continue shopping
-                    </button>
-                  </>
+                    </button></div>
+
                 ) : (
-                  products.map((item, index) => {
-                    return (
-                      <div key={item.productId}>
-                        <div className="row orderContent" key={item.productId}>
-                          <div className="col-2">
-                            <img
-                              width={119}
-                              height={175}
-                              src={`data:image/png;base64,${item.images}`}
-                              alt=""
-                            />
-                          </div>
-
-                          <div className="col-9">
-                            <div className="row">
-                              <h3 className="productName">{item.name}</h3>
-                            </div>
-                            <div className="row productInfo">
-                              <div className="col-2 productInfoColor">
-                                <p>Color: {item.color}</p>
-                              </div>
-
-                              <div className="col-2 productInfoSize">
-                                <p style={{ marginRight: "3px" }}> Size:</p>
-
-                                <select
-                                  name="size"
-                                  id="size_select"
-                                  className="size_select"
-                                >
-                                  {item.size.map((i, index) => {
-                                    return (
-                                      <option key={index} value={i}>
-                                        {i}
-                                      </option>
-                                    );
-                                  })}
-                                </select>
-                              </div>
-                              {/* <div className="col-1 productInfoArrow">
-                            <img
-                              height={20}
-                              width={20}
-                              src={Arrow_down}
-                              alt="arrow"
-                            />
-                          </div> */}
-                            </div>
-                            <div className="row productPrice">
-                              <p className="newPrice col-1">
-                                {(item.price - item.discount) *
-                                  item.countProducts}
-                                $
-                              </p>
-
-                              <p className="oldPrice productPriceDiscount col-1">
-                                {item.price * item.countProducts}$
-                              </p>
-                            </div>
-                            <div className="row btnBasketProduct">
-                              <div className="flexDisplay">
-                                <span
-                                  className="minus minusImage"
-                                  onClick={(e) => {
-                                    minusProduct(item.productId);
-                                  }}
-                                >
-                                  <img src={Minus} alt="minus" />
-                                </span>
-                                <button className="btnProductBasket ">
-                                  <p className="btnProductBasketCount">
-                                    {item.countProducts}
-                                  </p>
-                                </button>
-                                <span
-                                  onClick={(e) => {
-                                    plusProduct(item.productId);
-                                  }}
-                                  className="plus plusImage"
-                                >
-                                  <img src={Plus} alt="plus" />
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="col-1">
-                            <img
-                              onClick={(e) => {
-                                removeProduct(item.productId);
-                              }}
-                              className="removeProduct"
-                              width={30}
-                              height={30}
-                              src={Delete}
-                              alt="remove"
-                            />
-                          </div>
-                        </div>
-                        <div className="lineBasket" key={index}></div>
-                      </div>
-                    );
-                  })
+                  dataBasket
                 )}
               </>
             )}

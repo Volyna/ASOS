@@ -124,7 +124,7 @@ function App() {
           <Route path="/men" element={<Men />} />
           <Route path="/women" element={<Women />} />
           <Route path="/ViewAll" element={<ProductsPage />} />
-          <Route path="/Prod" element={<ProductPage />} />
+          <Route path="/men/:id" element={<ProductPage />} />
 
           <Route path="*" element={<Error />} />
         </Routes>

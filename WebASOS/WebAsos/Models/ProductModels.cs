@@ -83,6 +83,7 @@ namespace WebAsos.Models
         public string MainImage { get; set; }
         public int Quantity { get; set; }
         public bool IsInTheStock { get; set; }
+        public bool isLikeUser { get; set; }
         public List<string> Images { get; set; }
         public int? CategoryId { get; set; }
     }
