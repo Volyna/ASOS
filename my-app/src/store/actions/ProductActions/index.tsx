@@ -11,11 +11,12 @@ import {
 import {
   ProductActionTypes,
   ProductsActions,
-} from "../../reducers/ProductReducer/types";
+} from "../../reducers/productReducer/types";
 import {
   IProductCreate,
   IProductEdit,
 } from "../../../components/admin/components/products/types";
+
 
 export const GetAllProductMan = (iduser: number) => {
   return async (dispatch: Dispatch<ProductsActions>) => {
