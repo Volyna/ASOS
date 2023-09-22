@@ -114,14 +114,6 @@ const BasketEmpty = () => {
 
                 </select>
               </div>
-              {/* <div className="col-1 productInfoArrow">
-            <img
-              height={20}
-              width={20}
-              src={Arrow_down}
-              alt="arrow"
-            />
-          </div> */}
             </div>
             <div className="row productPrice">
               <p className="newPrice col-1">
@@ -304,7 +296,7 @@ const BasketEmpty = () => {
               *Items are reserved for 24 hours than you can find them in <br />{" "}
               your favorites
             </p>
-            <button className="btn-buy">checkout</button>
+            <Link to={"/checkout"}> <button className="btn-buy">checkout</button></Link>
             <div className="standard">
               <p className="shipping">Standard shipping</p>
               <p className="pFaster">

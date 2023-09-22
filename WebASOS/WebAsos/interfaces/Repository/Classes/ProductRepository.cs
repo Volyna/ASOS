@@ -56,8 +56,8 @@ namespace WebAsos.Interfaces.Repository.Classes
         {
             try
             {
-                int idCategoryMan = await _dbContext.Categories.Where(c => c.Name.ToLower().Trim() == Product.Men).Select(p => p.Id).FirstOrDefaultAsync();
-                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryMan).ToListAsync();
+                int idCategoryMan = await _dbContext.Categories.Where(c => c.Name.ToLower().Trim() == Product.Men && c.IsDeleted ==false).Select(p => p.Id).FirstOrDefaultAsync();
+                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryMan && p.IsDeleted == false).ToListAsync();
                 return resultProdcut;
 
             }
@@ -72,7 +72,7 @@ namespace WebAsos.Interfaces.Repository.Classes
         {
             try
             {
-                var resultProdcut = await _dbContext.Products.Where(p => p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Color).ToListAsync();
+                var resultProdcut = await _dbContext.Products.Where(p =>p.IsDeleted== false && p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Color).ToListAsync();
                 var newListWithoutDublicate = resultProdcut.Distinct().ToList();
                 return newListWithoutDublicate;
 
@@ -88,7 +88,7 @@ namespace WebAsos.Interfaces.Repository.Classes
         {
             try
             {
-                var resultProdcut = await _dbContext.Products.Where(p => p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Size.ToString()).ToListAsync();
+                var resultProdcut = await _dbContext.Products.Where(p => p.IsDeleted == false && p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Size.ToString()).ToListAsync();
                 return resultProdcut;
 
             }
