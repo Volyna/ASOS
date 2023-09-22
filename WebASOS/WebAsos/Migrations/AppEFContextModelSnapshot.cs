@@ -417,9 +417,6 @@ namespace WebAsos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Cout")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
 

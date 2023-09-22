@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import { Country } from "../types";
 import axios from "axios";
 import { CheckoutInfoSchema } from "../validation";
+import { boolean } from "yup";
 
 const Checkout = () => {
   const expriy_format = (value: string) => {
@@ -41,6 +42,7 @@ const Checkout = () => {
     (store) => store.BasketReducer
   );
   const [countries, setCountries] = useState<Country[]>([]);
+  const [canChangeMinus, setCanChangeMinus] = useState(false);
   const fetchData = async () => {
     try {
       const response = await axios.get<Country[]>(
@@ -97,7 +99,7 @@ const Checkout = () => {
   var plusProduct = (idProduct: number) => {
     var tempArray = products;
     tempArray.forEach((i) => {
-      if (i.productId == idProduct) {
+      if (i.productId == idProduct && i.countProducts + 1 <= i.quantity) {
         i.countProducts += 1;
       }
     });
@@ -108,9 +110,14 @@ const Checkout = () => {
     tempArray.forEach((i) => {
       if (i.productId == idProduct && i.countProducts != 1) {
         i.countProducts -= 1;
+        setCanChangeMinus(true);
       }
     });
-    MinusCountProductBasket(tempArray);
+    if (canChangeMinus === true) {
+      MinusCountProductBasket(tempArray);
+    } else {
+
+    }
   };
   var removeProduct = (idProduct: number) => {
     console.log("removeProduct");
@@ -169,9 +176,9 @@ const Checkout = () => {
                 $
               </p>
 
-              <p className="oldPrice productPriceDiscount productPriceDiscountChecout col-1">
+              {item.discount == 0 ? null : <p className="oldPrice productPriceDiscount productPriceDiscountChecout col-1">
                 {item.price * item.countProducts}$
-              </p>
+              </p>}
             </div>
             <div className="row btnBasketProduct">
               <div className="flexDisplay">
