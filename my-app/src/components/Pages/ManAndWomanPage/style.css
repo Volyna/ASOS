@@ -501,7 +501,6 @@
 .content .contentProductNavBar {
     flex-shrink: 0;
     width: 200px;
-    overflow: auto;
     position: sticky;
     top: 125px;
     margin-bottom: 20px;
