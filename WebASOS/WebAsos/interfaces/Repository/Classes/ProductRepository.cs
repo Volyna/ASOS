@@ -72,7 +72,7 @@ namespace WebAsos.Interfaces.Repository.Classes
         {
             try
             {
-                var resultProdcut = await _dbContext.Products.Where(p => p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Color).ToListAsync();
+                var resultProdcut = await _dbContext.Products.Where(p =>p.IsDeleted== false && p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Color).ToListAsync();
                 var newListWithoutDublicate = resultProdcut.Distinct().ToList();
                 return newListWithoutDublicate;
 
@@ -88,7 +88,7 @@ namespace WebAsos.Interfaces.Repository.Classes
         {
             try
             {
-                var resultProdcut = await _dbContext.Products.Where(p => p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Size.ToString()).ToListAsync();
+                var resultProdcut = await _dbContext.Products.Where(p => p.IsDeleted == false && p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Size.ToString()).ToListAsync();
                 return resultProdcut;
 
             }
