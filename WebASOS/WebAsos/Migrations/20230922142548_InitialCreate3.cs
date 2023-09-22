@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WebAsos.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCreate3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -274,11 +274,16 @@ namespace WebAsos.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ProductType = table.Column<string>(type: "text", nullable: false),
+                    Material = table.Column<string>(type: "text", nullable: false),
+                    Pattern = table.Column<string>(type: "text", nullable: false),
+                    Fit = table.Column<string>(type: "text", nullable: false),
+                    Shop = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     Discount = table.Column<int>(type: "integer", nullable: false),
+                    Size = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Color = table.Column<string>(type: "text", nullable: false),
-                    Size = table.Column<string>(type: "text", nullable: false),
                     Brand = table.Column<string>(type: "text", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
                     IsInTheStock = table.Column<bool>(type: "boolean", nullable: false),
