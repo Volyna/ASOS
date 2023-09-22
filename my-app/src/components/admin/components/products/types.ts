@@ -9,7 +9,7 @@ export interface IProductCreate {
     discount: number,
     description: string,
     color: string,
-    size: string,
+    size:  string,
     brand: string,
     quantity: number,
     isInTheStock: boolean,
