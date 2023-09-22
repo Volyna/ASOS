@@ -57,7 +57,7 @@ namespace WebAsos.Interfaces.Repository.Classes
             try
             {
                 int idCategoryMan = await _dbContext.Categories.Where(c => c.Name.ToLower().Trim() == Product.Men && c.IsDeleted ==false).Select(p => p.Id).FirstOrDefaultAsync();
-                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryMan).ToListAsync();
+                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryMan && p.IsDeleted == false).ToListAsync();
                 return resultProdcut;
 
             }
