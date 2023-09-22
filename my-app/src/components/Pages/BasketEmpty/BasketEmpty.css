@@ -360,6 +360,19 @@
 
 }
 
+.btn-buy a {
+    text-decoration: none;
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto Flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px;
+    /* 80% */
+    text-transform: uppercase;
+}
+
 .btn-buy:hover {
     transition: 0.5s;
     color: white;

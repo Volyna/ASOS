@@ -34,6 +34,10 @@ namespace WebAsos.Data.Entitties.Catalog
         [Range(0, int.MaxValue, ErrorMessage = "The Quantity field must be a positive value.")]
         public int Quantity { get; set; }
 
+        [Required(ErrorMessage = "The Cout field is required.")]
+        [Range(0, int.MaxValue, ErrorMessage = "The Quantity field must be a positive value.")]
+        public int Cout { get; set; }
+
 
         public bool IsInTheStock { get; set; }
 

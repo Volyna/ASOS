@@ -7,8 +7,8 @@
     color: black;
     border-bottom: 1px solid rgba(154, 154, 154, 1);
     padding-bottom: 50px;
-    
-    
+
+
 }
 
 .h3_checkout {
@@ -19,6 +19,7 @@
     text-transform: uppercase;
     color: black;
     margin-bottom: 50px;
+    margin-right: -15px;
 }
 
 .contact-inf {
@@ -34,6 +35,7 @@
     width: 70%;
     margin-left: 0;
 }
+
 .discount-input {
     width: 100%;
     margin-left: 0;
@@ -63,7 +65,7 @@
     line-height: 18px;
     color: rgba(0, 0, 0, 1);
     margin-bottom: 10px;
-} 
+}
 
 .btn-delivery {
     width: 70%;
@@ -109,12 +111,14 @@
     margin: 20px 0 30px 0;
 }
 
-.amount{font-family: 'Roboto Flex', sans-serif;
+.amount {
+    font-family: 'Roboto Flex', sans-serif;
     font-weight: 500;
     font-size: 20px;
     line-height: 23.44px;
     color: rgba(53, 53, 53, 1);
-    text-align: end;}    
+    text-align: end;
+}
 
 .normal {
     font-weight: 300;
@@ -128,6 +132,7 @@
     line-height: 23.44px;
     color: black;
 }
+
 .bold {
     font-weight: 500;
 }
@@ -136,4 +141,26 @@
     display: flex;
     border-bottom: 1px solid rgba(53, 53, 53, 0.5);
     margin-bottom: 50px;
+}
+
+.mainLinkCheckout {
+    margin-top: 250px;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.mainInformation .productPriceDiscountChecout {
+    margin-left: -40px;
+}
+
+.ckeckoutCountry {
+    width: 70%;
+    margin-left: 0;
+}
+
+.arrow_down:hover {
+    background: url("../../../images/arrow-down-Acept.png")no-repeat center right 10px;
+    background-size: 25px 25px;
 }
