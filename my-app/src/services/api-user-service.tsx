@@ -1,6 +1,7 @@
 import {
   IBeforeLoginUser,
   IChangeContactInfo,
+  IGetAllUsers,
   ILoginUser,
   ILoginUserByGoogle,
   IRegisterUser,
@@ -91,6 +92,20 @@ export async function recoveryPassword(email: string) {
 export async function recoveryPasswordUpdate(model: IRecoveryPasswordUpdate) {
   const data = await http
     .post(`api/User/changePassword`, model)
+    .then((response) => {
+      return {
+        response,
+      };
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return data;
+}
+
+export async function getAllUsers() {
+  const data = await http
+    .post(`api/User/GetAllUsers`)
     .then((response) => {
       return {
         response,

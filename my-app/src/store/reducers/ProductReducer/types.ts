@@ -4,6 +4,7 @@ import { type } from "os";
 export interface ProductsState {
   productsMan: Array<IItemProduct>;
   productsWoman: Array<IItemProduct>;
+  productCurrent: IItemProduct
   loadingProductMan: boolean;
   loadingProductWoman: boolean;
 
@@ -17,11 +18,14 @@ export interface ProductsState {
 interface IItemProduct {
   id: number;
   name: string,
+  productType: string,
+  material: string,
+  pattern: string,
+  fit: string,
+  shop: string,
   price: number,
   discount: number,
   description: string,
-  // color: string,
-  // size: string,
   color: Array<string>,
   size: Array<string>,
   brand: string,
@@ -44,6 +48,7 @@ export enum ProductActionTypes {
   SERVER_PRODUCTS_ERROR = "SERVER_PRODUCTS_ERROR",
   SUCCESSFUL_REQUEST_LIST_PRODUCTS = "SUCCESSFUL_REQUEST_LIST_PRODUCTS",
   SUCCESSFUL_REQUEST_CREATE_PRODUCTS = "SUCCESSFUL_REQUEST_CREATE_PRODUCTS",
+  SUCCESSFUL_REQUEST_CURRENT_PRODUCT= "SUCCESSFUL_REQUEST_CURRENT_PRODUCT",
 
 }
 
@@ -85,6 +90,10 @@ interface SuccessfulRequestListProductsAction {
   type: ProductActionTypes.SUCCESSFUL_REQUEST_LIST_PRODUCTS;
   payload: any;
 }
+interface SuccessfulRequaestCurrentProduct {
+  type: ProductActionTypes.SUCCESSFUL_REQUEST_CURRENT_PRODUCT;
+  payload: IItemProduct;
+}
 
 
 export type ProductsActions =
@@ -97,4 +106,5 @@ export type ProductsActions =
   | SuccessfulGetProductAction
   | SuccessfulUpdateProductAction
   | SuccessfulRequestRemoveImageProductAction
-  | SuccessfulRemoveProductAction;
+  | SuccessfulRemoveProductAction
+  | SuccessfulRequaestCurrentProduct

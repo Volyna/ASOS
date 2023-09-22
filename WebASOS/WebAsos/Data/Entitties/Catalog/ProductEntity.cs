@@ -6,6 +6,21 @@ namespace WebAsos.Data.Entitties.Catalog
     [Table("tblProducts")]
     public class ProductEntity : BaseEntity<int>
     {
+
+        [Required(ErrorMessage = "The product type field is required.")]
+        public string ProductType { get; set; }
+
+
+        [Required(ErrorMessage = "The material field is required.")]
+        public string Material { get; set; }
+
+        [Required(ErrorMessage = "The pattern field is required.")]
+        public string Pattern { get; set; }
+
+        public string Fit { get; set; }
+
+        public string Shop { get; set; }
+
         [Required(ErrorMessage = "The Price field is required.")]
         [Range(1, float.MaxValue, ErrorMessage = "Min price is 1$")]
         public float Price { get; set; }

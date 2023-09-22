@@ -28,22 +28,41 @@ export const userColumns = [
   },
 
   {
-    field: "age",
-    headerName: "Age",
+    field: "phone",
+    headerName: "Phone",
     width: 100,
   },
   {
-    field: "status",
-    headerName: "Status",
-    width: 160,
-    renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.status}
-        </div>
-      );
-    },
+    field: "country",
+    headerName: "Country",
+    width: 100,
   },
+  {
+    field: "state",
+    headerName: "State",
+    width: 100,
+  },
+  {
+    field: "street",
+    headerName: "Street",
+    width: 100,
+  },
+  {
+    field: "zipCode",
+    headerName: "ZipCode",
+    width: 100,
+  },
+  {
+    field: "city",
+    headerName: "City",
+    width: 100,
+  },
+  {
+    field: "homePhone",
+    headerName: "Home phone",
+    width: 100,
+  },
+ 
 ];
 
 export const productColumns = [
@@ -68,6 +87,31 @@ export const productColumns = [
   {
     field: "color",
     headerName: "Color",
+    width: 100,
+  },
+  {
+    field: "productType",
+    headerName: "Product type",
+    width: 100,
+  },
+  {
+    field: "material",
+    headerName: "Material",
+    width: 100,
+  },
+  {
+    field: "pattern",
+    headerName: "Pattern",
+    width: 100,
+  },
+  {
+    field: "fit",
+    headerName: "Fit",
+    width: 100,
+  },
+  {
+    field: "shop",
+    headerName: "Shop",
     width: 100,
   },
   {

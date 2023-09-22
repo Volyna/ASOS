@@ -36,6 +36,11 @@ const DatatableProducts = () => {
             (item: {
               id: number;
               name: string;
+              productType: string;
+              material: string;
+              pattern: string;
+              fit: string;
+              shop: string;
               price: number;
               discount: number;
               description: string;
@@ -49,6 +54,11 @@ const DatatableProducts = () => {
             }) => ({
               id: item.id,
               name: item.name,
+              productType: item.productType,
+              material: item.material,
+              pattern: item.pattern,
+              fit: item.fit,
+              shop: item.shop,
               price: item.price,
               discount: item.discount,
               description: item.description,
@@ -122,7 +132,10 @@ const DatatableProducts = () => {
       renderCell: (params: any) => {
         return (
           <div className="cellAction">
-            <Link to="/admin/users/test" style={{ textDecoration: "none" }}>
+            <Link
+              to={`/admin/products/${params.row.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="viewButton">Edit</div>
             </Link>
             <div

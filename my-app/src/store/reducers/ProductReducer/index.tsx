@@ -3,12 +3,7 @@ import { ProductActionTypes, ProductsActions, ProductsState } from "./types";
 const initialState: ProductsState = {
   productsMan: [],
   productsWoman: [],
-  loadingProductMan: false,
-  loadingProductWoman: false,
-  products: [],
-  message: null,
-  loading: false,
-  productForUpdate: {
+  productCurrent: {
     id: 0,
     name: "",
     price: 0,
@@ -22,7 +17,38 @@ const initialState: ProductsState = {
     mainImage: "",
     images: "",
     categoryId: 0,
-    isLikeUser: false
+    productType: "",
+    material: "",
+    pattern: "",
+    fit: "",
+    shop: "",
+    isLikeUser: false,
+  },
+  loadingProductMan: false,
+  loadingProductWoman: false,
+  products: [],
+  message: null,
+  loading: false,
+  productForUpdate: {
+    id: 0,
+    name: "",
+    productType: "",
+    material: "",
+    pattern: "",
+    fit: "",
+    shop: "",
+    price: 0,
+    discount: 0,
+    description: "",
+    color: [],
+    size: [],
+    brand: "",
+    quantity: 0,
+    isInTheStock: false,
+    mainImage: "",
+    images: "",
+    categoryId: 0,
+    isLikeUser: false,
   },
 };
 const ProductsReducer = (
@@ -63,6 +89,11 @@ const ProductsReducer = (
         productForUpdate: {
           id: 0,
           name: "",
+          productType: "",
+          material: "",
+          pattern: "",
+          fit: "",
+          shop: "",
           price: 0,
           discount: 0,
           description: "",
@@ -74,7 +105,7 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
-          isLikeUser: false
+          isLikeUser: false,
         },
         message: "",
         loading: true,
@@ -86,6 +117,11 @@ const ProductsReducer = (
         productForUpdate: {
           id: 0,
           name: "",
+          productType: "",
+          material: "",
+          pattern: "",
+          fit: "",
+          shop: "",
           price: 0,
           discount: 0,
           description: "",
@@ -97,7 +133,7 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
-          isLikeUser: false
+          isLikeUser: false,
         },
         message: action.payload.message,
         loading: false,
@@ -145,6 +181,13 @@ const ProductsReducer = (
         },
       };
     }
+    case ProductActionTypes.SUCCESSFUL_REQUEST_CURRENT_PRODUCT: {
+      return {
+        ...state,
+        productCurrent: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

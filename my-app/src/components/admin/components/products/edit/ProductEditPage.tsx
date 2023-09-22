@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { IProductCreate } from "../types";
-import { Field, Formik, useFormik } from "formik";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { IProductEdit } from "../types";
+import { Field, Formik } from "formik";
 import { useTypedSelector } from "../../../../../hooks/useTypedSelector";
 import { ToastContainer } from "react-toastify";
 import Sidebar from "../../sidebar/Sidebar";
@@ -10,15 +10,14 @@ import Navbar from "../../navbar/Navbar";
 import { showCategory } from "../../../../../store/actions/Categories/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store/reducers/rootReducer";
-import { CreateProduct } from "../../../../../store/actions/ProductActions";
-import { CreateProductSchema } from "../../../validation/ProductCreateValidationSchema";
+import { UpdateProductSchema } from "../../../validation/ProductCreateValidationSchema";
 import { useActions } from "../../../../../hooks/useActions";
 
-const ProductCreate = () => {
+const ProductEdit = () => {
   const navigator = useNavigate();
   var [imagesToShow, setImagesToShow] = useState([]);
   var [filesToSend, setFilesToSend] = useState([]);
-  const { CreateProduct } = useActions();
+  const { UpdateProduct } = useActions();
   const disp = useDispatch();
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -28,8 +27,13 @@ const ProductCreate = () => {
   const [selectedFit, setSelectedFit] = useState("");
   const [selectedShop, setSelectedShop] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const { GetByIdProduct } = useActions();
+  const { productForUpdate } = useTypedSelector(
+    (store) => store.ProductsReducer
+  );
 
-  const [model, setModel] = useState<IProductCreate>({
+  const [model, setModel] = useState<IProductEdit>({
+    id: 0,
     name: "",
     productType: "",
     material: "",
@@ -47,6 +51,19 @@ const ProductCreate = () => {
     categoryId: 0,
     images: "",
   });
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    console.log("Received id:", id);
+    const numericId = parseInt(id!);
+    if (!isNaN(numericId)) {
+      GetByIdProduct(numericId);
+      console.log("ID", numericId);
+    } else {
+      console.error("ID is not a valid number:", id);
+    }
+  }, []);
 
   const toBase64: any = (file: File) =>
     new Promise((resolve, reject) => {
@@ -187,7 +204,8 @@ const ProductCreate = () => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     Promise.all(promises).then((imagesBytes_toSend) => {
-      const newProduct: IProductCreate = {
+      const newProduct: IProductEdit = {
+        id: productForUpdate.id,
         name: data.get("name")?.toString()!,
         productType: data.get("productType")?.toString()!,
         material: data.get("material")?.toString()!,
@@ -206,7 +224,7 @@ const ProductCreate = () => {
         images: imagesBytes_toSend,
       };
       console.log("new product: ", newProduct);
-      CreateProduct(newProduct);
+      UpdateProduct(newProduct);
     });
   };
 
@@ -242,8 +260,25 @@ const ProductCreate = () => {
     <>
       <ToastContainer draggable={false} autoClose={3000} />
       <Formik
-        initialValues={model}
-        validationSchema={CreateProductSchema}
+        initialValues={{
+          name: productForUpdate.name,
+          productType: productForUpdate.productType,
+          material: productForUpdate.material,
+          pattern: productForUpdate.pattern,
+          fit: productForUpdate.fit,
+          shop: productForUpdate.shop,
+          price: productForUpdate.price,
+          discount: productForUpdate.discount,
+          description: productForUpdate.description,
+          color: productForUpdate.color,
+          size: productForUpdate.size,
+          brand: productForUpdate.brand,
+          quantity: productForUpdate.quantity,
+          isInTheStock: productForUpdate.isInTheStock,
+          images: productForUpdate.images,
+          categoryId: productForUpdate.categoryId,
+        }}
+        validationSchema={UpdateProductSchema}
         onSubmit={(e) => {
           console.log("E", e);
         }}
@@ -634,7 +669,7 @@ const ProductCreate = () => {
                           // disabled={!(isValid && dirty)}
                           // onClick={() => navigator("/admin/products")}
                         >
-                          Save
+                          Edit
                         </button>
                         <button
                           className="buttons"
@@ -655,4 +690,4 @@ const ProductCreate = () => {
   );
 };
 
-export default ProductCreate;
+export default ProductEdit;

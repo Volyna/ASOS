@@ -1,3 +1,4 @@
+import { IGetAllUsers } from "../../../components/auth/types";
 import { IUser, ServiceResponse } from "../../actions/UserActions/types";
 
 export interface UserState {
@@ -6,6 +7,7 @@ export interface UserState {
   message: null | string;
   loading: boolean;
   isAuth: boolean;
+  users: Array<IGetAllUsers>;
 }
 
 export enum UserActionTypes {
@@ -17,6 +19,7 @@ export enum UserActionTypes {
   LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL",
   SUCCESSFUL_REQUEST = "SUCCESSFUL_REQUEST",
   BAG_REQUEST = "BAG_REQUEST",
+  LIST_USERS = "SUCCESSFUL_REQUEST_LIST_USERS",
 }
 interface LoginSuccessfulAction {
   type: UserActionTypes.LOGIN_SUCCESSFUL;
@@ -47,6 +50,11 @@ interface SuccessfulRequestLoginUserAction {
   type: UserActionTypes.LOGIN_USER;
   payload: IUser;
 }
+
+interface SuccessfulRequestGetAllUsersAction {
+  type: UserActionTypes.LIST_USERS;
+  payload: any;
+}
 export type UserActions =
   | StartRequestUserAction
   | StartSetUserEmailAction
@@ -55,4 +63,5 @@ export type UserActions =
   | LogoutUserAction
   | LoginSuccessfulAction
   | BadRequestUserAction
+  | SuccessfulRequestGetAllUsersAction
   | SuccessfulRequestAction;

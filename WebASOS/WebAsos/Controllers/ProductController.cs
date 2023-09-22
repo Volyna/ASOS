@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAsos.Data.Entitties.DTO;
+using WebAsos.Data.ViewModels.Category;
 using WebAsos.Interfaces.Services.Interfaces;
 using WebAsos.Models;
 using WebAsos.Services;
@@ -70,15 +72,14 @@ namespace WebAsos.Controllers
             return Ok(model);
         }
 
-        [HttpPost("GetProductById")]
-        public async Task<IActionResult> GetProductByIdAsync([FromBody] FindByIdViewModel Id)
+        [HttpGet("GetProductById")]
+        public async Task<IActionResult> GetProductByIdAsync(int id)
         {
-            var res = await _productService.GetProductByIdAsync(Id.Id);
+            var res = await _productService.GetProductByIdAsync(id);
             if (res.IsSuccess)
             {
                 return Ok(res);
             }
-
             return BadRequest(res);
         }
 
@@ -93,7 +94,7 @@ namespace WebAsos.Controllers
 
             return BadRequest(res);
         }
-
+       
         [HttpPut]
         [Route("UpdateProduct")]
         public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProductDTO model)
