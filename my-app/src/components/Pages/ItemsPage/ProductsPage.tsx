@@ -67,6 +67,7 @@ const ProductsPage = () => {
           <div className="likeProductItem">
             <img src={like} onClick={(e) => { SwitchLike(e, item.id); }} className="favourites" alt="favourites" />
           </div>
+          <Link to={location + "/" + item.id}>
           <div key={item.mainImage} className="imageProductItem"> <img
             width={272}
             height={402}
@@ -76,7 +77,9 @@ const ProductsPage = () => {
           <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
           <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
           <div className="colorProductItem"><span className="red">red</span></div>
-        </div>
+          </Link>
+          </div>
+        
       </li>
 
     )

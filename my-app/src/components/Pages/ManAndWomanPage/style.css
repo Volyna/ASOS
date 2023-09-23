@@ -349,7 +349,6 @@
     text-align: start;
     color: var(--black, #353535);
     font-feature-settings: 'clig' off, 'liga' off;
-
     /* desktop_main */
     font-family: Roboto Flex;
     font-size: 18px;
@@ -721,4 +720,10 @@
     font-weight: 300;
     line-height: 18px;
     /* 100% */
+}
+
+
+li a{
+    color: #353535;
+    text-decoration: none;
 }
