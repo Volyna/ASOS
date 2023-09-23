@@ -134,32 +134,32 @@ const Men = () => {
   const dataProduct = productsMan.slice(0, countShowProduct).map((item) => {
 
     return (
-      <Link to={location + "/" + item.id}>
+      // <Link to={location + "/" + item.id}>
       <li key={item.id} >
-        <div className="">
-          <div className="oneItemProduct">
-            <div className="likeProductItem">
-              <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
-            </div>
-            <div key={item.mainImage} className="imageProductItem"> <img
-              width={272}
-              height={402}
-              src={`data:image/png;base64,${item.mainImage}`}
-              alt=""
-            /></div>
-            <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
-            <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
-            <div className="colorProductItem">
 
-              {item.color.length > 3 ? item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
-                : item.color.map(item => <span style={{ background: item }} className="circleProduct" />)}
-              {item.color.length > 3 ? "+" + item.color.length : null}
+        <div className="oneItemProduct">
+          <div className="likeProductItem">
+            <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
+          </div>
+          <div key={item.mainImage} className="imageProductItem"> <img
+            width={272}
+            height={402}
+            src={`data:image/png;base64,${item.mainImage}`}
+            alt=""
+          /></div>
+          <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
+          <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
+          <div className="colorProductItem">
 
-            </div>
+            {item.color.length > 3 ? item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
+              : item.color.map(item => <span style={{ background: item }} className="circleProduct" />)}
+            {item.color.length > 3 ? "+" + item.color.length : null}
+
           </div>
         </div>
+
       </li>
-      </Link>
+      // </Link>
 
     )
   })

@@ -307,7 +307,7 @@
 .content .likeProductItem {
     position: absolute;
     right: 10px;
-    top: 23px;
+    top: 13px;
 }
 
 .content .likeProductItem img {
@@ -659,6 +659,7 @@
 .content .nameProductItem p {
     margin: 0;
     padding: 0;
+    margin-bottom: 10px;
 }
 
 .content .imageProductItem {
@@ -666,7 +667,7 @@
 }
 
 .content .nameProductItem {
-    margin-bottom: 10px;
+    max-width: 285px;
     padding-left: 10px;
     padding-right: 10px;
 }
