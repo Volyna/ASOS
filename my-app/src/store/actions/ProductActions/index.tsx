@@ -147,7 +147,7 @@ export const GetByIdProduct = (id: number) => {
       const { response } = data;
       console.log("product:", response.data.payload);
       dispatch({
-        type: ProductActionTypes.SUCCESSFUL_REQUEST_CURRENT_PRODUCT,
+        type: ProductActionTypes.SUCCESSFUL_REQUEST_GET_PRODUCT,
         payload: response.data.payload,
       });
     } catch (e) {

@@ -23,6 +23,7 @@ const initialState: ProductsState = {
     fit: "",
     shop: "",
     isLikeUser: false,
+    message: "",
   },
   loadingProductMan: false,
   loadingProductWoman: false,
@@ -49,6 +50,7 @@ const initialState: ProductsState = {
     images: "",
     categoryId: 0,
     isLikeUser: false,
+    message: "",
   },
 };
 const ProductsReducer = (
@@ -113,6 +115,7 @@ const ProductsReducer = (
           images: "",
           categoryId: 0,
           isLikeUser: false,
+          message: "",
         },
         message: "",
         loading: true,
@@ -141,6 +144,7 @@ const ProductsReducer = (
           images: "",
           categoryId: 0,
           isLikeUser: false,
+          message: "",
         },
         message: action.payload.message,
         loading: false,
@@ -172,8 +176,8 @@ const ProductsReducer = (
       return {
         ...state,
         message: action.payload.message,
-        loading: false,
-        productForUpdate: action.payload.payload,
+        // loading: false,
+        productForUpdate: action.payload,
       };
     }
     case ProductActionTypes.SUCCESSFUL_REQUEST__REMOVE_IMAGE_PRODUCT: {
