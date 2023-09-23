@@ -52,7 +52,10 @@ const BeforeWomenPage = () => {
         return (
             <>
                 <Header />
-                <p className="titlePage">woman  </p>
+                <div className="">
+                    <p className="titlePage">woman</p>
+
+                </div>
                 <div className="MainblockM">
                     <img src={women1} />
                 </div>
@@ -118,7 +121,7 @@ const BeforeWomenPage = () => {
 
                 <BreadCrumbs />
 
-                <div className="categors">{ }</div>
+
 
                 <p className="title">WOMEN</p>
 
