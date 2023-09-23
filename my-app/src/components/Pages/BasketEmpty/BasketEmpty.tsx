@@ -50,7 +50,7 @@ const BasketEmpty = () => {
   var plusProduct = (idProduct: number) => {
     var tempArray = products;
     tempArray.forEach((i) => {
-      if (i.productId == idProduct) {
+      if (i.productId == idProduct && i.countProducts + 1 <= i.quantity) {
         i.countProducts += 1;
       }
     });

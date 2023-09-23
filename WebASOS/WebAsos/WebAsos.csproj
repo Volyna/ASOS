@@ -14,6 +14,7 @@
     <EmbeddedResource Remove="interfaces\JwtTokenService\**" />
     <None Remove="interfaces\JwtTokenService\**" />
     <None Remove="Repositories\LikesProducts\" />
+    <None Remove="Constants\OrderStatus\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.60.0" />
@@ -64,6 +65,7 @@
     <Folder Include="Data\AutoMapper\User\" />
     <Folder Include="Repositories\User\" />
     <Folder Include="Repositories\LikesProducts\" />
+    <Folder Include="Constants\OrderStatus\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="SMTP_Email\html\confirmEmail.html">

@@ -50,6 +50,8 @@ import ProductCreate from "./components/admin/components/products/create/Product
 import UserCreatePage from "./components/admin/components/user/create/UserCreatePage";
 import CategoryEdit from "./components/admin/components/categories/edit/CategoryEditPage";
 import ProductEdit from "./components/admin/components/products/edit/ProductEditPage";
+import BeforeMenPage from "./components/Pages/ManAndWomanPage/BeforeMenPage";
+import BeforeWomenPage from "./components/Pages/ManAndWomanPage/BeforeWomenPage";
 
 function App() {
   const { loading } = useTypedSelector((store) => store.UserReducer);
@@ -121,10 +123,12 @@ function App() {
           <Route path="/account/favourites" element={<Favourites />} />
           <Route path="/checkout" element={<Checkout />} />
 
-          <Route path="/men" element={<Men />} />
-          <Route path="/women" element={<Women />} />
-          <Route path="/ViewAll" element={<ProductsPage />} />
-          <Route path="/men/:id" element={<ProductPage />} />
+          <Route path="/men" element={<BeforeMenPage />} />
+          <Route path="/women" element={<BeforeWomenPage />} />
+          <Route path="/women/viewAll" element={<Women />} />
+          <Route path="/men/viewAll" element={<Men />} />
+          <Route path="/men/viewAll/:id" element={<ProductPage />} />
+          <Route path="/women/viewAll/:id" element={<ProductPage />} />
 
           <Route path="*" element={<Error />} />
         </Routes>

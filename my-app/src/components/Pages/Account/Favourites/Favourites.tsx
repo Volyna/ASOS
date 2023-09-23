@@ -80,10 +80,14 @@ const Favourites = () => {
 
               </div>
               <div className="colorsFavourite">  </div>
-              <div className="basketBtnFavourite"><button
+              {item.quantity <= 0 ? <div className="basketBtnFavourite"><button
+                style={{ paddingTop: "6px", fontSize: "19px" }}
+                className="btnFavourite">The product is out of stock
+              </button></div> : <div className="basketBtnFavourite"><button
                 onClick={(e) => { if (item.isOnBasket == true) { item.isOnBasket = false; RemoveFromBasketProduct(item.id); } else { item.isOnBasket = true; AddTobasketProduct(item.id) } }}
                 className="btnFavourite">
-                {item.isOnBasket == true ? "Remove from basket" : "Add to basket"}</button></div>
+                {item.isOnBasket == true ? "Remove from basket" : "Add to basket"}</button></div>}
+
             </div>
           </div>
         </div>

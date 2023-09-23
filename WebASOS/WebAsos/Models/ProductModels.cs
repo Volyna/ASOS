@@ -88,6 +88,7 @@ namespace WebAsos.Models
         public int? CategoryId { get; set; }
     }
 
+
     public class ProductUploadImageViewModel
     {
         public IFormFile Image { get; set; }
