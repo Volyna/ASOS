@@ -92,6 +92,17 @@
     display: flex;
 }
 
+.allOrders {
+    position: relative;
+    height: 681px;
+    overflow-y: scroll;
+    margin-bottom: 50px;
+}
+
+.ErrorCheckout {
+    position: absolute;
+}
+
 .btn-shop-bag {
     width: 100%;
     margin-bottom: 50px;

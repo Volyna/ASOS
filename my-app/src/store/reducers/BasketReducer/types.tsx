@@ -34,9 +34,13 @@ export enum BasketActionTypes {
   SUCCED_REMOVE_FROM_LIKE_BASKET = "SUCCED_REMOVE_FROM_LIKE_BASKET",
   MINUS_PRODUCT_COUNT_BASKET = "MINUS_PRODUCT_COUNT_BASKET",
   REMOVE_PRODUCT_BASKET = "REMOVE_PRODUCT_BASKET",
+  SUCCEED_CREATE_ORDER = "SUCCEED_CREATE_ORDER",
 }
 interface StartRequestBasketAction {
   type: BasketActionTypes.START_REQUESTS_BASKET;
+}
+interface SucceedCreatedOrderRequestBasketAction {
+  type: BasketActionTypes.SUCCEED_CREATE_ORDER;
 }
 interface AddProductCountBasketAction {
   type: BasketActionTypes.ADD_PRODUCT_COUNT_BASKET;
@@ -76,4 +80,5 @@ export type BasketActions =
   | MinusProductCountBasketAction
   | RemoveProductBasketAction
   | CreateBasketAction
-  | SuccedRemoveFromLikeBasketAction;
+  | SuccedRemoveFromLikeBasketAction
+  | SucceedCreatedOrderRequestBasketAction;

@@ -62,6 +62,13 @@ const ProductsReducer = (
         loadingProductMan: true,
       };
     }
+    case ProductActionTypes.SUCCESSFUL_REQUEST_WOMEN_PRODUCTS: {
+      return {
+        ...state,
+        loadingProductMan: false,
+        productsWoman: action.payload,
+      };
+    }
     case ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS: {
       return {
         ...state,

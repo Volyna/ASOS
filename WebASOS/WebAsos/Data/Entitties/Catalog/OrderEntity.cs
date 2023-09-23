@@ -12,6 +12,7 @@ namespace WebAsos.Data.Entitties.Catalog
 
         [ForeignKey(nameof(User))]
         public int? UserId { get; set; }
+        public string OrderNumber { get; set; }
 
 
         public CreditCardEntity CreditCard { get; set; }

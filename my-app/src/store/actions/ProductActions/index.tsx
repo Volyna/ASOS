@@ -7,6 +7,7 @@ import {
   removeProduct,
   updateProduct,
   getProductsMan,
+  getProductsWomen,
 } from "../../../services/api-products-service";
 import {
   ProductActionTypes,
@@ -27,6 +28,32 @@ export const GetAllProductMan = (iduser: number) => {
       if (response.data.isSuccess == true) {
         dispatch({
           type: ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS,
+          payload: response.data.payload,
+        });
+      } else {
+        dispatch({ type: ProductActionTypes.BAD_REQUEST_PRODUCT });
+        toast.error("Something get wrong...", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    } catch (e) {
+      dispatch({ type: ProductActionTypes.BAD_REQUEST_PRODUCT });
+      toast.error("Something get wrong...", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+};
+export const GetAllProductWomen = (iduser: number) => {
+  return async (dispatch: Dispatch<ProductsActions>) => {
+    try {
+      dispatch({ type: ProductActionTypes.START_REQUEST_PRODUCT });
+      const data = await getProductsWomen(iduser);
+      const { response } = data;
+      console.log("response", response);
+      if (response.data.isSuccess == true) {
+        dispatch({
+          type: ProductActionTypes.SUCCESSFUL_REQUEST_WOMEN_PRODUCTS,
           payload: response.data.payload,
         });
       } else {

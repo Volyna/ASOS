@@ -48,7 +48,8 @@ export enum ProductActionTypes {
   SERVER_PRODUCTS_ERROR = "SERVER_PRODUCTS_ERROR",
   SUCCESSFUL_REQUEST_LIST_PRODUCTS = "SUCCESSFUL_REQUEST_LIST_PRODUCTS",
   SUCCESSFUL_REQUEST_CREATE_PRODUCTS = "SUCCESSFUL_REQUEST_CREATE_PRODUCTS",
-  SUCCESSFUL_REQUEST_CURRENT_PRODUCT= "SUCCESSFUL_REQUEST_CURRENT_PRODUCT",
+  SUCCESSFUL_REQUEST_CURRENT_PRODUCT = "SUCCESSFUL_REQUEST_CURRENT_PRODUCT",
+  SUCCESSFUL_REQUEST_WOMEN_PRODUCTS = "SUCCESSFUL_REQUEST_WOMEN_PRODUCTS",
 
 }
 
@@ -60,6 +61,10 @@ interface BadRequestAction {
 }
 interface SuccessfulRequestManProductsAction {
   type: ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS;
+  payload: Array<IItemProduct>
+}
+interface SuccessfulRequestWomenProductsAction {
+  type: ProductActionTypes.SUCCESSFUL_REQUEST_WOMEN_PRODUCTS;
   payload: Array<IItemProduct>
 }
 interface SuccessfulRemoveProductAction {
@@ -108,3 +113,4 @@ export type ProductsActions =
   | SuccessfulRequestRemoveImageProductAction
   | SuccessfulRemoveProductAction
   | SuccessfulRequaestCurrentProduct
+  | SuccessfulRequestWomenProductsAction

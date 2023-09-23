@@ -93,3 +93,16 @@ export async function getProductsMan(iduser: number) {
     });
   return data;
 }
+export async function getProductsWomen(iduser: number) {
+  const data = await http
+    .post("/api/Product/getProdcutsWomen", iduser)
+    .then((response) => {
+      return {
+        response,
+      };
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return data;
+}

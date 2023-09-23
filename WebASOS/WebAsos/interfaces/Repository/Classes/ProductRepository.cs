@@ -57,7 +57,7 @@ namespace WebAsos.Interfaces.Repository.Classes
             try
             {
                 int idCategoryMan = await _dbContext.Categories.Where(c => c.Name.ToLower().Trim() == Product.Men && c.IsDeleted ==false).Select(p => p.Id).FirstOrDefaultAsync();
-                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryMan && p.IsDeleted == false).ToListAsync();
+                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryMan && p.IsDeleted == false && p.Quantity != 0).ToListAsync();
                 return resultProdcut;
 
             }
@@ -89,6 +89,22 @@ namespace WebAsos.Interfaces.Repository.Classes
             try
             {
                 var resultProdcut = await _dbContext.Products.Where(p => p.IsDeleted == false && p.Name.ToLower().Trim() == name.ToLower().Trim()).Select(p => p.Size.ToString()).ToListAsync();
+                return resultProdcut;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+
+        public async Task<List<ProductEntity>> GetAllProductsWomen()
+        {
+            try
+            {
+                int idCategoryWomen = await _dbContext.Categories.Where(c => c.Name.ToLower().Trim() == Product.Women && c.IsDeleted == false).Select(p => p.Id).FirstOrDefaultAsync();
+                var resultProdcut = await _dbContext.Products.Where(p => p.CategoryId == idCategoryWomen && p.IsDeleted == false && p.Quantity != 0).ToListAsync();
                 return resultProdcut;
 
             }

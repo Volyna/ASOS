@@ -23,6 +23,12 @@ const BasketReducer = (
         isBasketLoading: false,
       };
     }
+    case BasketActionTypes.SUCCEED_CREATE_ORDER: {
+      return {
+        ...state,
+        isBasketLoading: false,
+      };
+    }
     case BasketActionTypes.CREATE_BASKET: {
       return {
         ...state,

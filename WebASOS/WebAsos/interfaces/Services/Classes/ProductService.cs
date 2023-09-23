@@ -155,6 +155,56 @@ namespace WebAsos.Interfaces.Services.Classes
             }
         }
 
+        public async Task<ServiceResponse> GetAllProductsWomenAsync(int userId)
+        {
+            try
+            {
+                var products = await _productRepository.GetAllProductsWomen();
+                var userLikesProducts = await _likeProductRepository.GetAllLikesUser(userId);
+                if (products != null)
+                {
+                    List<ProductProductDTO> response = new List<ProductProductDTO>();
+                    foreach (var item in products)
+                    {
+                        ProductProductDTO tempProductDTO = new ProductProductDTO();
+                        tempProductDTO.Id = item.Id;
+                        tempProductDTO.Name = item.Name;
+                        tempProductDTO.Price = item.Price;
+                        tempProductDTO.Discount = item.Discount;
+                        tempProductDTO.Description = item.Description;
+                        tempProductDTO.Color = await _productRepository.GetAllColorProducsByName(item.Name);
+                        tempProductDTO.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
+                        tempProductDTO.Brand = item.Brand;
+                        var ifLikeExist = userLikesProducts.Where(l => l.userID == userId && l.productLikeId == item.Id).FirstOrDefault();
+                        tempProductDTO.isLikeUser = ifLikeExist != null ? true : false;
+                        var mainImage = await _productImageService.GetMainImageByIdAsync(item.Id);
+                        if (mainImage != null)
+                            tempProductDTO.MainImage = _productImageService.GetBase64ByName(mainImage.Name);
+                        tempProductDTO.Quantity = item.Quantity;
+                        tempProductDTO.IsInTheStock = item.IsInTheStock;
+                        tempProductDTO.IsInTheStock = item.IsInTheStock;
+                        tempProductDTO.CategoryId = item.CategoryId;
+                        //var productImages = await _productImageRepository.GetAllImagesById(item.Id);
+                        //tempProductDTO.Images = await _productImageService.GetAllProductImages(productImages);
+                        response.Add(tempProductDTO);
+
+
+                    }
+                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request", Payload = response };
+                }
+                return new ServiceResponse { IsSuccess = false, Message = "Some data is null !!!" };
+            }
+            catch (Exception ex)
+            {
+
+                return new ServiceResponse
+                {
+                    Message = ex.Message,
+                    IsSuccess = false,
+                };
+            }
+        }
+
         public async Task<ServiceResponse> GetProductAsync(string name)
         {
             ICollection<ProductEntity> res = _productRepository.GetProductsAsync();

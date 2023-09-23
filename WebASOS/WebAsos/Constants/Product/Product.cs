@@ -3,6 +3,6 @@
     public class Product
     {
         public const string Men = "men";
-        public const string Women = "user";
+        public const string Women = "women";
     }
 }

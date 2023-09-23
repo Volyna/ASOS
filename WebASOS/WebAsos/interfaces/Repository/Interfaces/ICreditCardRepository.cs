@@ -5,6 +5,7 @@ namespace WebAsos.interfaces.Repository.Interfaces
 {
     public interface ICreditCardRepository : IGenericRepository<CreditCardEntity, int>
     {
-        IQueryable<CreditCardEntity> CreditCards();
+        public Task CreateCredit(CreditCardEntity creditCard);
+        public Task<CreditCardEntity> IfCardExist(int idUse);
     }
 }

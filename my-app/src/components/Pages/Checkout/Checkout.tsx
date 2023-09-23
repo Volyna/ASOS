@@ -17,13 +17,14 @@ import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { IBasketRemove } from "../Account/Favourites/types";
-import { IChecout } from "./types";
+import { IChecout, IOrderChecout, IResponseListProductToOrder } from "./types";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { Country } from "../types";
 import axios from "axios";
 import { CheckoutInfoSchema } from "../validation";
 import { boolean } from "yup";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const expriy_format = (value: string) => {
@@ -36,7 +37,7 @@ const Checkout = () => {
     return expDateFormatter;
   };
   const { user } = useTypedSelector((store) => store.UserReducer);
-  const { GetBasketsByid, AddCountProductBasket, RemoveProductBasket, MinusCountProductBasket } =
+  const { GetBasketsByid, AddCountProductBasket, RemoveProductBasket, MinusCountProductBasket, CreateOrderProduct } =
     useActions();
   const { isBasketLoading, products } = useTypedSelector(
     (store) => store.BasketReducer
@@ -80,8 +81,33 @@ const Checkout = () => {
     cardCvv: ""
   }
   const onSubmitFormik = async (values: IChecout) => {
-    console.log("Formik submit: ", values);
-    console.log("Product to order: ", products);
+    const dataResonse: IOrderChecout = {
+      userId: user.id,
+      country: values.country,
+      state: values.state,
+      street: values.street,
+      zipCode: values.zipCode,
+      city: values.city,
+      homeNumber: values.homePhone,
+      cardNumber: values.cardNumber,
+      ExpirationDate: values.cardDate,
+      Cvv: values.cardCvv,
+      totalPrice: calculateTotalPrice(),
+      orders: []
+    }
+    products.forEach(item => {
+      var dataOrderProduct: IResponseListProductToOrder = {
+        productId: item.productId,
+        countProducts: item.countProducts,
+        price: item.price,
+        discount: item.discount,
+      }
+      dataResonse.orders.push(dataOrderProduct);
+
+    })
+    console.log("Product to response order: ", dataResonse);
+    CreateOrderProduct(dataResonse);
+
   };
   const formik = useFormik({
     initialValues: initValues,
@@ -113,11 +139,7 @@ const Checkout = () => {
         setCanChangeMinus(true);
       }
     });
-    if (canChangeMinus === true) {
-      MinusCountProductBasket(tempArray);
-    } else {
 
-    }
   };
   var removeProduct = (idProduct: number) => {
     console.log("removeProduct");
