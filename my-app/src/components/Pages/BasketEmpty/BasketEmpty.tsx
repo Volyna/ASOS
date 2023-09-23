@@ -3,7 +3,7 @@ import Header from "../../NavBar/header";
 import Footer from "../../Footer/FooterV";
 import Menu from "../../NavBar/menu";
 import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { Dispatch, useEffect, useState } from "react";
@@ -25,6 +25,7 @@ import {
 import { getBasketsById } from "../../../services/api-basket-service";
 import http from "../../../services/http_common";
 import { IBasketRemove } from "../Account/Favourites/types";
+import { toast } from "react-toastify";
 const BasketEmpty = () => {
   const { isAuth } = useTypedSelector((store) => store.UserReducer);
   const navigate = useNavigate();
@@ -38,6 +39,12 @@ const BasketEmpty = () => {
   useEffect(() => {
     GetBasketsByid(user.id);
   }, []);
+  if (isAuth == false) {
+    toast.error("First log in to the site", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    return <Navigate to={"/login"} />
+  }
 
   var calculateTotalPrice = () => {
     const totalPrice = products.reduce(
@@ -115,17 +122,23 @@ const BasketEmpty = () => {
                 </select>
               </div>
             </div>
-            <div className="row productPrice">
-              <p className="newPrice col-1">
-                {(item.price - item.discount) *
-                  item.countProducts}
-                $
-              </p>
+
+
+            {item.discount == 0 ? <div className="row productPrice"><p className="newPrice col-1">
+              {(item.price - item.discount) *
+                item.countProducts}
+              $
+            </p></div> : <div className=""> <p className="newPrice col-1">
+              {(item.price - item.discount) *
+                item.countProducts}
+              $
+            </p>
 
               <p className="oldPrice productPriceDiscount col-1">
                 {item.price * item.countProducts}$
-              </p>
-            </div>
+              </p></div>}
+
+
             <div className="row btnBasketProduct">
               <div className="flexDisplay">
                 <span

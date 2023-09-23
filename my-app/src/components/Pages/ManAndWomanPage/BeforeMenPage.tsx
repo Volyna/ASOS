@@ -42,8 +42,6 @@ const BeforeMenPage = () => {
 
             <BreadCrumbs />
 
-            {/* <div className="categors">{categories}</div> */}
-
             <p className="title">MEN</p>
 
             <div className="menBlock">

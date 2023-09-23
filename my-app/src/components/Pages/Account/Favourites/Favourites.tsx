@@ -5,11 +5,12 @@ import Liked from "../../../../images/liked.png";
 import Card1 from "../../../../images/favourite_card1.png";
 import userLogo from "../../../../images/user.svg";
 import cart from "../../../../images/cart.png";
-import like from "../../../../images/liked.png";
+import likeProduct from "../../../../images/liked.png";
+import like from "../../../../images/favouritesAccept.png";
 import search from "../../../../images/search.svg";
 import Logo from "../../../../images/Logo.svg";
 import Menu from "../../../NavBar/menu";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
@@ -18,6 +19,7 @@ import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../ManAndWomanPag
 import { IItemProductLike } from "../../../../store/reducers/LikeReducer/type";
 import { group } from "console";
 import { IBasketCreate, IBasketRemove } from "./types";
+import { toast } from "react-toastify";
 
 const Favourites = () => {
   const { LogOut, GetProductLikes, DeleteProductLike, CreateBasket, RemoveBasketFromLike, ChangeIsOnBasketLikes } = useActions();
@@ -30,6 +32,12 @@ const Favourites = () => {
   useEffect(() => {
     GetProductLikes(initLikeGetProduct);
   }, []);
+  if (isAuth == false) {
+    toast.error("First log in to the site", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    return <Navigate to={"/login"} />
+  }
   const SwitchLike = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, idProduct: number) => {
     var nameClass = (e.target as Element).className;
     const initDataLike: IAddLikeProductOrRemove = {
@@ -65,7 +73,7 @@ const Favourites = () => {
           <div className="likesLi">
             <div className="favouriteCard">
               <div className="likeFavourite">
-                <img width={30} height={30} src={like} onClick={(e) => { SwitchLike(e, item.id) }} className="favourites" alt="favourites" />
+                <img width={30} height={30} src={likeProduct} onClick={(e) => { SwitchLike(e, item.id) }} className="favourites" alt="favourites" />
               </div>
               <div className="imageFavourite"><img
                 width={272}
@@ -74,11 +82,19 @@ const Favourites = () => {
                 alt=""
               /></div>
               <div className="nameFavourite"><p>{item.name}</p></div>
-              <div className="row priceFavourite">
-                <div className="col-5 priceFavouriteCol"><div className="newPriceFavourite"><p>{item.price - item.discount} $</p></div>
-                  <div className="oldPriceFavourite"><p>{item.price} $</p></div></div>
+              {item.discount == 0 ?
+                <div className="row priceFavourite">
+                  <div className="col-5 priceFavouriteCol">
+                    <div className="newPriceFavouriteOne"><p>{item.price - item.discount}$</p></div>
+                  </div>
 
-              </div>
+                </div>
+                : <div className="row priceFavourite">
+                  <div className="col-5 priceFavouriteCol"><div className="newPriceFavourite"><p>{item.price - item.discount}$</p></div>
+                    <div className="oldPriceFavourite"><p>{item.price} $</p></div></div>
+
+                </div>}
+
               <div className="colorsFavourite">  </div>
               {item.quantity <= 0 ? <div className="basketBtnFavourite"><button
                 style={{ paddingTop: "6px", fontSize: "19px" }}
