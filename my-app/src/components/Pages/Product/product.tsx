@@ -12,9 +12,11 @@ import item1 from "../../../images/viewAll_1.png"
 import like from "../../../images/like.svg"
 import { useSelector } from 'react-redux';
 import { useActions } from '../../../hooks/useActions';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useEffect } from 'react';
+import { IBasketCreate} from "./types";
+import { toast } from 'react-toastify';
 
 const ProductPage = () => {
     const {id} = useParams()
@@ -23,12 +25,19 @@ const ProductPage = () => {
     const price = 55
     const {GetByIdProduct} = useActions()
     const {loading, productCurrent} = useTypedSelector((store) => store.ProductsReducer);
+    const { CreateBasket} = useActions();
+    const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
 
     useEffect(() => {
         GetByIdProduct(parseInt(id!));
     },[])
 
-
+    if (isAuth == false) {
+        toast.error("First log in to the site", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        return <Navigate to={"/login"} />
+      }
 
     const clrs = productCurrent.color.map((item) => {
             return(
@@ -37,7 +46,7 @@ const ProductPage = () => {
 
     const sizes = productCurrent.size.map((item) => {
             return(
-                <p className='code'>{item}</p>
+                <p className='code'>{item + " "} </p>
             )  
         })
 
@@ -46,6 +55,15 @@ const ProductPage = () => {
             <img src={`data:image/png;base64,${item}`} alt="" />
         )
     })
+
+    const AddTobasketProduct = (idProduct: number) => {
+        const initDataCreateBasket: IBasketCreate = {
+          countProducts: 1,
+          userIdOrder: user.id,
+          productId: idProduct
+        };
+        CreateBasket(initDataCreateBasket);
+      }
 
 
 
@@ -95,7 +113,7 @@ const ProductPage = () => {
 
                 <div className="blocke">
                     <div className="sizes">
-                    <p className='code'>Sizes:</p>
+                    <p className='code'>Sizes: </p>
                         {/* <button className='size active'>xs</button>
                         <button className='size none' style={{color:"gray"}}>s</button>
                         <button className='size active' style={{border:"2px solid black"}}>m</button>
@@ -117,7 +135,7 @@ const ProductPage = () => {
                 </div>
 
                 <div className="blocke">
-                    <button className='but'>add to busket</button>
+                    <button className='but' onClick={(e) => AddTobasketProduct(productCurrent.id)}>Add to basket</button>
                 </div>
 
                 <div className="blocke">
@@ -154,12 +172,6 @@ const ProductPage = () => {
                             {arrow}
                         </li>
                         <hr/>
-
-                        <li>
-                            <p>Material & suppliers</p>
-                            {arrow}
-                        </li>
-                        <hr/>
                         <li>
                             <p>Brand</p>
                             {arrow}
@@ -170,16 +182,7 @@ const ProductPage = () => {
                             {arrow}
                         </li>
                         <hr/>
-                        <li>
-                            <p>Care guide</p>
-                            {arrow}
-                        </li>
-                        <hr/>
-                        <li>
-                            <p>Reviews</p>
-                            {arrow}
-                        </li>
-                        <hr/>
+                        
                     </ul>
                 </div>
             </div>

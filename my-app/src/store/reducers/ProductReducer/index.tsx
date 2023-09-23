@@ -62,6 +62,7 @@ const ProductsReducer = (
       return {
         ...state,
         loadingProductMan: true,
+        loading:true,
       };
     }
     case ProductActionTypes.SUCCESSFUL_REQUEST_WOMEN_PRODUCTS: {
@@ -176,8 +177,9 @@ const ProductsReducer = (
       return {
         ...state,
         message: action.payload.message,
-        // loading: false,
+        loading: false,
         productForUpdate: action.payload,
+        productCurrent: action.payload
       };
     }
     case ProductActionTypes.SUCCESSFUL_REQUEST__REMOVE_IMAGE_PRODUCT: {
