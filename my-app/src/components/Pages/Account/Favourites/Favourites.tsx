@@ -91,7 +91,7 @@ const Favourites = () => {
                 </div>
                 : <div className="row priceFavourite">
                   <div className="col-5 priceFavouriteCol"><div className="newPriceFavourite"><p>{item.price - item.discount}$</p></div>
-                    <div className="oldPriceFavourite"><p>{item.price} $</p></div></div>
+                    <div className="oldPriceFavourite"><p>{item.price}$</p></div></div>
 
                 </div>}
 

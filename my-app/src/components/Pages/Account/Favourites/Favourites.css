@@ -103,11 +103,11 @@
 }
 
 .favouritesContent .nameFavourite {
-    margin-bottom: 10px;
+    min-height: 36px;
 }
 
 .favouritesContent .priceFavourite {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .favouritesContent .priceFavouriteCol {
