@@ -49,7 +49,7 @@ const DatatableProducts = () => {
               brand: string;
               quantity: number;
               isInTheStock: boolean;
-              image: string;
+              image: any;
               category: string;
             }) => ({
               id: item.id,
