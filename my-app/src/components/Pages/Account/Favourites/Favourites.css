@@ -128,3 +128,18 @@
     border-top: 1px solid #9A9A9A;
     padding-top: 50px;
 }
+
+.favouritesContentIsEmpty p {
+    color: var(--black, #353535);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    margin-bottom: 50px;
+    line-height: 18px;
+    /* 100% */
+}

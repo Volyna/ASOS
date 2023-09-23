@@ -228,8 +228,9 @@
 }
 
 
-.basket_text {
+.mainInformation .basket_text {
     margin: 0;
+    margin-bottom: 50px;
     color: var(--black, #353535);
     text-align: center;
     font-feature-settings: 'clig' off, 'liga' off;
