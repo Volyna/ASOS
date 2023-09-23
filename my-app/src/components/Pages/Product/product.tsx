@@ -41,6 +41,12 @@ const ProductPage = () => {
             )  
         })
 
+    const images = productCurrent.images.map((item:any) => {
+        return(
+            <img src={`data:image/png;base64,${item}`} alt="" />
+        )
+    })
+
 
 
     const arrow = <button style={{backgroundColor:'white', border:'none', width:"30px"}}><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" style={{margin: '10px 0 10px 0'}}><path d="M16.2468 6.65752L9.9993 12.7475L3.7518 6.65752C3.64018 6.54849 3.49034 6.48746 3.3343 6.48746C3.17827 6.48746 3.02842 6.54849 2.9168 6.65752C2.86275 6.71048 2.81982 6.77368 2.7905 6.84344C2.76119 6.9132 2.74609 6.98811 2.74609 7.06377C2.74609 7.13944 2.76119 7.21434 2.7905 7.2841C2.81982 7.35386 2.86275 7.41707 2.9168 7.47002L9.56305 13.95C9.67977 14.0638 9.83631 14.1275 9.9993 14.1275C10.1623 14.1275 10.3188 14.0638 10.4356 13.95L17.0818 7.47127C17.1362 7.41828 17.1795 7.35491 17.209 7.28493C17.2386 7.21494 17.2538 7.13974 17.2538 7.06377C17.2538 6.9878 17.2386 6.91261 17.209 6.84262C17.1795 6.77263 17.1362 6.70927 17.0818 6.65627C16.9702 6.54724 16.8203 6.48621 16.6643 6.48621C16.5083 6.48621 16.3584 6.54724 16.2468 6.65627V6.65752Z" fill="#353535"/></svg></button>             
@@ -66,7 +72,7 @@ const ProductPage = () => {
                 <BreadCrumbs/>
        <div className='product'>
             <div className="photos">
-                <img src={`data:image/png;base64,${productCurrent.mainImage}`} alt="" />
+                {images}
             </div>
 
             <div className="info">

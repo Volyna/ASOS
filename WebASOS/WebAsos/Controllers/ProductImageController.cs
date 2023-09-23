@@ -16,7 +16,7 @@ namespace WebAsos.Controllers
             _productImageService = productImageService;
         }
 
-        [HttpPost("GetImageById")]
+        [HttpGet("GetImageById")]
         public async Task<IActionResult> GetImageByIdAsync(FindByIdViewModel model)
         {
             var res = await _productImageService.GetMainImageByIdAsync(model.Id);
@@ -35,5 +35,7 @@ namespace WebAsos.Controllers
             var res = await _productImageService.GetMainImageByParentId(id);
             return Ok(res);
         }
+
+
     }
 }

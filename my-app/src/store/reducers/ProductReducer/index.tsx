@@ -15,7 +15,7 @@ const initialState: ProductsState = {
     quantity: 0,
     isInTheStock: false,
     mainImage: "",
-    images: "",
+    images: [],
     categoryId: 0,
     isLikeUser: false,
   },

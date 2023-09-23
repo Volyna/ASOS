@@ -193,6 +193,9 @@ namespace WebAsos.Interfaces.Services.Classes
             var item = _mapper.Map<ProductEntity, ProductViewModel>(res);
             var img = await _productImageService.GetMainImageByParentId(item.Id);
             item.Image = _productImageService.GetBase64ByName(img.Name);
+            var ListImages = await _productImageService.ListOfImages(id);
+            var images64 = await _productImageService.GetAllProductImages(ListImages);
+
 
             ProductProductDTO result = new();
             result.Id = item.Id;
@@ -203,10 +206,7 @@ namespace WebAsos.Interfaces.Services.Classes
             result.Color = await _productRepository.GetAllColorProducsByName(item.Name);
             result.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
             result.Brand = item.Brand;
-
-            var mainImage = await _productImageService.GetMainImageByIdAsync(item.Id);
-            if (mainImage != null)
-                result.MainImage = _productImageService.GetBase64ByName(mainImage.Name);
+            result.Images = images64;
             result.Quantity = item.Quantity;
             result.IsInTheStock = item.IsInTheStock;
             result.IsInTheStock = item.IsInTheStock;

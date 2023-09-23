@@ -55,6 +55,28 @@ namespace WebAsos.Interfaces.Services.Classes
             }
         }
 
+
+        public async Task<List<string>> ListOfImages(int id)
+        {
+            try
+            {
+                List<ProductImageEntity> resultImages = new List<ProductImageEntity>();
+                resultImages = _productImageRepository.GetAll().Where(image => image.ProductId == id).ToList();
+                List<string> resultList = new List<string>();
+                foreach(var item in resultImages)
+                {
+                    resultList.Add(item.Name);
+                }
+                return resultList;
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+
+
         public string GetBase64ByName(string name)
         {
             try
