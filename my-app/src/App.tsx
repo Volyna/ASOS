@@ -35,8 +35,6 @@ import CustomerService from "./components/Pages/CustomerService/CustomerService"
 import Checkout from "./components/Pages/Checkout/Checkout";
 
 import Error from "./components/Pages/Error/error";
-import ProductsPage from "./components/Pages/ItemsPage/ProductsPage";
-import ProductPage from "./components/Pages/Product/product";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import Loader from "./components/loader";
 import PasswordRecovery from "./components/Pages/passwordRecovery";
@@ -53,6 +51,8 @@ import ProductEdit from "./components/admin/components/products/edit/ProductEdit
 import BeforeMenPage from "./components/Pages/ManAndWomanPage/BeforeMenPage";
 import BeforeWomenPage from "./components/Pages/ManAndWomanPage/BeforeWomenPage";
 import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
+import ProductPageMan from "./components/Pages/Product/product";
+import ProductPageWoman from "./components/Pages/Product/productPageWoman";
 
 function App() {
   const { loading } = useTypedSelector((store) => store.UserReducer);
@@ -128,8 +128,8 @@ function App() {
           <Route path="/women" element={<BeforeWomenPage />} />
           <Route path="/women/viewAll" element={<Women />} />
           <Route path="/men/viewAll" element={<Men />} />
-          <Route path="/men/viewAll/:id" element={<ProductPage />} />
-          <Route path="/women/viewAll/:id" element={<ProductPage />} />
+          <Route path="/men/viewAll/:id" element={<ProductPageMan />} />
+          <Route path="/women/viewAll/:id" element={<ProductPageWoman />} />
 
           <Route path="*" element={<Error />} />
         </Routes>
