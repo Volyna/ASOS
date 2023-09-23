@@ -136,12 +136,12 @@ export const productColumns = [
   },
   {
     field: "image",
-    headerName: "Image",
+    headerName: "Images",
     width: 130,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImg" src={params.row.images} alt="product" />
+          <img className="cellImg" src={`data:image/png;base64,${params.row.image}`} alt="product" />
         </div>
       );
     },
