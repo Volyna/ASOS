@@ -196,3 +196,8 @@
     line-height: 18px;
     /* 100% */
 }
+
+.favouritesContent .oldPriceFavourite{
+    color: #F05B53;
+    text-decoration:line-through;
+}

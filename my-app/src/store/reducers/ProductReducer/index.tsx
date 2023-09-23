@@ -15,7 +15,7 @@ const initialState: ProductsState = {
     quantity: 0,
     isInTheStock: false,
     mainImage: "",
-    images: "",
+    images: [],
     categoryId: 0,
     productType: "",
     material: "",
@@ -196,6 +196,7 @@ const ProductsReducer = (
       return {
         ...state,
         productCurrent: action.payload,
+        loading:false
       };
     }
 

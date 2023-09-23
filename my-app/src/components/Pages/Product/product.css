@@ -69,7 +69,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .size {
@@ -88,6 +87,7 @@
 .sizes .active{
     align-self: center;
     margin: 0 20px 0 20px;
+    color: black;
 }
 
 /* .active:hover{
@@ -207,4 +207,10 @@
 .carousel p {
     display: block;
     width: 100%;
+}
+
+.prodLoad{
+    margin-top: 300px;
+    align-self: center;
+    margin-left: 50%;
 }

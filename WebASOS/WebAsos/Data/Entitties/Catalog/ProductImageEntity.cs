@@ -10,8 +10,6 @@ namespace WebAsos.Data.Entitties.Catalog
 
         public bool IsMainImage { get; set; }
 
-
-
         public ProductEntity Product { get; set; }
 
         [ForeignKey(nameof(Product))]

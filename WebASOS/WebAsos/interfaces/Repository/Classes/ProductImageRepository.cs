@@ -31,5 +31,20 @@ namespace WebAsos.Interfaces.Repository.Classes
                 return null;
             }
         }
+
+        public async Task<List<string>> ListOfImages(int id)
+        {
+            try
+            {
+                var result = await _dbContext.ProductImages.Where(i => i.ProductId == id).Select(i => i.Name).ToListAsync();
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
     }
 }

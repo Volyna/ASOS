@@ -5,8 +5,7 @@ namespace WebAsos.Interfaces.Repository.Interfaces
     public interface IProductImageRepository : IGenericRepository<ProductImageEntity, int>
     {
         public IQueryable<ProductImageEntity> ProductImages { get; }
-        public Task<List<string>> GetAllImagesById(int id);
-      
+        public Task<List<string>> ListOfImages(int id);
 
     }
 }
