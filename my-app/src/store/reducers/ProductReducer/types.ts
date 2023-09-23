@@ -33,8 +33,9 @@ interface IItemProduct {
   isInTheStock: boolean,
   images: any,
   mainImage: string,
-  categoryId: number
-  isLikeUser: boolean
+  categoryId: number,
+  isLikeUser: boolean,
+  message: null | string;
 }
 
 export enum ProductActionTypes {
@@ -85,7 +86,7 @@ interface SuccessfulUpdateProductAction {
 }
 interface SuccessfulGetProductAction {
   type: ProductActionTypes.SUCCESSFUL_REQUEST_GET_PRODUCT;
-  payload: any;
+  payload: IItemProduct;
 }
 interface SuccessfulCreateProductAction {
   type: ProductActionTypes.SUCCESSFUL_REQUEST_CREATE_PRODUCTS;
