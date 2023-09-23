@@ -28,17 +28,14 @@ namespace WebAsos.Data.Entitties.Catalog
         [Range(0, 100, ErrorMessage = "The Discount field must be between 0 and 100.")]
         public int Discount { get; set; }
 
-
+        [Required(ErrorMessage = "The Sizse field is required.")]
+        public string Size { get; set; }
         [Required(ErrorMessage = "The Description field is required.")]
         public string Description { get; set; }
 
 
         [Required(ErrorMessage = "The Color field is required.")]
         public string Color { get; set; }
-
-
-        [Required(ErrorMessage = "The Sizse field is required.")]
-        public string Size { get; set; }
 
 
         [Required(ErrorMessage = "The Brand field is required.")]

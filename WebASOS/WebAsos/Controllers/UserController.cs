@@ -174,6 +174,16 @@ namespace WebAsos.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsersAsync()
+        {
+            var result = await _userService.GetAllUsersAsync();
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
     }
 }

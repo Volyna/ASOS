@@ -341,6 +341,10 @@ namespace WebAsos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("text");
@@ -358,6 +362,135 @@ namespace WebAsos.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("tblOrders");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderProductEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cvv")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("ExpirationDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HomeNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("tblOrdersProducts");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderProductItemEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("OrderProductEntityId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderProductEntityId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("tblOrderProductItem");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderedProductEntity", b =>
@@ -788,6 +921,40 @@ namespace WebAsos.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderProductEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.IdentityUser.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderProductItemEntity", b =>
+                {
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.OrderProductEntity", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderProductEntityId");
+
+                    b.HasOne("WebAsos.Data.Entitties.Catalog.ProductEntity", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAsos.Data.Entitties.IdentityUser.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderedProductEntity", b =>
                 {
                     b.HasOne("WebAsos.Data.Entitties.Catalog.OrderEntity", "Order")
@@ -858,6 +1025,11 @@ namespace WebAsos.Migrations
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderEntity", b =>
                 {
                     b.Navigation("OrderedProducts");
+                });
+
+            modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.OrderProductEntity", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("WebAsos.Data.Entitties.Catalog.ProductEntity", b =>

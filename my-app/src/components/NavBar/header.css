@@ -62,8 +62,8 @@
     background-image: url("../../images/userAcept.png");
 }
 
-.favourites:hover {
-    background-image: url("../../images/liked.png");
+.mainblock .favourites:hover {
+    background-image: url("../../images/favouritesAccept.png");
 }
 
 .userIcons img {

@@ -15,7 +15,7 @@ import AdminLayout from "./components/containers/admin/AdminLayout";
 import CategoryCreatePage from "./components/admin/components/categories/create/CategoryCreatePage";
 import FAQs from "./components/Pages/FAQs/FAQs";
 
-import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
+
 import Header from "./components/NavBar/header";
 import MainPage from "./components/Pages/Main/MainPage";
 import Register from "./components/auth/register";
@@ -49,8 +49,10 @@ import CategoryCreate from "./components/admin/components/categories/create/Cate
 import ProductCreate from "./components/admin/components/products/create/ProductCreatePage";
 import UserCreatePage from "./components/admin/components/user/create/UserCreatePage";
 import CategoryEdit from "./components/admin/components/categories/edit/CategoryEditPage";
-
-// import ProductEditPage from "./components/admin/components/products/edit/ProductEditPage";
+import ProductEdit from "./components/admin/components/products/edit/ProductEditPage";
+import BeforeMenPage from "./components/Pages/ManAndWomanPage/BeforeMenPage";
+import BeforeWomenPage from "./components/Pages/ManAndWomanPage/BeforeWomenPage";
+import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
 
 function App() {
   const { loading } = useTypedSelector((store) => store.UserReducer);
@@ -77,7 +79,7 @@ function App() {
             </Route>
             <Route path="products">
               <Route index element={<ListProducts />} />
-              <Route path=":productId" element={<Single />} />
+              <Route path=":id" element={<ProductEdit />} />
               <Route path="new" element={<ProductCreate />} />
             </Route>
             <Route path="categories">
@@ -122,10 +124,12 @@ function App() {
           <Route path="/account/favourites" element={<Favourites />} />
           <Route path="/checkout" element={<Checkout />} />
 
-          <Route path="/men" element={<Men />} />
-          <Route path="/women" element={<Women />} />
-          <Route path="/ViewAll" element={<ProductsPage />} />
-          <Route path="/men/:id" element={<ProductPage />} />
+          <Route path="/men" element={<BeforeMenPage />} />
+          <Route path="/women" element={<BeforeWomenPage />} />
+          <Route path="/women/viewAll" element={<Women />} />
+          <Route path="/men/viewAll" element={<Men />} />
+          <Route path="/men/viewAll/:id" element={<ProductPage />} />
+          <Route path="/women/viewAll/:id" element={<ProductPage />} />
 
           <Route path="*" element={<Error />} />
         </Routes>
@@ -135,91 +139,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   const { loading } = useTypedSelector((store) => store.UserReducer);
-//   const { darkMode } = useContext(DarkModeContext);
-//   const { pathname } = useLocation();
-
-//   useLayoutEffect(() => {
-//     window.scrollTo({ top: 0, behavior: "smooth" });
-//   }, [pathname]);
-
-//   return (
-//     <>
-//       {loading == true ? (
-//         <Loader />
-//       ) : (
-//             <Routes>
-//               <Route path="/" element={<MainPage />} />
-//               <Route path="login" element={<LoginePage />} />
-//               <Route path="resetPassword" element={<PasswordUpdateRecovery />} />
-//               <Route path="register" element={<RegisterPage />} />
-//               <Route path="forgotPassword" element={<PasswordRecovery />} />
-//               <Route path="admin" element={<AdminLayout />} />
-//           <Routes>
-//             <Route path="/admin">
-//               <Route index element={<Home />} />
-//           {/* <Route path="login" element={<Login />} /> */}
-//              <Route path="categoryCreate" element={<CategoryCreatePage />} />
-//           {/* <Route path="categoryEdit" element={<CategoryEditPage />} />
-//           <Route path="productCreate" element={<ProductCreatePage />} />
-//           <Route path="productEdit" element={<ProductEditPage />} /> */}
-
-//           <Route path="users">
-//             <Route index element={<List />} />
-//             <Route path=":userId" element={<SingleUser />} />
-//             <Route
-//               path="new"
-//               element={<New inputs={userInputs} title="Add New User" />}
-//             />
-//           </Route>
-//           <Route path="products">
-//             <Route index element={<List />} />
-//             {/* <Route path=":productId" element={<Single />} /> */}
-//             <Route
-//               path="new"
-//               element={<New inputs={productInputs} title="Add New Product" />}
-//             />
-//           </Route>
-//         </Route>
-
-//         <Route path="/" element={<MainPage />} />
-//         <Route path="login" element={<LoginePage />} />
-//         <Route path="register" element={<RegisterPage />} />
-//         {/* <Route path="admin" element={<AdminLayout />} /> */}
-
-//           <Route path="customer-care" element={<FAQs />} />
-//           <Route path="customer-service" element={<CustomerService />} />
-
-//           <Route path="basket-empty" element={<BasketEmpty />} />
-//           <Route path="basket" element={<Basket />} />
-
-//           <Route path="/account/contact-information" element={<ContactInf />} />
-
-//           <Route path="/account/shopping-history" element={<Payment />} />
-//           <Route
-//             path="/account/shopping-history-empty"
-//             element={<PaymentEmpty />}
-//           />
-
-//           <Route path="/account/returns" element={<Returns />} />
-//           <Route path="/account/returns-empty" element={<ReturnsEmpty />} />
-
-//           <Route path="/account/favourites" element={<Favourites />} />
-//           <Route path="/checkout" element={<Checkout />} />
-
-//           <Route path="/men" element={<Men />} />
-//           <Route path="/women" element={<Women />} />
-//           <Route path="/ViewAll" element={<ProductsPage />} />
-//           <Route path="/Prod" element={<ProductPage />} />
-
-//           <Route path="*" element={<Error />} />
-//         </Routes>
-
-//     </>
-
-//  )
-// }
-
-// export default App;

@@ -307,7 +307,7 @@
 .content .likeProductItem {
     position: absolute;
     right: 10px;
-    top: 23px;
+    top: 13px;
 }
 
 .content .likeProductItem img {
@@ -414,9 +414,9 @@
 }
 
 
-.content .likeImage {
-    background-image: url("../../../images/liked.png");
-}
+/* .content .likeImage {
+    background-image: url("../../../images/liked.png") repeat-x top center;
+} */
 
 .content .styleArrowSelect {
     margin-left: 10px;
@@ -429,6 +429,23 @@
     background-position-y: -3px;
     width: 50px;
     background-image: url("../../../images/arrow-down-Acept.png");
+
+}
+
+.favourites {
+    background-image: url("../../../images/like.png");
+}
+
+.content .oneItemProduct .likeProductItem .favourites {
+    background-image: url("../../../images/like.png");
+}
+
+.content .oneItemProduct .likeProductItem .likeImage {
+    background-image: url("../../../images/liked.png");
+}
+
+.content .oneItemProduct .likeProductItem img:hover {
+    background-image: url("../../../images/liked.png");
 
 }
 
@@ -501,7 +518,6 @@
 .content .contentProductNavBar {
     flex-shrink: 0;
     width: 200px;
-    overflow: auto;
     position: sticky;
     top: 125px;
     margin-bottom: 20px;
@@ -660,6 +676,7 @@
 .content .nameProductItem p {
     margin: 0;
     padding: 0;
+    margin-bottom: 10px;
 }
 
 .content .imageProductItem {
@@ -667,7 +684,7 @@
 }
 
 .content .nameProductItem {
-    margin-bottom: 10px;
+    max-width: 285px;
     padding-left: 10px;
     padding-right: 10px;
 }

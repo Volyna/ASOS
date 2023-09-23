@@ -18,11 +18,14 @@ export interface ProductsState {
 interface IItemProduct {
   id: number;
   name: string,
+  productType: string,
+  material: string,
+  pattern: string,
+  fit: string,
+  shop: string,
   price: number,
   discount: number,
   description: string,
-  // color: string,
-  // size: string,
   color: Array<string>,
   size: Array<string>,
   brand: string,
@@ -30,8 +33,9 @@ interface IItemProduct {
   isInTheStock: boolean,
   images: any,
   mainImage: string,
-  categoryId: number
-  isLikeUser: boolean
+  categoryId: number,
+  isLikeUser: boolean,
+  message: null | string;
 }
 
 export enum ProductActionTypes {
@@ -45,7 +49,8 @@ export enum ProductActionTypes {
   SERVER_PRODUCTS_ERROR = "SERVER_PRODUCTS_ERROR",
   SUCCESSFUL_REQUEST_LIST_PRODUCTS = "SUCCESSFUL_REQUEST_LIST_PRODUCTS",
   SUCCESSFUL_REQUEST_CREATE_PRODUCTS = "SUCCESSFUL_REQUEST_CREATE_PRODUCTS",
-  SUCCESSFUL_REQUEST_CURRENT_PRODUCT= "SUCCESSFUL_REQUEST_CURRENT_PRODUCT",
+  SUCCESSFUL_REQUEST_CURRENT_PRODUCT = "SUCCESSFUL_REQUEST_CURRENT_PRODUCT",
+  SUCCESSFUL_REQUEST_WOMEN_PRODUCTS = "SUCCESSFUL_REQUEST_WOMEN_PRODUCTS",
 
 }
 
@@ -57,6 +62,10 @@ interface BadRequestAction {
 }
 interface SuccessfulRequestManProductsAction {
   type: ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS;
+  payload: Array<IItemProduct>
+}
+interface SuccessfulRequestWomenProductsAction {
+  type: ProductActionTypes.SUCCESSFUL_REQUEST_WOMEN_PRODUCTS;
   payload: Array<IItemProduct>
 }
 interface SuccessfulRemoveProductAction {
@@ -77,7 +86,7 @@ interface SuccessfulUpdateProductAction {
 }
 interface SuccessfulGetProductAction {
   type: ProductActionTypes.SUCCESSFUL_REQUEST_GET_PRODUCT;
-  payload: any;
+  payload: IItemProduct;
 }
 interface SuccessfulCreateProductAction {
   type: ProductActionTypes.SUCCESSFUL_REQUEST_CREATE_PRODUCTS;
@@ -105,3 +114,4 @@ export type ProductsActions =
   | SuccessfulRequestRemoveImageProductAction
   | SuccessfulRemoveProductAction
   | SuccessfulRequaestCurrentProduct
+  | SuccessfulRequestWomenProductsAction

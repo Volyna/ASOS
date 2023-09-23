@@ -18,8 +18,9 @@ namespace WebAsos.Controllers
         }
 
         [HttpPost("addOrder")]
-        public async Task<IActionResult> AddOrderAsync(OrderDTO model)
+        public async Task<IActionResult> AddOrderAsync([FromBody] OrderDTO model)
         {
+
             var result = await _orderService.AddOrderAsync(model);
             return Ok(result);
         }

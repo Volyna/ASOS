@@ -17,6 +17,8 @@ namespace WebAsos.Data
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
 
+        public DbSet<OrderProductEntity> OrderProduct { get; set; }
+        public DbSet<OrderProductItemEntity> OrderProductItem { get; set; }
         public DbSet<CategoryEntity> Categories { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<ProductImageEntity> ProductImages { get; set; }

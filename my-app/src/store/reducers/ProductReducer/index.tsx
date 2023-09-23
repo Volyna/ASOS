@@ -3,7 +3,7 @@ import { ProductActionTypes, ProductsActions, ProductsState } from "./types";
 const initialState: ProductsState = {
   productsMan: [],
   productsWoman: [],
-  productCurrent:{
+  productCurrent: {
     id: 0,
     name: "",
     price: 0,
@@ -17,7 +17,13 @@ const initialState: ProductsState = {
     mainImage: "",
     images: [],
     categoryId: 0,
+    productType: "",
+    material: "",
+    pattern: "",
+    fit: "",
+    shop: "",
     isLikeUser: false,
+    message: "",
   },
   loadingProductMan: false,
   loadingProductWoman: false,
@@ -27,6 +33,11 @@ const initialState: ProductsState = {
   productForUpdate: {
     id: 0,
     name: "",
+    productType: "",
+    material: "",
+    pattern: "",
+    fit: "",
+    shop: "",
     price: 0,
     discount: 0,
     description: "",
@@ -38,7 +49,8 @@ const initialState: ProductsState = {
     mainImage: "",
     images: "",
     categoryId: 0,
-    isLikeUser: false
+    isLikeUser: false,
+    message: "",
   },
 };
 const ProductsReducer = (
@@ -50,7 +62,13 @@ const ProductsReducer = (
       return {
         ...state,
         loadingProductMan: true,
-        loading: true
+      };
+    }
+    case ProductActionTypes.SUCCESSFUL_REQUEST_WOMEN_PRODUCTS: {
+      return {
+        ...state,
+        loadingProductMan: false,
+        productsWoman: action.payload,
       };
     }
     case ProductActionTypes.SUCCESSFUL_REQUEST_MAN_PRODUCTS: {
@@ -80,6 +98,11 @@ const ProductsReducer = (
         productForUpdate: {
           id: 0,
           name: "",
+          productType: "",
+          material: "",
+          pattern: "",
+          fit: "",
+          shop: "",
           price: 0,
           discount: 0,
           description: "",
@@ -91,7 +114,8 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
-          isLikeUser: false
+          isLikeUser: false,
+          message: "",
         },
         message: "",
         loading: true,
@@ -103,6 +127,11 @@ const ProductsReducer = (
         productForUpdate: {
           id: 0,
           name: "",
+          productType: "",
+          material: "",
+          pattern: "",
+          fit: "",
+          shop: "",
           price: 0,
           discount: 0,
           description: "",
@@ -114,7 +143,8 @@ const ProductsReducer = (
           mainImage: "",
           images: "",
           categoryId: 0,
-          isLikeUser: false
+          isLikeUser: false,
+          message: "",
         },
         message: action.payload.message,
         loading: false,
@@ -146,8 +176,8 @@ const ProductsReducer = (
       return {
         ...state,
         message: action.payload.message,
-        loading: false,
-        productForUpdate: action.payload.payload,
+        // loading: false,
+        productForUpdate: action.payload,
       };
     }
     case ProductActionTypes.SUCCESSFUL_REQUEST__REMOVE_IMAGE_PRODUCT: {

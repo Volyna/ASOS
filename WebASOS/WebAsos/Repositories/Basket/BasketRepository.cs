@@ -93,7 +93,7 @@ namespace WebAsos.Repositories.Basket
                 List<BasketsResponseDTO> result = new List<BasketsResponseDTO>();
                 foreach (var item in basketEntities)
                 {
-                    var product = await _context.Products.Where(p => p.Id == item.ProductId).FirstOrDefaultAsync();
+                    var product = await _context.Products.Where(p => p.Id == item.ProductId && p.Quantity != 0).FirstOrDefaultAsync();
                     if (product != null)
                     {
                         BasketsResponseDTO newBasket = new BasketsResponseDTO();

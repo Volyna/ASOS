@@ -3,7 +3,7 @@ import Header from "../../NavBar/header";
 import Footer from "../../Footer/FooterV";
 import Menu from "../../NavBar/menu";
 import BreadCrumbs from "../../BreadCrumbs/breadCrumbs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { Dispatch, useEffect, useState } from "react";
@@ -25,6 +25,7 @@ import {
 import { getBasketsById } from "../../../services/api-basket-service";
 import http from "../../../services/http_common";
 import { IBasketRemove } from "../Account/Favourites/types";
+import { toast } from "react-toastify";
 const BasketEmpty = () => {
   const { isAuth } = useTypedSelector((store) => store.UserReducer);
   const navigate = useNavigate();
@@ -38,6 +39,12 @@ const BasketEmpty = () => {
   useEffect(() => {
     GetBasketsByid(user.id);
   }, []);
+  if (isAuth == false) {
+    toast.error("First log in to the site", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    return <Navigate to={"/login"} />
+  }
 
   var calculateTotalPrice = () => {
     const totalPrice = products.reduce(
@@ -50,7 +57,7 @@ const BasketEmpty = () => {
   var plusProduct = (idProduct: number) => {
     var tempArray = products;
     tempArray.forEach((i) => {
-      if (i.productId == idProduct) {
+      if (i.productId == idProduct && i.countProducts + 1 <= i.quantity) {
         i.countProducts += 1;
       }
     });
@@ -114,26 +121,24 @@ const BasketEmpty = () => {
 
                 </select>
               </div>
-              {/* <div className="col-1 productInfoArrow">
-            <img
-              height={20}
-              width={20}
-              src={Arrow_down}
-              alt="arrow"
-            />
-          </div> */}
             </div>
-            <div className="row productPrice">
-              <p className="newPrice col-1">
-                {(item.price - item.discount) *
-                  item.countProducts}
-                $
-              </p>
+
+
+            {item.discount == 0 ? <div className="row productPrice"><p className="newPrice col-1">
+              {(item.price - item.discount) *
+                item.countProducts}
+              $
+            </p></div> : <div className=""> <p className="newPrice col-1">
+              {(item.price - item.discount) *
+                item.countProducts}
+              $
+            </p>
 
               <p className="oldPrice productPriceDiscount col-1">
                 {item.price * item.countProducts}$
-              </p>
-            </div>
+              </p></div>}
+
+
             <div className="row btnBasketProduct">
               <div className="flexDisplay">
                 <span
@@ -304,7 +309,7 @@ const BasketEmpty = () => {
               *Items are reserved for 24 hours than you can find them in <br />{" "}
               your favorites
             </p>
-            <button className="btn-buy">checkout</button>
+            <Link to={"/checkout"}> <button className="btn-buy">checkout</button></Link>
             <div className="standard">
               <p className="shipping">Standard shipping</p>
               <p className="pFaster">

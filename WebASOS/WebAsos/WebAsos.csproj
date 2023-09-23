@@ -13,8 +13,8 @@
     <Content Remove="interfaces\JwtTokenService\**" />
     <EmbeddedResource Remove="interfaces\JwtTokenService\**" />
     <None Remove="interfaces\JwtTokenService\**" />
-    <None Remove="Interfaces\LikesproductInterfaces\" />
     <None Remove="Repositories\LikesProducts\" />
+    <None Remove="Constants\OrderStatus\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.60.0" />
@@ -61,12 +61,11 @@
     <None Remove="Repositories\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="interfaces\JwtTokenInterfaces\" />
     <Folder Include="Data\Validation\User\" />
     <Folder Include="Data\AutoMapper\User\" />
     <Folder Include="Repositories\User\" />
-    <Folder Include="Interfaces\LikesproductInterfaces\" />
     <Folder Include="Repositories\LikesProducts\" />
+    <Folder Include="Constants\OrderStatus\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="SMTP_Email\html\confirmEmail.html">

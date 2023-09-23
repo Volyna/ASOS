@@ -19,6 +19,7 @@ import cart from "../../../../images/cart.png";
 import like from "../../../../images/like.svg";
 import search from "../../../../images/search.svg";
 import Menu from "../../../NavBar/menu";
+import { toast } from "react-toastify";
 const ContactInf = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [myState, setMyState] = useState<JSX.Element | null>(null);
@@ -75,7 +76,11 @@ const ContactInf = () => {
     validationSchema: ChangeContactInfoSchema,
   });
   if (user == null || isAuth == false) {
+    toast.error("First log in to the site", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     return <Navigate to={"/login"}></Navigate>;
+
   }
   const mapCountry = countries.map((region, index) => (
     <option defaultChecked={false} key={index} value={region.name.common}>
