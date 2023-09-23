@@ -289,13 +289,13 @@ const ProductEdit = () => {
             <div className="newContainer">
               <Navbar />
               <div className="top">
-                <h1>ADD PRODUCT</h1>
+                <h1>EDIT PRODUCT</h1>
               </div>
               <div className="bottom">
                 <form onSubmit={onSubmitHandler}>
                   <div className="container">
                     <div>
-                      <h1 className="header">ADD PRODUCT</h1>
+                      <h1 className="header">EDIT PRODUCT</h1>
                       <div>
                         <div>
                           <label className="label">Name</label>
