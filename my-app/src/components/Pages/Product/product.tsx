@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 const ProductPage = () => {
     const {id} = useParams()
     const colors = ['black', 'blue']
+    const size = ['xs','s','m','l','xl']
     const price = 55
     const {GetByIdProduct} = useActions()
     const {loading, productCurrent} = useTypedSelector((store) => store.ProductsReducer);
@@ -36,8 +37,8 @@ const ProductPage = () => {
 
     const sizes = productCurrent.size.map((item) => {
             return(
-                    <button className='size active'>{item}</button>
-            )
+                <p className='code'>{item}</p>
+            )  
         })
 
 
@@ -88,6 +89,7 @@ const ProductPage = () => {
 
                 <div className="blocke">
                     <div className="sizes">
+                    <p className='code'>Sizes:</p>
                         {/* <button className='size active'>xs</button>
                         <button className='size none' style={{color:"gray"}}>s</button>
                         <button className='size active' style={{border:"2px solid black"}}>m</button>
@@ -252,80 +254,7 @@ const ProductPage = () => {
 
         </div>
 
-
-        <div className="cont">
-            <h1>recently viewed</h1>
-            <div className="carousel">
-
-                <div className="itemName">
-                    <div className="itemImg">
-                        <img className="titleImg" src={item1}/>
-                        <img className='like' src={like}/>
-                    </div>
-
-                    <div className="desc">
-                        <p className='headerText' id="name">Linen-blend pull-on trousers</p>
-                        <p className='headerText' id="price">54.99$</p>
-                        <span className="dot" style={{backgroundColor:colors[0]}}/> 
-                        <span className="dot" style={{backgroundColor:colors[1]}}/> 
-                    </div>
-                </div>
-                <div className="itemName">
-                    <div className="itemImg">
-                        <img className="titleImg" src={item1}/>
-                        <img className='like' src={like}/>
-                    </div>
-
-                    <div className="desc">
-                        <p className='headerText' id="name">Linen-blend pull-on trousers</p>
-                        <p className='headerText' id="price">54.99$</p>
-                        <span className="dot" style={{backgroundColor:colors[0]}}/> 
-                        <span className="dot" style={{backgroundColor:colors[1]}}/> 
-                    </div>
-                </div>
-                <div className="itemName">
-                    <div className="itemImg">
-                        <img className="titleImg" src={item1}/>
-                        <img className='like' src={like}/>
-                    </div>
-
-                    <div className="desc">
-                        <p className='headerText' id="name">Linen-blend pull-on trousers</p>
-                        <p className='headerText' id="price">54.99$</p>
-                        <span className="dot" style={{backgroundColor:colors[0]}}/> 
-                        <span className="dot" style={{backgroundColor:colors[1]}}/> 
-                    </div>
-                </div>
-                <div className="itemName">
-                    <div className="itemImg">
-                        <img className="titleImg" src={item1}/>
-                        <img className='like' src={like}/>
-                    </div>
-
-                    <div className="desc">
-                        <p className='headerText' id="name">Linen-blend pull-on trousers</p>
-                        <p className='headerText' id="price">54.99$</p>
-                        <span className="dot" style={{backgroundColor:colors[0]}}/> 
-                        <span className="dot" style={{backgroundColor:colors[1]}}/> 
-                    </div>
-                </div>
-                <div className="itemName">
-                    <div className="itemImg">
-                        <img className="titleImg" src={item1}/>
-                        <img className='like' src={like}/>
-                    </div>
-
-                    <div className="desc">
-                        <p className='headerText' id="name">Linen-blend pull-on trousers</p>
-                        <p className='headerText' id="price">54.99$</p>
-                        <span className="dot" style={{backgroundColor:colors[0]}}/> 
-                        <span className="dot" style={{backgroundColor:colors[1]}}/> 
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+        
         <Footer/>
     </>
      /* <div className='product'>

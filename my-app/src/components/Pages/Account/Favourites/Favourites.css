@@ -128,3 +128,8 @@
     border-top: 1px solid #9A9A9A;
     padding-top: 50px;
 }
+
+.favouritesContent .oldPriceFavourite{
+    color: #F05B53;
+    text-decoration:line-through;
+}
