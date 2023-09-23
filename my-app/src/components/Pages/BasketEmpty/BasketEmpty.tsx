@@ -122,17 +122,23 @@ const BasketEmpty = () => {
                 </select>
               </div>
             </div>
-            <div className="row productPrice">
-              <p className="newPrice col-1">
-                {(item.price - item.discount) *
-                  item.countProducts}
-                $
-              </p>
+
+
+            {item.discount == 0 ? <div className="row productPrice"><p className="newPrice col-1">
+              {(item.price - item.discount) *
+                item.countProducts}
+              $
+            </p></div> : <div className=""> <p className="newPrice col-1">
+              {(item.price - item.discount) *
+                item.countProducts}
+              $
+            </p>
 
               <p className="oldPrice productPriceDiscount col-1">
                 {item.price * item.countProducts}$
-              </p>
-            </div>
+              </p></div>}
+
+
             <div className="row btnBasketProduct">
               <div className="flexDisplay">
                 <span

@@ -414,9 +414,9 @@
 }
 
 
-.content .likeImage {
-    background-image: url("../../../images/liked.png");
-}
+/* .content .likeImage {
+    background-image: url("../../../images/liked.png") repeat-x top center;
+} */
 
 .content .styleArrowSelect {
     margin-left: 10px;
@@ -429,6 +429,23 @@
     background-position-y: -3px;
     width: 50px;
     background-image: url("../../../images/arrow-down-Acept.png");
+
+}
+
+.favourites {
+    background-image: url("../../../images/like.png");
+}
+
+.content .oneItemProduct .likeProductItem .favourites {
+    background-image: url("../../../images/like.png");
+}
+
+.content .oneItemProduct .likeProductItem .likeImage {
+    background-image: url("../../../images/liked.png");
+}
+
+.content .oneItemProduct .likeProductItem img:hover {
+    background-image: url("../../../images/liked.png");
 
 }
 

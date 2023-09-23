@@ -15,7 +15,7 @@ import AdminLayout from "./components/containers/admin/AdminLayout";
 import CategoryCreatePage from "./components/admin/components/categories/create/CategoryCreatePage";
 import FAQs from "./components/Pages/FAQs/FAQs";
 
-import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
+
 import Header from "./components/NavBar/header";
 import MainPage from "./components/Pages/Main/MainPage";
 import Register from "./components/auth/register";
@@ -52,6 +52,7 @@ import CategoryEdit from "./components/admin/components/categories/edit/Category
 import ProductEdit from "./components/admin/components/products/edit/ProductEditPage";
 import BeforeMenPage from "./components/Pages/ManAndWomanPage/BeforeMenPage";
 import BeforeWomenPage from "./components/Pages/ManAndWomanPage/BeforeWomenPage";
+import Basket from "./components/Pages/BasketEmpty/BasketEmpty";
 
 function App() {
   const { loading } = useTypedSelector((store) => store.UserReducer);

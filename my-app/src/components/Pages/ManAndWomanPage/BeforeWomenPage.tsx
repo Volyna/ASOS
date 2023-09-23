@@ -121,8 +121,6 @@ const BeforeWomenPage = () => {
 
                 <BreadCrumbs />
 
-
-
                 <p className="title">WOMEN</p>
 
                 <div className="menBlock">
