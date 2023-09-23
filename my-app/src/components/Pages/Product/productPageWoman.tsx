@@ -20,15 +20,15 @@ import { IBasketCreate} from "./types";
 import { toast } from 'react-toastify';
 import { IAddLikeProductOrRemove } from '../ManAndWomanPage/types';
 import { ProductActionTypes } from '../../../store/reducers/ProductReducer/types';
-import { getProductsMan } from '../../../services/api-products-service';
+import { getProductsWomen } from '../../../services/api-products-service';
 
-const ProductPageMan = () => {
+const ProductPageWoman = () => {
     const {id} = useParams()
     const colors = ['black', 'blue']
     const size = ['xs','s','m','l','xl']
     const price = 55
     const {GetByIdProduct} = useActions()
-    const {loading, productCurrent, productsMan, productsWoman} = useTypedSelector((store) => store.ProductsReducer);
+    const {loading, productCurrent, productsWoman} = useTypedSelector((store) => store.ProductsReducer);
     const { CreateBasket} = useActions();
     const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
     const [des, showDesc] = useState(false);
@@ -100,7 +100,7 @@ const ProductPageMan = () => {
 
     function Might_like():any[]{
         let products = []
-        let [...rest] = productsMan
+        let [...rest] = productsWoman
 
         
         let i = 0
@@ -121,7 +121,7 @@ const ProductPageMan = () => {
       <div className="likeProductItem">
         <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
       </div>
-      <Link to={'/men/viewAll/' + item.id} onClick={(e) =>  GetByIdProduct(item.id)}>
+      <Link to={'/women/viewAll/' + item.id} onClick={(e) =>  GetByIdProduct(item.id)}>
       <div key={item.mainImage} className="imageProductItem"> <img
         width={272}
         height={402}
@@ -489,4 +489,4 @@ const ProductPageMan = () => {
         </div> */
             )}}
 
-export default ProductPageMan;
+export default ProductPageWoman;

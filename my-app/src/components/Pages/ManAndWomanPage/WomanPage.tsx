@@ -141,6 +141,7 @@ const Women = () => {
           <div className="likeProductItem">
             <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
           </div>
+          <Link to={location + "/" + item.id}>
           <div key={item.mainImage} className="imageProductItem"> <img
             width={272}
             height={402}
@@ -156,6 +157,7 @@ const Women = () => {
             {item.color.length > 3 ? "+" + item.color.length : null}
 
           </div>
+          </Link>
         </div>
 
       </li>

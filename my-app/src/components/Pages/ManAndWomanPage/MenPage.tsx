@@ -46,10 +46,18 @@ const Men = () => {
   const { user } = useTypedSelector(
     (store) => store.UserReducer
   );
+  const gender = location.split('/')[1]
 
   useEffect(() => {
     GetAllProductMan(user.id);
   }, []);
+
+  const man =  true ? gender == 'men' : false
+  console.log(gender)
+  console.log(typeof(gender))
+  console.log(typeof("men"))
+  console.log(man)
+
   if (isMobile) {
     return (
       <>
