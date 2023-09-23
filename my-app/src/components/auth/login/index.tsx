@@ -3,9 +3,9 @@ import LoginPage from "./LoginPage";
 
 const Login = () => {
   return (
-    <GoogleReCaptchaProvider reCaptchaKey="6LeJebsnAAAAAMD6xENChWE4vhCVLZk7w7Fo2z0h">
-      <LoginPage />
-    </GoogleReCaptchaProvider>
+    // <GoogleReCaptchaProvider reCaptchaKey="6LeJebsnAAAAAMD6xENChWE4vhCVLZk7w7Fo2z0h">
+    <LoginPage />
+    /* </GoogleReCaptchaProvider> */
   );
 };
 

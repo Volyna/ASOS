@@ -46,16 +46,16 @@ namespace WebAsos.Services
         {
             try
             {
-                var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
-                float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
-                if (!recaptchaResult.Success)
-                {
-                    return new ServiceResponse()
-                    {
-                        IsSuccess = false,
-                        Message = "Recaptcha failed"
-                    };
-                }
+                //var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
+                //float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
+                //if (!recaptchaResult.Success)
+                //{
+                //    return new ServiceResponse()
+                //    {
+                //        IsSuccess = false,
+                //        Message = "Recaptcha failed"
+                //    };
+                //}
 
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user == null)
@@ -88,16 +88,16 @@ namespace WebAsos.Services
         {
             try
             {
-                var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
-                float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
-                if (!recaptchaResult.Success || recaptchaResult.Score < minScore)
-                {
-                    return new ServiceResponse()
-                    {
-                        IsSuccess = false,
-                        Message = "Recaptcha failed"
-                    };
-                }
+                //var recaptchaResult = await _recaptchaService.VerifyTokenAsync(model.RecaptchaToken);
+                //float minScore = float.Parse(_configuration["RecaptchaConfig:MinScore"], NumberStyles.Float, CultureInfo.InvariantCulture);
+                //if (!recaptchaResult.Success || recaptchaResult.Score < minScore)
+                //{
+                //    return new ServiceResponse()
+                //    {
+                //        IsSuccess = false,
+                //        Message = "Recaptcha failed"
+                //    };
+                //}
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user != null)
                 {

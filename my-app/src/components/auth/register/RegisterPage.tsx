@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 function RegisterPage() {
   const [passwordShown, setPasswordShown] = useState(false);
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  // const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user, isAuth } = useTypedSelector(
     (store) => store.UserReducer
   );
@@ -39,8 +39,8 @@ function RegisterPage() {
 
   const onSubmitFormik = async (values: IRegisterUser) => {
     console.log(values);
-    if (!executeRecaptcha) return;
-    values.RecaptchaToken = await executeRecaptcha();
+    // if (!executeRecaptcha) return;
+    // values.RecaptchaToken = await executeRecaptcha();
 
     RegisterUser(values);
   };

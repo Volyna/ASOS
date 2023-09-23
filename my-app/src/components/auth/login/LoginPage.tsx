@@ -19,7 +19,7 @@ import axios from "axios";
 import { useState } from "react";
 function LoginePage() {
   const [passwordShown, setPasswordShown] = useState(false);
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  // const { executeRecaptcha } = useGoogleReCaptcha();
   const { email, user, isAuth } = useTypedSelector(
     (store) => store.UserReducer
   );
@@ -31,19 +31,11 @@ function LoginePage() {
     },
     onSuccess: async (tokenResponse) => {
       responseGoogle(tokenResponse.access_token);
-      // const userInfo = await axios
-      //   .get("https://www.googleapis.com/oauth2/v3/userinfo", {
-      //     headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-      //   })
-      //   .then((res) => res.data);
-      // console.log("userInfo", userInfo);
-      // responseGoogle(userInfo);
     },
   });
 
   const onSubmitFormik = async (values: IBeforeLoginUser) => {
-    if (!executeRecaptcha) return;
-    values.RecaptchaToken = await executeRecaptcha();
+    // if (!executeRecaptcha) return;
     console.log("values IBeforeLoginUser: ", values);
     let resultExistUser = await IsUserExist(values);
     let isUserExits =
@@ -52,7 +44,7 @@ function LoginePage() {
       let userData: ILoginUser = {
         email: values.email,
         password: values.password,
-        RecaptchaToken: values.RecaptchaToken,
+        RecaptchaToken: "",
         IsRemember: values.remember,
       };
       console.log("Login userData:", userData);

@@ -9,7 +9,7 @@ import like from "../../../../images/liked.png";
 import search from "../../../../images/search.svg";
 import Logo from "../../../../images/Logo.svg";
 import Menu from "../../../NavBar/menu";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
@@ -18,6 +18,7 @@ import { IAddLikeProductOrRemove, IGetLikesProducts } from "../../ManAndWomanPag
 import { IItemProductLike } from "../../../../store/reducers/LikeReducer/type";
 import { group } from "console";
 import { IBasketCreate, IBasketRemove } from "./types";
+import { toast } from "react-toastify";
 
 const Favourites = () => {
   const { LogOut, GetProductLikes, DeleteProductLike, CreateBasket, RemoveBasketFromLike, ChangeIsOnBasketLikes } = useActions();
@@ -30,6 +31,12 @@ const Favourites = () => {
   useEffect(() => {
     GetProductLikes(initLikeGetProduct);
   }, []);
+  if (isAuth == false) {
+    toast.error("First log in to the site", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    return <Navigate to={"/login"} />
+  }
   const SwitchLike = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, idProduct: number) => {
     var nameClass = (e.target as Element).className;
     const initDataLike: IAddLikeProductOrRemove = {
