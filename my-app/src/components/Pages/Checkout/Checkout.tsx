@@ -25,6 +25,8 @@ import axios from "axios";
 import { CheckoutInfoSchema } from "../validation";
 import { boolean } from "yup";
 import { toast } from "react-toastify";
+import { store } from "../../../store";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const expriy_format = (value: string) => {
@@ -36,6 +38,7 @@ const Checkout = () => {
 
     return expDateFormatter;
   };
+  const navigate = useNavigate();
   const { user } = useTypedSelector((store) => store.UserReducer);
   const { GetBasketsByid, AddCountProductBasket, RemoveProductBasket, MinusCountProductBasket, CreateOrderProduct } =
     useActions();
@@ -54,6 +57,7 @@ const Checkout = () => {
       console.log(err);
     }
   };
+
 
   useEffect(() => {
     fetchData();
@@ -92,7 +96,7 @@ const Checkout = () => {
       cardNumber: values.cardNumber,
       ExpirationDate: values.cardDate,
       Cvv: values.cardCvv,
-      totalPrice: calculateTotalPrice(),
+      totalPrice: calculateTotalPrice() + 10,
       orders: []
     }
     products.forEach(item => {
@@ -107,13 +111,17 @@ const Checkout = () => {
     })
     console.log("Product to response order: ", dataResonse);
     CreateOrderProduct(dataResonse);
-
+    navigate("/basket");
   };
+
   const formik = useFormik({
     initialValues: initValues,
     onSubmit: onSubmitFormik,
     validationSchema: CheckoutInfoSchema
   });
+  if (products.length <= 0) {
+    return <Navigate to={"/basket"} />
+  }
   var calculateTotalPrice = () => {
     const totalPrice = products.reduce(
       (total: number, item) =>
@@ -255,7 +263,7 @@ const Checkout = () => {
       <Header_full />
 
       <div className="container-fluid">
-        <div className="mainLink mainLinkCheckout">
+        <div className="mainLinkChecout mainLinkCheckout">
           <p className="focusCom">focus.com |</p>
           <p className="focusCom basket">Checkout</p>
         </div>
@@ -578,8 +586,8 @@ const Checkout = () => {
                 <p className="purchase-inf bold col-10 ">Total to pay</p>
                 <p className="amount col-2 ">{calculateTotalPrice() + 10} $</p>
               </div>
-              <button type="submit" className="btn_continue btn-shop-bag">pay</button>
-              <button className="btn-buy btn-shop-bag">back</button>
+              <button type="submit" className="btn_continue btn-shop-bag btn-Pay">pay</button>
+              <button onClick={(e) => { navigate("/basket") }} className="btn-buy btn-shop-bag btn-Buy">back</button>
             </div>
           </div>
         </form>

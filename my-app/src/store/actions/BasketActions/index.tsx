@@ -4,7 +4,7 @@ import {
   BasketActions,
   IItemProduct,
 } from "../../reducers/BasketReducer/types";
-import { createBasket, createOrder, getBasketsById, removeBasket } from "../../../services/api-basket-service";
+import { createBasket, createOrder, getBasketsById, getOrders, removeBasket } from "../../../services/api-basket-service";
 import { toast } from "react-toastify";
 import { IBasketCreate, IBasketRemove } from "../../../components/Pages/Account/Favourites/types";
 import { IItemProductLike } from "../../reducers/LikeReducer/type";
@@ -163,7 +163,6 @@ export const CreateOrderProduct = (model: IOrderChecout) => {
   return async (dispatch: Dispatch<BasketActions>) => {
     try {
       dispatch({ type: BasketActionTypes.START_REQUESTS_BASKET });
-      console.log("Creat")
       const data = await createOrder(model);
       const { response } = data;
       if (response.data.isSuccess == true) {
@@ -172,6 +171,35 @@ export const CreateOrderProduct = (model: IOrderChecout) => {
         });
         toast.success("The order has been placed", {
           position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        dispatch({
+          type: BasketActionTypes.BAG_REQUEST_BASKET,
+          payload: "Error !!!",
+        });
+      }
+
+    } catch (e) {
+      dispatch({
+        type: BasketActionTypes.BAG_REQUEST_BASKET,
+        payload: "Error with server !!!",
+      });
+      toast.error("Some problems with server !!!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+};
+export const GetOrderProduct = (idUser: number) => {
+  return async (dispatch: Dispatch<BasketActions>) => {
+    try {
+      dispatch({ type: BasketActionTypes.START_REQUESTS_BASKET });
+      const data = await getOrders(idUser);
+      const { response } = data;
+      if (response.data.isSuccess == true) {
+        dispatch({
+          type: BasketActionTypes.SUCCEED_GET_ORDERS,
+          payload: response.data.payload,
         });
       } else {
         dispatch({

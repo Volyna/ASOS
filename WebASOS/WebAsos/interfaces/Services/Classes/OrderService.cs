@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +44,7 @@ namespace WebAsos.interfaces.Services.Classes
             return new string(Enumerable.Repeat(chars, 10)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-        public async Task<OrderWithUpdateProductsDTO> AddOrderAsync(OrderDTO model)
+        public async Task<ServiceResponse> AddOrderAsync(OrderDTO model)
         {
             try
             {
@@ -86,15 +87,14 @@ namespace WebAsos.interfaces.Services.Classes
                 await _context.OrderProduct.AddAsync(orderProductEntity);
                 await _context.SaveChangesAsync();
 
-                return null;
-                
+                return new ServiceResponse { IsSuccess=true };
 
 
 
             }
             catch (Exception ex)
             {
-                return null;
+                return new ServiceResponse { IsSuccess = false };
             }
         }
 
@@ -106,6 +106,41 @@ namespace WebAsos.interfaces.Services.Classes
         public List<OrderEntity> GetOrdersByUserIdAsync(int id)
         {
             return _orderRepository.GetAll().Where(order => order.UserId == id).ToList();
+        }
+
+        public async Task<ServiceResponse> GetHistoryOrder(int userId)
+        {
+            try
+            {
+                var orders = await _context.OrderProduct.Where(p => p.UserId == userId).ToListAsync();
+                if (orders == null)
+                {
+                    return new ServiceResponse { IsSuccess = true };
+                }
+                else
+                {
+                    List<OrderResponseDto> orderResponseDtos = new List<OrderResponseDto>();
+                    foreach (var item in orders)
+                    {
+                        OrderResponseDto order = new OrderResponseDto();
+                        order.Amount = item.TotalPrice;
+                        string day = item.DateCreated.Day.ToString();
+                        string month = item.DateCreated.Month.ToString();
+                        string year = item.DateCreated.Year.ToString();
+                        order.Date = day + "." + month + "." + year;
+                        order.OrderStatus = item.Status;
+                        order.OrderNumber = item.OrderNumber;
+                        orderResponseDtos.Add(order);
+                    }
+                    return new ServiceResponse { IsSuccess = true, Payload = orderResponseDtos };
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse { IsSuccess = false };
+            }
         }
     }
 }

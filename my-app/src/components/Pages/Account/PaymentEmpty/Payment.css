@@ -1,0 +1,35 @@
+.OrderedData {
+    display: flex;
+    justify-content: center;
+}
+
+.OrderedData p {
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
+}
+
+.dataNameOrder {
+    text-align: center;
+}
+
+.dataTotalOrder {
+    text-align: center;
+
+}
+
+.OrderedData a {
+    color: #353535;
+
+}
+
+.dataTotalOrder p {
+    padding-left: -85px;
+}

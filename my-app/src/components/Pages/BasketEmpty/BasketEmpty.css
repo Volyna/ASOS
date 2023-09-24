@@ -420,3 +420,16 @@
 .mainInformation .content {
     margin: 0;
 }
+
+.btnProductBasketCountEmpty {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background-color: #ffffff;
+    width: 296px;
+    height: 65px;
+    align-items: center;
+    text-align: center;
+    border-radius: 30px;
+    border: 2px solid var(--black, #353535);
+}

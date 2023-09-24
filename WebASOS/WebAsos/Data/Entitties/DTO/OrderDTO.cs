@@ -32,5 +32,11 @@
         public int? CardId { get; set; }
         public int? AddressId { get; set; }
         public ICollection<OrderedProductUpdatedDTO> Products { get; set; }
+    } public class OrderResponseDto
+    {
+        public string Date { get; set; }
+        public double Amount { get; set; }
+        public string OrderNumber { get; set; }
+        public string OrderStatus { get; set; }
     }
 }

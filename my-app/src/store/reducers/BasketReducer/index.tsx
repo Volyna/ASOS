@@ -4,6 +4,7 @@ const initialState: IBasketState = {
   isBasketUpdate: false,
   products: [],
   isBasketLoading: false,
+  productsOrder: []
 };
 
 const BasketReducer = (
@@ -15,6 +16,13 @@ const BasketReducer = (
       return {
         ...state,
         isBasketLoading: true,
+      };
+    }
+    case BasketActionTypes.SUCCEED_GET_ORDERS: {
+      return {
+        ...state,
+        isBasketLoading: false,
+        productsOrder: action.payload
       };
     }
     case BasketActionTypes.SUCCED_REMOVE_FROM_LIKE_BASKET: {

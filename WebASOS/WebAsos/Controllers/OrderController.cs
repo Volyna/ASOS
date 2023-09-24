@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebAsos.Data.Entitties.DTO;
 using WebAsos.interfaces.Services.Interfaces;
 using WebAsos.Models;
+using WebAsos.Services;
 
 namespace WebAsos.Controllers
 {
@@ -18,11 +19,11 @@ namespace WebAsos.Controllers
         }
 
         [HttpPost("addOrder")]
-        public async Task<IActionResult> AddOrderAsync([FromBody] OrderDTO model)
+        public async Task<ServiceResponse> AddOrderAsync([FromBody] OrderDTO model)
         {
 
             var result = await _orderService.AddOrderAsync(model);
-            return Ok(result);
+            return result;
         }
 
         [HttpGet("getAllOrders")]
@@ -37,6 +38,12 @@ namespace WebAsos.Controllers
         {
             var result = _orderService.GetOrdersByUserIdAsync(model.Id);
             return Ok(result);
+        }
+        [HttpPost("getOrdersHistoryByUserId")]
+        public async Task<ServiceResponse> GetOrdersHistoryByUserIdAsync([FromBody] int idUser)
+        {
+            var result = await _orderService.GetHistoryOrder(idUser);
+            return result;
         }
     }
 }

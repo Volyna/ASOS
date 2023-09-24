@@ -3,6 +3,7 @@ import { IItemProductLike } from "../LikeReducer/type";
 export interface IBasketState {
   isBasketUpdate: boolean;
   products: Array<IItemProduct>;
+  productsOrder: Array<IItemOrder>;
   isBasketLoading: boolean;
 }
 
@@ -23,6 +24,12 @@ export interface IItemProduct {
   productId: number;
   userIdOrder: number;
 }
+export interface IItemOrder {
+  date: string,
+  amount: number,
+  orderNumber: string,
+  orderStatus: string,
+}
 
 export enum BasketActionTypes {
   START_REQUESTS_BASKET = "START_REQUESTS_BASKET",
@@ -35,6 +42,7 @@ export enum BasketActionTypes {
   MINUS_PRODUCT_COUNT_BASKET = "MINUS_PRODUCT_COUNT_BASKET",
   REMOVE_PRODUCT_BASKET = "REMOVE_PRODUCT_BASKET",
   SUCCEED_CREATE_ORDER = "SUCCEED_CREATE_ORDER",
+  SUCCEED_GET_ORDERS = "SUCCEED_GET_ORDERS",
 }
 interface StartRequestBasketAction {
   type: BasketActionTypes.START_REQUESTS_BASKET;
@@ -55,6 +63,10 @@ interface CreateBasketAction {
 interface RemoveProductBasketAction {
   type: BasketActionTypes.REMOVE_PRODUCT_BASKET;
   payload: IItemProduct[];
+}
+interface SuccedGetOrdersBasketAction {
+  type: BasketActionTypes.SUCCEED_GET_ORDERS;
+  payload: IItemOrder[];
 }
 interface MinusProductCountBasketAction {
   type: BasketActionTypes.MINUS_PRODUCT_COUNT_BASKET;
@@ -81,4 +93,5 @@ export type BasketActions =
   | RemoveProductBasketAction
   | CreateBasketAction
   | SuccedRemoveFromLikeBasketAction
-  | SucceedCreatedOrderRequestBasketAction;
+  | SucceedCreatedOrderRequestBasketAction
+  | SuccedGetOrdersBasketAction;
