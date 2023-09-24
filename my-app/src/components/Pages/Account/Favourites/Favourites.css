@@ -1,5 +1,7 @@
 .favouritesContent .favouriteCard {
     position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .favouritesContent .likeFavourite {
@@ -113,6 +115,7 @@
 .favouritesContent .priceFavouriteCol {
     display: flex;
     justify-content: space-between;
+    padding-top: 15px;
 }
 
 .favouritesContent .likeFavourite {

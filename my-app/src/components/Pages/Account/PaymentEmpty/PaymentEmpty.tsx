@@ -2,13 +2,39 @@ import Header_full from "../../../Header_full/Header_full";
 import Footer from "../../../Footer/FooterV";
 import { Link, useNavigate } from "react-router-dom";
 import BreadCrumbs from "../../../BreadCrumbs/breadCrumbs";
-
+import axios from "axios";
+import { useEffect } from "react";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useActions } from "../../../../hooks/useActions";
+import "./Payment.css";
 const PaymentEmpty = () => {
   const navigate = useNavigate();
+  const { user } = useTypedSelector(
+    (store) => store.UserReducer
+  );
+  const { productsOrder } = useTypedSelector(
+    (store) => store.BasketReducer
+  );
+  const { GetOrderProduct } = useActions();
+  useEffect(() => {
+    GetOrderProduct(user.id);
+
+  }, []);
+  var dataHistory = productsOrder.map((item) => {
+    return (
+      <div className="OrderedData row">
+        <div className="dataNameOrder col-2"> <div className=""><p >{item.date}</p></div></div>
+        <div className="dataTotalOrder col-2"><div style={{ paddingRight: "65px" }}><p>{item.amount}</p></div></div>
+        <div style={{ paddingLeft: "50px" }} className="dataNumberOrder col-2"><p>{item.orderNumber}</p></div>
+        <div style={{ padding: "0" }} className="dataStatusOrder col-2"><p>{item.orderStatus}</p></div>
+        <div className="dataViewAllOrder col-2"><Link to="#">View order</Link></div>
+      </div>
+    )
+  })
   return (
     <>
       <Header_full />
-      <BreadCrumbs/>
+      <BreadCrumbs />
       <div className="container-fluid">
         <div className="container">
           <div className="menu_item">
@@ -34,15 +60,20 @@ const PaymentEmpty = () => {
           <label className="col-2">Amount</label>
           <label className="col-2">Order number</label>
           <label className="col-2">Order status</label>
-          <label className="col-2">Parcel tracking number</label>
+          <label style={{ minWidth: "228px" }} className="col-2">Parcel tracking number</label>
         </div>
 
-        <div className="content col-12">
+        {productsOrder.length <= 0 ? <div className="content col-12">
+
           <p className="basket_text">Ops, you haven’t made any orders yet!</p>
           <button onClick={() => navigate("/")} className="btn_continue">
             continue shopping
           </button>
-        </div>
+
+        </div> : dataHistory}
+
+
+
       </div>
       <Footer />
     </>

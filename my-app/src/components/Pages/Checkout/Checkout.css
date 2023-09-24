@@ -108,11 +108,6 @@
     margin-bottom: 50px;
 }
 
-.contact-inf {
-    margin-top: 100px;
-}
-
-
 
 .number {
     width: 120px;
@@ -176,4 +171,21 @@
 .arrow_down:hover {
     background: url("../../../images/arrow-down-Acept.png")no-repeat center right 10px;
     background-size: 25px 25px;
+}
+
+.mainInformation .btn-Pay {
+    width: 722px;
+}
+
+.mainInformation .btn-Buy {
+    width: 722px;
+    border-radius: 30px;
+    border: 2px solid var(--black, #353535);
+    background-color: #FFFF;
+}
+
+.mainLinkChecout {
+    margin-top: 250px;
+    display: flex;
+    justify-content: center;
 }

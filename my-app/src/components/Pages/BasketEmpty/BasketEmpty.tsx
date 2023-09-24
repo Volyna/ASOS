@@ -34,16 +34,20 @@ const BasketEmpty = () => {
   const { isBasketLoading, products } = useTypedSelector(
     (store) => store.BasketReducer
   );
-  var [loader, setLouder] = useState(true);
+  var [canOrder, setCanOrder] = useState(true);
   const { user } = useTypedSelector((store) => store.UserReducer);
   useEffect(() => {
     GetBasketsByid(user.id);
+    IsValidOrder();
   }, []);
   if (isAuth == false) {
     toast.error("First log in to the site", {
       position: toast.POSITION.TOP_RIGHT,
     });
     return <Navigate to={"/login"} />
+  }
+  var IsValidOrder = () => {
+    products.forEach(item => item.quantity <= 0 ? setCanOrder(false) : null);
   }
 
   var calculateTotalPrice = () => {
@@ -114,10 +118,6 @@ const BasketEmpty = () => {
                 >
                   {item.size.filter((element, index) => element.indexOf(element) === index).map(size => <option key={size} value={size}>{size}</option>)}
 
-                  {/* <option key={index} value={i}>
-                        {i}
-                      </option> */}
-
 
                 </select>
               </div>
@@ -128,7 +128,7 @@ const BasketEmpty = () => {
               {(item.price - item.discount) *
                 item.countProducts}
               $
-            </p></div> : <div className=""> <p className="newPrice col-1">
+            </p></div> : <div className="row productPrice"> <p className="newPrice col-1">
               {(item.price - item.discount) *
                 item.countProducts}
               $
@@ -141,27 +141,33 @@ const BasketEmpty = () => {
 
             <div className="row btnBasketProduct">
               <div className="flexDisplay">
-                <span
+                {item.quantity <= 0 ? null : <span
                   className="minus minusImage"
                   onClick={(e) => {
                     minusProduct(item.productId);
                   }}
                 >
                   <img src={Minus} alt="minus" />
-                </span>
-                <button className="btnProductBasket ">
+                </span>}
+
+                {item.quantity <= 0 ? <button className="btnProductBasketCountEmpty">
+                  <p style={{ borderRadius: "30px" }} className="btnProductBasketCount">
+                    The product is out of stock
+                  </p>
+                </button> : <button className="btnProductBasket ">
                   <p className="btnProductBasketCount">
                     {item.countProducts}
                   </p>
-                </button>
-                <span
+                </button>}
+
+                {item.quantity <= 0 ? null : <span
                   onClick={(e) => {
                     plusProduct(item.productId);
                   }}
                   className="plus plusImage"
                 >
                   <img src={Plus} alt="plus" />
-                </span>
+                </span>}
               </div>
             </div>
           </div>
@@ -309,7 +315,7 @@ const BasketEmpty = () => {
               *Items are reserved for 24 hours than you can find them in <br />{" "}
               your favorites
             </p>
-            <Link to={"/checkout"}> <button className="btn-buy">checkout</button></Link>
+            {canOrder == true ? <Link to={"/checkout"}> <button className="btn-buy">checkout</button></Link> : null}
             <div className="standard">
               <p className="shipping">Standard shipping</p>
               <p className="pFaster">

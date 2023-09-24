@@ -54,3 +54,16 @@ export async function createOrder(model: IOrderChecout) {
     });
   return data;
 }
+export async function getOrders(idUser: number) {
+  const data = await http
+    .post("/api/Order/getOrdersHistoryByUserId", idUser)
+    .then((response) => {
+      return {
+        response,
+      };
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return data;
+}
