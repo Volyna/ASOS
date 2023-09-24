@@ -3,12 +3,13 @@ body {
 }
 
 .staticnav {
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 92%;
     background-color: white;
     border-bottom: 1px;
     border-color: black;
+    z-index: 10;
 
 }
 

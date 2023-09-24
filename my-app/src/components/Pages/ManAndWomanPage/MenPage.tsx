@@ -46,10 +46,18 @@ const Men = () => {
   const { user } = useTypedSelector(
     (store) => store.UserReducer
   );
+  const gender = location.split('/')[1]
 
   useEffect(() => {
     GetAllProductMan(user.id);
   }, []);
+
+  const man =  true ? gender == 'men' : false
+  console.log(gender)
+  console.log(typeof(gender))
+  console.log(typeof("men"))
+  console.log(man)
+
   if (isMobile) {
     return (
       <>
@@ -141,12 +149,14 @@ const Men = () => {
           <div className="likeProductItem">
             <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
           </div>
+          <Link to={location + '/' + item.id}>
           <div key={item.mainImage} className="imageProductItem"> <img
             width={272}
             height={402}
             src={`data:image/png;base64,${item.mainImage}`}
             alt=""
           /></div>
+          
           <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
           <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
           <div className="colorProductItem">
@@ -156,6 +166,7 @@ const Men = () => {
             {item.color.length > 3 ? "+" + item.color.length : null}
 
           </div>
+          </Link>
         </div>
 
       </li>

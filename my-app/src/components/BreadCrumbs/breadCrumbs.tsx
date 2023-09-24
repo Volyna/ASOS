@@ -16,7 +16,7 @@ export default function BreadCrumbs(){
 
             return(
                     <NavLink className={({isActive}) => {return isActive ? 'last crumbComp' : 'crumbComp'}} to={currentLink}> 
-                         {" " + crumb.charAt(0).toUpperCase()+crumb.slice(1).replace('-', " ")}
+                         {" | " + crumb.charAt(0).toUpperCase()+crumb.slice(1).replace('-', " ")}
                     </NavLink>
             )
       
@@ -25,7 +25,7 @@ export default function BreadCrumbs(){
 
     return(
         <div className="crumbs">
-            <Link to='/' className="firstLink crumbComp">focus.com |</Link>
+            <Link to='/' className="firstLink crumbComp">focus.com </Link>
             {crumbsLink}
         </div>
     )
