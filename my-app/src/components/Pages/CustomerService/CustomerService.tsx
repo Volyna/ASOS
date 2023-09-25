@@ -7,7 +7,7 @@ const CustomerService = () => {
   return (
     <>
       <Header_full />
-      <BreadCrumbs/>
+      <BreadCrumbs />
       <div className="container-fluid">
         <div className="help">
           <div className="for_help container">
@@ -44,7 +44,7 @@ const CustomerService = () => {
                 placeholder="e. g. 230976  "
               />
 
-              <button className="btn-checkout tracking_button">
+              <button className="btn_continue btn-shop-bag btn-Pay btn-track">
                 Track my order
               </button>
             </div>
@@ -62,7 +62,7 @@ const CustomerService = () => {
                 placeholder="e. g. 230976  "
               />
 
-              <button className="btn-checkout tracking_button">
+              <button className="btn_continue btn-shop-bag btn-Pay btn-track">
                 register a return
               </button>
             </div>
