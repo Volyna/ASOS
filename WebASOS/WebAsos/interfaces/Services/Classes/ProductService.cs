@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using WebAsos.Constants.Product;
 using WebAsos.Interfaces.LikesproductInterfaces;
+using System.Diagnostics;
 
 namespace WebAsos.Interfaces.Services.Classes
 {
@@ -20,7 +21,6 @@ namespace WebAsos.Interfaces.Services.Classes
         private readonly IProductImageService _productImageService;
         private readonly IProductImageRepository _productImageRepository;
         private readonly ILikeProductRepository _likeProductRepository;
-
         private readonly IMapper _mapper;
 
         public ProductService(IProductRepository productRepository, IMapper mapper, ICategoryService categoryService, IProductImageService productImageService, IProductImageRepository productImageRepository, ILikeProductRepository likeProductRepository)
@@ -109,38 +109,25 @@ namespace WebAsos.Interfaces.Services.Classes
         {
             try
             {
+               
                 var products = await _productRepository.GetAllProductsMan();
                 var userLikesProducts = await _likeProductRepository.GetAllLikesUser(idUser);
+
                 if (products != null)
                 {
-                    List<ProductProductDTO> response = new List<ProductProductDTO>();
-                    foreach (var item in products)
+                    
+                    var resMap = _mapper.Map<List<ProductEntity>,List<ProductProductDTO>>(products);
+                    foreach (var item in resMap)
                     {
-                        ProductProductDTO tempProductDTO = new ProductProductDTO();
-                        tempProductDTO.Id = item.Id;
-                        tempProductDTO.Name = item.Name;
-                        tempProductDTO.Price = item.Price;
-                        tempProductDTO.Discount = item.Discount;
-                        tempProductDTO.Description = item.Description;
-                        tempProductDTO.Color = await _productRepository.GetAllColorProducsByName(item.Name);
-                        tempProductDTO.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
-                        tempProductDTO.Brand = item.Brand;
-                        var ifLikeExist = userLikesProducts.Where(l => l.userID == idUser && l.productLikeId == item.Id).FirstOrDefault();
-                        tempProductDTO.isLikeUser = ifLikeExist != null ? true : false;
                         var mainImage = await _productImageService.GetMainImageByIdAsync(item.Id);
                         if (mainImage != null)
-                            tempProductDTO.MainImage = _productImageService.GetBase64ByName(mainImage.Name);
-                        tempProductDTO.Quantity = item.Quantity;
-                        tempProductDTO.IsInTheStock = item.IsInTheStock;
-                        tempProductDTO.IsInTheStock = item.IsInTheStock;
-                        tempProductDTO.CategoryId = item.CategoryId;
-                        //var productImages = await _productImageRepository.GetAllImagesById(item.Id);
-                        //tempProductDTO.Images = await _productImageService.GetAllProductImages(productImages);
-                        response.Add(tempProductDTO);
-                     
-                        
+                            item.MainImage = _productImageService.GetBase64ByName(mainImage.Name);
+                        item.Color = await _productRepository.GetAllColorProducsByName(item.Name);
+                        item.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
+                        var ifLikeExist = userLikesProducts.Where(l => l.userID == idUser && l.productLikeId == item.Id).FirstOrDefault();
+                        item.isLikeUser = ifLikeExist != null ? true : false;
                     }
-                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request",Payload= response };
+                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request",Payload= resMap };
                 }
                 return new ServiceResponse { IsSuccess = false, Message = "Some data is null !!!" };
             }
@@ -163,34 +150,18 @@ namespace WebAsos.Interfaces.Services.Classes
                 var userLikesProducts = await _likeProductRepository.GetAllLikesUser(userId);
                 if (products != null)
                 {
-                    List<ProductProductDTO> response = new List<ProductProductDTO>();
-                    foreach (var item in products)
+                    var resMap = _mapper.Map<List<ProductEntity>, List<ProductProductDTO>>(products);
+                    foreach (var item in resMap)
                     {
-                        ProductProductDTO tempProductDTO = new ProductProductDTO();
-                        tempProductDTO.Id = item.Id;
-                        tempProductDTO.Name = item.Name;
-                        tempProductDTO.Price = item.Price;
-                        tempProductDTO.Discount = item.Discount;
-                        tempProductDTO.Description = item.Description;
-                        tempProductDTO.Color = await _productRepository.GetAllColorProducsByName(item.Name);
-                        tempProductDTO.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
-                        tempProductDTO.Brand = item.Brand;
-                        var ifLikeExist = userLikesProducts.Where(l => l.userID == userId && l.productLikeId == item.Id).FirstOrDefault();
-                        tempProductDTO.isLikeUser = ifLikeExist != null ? true : false;
                         var mainImage = await _productImageService.GetMainImageByIdAsync(item.Id);
                         if (mainImage != null)
-                            tempProductDTO.MainImage = _productImageService.GetBase64ByName(mainImage.Name);
-                        tempProductDTO.Quantity = item.Quantity;
-                        tempProductDTO.IsInTheStock = item.IsInTheStock;
-                        tempProductDTO.IsInTheStock = item.IsInTheStock;
-                        tempProductDTO.CategoryId = item.CategoryId;
-                        //var productImages = await _productImageRepository.GetAllImagesById(item.Id);
-                        //tempProductDTO.Images = await _productImageService.GetAllProductImages(productImages);
-                        response.Add(tempProductDTO);
-
-
+                            item.MainImage = _productImageService.GetBase64ByName(mainImage.Name);
+                        item.Color = await _productRepository.GetAllColorProducsByName(item.Name);
+                        item.Size = await _productRepository.GetAllSizeProducsByName(item.Name);
+                        var ifLikeExist = userLikesProducts.Where(l => l.userID == userId && l.productLikeId == item.Id).FirstOrDefault();
+                        item.isLikeUser = ifLikeExist != null ? true : false;
                     }
-                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request", Payload = response };
+                    return new ServiceResponse { IsSuccess = true, Message = "Successfully request", Payload = resMap };
                 }
                 return new ServiceResponse { IsSuccess = false, Message = "Some data is null !!!" };
             }

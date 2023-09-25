@@ -33,6 +33,7 @@ using WebAsos.interfaces.BasketInterfaces;
 using WebAsos.Repositories.Basket;
 using WebAsos.Interfaces.LikesproductInterfaces;
 using WebAsos.Repositories.LikesProducts;
+using WebAsos.Data.AutoMapper.Product;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
@@ -50,6 +51,7 @@ builder.Services.AddScoped<ILikeProductService, LikeService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperUserProfile));
 builder.Services.AddAutoMapper(typeof(AutoMapperCategory));
+builder.Services.AddAutoMapper(typeof(AutoMapperProduct));
 
 
 // Add services to the container.

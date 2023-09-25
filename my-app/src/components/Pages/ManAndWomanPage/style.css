@@ -679,6 +679,7 @@
 
 .content .imageProductItem {
     margin-bottom: 10px;
+    padding-left: 10px;
 }
 
 .content .nameProductItem {
@@ -722,7 +723,27 @@
 }
 
 
-li a{
+li a {
     color: #353535;
     text-decoration: none;
+}
+
+.content .nameProductItemMen {
+    max-width: 285px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content .nameProductItemMen p {
+
+    color: var(--black, #353535);
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* desktop_main */
+    font-family: Roboto Flex;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    /* 100% */
 }
