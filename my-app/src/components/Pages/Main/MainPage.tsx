@@ -21,11 +21,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect"
 import { useEffect } from "react";
 import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { GetAllProductMan } = useActions();
+
+  const { productsMan, loadingProductMan, productsWoman } = useTypedSelector(
+    (store) => store.ProductsReducer
+  );
+  const { GetAllProductMan, GetAllProductWomen } = useActions();
+  const { user } = useTypedSelector(
+    (store) => store.UserReducer
+  );
   useEffect(() => {
+    if (productsMan.length == 0 && loadingProductMan == false) {
+      GetAllProductMan(user.id);
+    } else if (productsWoman.length == 0 && loadingProductMan == false) {
+      GetAllProductWomen(user.id);
+    }
     // GetAllProductMan();
   }, []);
 

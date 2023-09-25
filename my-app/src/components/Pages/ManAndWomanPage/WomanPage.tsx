@@ -48,7 +48,9 @@ const Women = () => {
   );
 
   useEffect(() => {
-    GetAllProductWomen(user.id);
+    if (productsWoman.length == 0 && loadingProductMan == false) {
+      GetAllProductWomen(user.id);
+    }
   }, []);
   if (isMobile) {
     return (
@@ -142,21 +144,21 @@ const Women = () => {
             <img src={like} style={{}} onClick={(e) => { SwitchLike(e, item.id); }} className={item.isLikeUser === true ? "likeImage" : "favourites"} alt="favourites" />
           </div>
           <Link to={location + "/" + item.id}>
-          <div key={item.mainImage} className="imageProductItem"> <img
-            width={272}
-            height={402}
-            src={`data:image/png;base64,${item.mainImage}`}
-            alt=""
-          /></div>
-          <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
-          <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
-          <div className="colorProductItem">
+            <div key={item.mainImage} className="imageProductItem"> <img
+              width={272}
+              height={402}
+              src={`data:image/png;base64,${item.mainImage}`}
+              alt=""
+            /></div>
+            <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
+            <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
+            <div className="colorProductItem">
 
-            {item.color.length > 3 ? item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
-              : item.color.map(item => <span style={{ background: item }} className="circleProduct" />)}
-            {item.color.length > 3 ? "+" + item.color.length : null}
+              {item.color.length > 3 ? item.color.slice(0, 3).map(item => <span style={{ background: item }} className="circleProduct" />)
+                : item.color.map(item => <span style={{ background: item }} className="circleProduct" />)}
+              {item.color.length > 3 ? "+" + item.color.length : null}
 
-          </div>
+            </div>
           </Link>
         </div>
 

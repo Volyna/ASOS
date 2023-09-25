@@ -20,33 +20,26 @@ import { showCategory } from "../../../store/actions/Categories/categoryAction";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { isMobile } from "react-device-detect";
 import FooterM from "../../Footer/mFooter";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 const BeforeWomenPage = () => {
     const navigate = useNavigate();
     const location = useLocation().pathname;
 
-    // const disp = useDispatch();
-    // const fetchCat = async () => {
-    //   const response = await axios.get(
-    //     "http://localhost:5056/api/Category/getAllCategories"
-    //   );
-    //   disp(showCategory(response.data.payload));
-    // };
+    const { GetAllProductWomen } = useActions();
 
-    // useEffect(() => {
-    //   fetchCat();
-    // }, []);
-
-    // const cat = useSelector((state: RootState) => state.allCategory.categories);
-
-    // const categories = cat.map((category: any) => {
-    //   const { id, name } = category;
-    //   return (
-    //     <Link to={location + "/" + name} key={id}>
-    //       {name}
-    //     </Link>
-    //   );
-    // });
+    const { loadingProductMan, productsWoman } = useTypedSelector(
+        (store) => store.ProductsReducer
+    );
+    const { user } = useTypedSelector(
+        (store) => store.UserReducer
+    );
+    useEffect(() => {
+        if (productsWoman.length == 0 && loadingProductMan == false) {
+            GetAllProductWomen(user.id);
+        }
+    }, []);
 
     if (isMobile) {
         return (

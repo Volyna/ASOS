@@ -21,14 +21,26 @@ import { AnyARecord } from "dns";
 import { store } from "../../../store";
 import { RootState } from "../../../store/reducers/rootReducer";
 import { NavigateBefore } from "@mui/icons-material";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 const BeforeMenPage = () => {
     const navigate = useNavigate();
     const location = useLocation().pathname;
 
     const disp = useDispatch();
+    const { productsMan, loadingProductMan } = useTypedSelector(
+        (store) => store.ProductsReducer
+    );
+    const { GetAllProductMan } = useActions();
+    const { user } = useTypedSelector(
+        (store) => store.UserReducer
+    );
     useEffect(() => {
+        if (productsMan.length == 0 && loadingProductMan == false) {
 
+            GetAllProductMan(user.id);
+        }
     }, []);
 
 

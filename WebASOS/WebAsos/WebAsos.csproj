@@ -15,6 +15,7 @@
     <None Remove="interfaces\JwtTokenService\**" />
     <None Remove="Repositories\LikesProducts\" />
     <None Remove="Constants\OrderStatus\" />
+    <None Remove="Data\AutoMapper\Product\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.60.0" />
@@ -66,6 +67,7 @@
     <Folder Include="Repositories\User\" />
     <Folder Include="Repositories\LikesProducts\" />
     <Folder Include="Constants\OrderStatus\" />
+    <Folder Include="Data\AutoMapper\Product\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="SMTP_Email\html\confirmEmail.html">
