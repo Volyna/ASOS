@@ -150,7 +150,7 @@ const Women = () => {
               src={`data:image/png;base64,${item.mainImage}`}
               alt=""
             /></div>
-            <div key={item.name} className="nameProductItem"><p>{item.name}</p></div>
+            <div key={item.name} className="nameProductItemMen"><p>{item.name}</p></div>
             <div key={item.price} className="priceProductItem"><p>{item.price} $</p></div>
             <div className="colorProductItem">
 
